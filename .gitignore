@@ -1,0 +1,23 @@
+# LaTeX
+*.aux
+*.log
+*.out
+*.toc
+*.bbl
+*.blg
+*.bcf
+*.run.xml
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+
+# PDF (compiled output)
+*.pdf
+
+# System
+.DS_Store
+Thumbs.db
+
+# Agent artifacts
+.agents/
+.claude/
