@@ -1,6 +1,22 @@
 # Convergence and Divergence: Capability Boundaries, Structural Deficiencies, and the Necessity of Human-AI Collaboration in LLM Agents
 
-A **conceptual framework paper** that uses category theory to provide a unified mathematical analysis of Transformer architectures, LLM capability boundaries, structural failure modes of Agent systems, and the irreducible necessity of human collaboration.
+> **⚠️ Draft stage.** This is a work in progress. The core mathematical analysis (§2.1) is stable, the conceptual framework is internally coherent, and the 10 testable predictions are specified — but three known hard flaws await structural repair, the reasoning mid-section needs denser argumentation, and the full paper has not yet been submitted for publication. See [§6](#known-gaps--limitations) for the honest list of what's still broken.
+
+A **conceptual framework paper (draft)** that uses category theory to provide a unified mathematical analysis of Transformer architectures, LLM capability boundaries, structural failure modes of Agent systems, and the irreducible necessity of human collaboration.
+
+---
+
+## Status
+
+| Aspect | State |
+|--------|:-----:|
+| Core mathematical analysis (§2.1) | Stable — mathematical facts |
+| Conceptual framework (§2–§3) | Internally coherent |
+| Formal derivations (§4) | Premises explicit, gaps labeled |
+| Hard flaws (3 known) | Documented, not yet repaired |
+| Testable predictions (T1–T10) | Specified, not yet experimentally tested |
+| Full paper (LaTeX) | Draft; structure complete, prose still evolving |
+| Submission readiness | Not yet |
 
 ---
 
@@ -183,7 +199,7 @@ The framework honestly labels its open problems (§6):
              and the Necessity of Human-AI Collaboration in {LLM} Agents},
   author  = {Shi, Chen},
   year    = {2026},
-  note    = {Manuscript in preparation. Conceptual framework paper.},
+  note    = {Draft. Manuscript in preparation. Conceptual framework paper.},
   url     = {https://github.com/sc19961992/llm-agent-theory}
 }
 ```
