@@ -191,26 +191,13 @@ The framework honestly labels its open problems (§6):
 
 ---
 
-## How to Cite
-
-```bibtex
-@unpublished{shi2026convergence,
-  title   = {Convergence and Divergence: Capability Boundaries, Structural Deficiencies,
-             and the Necessity of Human-AI Collaboration in {LLM} Agents},
-  author  = {Shi, Chen},
-  year    = {2026},
-  note    = {Draft. Manuscript in preparation. Conceptual framework paper.},
-  url     = {https://github.com/sc19961992/llm-agent-theory}
-}
-```
-
 ---
 
-## Author
+## A Note on Language & Generation
 
-**Chen Shi (石琛)** — Independent researcher.
-
-This work emerged from engineering practice with LLM Agent systems and a conviction that the patterns observed in use have a deep mathematical structure worth articulating. The framework is built from first principles using category theory as the organizing language, and is offered in the spirit of conceptual frameworks in theoretical physics and systems theory: a coherent way of seeing, with its boundaries honestly marked.
+- The core **mathematical analysis** (§2.1, `notes/范畴论与Transformer分析/`) and the **57 principles** were written in Chinese and refined through human editing.
+- All English text in this repository is **machine translation** (Chinese → English, via LLM). It has not been manually proofread.
+- The majority of the prose outside the core mathematical/engineering content — including this README, the English paper draft, and the related-paper summaries — is **AI-generated and unverified**. Caveat lector.
 
 ---
 
