@@ -18,6 +18,9 @@
 .DS_Store
 Thumbs.db
 
+# Model cache
+modelscope_cache/
+
 # Agent artifacts
 .agents/
 .claude/
