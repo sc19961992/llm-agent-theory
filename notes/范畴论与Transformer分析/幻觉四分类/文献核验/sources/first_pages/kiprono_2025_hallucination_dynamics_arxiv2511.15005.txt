@@ -1,0 +1,35 @@
+arXiv:2511.15005v1 [cs.CL] 19 Nov 2025
+
+Mathematical Analysis of Hallucination Dynamics in
+Large Language Models:
+Uncertainty Quantification, Advanced Decoding, and
+Principled Mitigation
+Moses Kiprono
+Catholic University of America
+October 2025
+Abstract
+Large Language Models (LLMs) are powerful linguistic engines but remain susceptible to hallucinations—plausible-sounding outputs that are factually incorrect or
+unsupported. In this work, we present a coherent, mathematically grounded framework
+to understand, measure, and mitigate these hallucinations. Drawing on probabilistic
+modeling, information theory, trigonometric signal analysis, and Bayesian uncertainty
+estimation, we analyze how errors compound autoregressively, propose refined uncertainty metrics (including semantic and phase-aware variants), and develop principled
+mitigation strategies: contrastive decoding, retrieval-augmented grounding, factual
+alignment, and abstention. This unified lens connects recent advances in calibration,
+retrieval, and alignment in a way that supports safer and more reliable LLMs.
+
+1
+
+Introduction
+
+Large Language Models (LLMs) have rapidly become critical tools in multiple domains—conversational
+agents, scientific assistants, tutoring systems, and more. Their fluency can be staggering,
+but they rely fundamentally on statistical prediction: anticipating the next token based
+on context rather than verifying the truth of what they generate. This gap can lead to
+hallucinations, where output is syntactically plausible but factually ungrounded.
+We broadly classify hallucinations into two types:
+• Intrinsic hallucinations: errors or contradictions with respect to the input context.
+• Extrinsic hallucinations: statements that conflict with verified external sources.
+
+1
+
+

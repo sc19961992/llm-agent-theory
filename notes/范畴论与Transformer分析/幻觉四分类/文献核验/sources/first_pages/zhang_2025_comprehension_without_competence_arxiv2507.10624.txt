@@ -1,0 +1,54 @@
+Published in Transactions on Machine Learning Research (11/2025)
+
+Comprehension Without Competence: Architectural Limits
+of LLMs in Symbolic Computation and Reasoning∗
+Zheng Zhang†
+
+zzhang@gmail.com
+
+Reviewed on OpenReview: https: // openreview. net/ forum? id= Gz5HMiJLqv
+
+arXiv:2507.10624v3 [cs.AI] 14 Nov 2025
+
+Abstract
+Large Language Models (LLMs) display striking surface fluency yet systematically fail at
+tasks requiring symbolic reasoning, arithmetic accuracy, and logical consistency. This paper offers a structural diagnosis of such failures, revealing a persistent gap between comprehension and competence. Through controlled experiments and architectural analysis, we
+demonstrate that LLMs often articulate correct principles without reliably applying them—a
+failure rooted not in knowledge access, but in computational execution. We term this phenomenon the computational split-brain syndrome, where instruction and action pathways are
+geometrically and functionally dissociated. This core limitation recurs across domains, from
+mathematical operations to relational inferences, and explains why model behavior remains
+brittle even under idealized prompting. We argue that LLMs function as powerful pattern
+completion engines, but lack the architectural scaffolding for principled, compositional reasoning. Our findings delineate the boundary of current LLM capabilities and motivate future
+models with metacognitive control, principle lifting, and structurally grounded execution.
+This diagnosis also clarifies why mechanistic interpretability findings may reflect trainingspecific pattern coordination rather than universal computational principles, and why the
+geometric separation between instruction and execution pathways suggests limitations in
+neural introspection and mechanistic analysis.
+
+1
+
+Introduction
+
+When asked whether 9.9 is greater than 9.11, Claude Sonnet 4 confidently states that 9.11 is larger, explaining
+that “since 90 is greater than 11 in the hundredths place, 9.11 is the larger number”—while simultaneously
+calculating that 9.11 - 9.9 = 0.21 (incorrect). GPT-4o claims that “9.11 is greater than 9.9” in mathematical
+contexts, invoking software versioning to justify the confusion. Yet when asked to explain how to compare
+decimal numbers, both models provide flawless algorithmic descriptions: “Write the numbers one above the
+other, aligning the decimal points... Compare digit by digit from left to right.” Claude Sonnet 4 even works
+through the exact same comparison correctly as an instructional example, concluding that “9.90 > 9.11.”
+Both models articulate decimal comparison procedures with textbook precision while failing to execute them
+reliably.
+This disconnect reveals a fundamental limitation in Large Language Models: they exhibit comprehension
+without competence—a systematic dissociation where models can perfectly explain principles they cannot
+reliably execute. We term this phenomenon computational split-brain syndrome 1 , drawing analogy to neurological conditions where different brain systems cannot coordinate effectively. Like patients who can verbally
+describe actions they cannot perform, LLMs develop geometrically separated pathways for “knowing about”
+procedures versus “executing” them.
+∗ Code repository: https://github.com/zzhang-cn/comprehension-without-competence. Video presentation: https://
+youtu.be/Z4waL0GwhyQ
+† This work was completed as a personal research project while employed at Amazon Web Services. The views expressed are
+those of the author and do not necessarily reflect those of Amazon.
+1 The term also appears in distributed systems to describe partitioned networks that cannot coordinate (Brewer, 2000)—we
+use the neuroscience analogy as it better captures the functional dissociation between capabilities.
+
+1
+
+

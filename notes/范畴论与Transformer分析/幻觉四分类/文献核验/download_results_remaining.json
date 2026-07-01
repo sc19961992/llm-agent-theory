@@ -1,0 +1,32 @@
+﻿[
+    {
+        "file":  "ji_2023_nlg_hallucination_survey_arxiv2202.03629.pdf",
+        "status":  "downloaded",
+        "bytes":  3996575,
+        "url":  "https://arxiv.org/pdf/2202.03629"
+    },
+    {
+        "file":  "hsieh_2024_found_in_the_middle_acl.pdf",
+        "status":  "downloaded",
+        "bytes":  1813538,
+        "url":  "https://aclanthology.org/2024.findings-acl.890.pdf"
+    },
+    {
+        "file":  "an_2024_make_llm_utilize_context_neurips.pdf",
+        "status":  "downloaded",
+        "bytes":  1830872,
+        "url":  "https://proceedings.neurips.cc/paper_files/paper/2024/file/71c3451f6cd6a4f82bb822db25cea4fd-Paper-Conference.pdf"
+    },
+    {
+        "file":  "zou_2025_memvr_icml_arxiv2410.03577.pdf",
+        "status":  "downloaded",
+        "bytes":  4398083,
+        "url":  "https://arxiv.org/pdf/2410.03577"
+    },
+    {
+        "file":  "zhang_2025_router_r1_arxiv2506.09033.pdf",
+        "status":  "downloaded",
+        "bytes":  943614,
+        "url":  "https://arxiv.org/pdf/2506.09033"
+    }
+]

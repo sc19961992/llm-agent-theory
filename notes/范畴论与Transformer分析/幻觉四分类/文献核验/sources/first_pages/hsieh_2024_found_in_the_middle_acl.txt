@@ -1,0 +1,69 @@
+Found in the middle: Calibrating Positional Attention Bias
+Improves Long Context Utilization
+Cheng-Yu Hsieh1 * , Yung-Sung Chuang2 , Chun-Liang Li3 , Zifeng Wang3 ,
+Long T. Le3 , Abhishek Kumar4 , James Glass2 , Alexander Ratner1 ,
+Chen-Yu Lee3 , Ranjay Krishna1† , Tomas Pfister3†
+1
+University of Washington, 2 MIT, 3 Google Cloud AI Research, 4 Google
+
+Abstract
+Large language models (LLMs), even when
+specifically trained to process long input contexts, struggle to capture relevant information
+located in the middle of their input. This phenomenon has been known as the lost-in-themiddle problem. In this work, we make three
+contributions. First, we set out to understand
+the factors that cause this phenomenon. In
+doing so, we establish a connection between
+lost-in-the-middle to LLMs’ intrinsic attention
+bias: LLMs exhibit an U-shaped attention bias
+where the tokens at the beginning and at the
+end of its input receive higher attention, regardless of their relevance. Second, we mitigate this positional bias through a calibration
+mechanism, found-in-the-middle, that allows
+the model to attend to contexts faithfully according to their relevance, even though when
+they are in the middle. Third, we show foundin-the-middle not only achieves better performance in locating relevant information within
+a long context, but also eventually leads to improved retrieval-augmented generation (RAG)
+performance across various tasks, outperforming existing methods by up to 10 percentage
+points. These findings open up future directions in understanding LLM attention bias and
+its potential consequences.
+
+1
+
+Figure 1: (a) Lost-in-the-middle refers to models’ Ushape RAG performance as the relevant context’s (e.g.,
+a gold document containing the answer to a query) position varies within the input; (b) We observe models exhibit U-shape attention weights favoring leading
+and ending contexts, regardless of their actual contents;
+(c) Models do attend to relevant contexts even when
+placed in the middle, but are eventually distracted by
+leading/ending contexts; (d) We propose a calibration
+mechanism, find-in-the-middle, that disentangles the
+effect of U-shape attention bias that allows models to
+attend to relevant context regardless their positions.
+
+Introduction
+
+Effective prompting of large language models
+(LLMs) (Brown et al., 2020; Anil et al., 2023; Touvron et al., 2023) has enabled a variety of userfacing applications, including conversational interfaces (chatbots) (Thoppilan et al., 2022), search
+and summarization (Min et al., 2024), open-domain
+question answering (Izacard and Grave, 2021), tool
+* Work done while the author was a student researcher
+at Google Cloud AI Research. Correspondence to: ChengYu Hsieh <cydhsieh@cs.washington.edu>, Chen-Yu Lee
+<chenyulee@google.com>
+†
+The authors contributed equally to this work.
+
+usage (Hsieh et al., 2023), fact checking (Asai et al.,
+2023), and collaborative writing (Lee et al., 2019).
+Some of these applications, such as search and summarization (Ji et al., 2023; Min et al., 2023; Asai
+et al., 2023), require the ability to retrieve information from external knowledge sources. As a result,
+retrieval-augmented generation (RAG) has become
+a powerful solution. RAG fetches relevant documents (e.g. structured tables (Wang et al., 2024)
+and API documentation (Karpukhin et al., 2020))
+from external knowledge sources and makes them
+available in the LLMs’ input prompt (Khandelwal
+et al., 2020; Borgeaud et al., 2022; Izacard et al.,
+2022b; Xu et al., 2023a). Despite the widespread
+utility of RAG (Li et al., 2023a; Xiong et al., 2023;
+
+14982
+Findings of the Association for Computational Linguistics: ACL 2024, pages 14982–14995
+August 11-16, 2024 ©2024 Association for Computational Linguistics
+
+

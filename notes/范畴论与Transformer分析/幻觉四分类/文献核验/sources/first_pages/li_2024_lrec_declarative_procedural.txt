@@ -1,0 +1,81 @@
+Meta-Cognitive Analysis: Evaluating Declarative and Procedural
+Knowledge in Datasets and Large Language Models
+Zhuoqun Li1,3 , Hongyu Lin1 , Yaojie Lu1 , Hao Xiang1,3 , Xianpei Han1,2 , Le Sun1,2,B
+1
+
+Chinese Information Processing Laboratory 2 State Key Laboratory of Computer Science
+Institute of Software, Chinese Academy of Sciences, Beijing, China
+3
+University of Chinese Academy of Sciences, Beijing, China
+{lizhuoqun2021,hongyu,luyaojie,xianghao2022,xianpei,sunle}@iscas.ac.cn
+Abstract
+Declarative knowledge and procedural knowledge are two key parts in meta-cognitive theory, and these two hold
+significant importance in pre-training and inference of LLMs. However, a comprehensive analysis comparing these
+two types of knowledge is lacking, primarily due to challenges in definition, probing and quantitative assessment.
+In this paper, we explore from a new perspective by providing ground-truth knowledge for LLMs and evaluating the
+effective score. Through extensive experiments with widely-used datasets and models, we get conclusions: (1)
+In most tasks, benefits from declarative knowledge are greater than those from procedural knowledge. (2) Profits
+of procedural knowledge are larger than declarative knowledge only in reasoning tasks with simple logic. (3) As
+pre-training progresses and size increases, model ability to utilize both kinds of knowledge significantly improves,
+but in different speed. We do detailed analysis for the findings and this can provide primary guidance for evaluation
+and enhancement of large language models.
+Keywords: large language model, declarative knowledge, procedural knowledge
+
+1. Introduction
+Recent advancements in large language models
+(LLMs) have been noteworthy, with models such
+as GPT4 (OpenAI, 2023), Llama (Touvron et al.,
+2023a) and Vicuna (Chiang et al., 2023) leading
+the way. These models are capable of solving
+various NLP tasks through an autoregressive approach and have show impressive performance
+(Ye et al., 2023; Bang et al., 2023). This evolution of LLMs has push NLP into a new era, moving
+away from traditional task-specific pre-train finetuning paradigm (Zhao et al., 2023).
+According to metacognitive theories (Brown,
+1987; Jacobs and Paris, 1987), there are two kinds
+of knowledge that critically contributes to the cognition of human beings: declarative knowledge
+and procedural knowledge. Declarative knowledge refers to “knowing that”. It encompasses
+facts, concepts, and information that can be explicitly verbalized or described (Ryle, 1945, 2009). For
+instance, knowing the capital of France is Paris or
+understanding the concept of gravity is declarative
+knowledge. Procedural knowledge, on the other
+hand, refers to “knowing how”. It pertains to skills
+and procedures that we might not be able to verbalize explicitly but can demonstrate through action
+(Ryle, 1945, 2009). For example, knowing how
+to ride a bike, play a musical instrument, or swim
+are all forms of procedural knowledge. This type
+of knowledge is typically acquired through practice
+and repetition and is believed to involve the basal
+ganglia and cerebellum in the brain. Declarative
+B Corresponding Author
+
+and procedural knowledge are at the core of human cognition, underpinning our ability to function,
+learn, and adapt in various environments.
+For large language models, many previous work
+has confirmed the existence of declarative and
+procedural knowledge in them. For declarative
+knowledge, it has been observed that LLMs are
+encoded with declarative knowledge across many
+domains (Zhong et al., 2023; Huang et al., 2023),
+which is learned from the pre-training on vast portions of Internet. For procedural knowledge, many
+researches have found that LLMs exhibit an understanding of processes or sequences of actions,
+to an extent. For instance, they can generate
+code snippets, describe step-by-step instructions,
+or help with problem-solving in certain domains,
+which significantly contribute to their ability to resolve complicated tasks (Gao et al., 2022; Wei
+et al., 2023; Zhou et al., 2023).
+Despite acknowledgment of their existence and
+significance within LLMs (Wei et al., 2023; Shi
+et al., 2023; Fu et al., 2023), there is a marked
+absence of systematic exploration into how these
+two kinds of knowledge exert on the capabilities
+of LLMs. This oversight considerably hampers
+our comprehensive understanding of large model
+dynamics and effective improvement of LLM abilities in certain tasks, domain and scenarios. A potential explanation for this absence stems from inherent challenges associated with formulating and
+probing these two kinds of knowledge and quantitatively assessing their implications on LLMs, respectively because of the black box nature of
+LLMs. Therefore, it is challenging to determine
+
+11222
+LREC-COLING 2024, pages 11222–11228
+20-25 May, 2024. © 2024 ELRA Language Resource Association: CC BY-NC 4.0
+
+

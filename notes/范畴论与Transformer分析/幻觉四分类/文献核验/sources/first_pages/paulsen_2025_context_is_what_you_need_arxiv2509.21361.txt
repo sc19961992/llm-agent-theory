@@ -1,0 +1,84 @@
+Context Is What You Need: The Maximum Effective
+Context Window for Real World Limits of LLMs
+Norman Paulsen
+Denver, Colorado, USA
+Accion Group
+npaulsen@acciongroup.com
+
+Abstract
+Large language model (LLM) providers boast big
+numbers for maximum context window sizes. To test
+the real-world use of context windows, we 1) define a
+concept of maximum effective context window, 2)
+formulate a testing method of a context window’s
+effectiveness over various sizes and problem types,
+and 3) create a standardized way to compare model
+efficacy for increasingly larger context window sizes to
+find the point of failure. We collected hundreds of
+thousands of data points across several models and
+found significant differences between the reported
+Maximum Context Window (MCW) size and the
+Maximum Effective Context Window (MECW) size.
+Our findings show that the MECW is not only
+drastically different from the MCW but also shifts
+based on the problem type. A few top-of-the-line
+models in our test group failed with as few as 100
+tokens in context; most had severe degradation in
+accuracy by 1000 tokens in context. All models fell far
+short of their Maximum Context Window by as much
+as >99%. Our data reveals the Maximum Effective
+Context Window shifts based on the type of problem
+provided, offering clear and actionable insights into
+how to improve model accuracy and decrease model
+hallucination rates.
+
+CCS Concepts
+·
+
+Computing methodologies → Artificial
+intelligence → Natural language processing
+→ Information extraction
+
+Keywords
+Large Language Models, Context Window, Inference
+Tokens, Hallucination Rates, LLM Accuracy
+
+ACM Reference Format:​
+Norman Paulsen. 2025. Context Is What You Need:
+The Maximum Effective Context Window for Real
+World Limits of LLMs
+
+1 Introduction
+The rise of large language models (LLMs) such as
+ChatGPT, Claude, Gemini, and LLaMA has reshaped
+the landscape of natural language processing (NLP),
+enabling increasingly sophisticated contextual
+understanding, summarization, coding, and dialog
+capabilities. Central to the application of these
+advancements is the concept of the context window
+(or maximum context length), the maximum number
+of input tokens (words, punctuation, and symbols) a
+model can consider at one time. The expansion of
+context windows from hundreds to tens of thousands
+and, more recently, to millions of tokens, represents a
+technical triumph. Several methods have been
+employed to effectively extend context windows [42],
+yet an unresolved and often misunderstood question
+remains: how much of that context can truly be used
+effectively by the model?
+While model specifications cite a maximum context
+window of 128k, 1 million, or even as much as 10
+million tokens [33], these numbers reflect architectural
+or implementation limits, not necessarily the model’s
+practical capacity for handling or retaining that full
+input context. Empirical evidence increasingly
+suggests a divergence between the maximum context
+window (MCW) and the maximum effective context
+window (MECW) — the point beyond which additional
+tokens no longer meaningfully contribute to model
+output quality (A2.1). Understanding this discrepancy
+is vital for the efficient deployment of LLMs in domains
+that demand long-context comprehension, such as
+legal reasoning, scientific literature synthesis,
+
+

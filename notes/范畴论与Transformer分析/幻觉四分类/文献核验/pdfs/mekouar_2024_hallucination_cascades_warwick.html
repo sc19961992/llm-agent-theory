@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html class="" lang="en-US">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=yes" />
+        <meta name="description" content="Testing the transfer of https://davku.lnx.warwick.ac.uk production server <br />
+<br />
+Asset owner is Kacper Saar (k.saar@warwick.ac.uk).<br />
+<br />
+Support from Godwin Yeboah:<br />
+ResearchComputingRSE@warwick.ac.uk" />
+    
+        <title>Investigating Hallucination Cascades in Autoregressive Large Language Models &middot; URSS SHOWCASE</title>
+
+    <link rel="alternate" type="application/rss+xml" title="Omeka RSS Feed" href="/items/browse?output=rss2" /><link rel="alternate" type="application/atom+xml" title="Omeka Atom Feed" href="/items/browse?output=atom" />
+        <link rel="preconnect" href="https://fonts.googleapis.com"> 
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+    <!-- Stylesheets -->
+    <link href="/application/views/scripts/css/public.css?v=3.1.2" media="screen" rel="stylesheet" type="text/css" >
+<link href="/plugins/EUCookieBar/views/shared/css/vendor/jquery.cookiebar.css?v=3.1.2" media="all" rel="stylesheet" type="text/css" >
+<link href="/plugins/GuestUser/views/public/css/guest-user.css?v=3.1.2" media="all" rel="stylesheet" type="text/css" >
+<link href="//fonts.googleapis.com/css?family=Arvo:400" media="screen" rel="stylesheet" type="text/css" >
+<link href="/application/views/scripts/css/admin-bar.css?v=3.1.2" media="screen" rel="stylesheet" type="text/css" >
+<link href="/application/views/scripts/css/iconfonts.css?v=3.1.2" media="all" rel="stylesheet" type="text/css" >
+<link href="/themes/URSS/css/skeleton.css?v=3.1.2" media="all" rel="stylesheet" type="text/css" >
+<link href="/themes/URSS/css/style.css?v=3.1.2" media="all" rel="stylesheet" type="text/css" >    <!-- JavaScripts -->
+                        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript">
+    //<!--
+    window.jQuery || document.write("<script type=\"text\/javascript\" src=\"\/application\/views\/scripts\/javascripts\/vendor\/jquery.js?v=3.1.2\" charset=\"utf-8\"><\/script>")    //-->
+</script>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script type="text/javascript">
+    //<!--
+    window.jQuery.ui || document.write("<script type=\"text\/javascript\" src=\"\/application\/views\/scripts\/javascripts\/vendor\/jquery-ui.js?v=3.1.2\" charset=\"utf-8\"><\/script>")    //-->
+</script>
+<script type="text/javascript" src="/application/views/scripts/javascripts/vendor/jquery.ui.touch-punch.js"></script>
+<script type="text/javascript">
+    //<!--
+    jQuery.noConflict();    //-->
+</script>
+<script type="text/javascript" src="/plugins/EUCookieBar/views/shared/javascripts/vendor/jquery.cookiebar.js?v=3.1.2"></script>
+<script type="text/javascript" src="/plugins/GuestUser/views/public/javascripts/guest-user.js?v=3.1.2"></script>
+<!--[if (gte IE 6)&(lte IE 8)]><script type="text/javascript" src="/application/views/scripts/javascripts/vendor/selectivizr.js?v=3.1.2"></script><![endif]-->
+<script type="text/javascript" src="/application/views/scripts/javascripts/vendor/respond.js?v=3.1.2"></script>
+<script type="text/javascript" src="/application/views/scripts/javascripts/vendor/jquery-accessibleMegaMenu.js?v=3.1.2"></script>
+<script type="text/javascript" src="/themes/URSS/javascripts/berlin.js?v=3.1.2"></script>
+<script type="text/javascript" src="/application/views/scripts/javascripts/globals.js?v=3.1.2"></script></head>
+ <body class="admin-bar items show">
+    <a href="#content" id="skipnav">Skip to main content</a>
+    <nav id="admin-bar">
+
+<ul class="navigation">
+    <li>
+        <a id="menu-guest-user-login" href="/guest-user/user/login">Login</a>
+    </li>
+    <li>
+        <a id="menu-guest-user-register" href="/guest-user/user/register">Register</a>
+    </li>
+</ul></nav>
+        <header role="banner">
+            <div id='guest-user-register-info'></div>            <div id="site-title"><a href="https://urss.warwick.ac.uk" >URSS SHOWCASE</a>
+</div>
+
+            <div id="search-container" role="search">
+                                <form id="search-form" name="search-form" action="/search" aria-label="Search" method="get">    <input type="text" name="query" id="query" value="" title="Query" aria-label="Query" aria-labelledby="search-form query">            <input type="hidden" name="query_type" value="keyword" id="query_type">                <input type="hidden" name="record_types[]" value="Item">                <input type="hidden" name="record_types[]" value="File">                <input type="hidden" name="record_types[]" value="Collection">                <button name="submit_search" id="submit_search" type="submit" value="Submit" title="Submit" class="button" aria-label="Submit" aria-labelledby="search-form submit_search"><span class="icon" aria-hidden="true"></span></button></form>
+                            </div>
+        </header>
+
+         <div id="primary-nav" role="navigation">
+             <ul class="navigation">
+    <li>
+        <a href="/items/browse">Browse Items</a>
+    </li>
+    <li>
+        <a href="/collections/browse">Browse Collections</a>
+    </li>
+    <li>
+        <a href="/about">About</a>
+    </li>
+    <li>
+        <a href="/contribution">Contribute an Item</a>
+    </li>
+</ul>         </div>
+
+         <div id="mobile-nav" role="navigation" aria-label="Mobile Navigation">
+             <ul class="navigation">
+    <li>
+        <a href="/items/browse">Browse Items</a>
+    </li>
+    <li>
+        <a href="/collections/browse">Browse Collections</a>
+    </li>
+    <li>
+        <a href="/about">About</a>
+    </li>
+    <li>
+        <a href="/contribution">Contribute an Item</a>
+    </li>
+</ul>         </div>
+
+        
+    <div id="content" role="main" tabindex="-1">
+
+<div id="primary">
+    <h1>Investigating Hallucination Cascades in Autoregressive Large Language Models</h1>
+
+    
+    <!-- Items metadata -->
+    <div id="item-metadata">
+        <div class="element-set">
+            <div id="dublin-core-title" class="element">
+        <h3>Title</h3>
+                    <div class="element-text">Investigating Hallucination Cascades in Autoregressive Large Language Models</div>
+            </div><!-- end element -->
+        <div id="dublin-core-subject" class="element">
+        <h3>Subject</h3>
+                    <div class="element-text">Computer Science</div>
+            </div><!-- end element -->
+        <div id="dublin-core-creator" class="element">
+        <h3>Creator</h3>
+                    <div class="element-text">Luc Mekouar <br />
+</div>
+            </div><!-- end element -->
+        <div id="dublin-core-date" class="element">
+        <h3>Date</h3>
+                    <div class="element-text">2024</div>
+            </div><!-- end element -->
+        <div id="dublin-core-contributor" class="element">
+        <h3>Contributor</h3>
+                    <div class="element-text">Prof Bo Chen</div>
+            </div><!-- end element -->
+    </div><!-- end element-set -->
+<div class="element-set">
+            <div id="academic-paper-item-type-metadata-abstract" class="element">
+        <h3>Abstract</h3>
+                    <div class="element-text">As the adoption of Large Language Models (LLMs) is becoming ubiquitous, understanding their pitfalls is becoming increasingly urgent. LLMs are known to hallucinate and may be subject to cascading hallucinatory generations due to their autoregressive structure and exposure bias. This paper first introduces the topic of hallucination cascade, covering relevant literature. Then an experiment is presented on the propagation of hallucination through long answer text generation, for all combinations of five LLMs - Qwen2 (0.5B), Qwen2 (7B), Llama3.1 (8B), Gemma2 (9B) and Mistral-NeMo (12B) - at five levels of temperature: 0, 0.75, 1, 1.25, 2. In a novel methodology, responses are generated by the five LLMs, then labelled by two more LLMs as hallucinatory or not on both a token and sentence level. The labelling is done with clear instructions and additional context to ensure its quality. Correlational evidence was found on both granularity levels that hallucinatory tokens are positively autocorrelated at lag 1, and that autocorrelation monotonically decreases as lag increases (token level only), supporting the cascading hallucination hypothesis. Finally, some hallucination mitigating techniques are presented, with both research and application in mind. All the code used for the empirical part of this paper (Section 3) can be found at https://github.com/LucMekouar/URSS_2024.</div>
+            </div><!-- end element -->
+        <div id="academic-paper-item-type-metadata-meta-tags" class="element">
+        <h3>Meta Tags</h3>
+                    <div class="element-text">Large Language Model, LLM, Machine Learning, Natural Language Processing, Hallucination</div>
+            </div><!-- end element -->
+    </div><!-- end element-set -->
+    </div>
+    
+          <h3>Files</h3>
+      <div id="item-images">
+           <div class="item-file application-pdf"><iframe src="/plugins/PdfEmbed/views/shared/pdf-embed-js/web/viewer.html?file=https%3A%2F%2Furss.warwick.ac.uk%2Ffiles%2Foriginal%2F8fc2754163c0e086d7050b0d1bb842f5.pdf" style="width: 100%; height: 500px" title="Investigating Hallucination Cascades in Autoregressive Large Language Models.pdf"></iframe></div>      </div>
+    
+         <div id="collection" class="element">
+        <h3>Collection</h3>
+        <div class="element-text"><a href="/collections/show/2">Science, Engineering and Medicine</a></div>
+      </div>
+   
+     <!-- The following prints a list of all tags associated with the item -->
+        <div id="item-tags" class="element">
+        <h3>Tags</h3>
+        <div class="element-text"><a href="/items/browse?tags=Hallucination" rel="tag">Hallucination</a>, <a href="/items/browse?tags=Large+Language+Model" rel="tag">Large Language Model</a>, <a href="/items/browse?tags=LLM" rel="tag">LLM</a>, <a href="/items/browse?tags=Machine+learning" rel="tag">Machine learning</a>, <a href="/items/browse?tags=Natural+Language+Processing" rel="tag">Natural Language Processing</a></div>
+    </div>
+    
+    <!-- The following prints a citation for this item. -->
+    <div id="item-citation" class="element">
+        <h3>Citation</h3>
+        <div class="element-text">Luc Mekouar, &#8220;Investigating Hallucination Cascades in Autoregressive Large Language Models,&#8221; <em>URSS SHOWCASE</em>, accessed June 16, 2026, https://urss.warwick.ac.uk/items/show/598.</div>
+    </div>
+       
+
+    <ul class="item-pagination navigation">
+        <li id="previous-item" class="previous"><a href="/items/show/597">&larr; Previous Item</a></li>
+        <li id="next-item" class="next"><a href="/items/show/599">Next Item &rarr;</a></li>
+    </ul>
+
+</div> <!-- End of Primary. -->
+
+ </div><!-- end content -->
+
+<footer role="contentinfo">
+
+    <div id="footer-content" class="center-div">
+                <div id="custom-footer-text">
+            <p><a href="https://urss.warwick.ac.uk/terms" title="Terms">Terms of Use</a><br /><a href="https://urss.warwick.ac.uk/accessibility" title="Accessibility">Accessibility Statement</a></p>
+        </div>
+                        
+        
+
+    </div><!-- end footer-content -->
+
+     <script type="text/javascript">
+	jQuery(document).ready(function(){
+		jQuery.cookieBar({
+			message: "We use cookies to track usage of this academic project."
+		});
+	});
+</script>
+
+</footer>
+
+<script type="text/javascript">
+    jQuery(document).ready(function(){
+        Omeka.showAdvancedForm();
+        Omeka.skipNav();
+        Omeka.megaMenu();
+        Berlin.dropDown();
+    });
+</script>
+
+</body>
+
+</html>

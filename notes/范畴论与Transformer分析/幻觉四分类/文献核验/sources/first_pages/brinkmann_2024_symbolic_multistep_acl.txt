@@ -1,0 +1,228 @@
+A Mechanistic Analysis of a Transformer Trained on
+a Symbolic Multi-Step Reasoning Task
+Jannik Brinkmann†1
+Abhay Sheshadri†2
+Victor Levoso†3
+4
+Paul Swoboda
+Christian Bartelt1
+1
+
+University of Mannheim
+
+2
+
+3
+
+Georgia Institute of Technology
+
+Independent
+
+4
+
+Heinrich-Heine University Düsseldorf
+
+Abstract
+
+3
+
+1
+
+Transformer-based language models (Vaswani
+et al., 2017) demonstrate impressive performance
+on reasoning2 tasks (Kojima et al., 2023), mathematical problem-solving (Cobbe et al., 2021), and
+planning (Huang et al., 2022). However, despite
+strong performance on certain reasoning benchmarks, it remains unclear to what extent these abilities are a result of actual reasoning or simple pattern
+memorization (Huang and Chang, 2023).
+Equal contribution.
+Correspondence to jannik.brinkmann@uni-mannheim.de.
+The code is available at github.com/backward-chainingcircuits.
+2
+In this paper, we consider a form of deductive reasoning
+as studied in Saparov and He (2023). For a discussion of
+different forms of reasoning, refer to Huang and Chang (2023).
+1
+
+1
+
+:
+
+0
+
+→3
+
+|
+
+1
+
+:
+
+0
+
+0
+
+→3
+
+|
+
+1
+
+:
+
+0
+
+,i
+
+0
+
+(B) Goal
+| 1 : 0
+→ 3 Movement
+
+,i
+
+0
+
+→3
+
+2
+
+→1
+
+,i
+
+3
+
+→2
+
+2
+
+→1
+
+,i
+
+3
+
+→2
+
+,i
+
+0
+
+→4
+
+,i
+
+2
+
+(A) Edge Token
+→
+1 ,i 3 → 2
+Concatenation
+
+,i
+
+0
+
+→4
+
+2
+
+→1
+
+,i
+
+0
+
+→4
+
+,i
+
+3
+
+→2
+
+→2
+
+0
+
+→4
+
+,i
+
+0
+
+(C) Backward
+Chaining
+,i 0 → 4 ,i 0
+
+|
+
+1
+
+:
+
+0
+
+Figure 1: Backward Chaining. Given an input prompt,
+the model concatenates edge tokens in a single token
+position (A), and copies the goal node into the final
+token position (B). The next step is then identified by
+applying an iterative algorithm that climbs the tree one
+level per layer (C).
+
+Introduction
+
+†
+
+|
+
+,i
+
+3
+
+,i
+
+→3
+
+→1
+
+2
+
+Transformers demonstrate impressive performance on a range of reasoning benchmarks.
+To evaluate the degree to which these abilities
+are a result of actual reasoning, existing work
+has focused on developing sophisticated benchmarks for behavioral studies. However, these
+studies do not provide insights into the internal mechanisms driving the observed capabilities. To improve our understanding of the internal mechanisms of transformers, we present a
+comprehensive mechanistic analysis of a transformer trained on a synthetic reasoning task.
+We identify a set of interpretable mechanisms
+the model uses to solve the task, and validate
+our findings using correlational and causal evidence. Our results suggest that it implements a
+depth-bounded recurrent mechanisms that operates in parallel and stores intermediate results
+in selected token positions. We anticipate that
+the motifs we identified in our synthetic setting
+can provide valuable insights into the broader
+operating principles of transformers and thus
+provide a basis for understanding more complex models.1
+
+To understand the reasoning capabilities of language models, existing work has focused on developing sophisticated benchmarks for behavioral
+studies (Tafjord et al., 2021; Saparov and He, 2023;
+Valmeekam et al., 2023). However, the conclusions
+drawn from these studies do not provide insights
+into the internal mechanisms driving the observed
+capabilities. In contrast, recent work in the field of
+mechanistic interpretability attempts to understand
+the algorithms that models implement by reverseengineering their internal mechanisms, and describing them at a certain level of abstraction (Elhage
+et al., 2021). For example, Nanda et al. (2023a)
+reverse-engineered how a small transformer model
+implements modular addition, providing insights
+into the specific computations performed by different components of the model. Similarly, Olsson et al. (2022) discovered “induction heads” in
+transformers which enable a distinct copying mechanism that is considered to be crucial for the incontext learning abilities of language models.
+Contributions This paper studies reasoning in
+language models by reverse-engineering the inter-
+
+4082
+Findings of the Association for Computational Linguistics: ACL 2024, pages 4082–4102
+August 11-16, 2024 ©2024 Association for Computational Linguistics
+
+

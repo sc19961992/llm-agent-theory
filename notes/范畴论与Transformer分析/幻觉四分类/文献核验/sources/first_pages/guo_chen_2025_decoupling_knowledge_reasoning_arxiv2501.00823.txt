@@ -1,0 +1,58 @@
+Decoupling Knowledge and Reasoning in
+Transformers: A Modular Architecture with
+Generalized Cross-Attention
+Zhenyu Guo1,2
+Tsinghua University
+2
+Ant Group
+imzhenyu@outlook.com
+
+Wenguang Chen
+Tsinghua University
+cwg@tsinghua.edu.cn
+
+arXiv:2501.00823v2 [cs.LG] 6 Jan 2025
+
+1
+
+Abstract
+Transformers have achieved remarkable success across diverse domains, but their
+monolithic architecture presents challenges in interpretability, adaptability, and
+scalability. This paper introduces a novel modular Transformer architecture that
+explicitly decouples knowledge and reasoning through a generalized cross-attention
+mechanism to a globally shared knowledge base with layer-specific transformations,
+specifically designed for effective knowledge retrieval. Critically, we provide a
+rigorous mathematical derivation demonstrating that the Feed-Forward Network
+(FFN) in a standard Transformer is a specialized case (a closure) of this generalized
+cross-attention, revealing its role in implicit knowledge retrieval and validating our
+design. This theoretical framework provides a new lens for understanding FFNs
+and lays the foundation for future research exploring enhanced interpretability,
+adaptability, and scalability, enabling richer interplay with external knowledge
+bases and other systems.
+
+1
+
+Introduction
+
+Large language models (LLMs) based on the Transformer architecture have achieved remarkable
+success [17, 7, 14, 3]. However, a key limitation of their monolithic design is the deep entanglement of
+knowledge and reasoning within the model’s parameters, posing significant challenges for real-world
+applications requiring transparency, adaptability, and continuous learning.
+Specifically, current Transformers face limitations in:
+• Interpretability. The distributed nature of knowledge representation, especially within
+Feed-Forward Networks (FFNs), makes it difficult to pinpoint the specific information used
+for predictions [5, 18], limiting their use in high-stakes applications like healthcare and legal
+reasoning.
+• Adaptability. Adapting pre-trained models to new knowledge or integrating them with
+external systems is inefficient and complex. Current methods like RAG [12], which simply
+concatenate retrieved context with input, suffer from context dilution and retrieval performed
+only at the input level, lacking dynamic, context-dependent access to knowledge during
+processing. This hinders continuous learning and the ability to incorporate rapidly changing
+information, such as real-time news or scientific discoveries.
+• Scalability. The tight coupling of knowledge and reasoning in monolithic Transformers
+prevents modular scaling, unlike human cognition, which efficiently transfers existing
+reasoning capabilities to new knowledge through modular learning. This "parameter explosion" limits accessibility of larger models, hindering progress towards truly comprehensive
+knowledge-driven AI.
+Preprint.
+
+

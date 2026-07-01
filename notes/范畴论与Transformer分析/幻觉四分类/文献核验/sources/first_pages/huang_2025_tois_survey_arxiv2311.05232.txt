@@ -1,0 +1,55 @@
+1
+
+arXiv:2311.05232v2 [cs.CL] 19 Nov 2024
+
+A Survey on Hallucination in Large Language Models:
+Principles, Taxonomy, Challenges, and Open Questions
+LEI HUANG, Harbin Institute of Technology, China
+WEIJIANG YU, Huawei Inc., China
+WEITAO MA and WEIHONG ZHONG, Harbin Institute of Technology, China
+ZHANGYIN FENG and HAOTIAN WANG, Harbin Institute of Technology, China
+QIANGLONG CHEN and WEIHUA PENG, Huawei Inc., China
+XIAOCHENG FENG∗ , BING QIN, and TING LIU, Harbin Institute of Technology, China
+The emergence of large language models (LLMs) has marked a significant breakthrough in natural language
+processing (NLP), fueling a paradigm shift in information acquisition. Nevertheless, LLMs are prone to
+hallucination, generating plausible yet nonfactual content. This phenomenon raises significant concerns over
+the reliability of LLMs in real-world information retrieval (IR) systems and has attracted intensive research to
+detect and mitigate such hallucinations. Given the open-ended general-purpose attributes inherent to LLMs,
+LLM hallucinations present distinct challenges that diverge from prior task-specific models. This divergence
+highlights the urgency for a nuanced understanding and comprehensive overview of recent advances in
+LLM hallucinations. In this survey, we begin with an innovative taxonomy of hallucination in the era of
+LLM and then delve into the factors contributing to hallucinations. Subsequently, we present a thorough
+overview of hallucination detection methods and benchmarks. Our discussion then transfers to representative
+methodologies for mitigating LLM hallucinations. Additionally, we delve into the current limitations faced
+by retrieval-augmented LLMs in combating hallucinations, offering insights for developing more robust IR
+systems. Finally, we highlight the promising research directions on LLM hallucinations, including hallucination
+in large vision-language models and understanding of knowledge boundaries in LLM hallucinations.
+CCS Concepts: • Computing methodologies → Natural language generation; • General and reference
+→ Surveys and overviews.
+Additional Key Words and Phrases: Large Language Models, Hallucination, Factuality, Faithfulness
+ACM Reference Format:
+Lei Huang, Weijiang Yu, Weitao Ma, Weihong Zhong, Zhangyin Feng, Haotian Wang, Qianglong Chen, Weihua
+Peng, Xiaocheng Feng, Bing Qin, and Ting Liu. 2024. A Survey on Hallucination in Large Language Models:
+Principles, Taxonomy, Challenges, and Open Questions. ACM Transactions on Information Systems 1, 1, Article 1
+(January 2024), 58 pages. https://doi.org/10.1145/3703155
+∗ corresponding author
+
+Authors’ addresses: Lei Huang, Harbin Institute of Technology, 800 Dongchuan Road, Harbin, Heilongjiang, China,
+150001, lhuang@ir.hit.edu.cn; Weijiang Yu, Huawei Inc., Bantian Subdistrict, Shenzhen, Guangdong, China, 518129,
+weijiangyu8@gmail.com; Weitao Ma, wtma@ir.hit.edu.cn; Weihong Zhong, whzhong@ir.hit.edu.cn, Harbin Institute of
+Technology, 800 Dongchuan Road, Harbin, Heilongjiang, China, 150001; Zhangyin Feng, zyfeng@ir.hit.edu.cn; Haotian
+Wang, wanght1998@gmail.com, Harbin Institute of Technology, 800 Dongchuan Road, Harbin, Heilongjiang, China, 150001;
+Qianglong Chen, chenqianglong.ai@gmail.com; Weihua Peng, pengwh.hit@gmail.com, Huawei Inc., Bantian Subdistrict,
+Shenzhen, Guangdong, China, 518129; Xiaocheng Feng, xcfeng@ir.hit.edu.cn; Bing Qin, qinb@ir.hit.edu.cn; Ting Liu,
+tliu@ir.hit.edu.cn, Harbin Institute of Technology, 800 Dongchuan Road, Harbin, Heilongjiang, China, 150001.
+Permission to make digital or hard copies of all or part of this work for personal or classroom use is granted without fee
+provided that copies are not made or distributed for profit or commercial advantage and that copies bear this notice and the
+full citation on the first page. Copyrights for components of this work owned by others than the author(s) must be honored.
+Abstracting with credit is permitted. To copy otherwise, or republish, to post on servers or to redistribute to lists, requires
+prior specific permission and/or a fee. Request permissions from permissions@acm.org.
+© 2024 Copyright held by the owner/author(s). Publication rights licensed to ACM.
+1046-8188/2024/1-ART1 $15.00
+https://doi.org/10.1145/3703155
+ACM Transactions on Information Systems, Vol. 1, No. 1, Article 1. Publication date: January 2024.
+
+

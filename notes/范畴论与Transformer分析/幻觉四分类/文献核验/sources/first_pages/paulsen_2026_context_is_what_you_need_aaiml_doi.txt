@@ -1,0 +1,44 @@
+Advances in Artificial Intelligence and Machine Learning; Research 6 (1) 4853-4878 Received 13-10-2025; Accepted 12-01-2026; Published online 19-01-2026
+
+Context Is What You Need: The Maximum Effective Context
+Window for Real World Limits of LLMs
+Norman Paulsen
+
+npaulsen@acciongroup.com
+
+Denver, Colorado, USA
+Accion Group
+Corresponding Author: Norman Paulsen
+Copyright © 2026 Norman Paulsen. This is an open access article distributed under the Creative Commons Attribution
+License, which permits unrestricted use, distribution, and reproduction in any medium, provided the original work is
+properly cited.
+
+Abstract
+Large language model (LLM) providers boast big numbers for maximum context window
+sizes. To test the real-world use of context windows, we 1) define a concept of maximum
+effective context window, 2) formulate a testing method of a context window’s effectiveness
+over various sizes and problem types, and 3) create a standardized way to compare model
+efficacy for increasingly larger context window sizes to find the point of failure. We collected
+hundreds of thousands of data points across several models and found significant differences
+between the reported Maximum Context Window (MCW) size and the Maximum Effective
+Context Window (MECW) size. Our findings show that the MECW is not only drastically
+different from the MCW but also shifts based on the problem type. A few top-of-the-line
+models in our test group failed with as few as 100 tokens in context; most had severe degradation in accuracy by 1000 tokens in context. All models fell far short of their Maximum
+Context Window by as much as >99%. Our data reveals the Maximum Effective Context
+Window shifts based on the type of problem provided, offering clear and actionable insights
+into how to improve model accuracy and decrease model hallucination rates.
+
+CCS Concepts
+Computing methodologies → Artificial intelligence → Natural language processing → Information extraction
+Keywords: Large Language Models (LLM), Context window, Inference tokens, Hallucination rates, LLM Accuracy
+
+1. INTRODUCTION
+The rise of large language models (LLMs) such as ChatGPT, Claude, Gemini, and LLaMA has
+reshaped the landscape of natural language processing (NLP), enabling increasingly sophisticated
+contextual understanding, summarization, coding, and dialog capabilities. Central to the application
+of these advancements is the concept of the context window (or maximum context length), the
+4853
+Citation: Norman Paulsen. Context Is What You Need: The Maximum Effective Context Window for Real World Limits of LLMs.
+Advances in Artificial Intelligence and Machine Learning. 2026;6(1):268. https://dx.doi.org/10.54364/AAIML.2026.61268
+
+

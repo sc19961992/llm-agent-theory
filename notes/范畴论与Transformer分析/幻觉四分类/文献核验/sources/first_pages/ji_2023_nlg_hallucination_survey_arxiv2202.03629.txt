@@ -1,0 +1,76 @@
+Survey of Hallucination in Natural Language Generation
+
+arXiv:2202.03629v7 [cs.CL] 14 Jul 2024
+
+ZIWEI JI, NAYEON LEE, RITA FRIESKE, TIEZHENG YU, DAN SU, YAN XU, ETSUKO ISHII,
+YEJIN BANG, DELONG CHEN, WENLIANG DAI, HO SHU CHAN, ANDREA MADOTTO,
+and PASCALE FUNG, Center for Artificial Intelligence Research (CAiRE), Hong Kong University of
+Science and Technology, Hong Kong
+Natural Language Generation (NLG) has improved exponentially in recent years thanks to the development of sequence-to-sequence deep learning technologies such as Transformer-based language models. This
+advancement has led to more fluent and coherent NLG, leading to improved development in downstream
+tasks such as abstractive summarization, dialogue generation and data-to-text generation. However, it is also
+apparent that deep learning based generation is prone to hallucinate unintended text, which degrades the
+system performance and fails to meet user expectations in many real-world scenarios. To address this issue,
+many studies have been presented in measuring and mitigating hallucinated texts, but these have never been
+reviewed in a comprehensive manner before.
+In this survey, we thus provide a broad overview of the research progress and challenges in the hallucination
+problem in NLG. The survey is organized into two parts: (1) a general overview of metrics, mitigation methods,
+and future directions; (2) an overview of task-specific research progress on hallucinations in the following
+downstream tasks, namely abstractive summarization, dialogue generation, generative question answering,
+data-to-text generation, machine translation, and visual-language generation; and (3) hallucinations in large
+language models (LLMs) 1 . This survey serves to facilitate collaborative efforts among researchers in tackling
+the challenge of hallucinated texts in NLG.
+CCS Concepts: • Computing methodologies → Natural language generation; Neural networks.
+Additional Key Words and Phrases: Hallucination, Intrinsic Hallucination, Extrinsic Hallucination, Faithfulness
+in NLG, Factuality in NLG, Consistency in NLG
+
+Contents
+Abstract
+Contents
+1
+Introduction
+2
+Definitions
+2.1
+Categorization
+2.2
+Task Comparison
+2.3
+Terminology Clarification
+3
+Contributors to Hallucination in NLG
+3.1
+Hallucination from Data
+3.2
+Hallucination from Training and Inference
+4
+Metrics Measuring Hallucination
+4.1
+Statistical Metric
+
+1
+1
+3
+4
+4
+5
+5
+5
+5
+8
+9
+9
+
+1 This section was updated in Jan 2024.
+
+Authors’ address: Ziwei Ji, zjiad@connect.ust.hk; Nayeon Lee, nyleeaa@connect.ust.hk; Rita Frieske, rita.frieske@ust.
+hk; Tiezheng Yu, tyuah@connect.ust.hk; Dan Su, dsu@connect.ust.hk; Yan Xu, yxucb@connect.ust.hk; Etsuko Ishii,
+eishii@connect.ust.hk; Yejin Bang, yjbang@connect.ust.hk; Delong Chen, delong.chen@connect.ust.hk; Wenliang Dai,
+wdaiai@connect.ust.hk; Ho Shu Chan, hschanav@connect.ust.hk; Andrea Madotto, amadotto@connect.ust.hk; Pascale Fung,
+pascale@ece.ust.hk, Center for Artificial Intelligence Research (CAiRE), Hong Kong University of Science and Technology,
+Clear Water Bay, Hong Kong.
+. 0360-0300/2022/2-ART $15.00
+https://doi.org/
+ACM Comput. Surv., Vol. 1, No. 1, Article . Publication date: February 2022.
+
+

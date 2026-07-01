@@ -1,0 +1,132 @@
+Transformer Feed-Forward Layers Are Key-Value Memories
+Mor Geva1,2
+Roei Schuster1,3
+Jonathan Berant1,2
+Omer Levy1
+1
+Blavatnik School of Computer Science, Tel-Aviv University
+2
+Allen Institute for Artificial Intelligence
+3
+Cornell Tech
+{morgeva@mail,joberant@cs,levyomer@cs}.tau.ac.il, rs864@cornell.edu
+
+Abstract
+Feed-forward layers constitute two-thirds of a
+transformer model’s parameters, yet their role
+in the network remains under-explored. We
+show that feed-forward layers in transformerbased language models operate as key-value
+memories, where each key correlates with textual patterns in the training examples, and each
+value induces a distribution over the output
+vocabulary. Our experiments show that the
+learned patterns are human-interpretable, and
+that lower layers tend to capture shallow patterns, while upper layers learn more semantic
+ones. The values complement the keys’ input patterns by inducing output distributions
+that concentrate probability mass on tokens
+likely to appear immediately after each pattern,
+particularly in the upper layers. Finally, we
+demonstrate that the output of a feed-forward
+layer is a composition of its memories, which
+is subsequently refined throughout the model’s
+layers via residual connections to produce the
+final output distribution.
+
+1
+
+Introduction
+
+Transformer layers
+
+x’1
+
+x’2
+
+x’3
+
+x’4
+
+x’5
+
+FF
+layer
+
+.2
+
+while
+
+v1
+
+1.5
+
+k1
+
+x1
+
+x2
+
+v2
+
+... it will take a
+... every once in a
+... , and for a
+
+k2
+
+x3
+
+0
+
+vdm
+
+k dm
+
+x4
+
+x5
+self-attention layer
+Transformer layers
+
+Stay
+
+with
+
+you
+
+for
+
+a
+
+Figure 1: An illustration of how a feed-forward layer
+emulates a key-value memory. Input vectors (here, x5 )
+are multiplied by keys to produce memory coefficients
+(e.g., the memory coefficient for v1 is 0.2), which then
+weigh distributions over the output vocabulary, stored
+in the values. The feed-forward layer’s output is thus
+the weighted sum of its values.
+
+Transformer-based language models (Vaswani
+et al., 2017) are at the core of state-of-the-art natuparameter matrix in the layer corresponds to keys,
+ral language processing (Devlin et al., 2019; Brown
+et al., 2020), largely due to the success of self- and the second parameter matrix to values. Figure 1
+shows how the keys (first parameter matrix) interattention. While much literature has been devoted
+act with the input to produce coefficients, which
+to analyzing the function of self-attention layers
+(Voita et al., 2019; Clark et al., 2019; Vig and Be- are then used to compute a weighted sum of the vallinkov, 2019), they account for only a third of a typ- ues (second parameter matrix) as the output. While
+the theoretical similarity between feed-forward layical transformer’s parameters (4d2 per layer, where
+ers and key-value memories has previously been
+d is the model’s hidden dimension). Most of the
+parameter budget is spent on position-wise feed- suggested by Sukhbaatar et al. (2019), we take
+forward layers (8d2 per layer), yet their role re- this observation one step further, and analyze the
+mains under-explored. What, if so, is the function “memories” that the feed-forward layers store.
+of feed-forward layers in a transformer language
+We find that each key correlates with a specific
+model?
+set of human-interpretable input patterns, such as
+We show that feed-forward layers emulate neural
+n-grams or semantic topics. For example, k2 in
+memories (Sukhbaatar et al., 2015), where the first
+Figure 1 is triggered by inputs that describe a pe5484
+Proceedings of the 2021 Conference on Empirical Methods in Natural Language Processing, pages 5484–5495
+November 7–11, 2021. c 2021 Association for Computational Linguistics
+
+
