@@ -1,0 +1,366 @@
+\section{Transformer 自回归预测状态：分布加权构造定理}
+\label{app:transformer-predictive-states}
+\label{supp:transformer}
+
+本节把正文中关于 Transformer 的构造例写成一个自包含的有限状态定理。它回答的范围很窄：在一个已经固定边界的自回归生成系统中，如果语言本身具有少量、可递推的预测状态，模型又学到了相应的下一 token 条件分布，而且这些预测状态能从模型完整状态中读出，那么这些状态构成一个分布加权意义下近似闭合的宏观过程。本节不证明三个前提对任意语言或任意 Transformer 自动成立。
+
+\subsection{系统边界与统一记号}
+
+对每个规模指标 $N$，固定模型参数、解码规则、有限词表 $\mathcal V_N$、最大上下文长度与最大生成长度。令 $\mathcal H_N$ 为带有位置、生成阶段和终止信息的有限历史集合；EOS 后的终止状态视为吸收态。只考虑声明时域内的相关扩展 $ha\in\mathcal H_N$。令
+\[
+ P_N(\,\cdot\mid h),\qquad \widehat P_N(\,\cdot\mid h)
+ \in\Delta(\mathcal V_N)
+\]
+分别为参考语言与 Transformer 在历史 $h$ 后的下一 token 条件分布，并令 $\mu_N\in\Delta(\mathcal H_N)$ 为预先声明的历史分布。$P_N$ 必须在所有声明历史上有定义；若自由生成会离开这些历史，则离开部分属于部署失配，不能继续由同一个 $\mu_N$ 下的结论覆盖。
+
+令 $X_N^{\mathrm{reach}}$ 为可达的完整推理状态集，$x_N(h)\in X_N^{\mathrm{reach}}$ 为读取 $h$ 后的状态。完整状态包括使下一步生成满足 Markov 性所需的全部量，例如历史、位置、KV cache、解码器状态以及已纳入模型边界的环境状态。形式上，假定下式右端只依赖 $x_N(h)$：
+\[
+ \begin{aligned}
+ G_N^{\mathrm{next}}(x_N(h),a)
+   &:=\widehat P_N(a\mid h),\\
+ K_N(x_N(h),x')
+   &:=\sum_{a\in\mathcal V_N}
+      \widehat P_N(a\mid h)\,
+      \one\{x_N(ha)=x'\}.
+ \end{aligned}
+\]
+若相同完整状态可能由多个历史表示，这一假定同时要求上述条件分布与 token 后继状态保持一致；把完整历史纳入状态即可保证它。
+
+对确定性映射 $f:A\to B$，记其对应的通道为
+\[
+ Q_f(a,b):=\one\{f(a)=b\}.
+\]
+通道按从左到右的次序复合，例如 $K_NQ_f$ 表示先按 $K_N$ 转移再应用 $f$。令
+\[
+ \nu_N:=(x_N)_*\mu_N.
+\]
+对同型通道 $A,B:X_N^{\mathrm{reach}}\rightsquigarrow Z$，定义分布加权距离
+\[
+ d_{\nu_N}(A,B)
+ :=\sum_{x\in X_N^{\mathrm{reach}}}\nu_N(x)
+   \left\|A(x,\cdot)-B(x,\cdot)\right\|_{\TV},
+ \qquad
+ \|p-r\|_{\TV}:=\frac12\sum_z|p(z)-r(z)|.
+\]
+这个距离只控制 $\nu_N$ 实际赋予质量的状态，不是全状态最坏情形距离。
+
+\subsection{三个假设}
+
+以下三个假设分别描述语言结构、学习误差与内部可读出性；三者不能相互替代。
+
+\paragraph{假设 T1（低复杂度递推预测状态）.}
+存在有限集合 $S_N$、满射 $s_N:\mathcal H_N\twoheadrightarrow S_N$、读出 kernel
+$R_N:S_N\rightsquigarrow\mathcal V_N$ 和确定性更新
+$F_N:S_N\times\mathcal V_N\to S_N$，使所有相关扩展满足
+\[
+ s_N(ha)=F_N(s_N(h),a),
+ \tag{T1a}\label{eq:T1-recursion}
+\]
+并且
+\[
+ \mathbb E_{h\sim\mu_N}
+ \left\|P_N(\cdot\mid h)-R_N(s_N(h),\cdot)\right\|_{\TV}
+ \le \eta_N.
+ \tag{T1b}\label{eq:T1-readout}
+\]
+相对于正文中事先固定的操作性微观基线 $B_N$，还要求
+\[
+ \frac{|S_N|}{|B_N|}\le\lambda_N.
+ \tag{T1c}\label{eq:T1-complexity}
+\]
+式 \eqref{eq:T1-recursion} 是自治性的结构前提；仅有少状态的下一 token 读出并不足以推出闭合。
+
+\paragraph{假设 T2（总体下一 token 学习）.}
+以自然对数计算 KL 散度，并假定
+\[
+ \delta_N
+ :=\mathbb E_{h\sim\mu_N}
+ D_{\mathrm{KL}}\!\left(
+ P_N(\cdot\mid h)\,\middle\|\,
+ \widehat P_N(\cdot\mid h)
+ \right)<\infty.
+ \tag{T2}\label{eq:T2-kl}
+\]
+这是声明分布上的总体额外交叉熵。有限训练集或测试集上的经验成功若没有泛化界，不能代替 \eqref{eq:T2-kl}。
+
+\paragraph{假设 T3（预测状态可由完整状态确定）.}
+在可达状态上存在确定性满射
+\[
+ q_N:X_N^{\mathrm{reach}}\twoheadrightarrow S_N,
+ \qquad q_N(x_N(h))=s_N(h).
+ \tag{T3}\label{eq:T3-readout}
+\]
+如果 $q_N$ 允许读取完整历史，这通常是一个构造条件；如果要求 $q_N$ 只能读取指定层的 hidden states 或 KV cache，它就是需要独立验证的神经表征假设。
+
+\subsection{加权 TV 定理与证明}
+
+根据 $R_N$ 和 $F_N$ 定义候选宏观转移 kernel
+\[
+ L_N(s,s')
+ :=\sum_{\substack{a\in\mathcal V_N:\,F_N(s,a)=s'}}R_N(s,a).
+ \tag{S.1}\label{eq:transformer-macro-kernel}
+\]
+
+\begin{theorem}[自回归预测状态的分布加权闭合]
+\label{thm:transformer-weighted-closure}
+在假设 \textup{T1--T3} 下，令
+\[
+ \varepsilon_N:=\eta_N+\sqrt{\frac{\delta_N}{2}}.
+ \tag{S.2}\label{eq:transformer-epsilon}
+\]
+则
+\[
+ d_{\nu_N}\!\left(
+ G_N^{\mathrm{next}},Q_{q_N}R_N
+ \right)\le\varepsilon_N,
+ \tag{S.3}\label{eq:transformer-token-bound}
+\]
+以及
+\[
+ d_{\nu_N}\!\left(
+ K_NQ_{q_N},Q_{q_N}L_N
+ \right)\le\varepsilon_N.
+ \tag{S.4}\label{eq:transformer-closure-bound}
+\]
+同时，候选宏观过程使用 $|S_N|$ 个状态，并满足
+$|S_N|/|B_N|\le\lambda_N$。因此，若
+$\eta_N,\delta_N,\lambda_N\to0$，则下一 token 读出误差、一步闭合误差与相对状态数同时趋于零。
+\end{theorem}
+
+\begin{proof}
+固定 $h\in\mathcal H_N$。Pinsker 不等式给出
+\[
+ \left\|P_N(\cdot\mid h)-\widehat P_N(\cdot\mid h)\right\|_{\TV}
+ \le
+ \sqrt{\frac12
+ D_{\mathrm{KL}}\!\left(
+ P_N(\cdot\mid h)\,\middle\|\,
+ \widehat P_N(\cdot\mid h)
+ \right)}.
+\]
+对 $h\sim\mu_N$ 取期望，并对凹函数 $u\mapsto\sqrt u$ 使用 Jensen 不等式，得到
+\[
+ \mathbb E_{h\sim\mu_N}
+ \left\|P_N(\cdot\mid h)-\widehat P_N(\cdot\mid h)\right\|_{\TV}
+ \le\sqrt{\frac{\delta_N}{2}}.
+ \tag{S.5}\label{eq:pinsker-average}
+\]
+由 TV 三角不等式、\eqref{eq:T1-readout} 与
+\eqref{eq:pinsker-average}，
+\[
+ \begin{aligned}
+ &\mathbb E_{h\sim\mu_N}
+ \left\|\widehat P_N(\cdot\mid h)
+       -R_N(s_N(h),\cdot)\right\|_{\TV}\\
+ &\quad\le
+ \mathbb E_{h\sim\mu_N}
+ \left\|\widehat P_N(\cdot\mid h)-P_N(\cdot\mid h)\right\|_{\TV}
+ +\mathbb E_{h\sim\mu_N}
+ \left\|P_N(\cdot\mid h)-R_N(s_N(h),\cdot)\right\|_{\TV}\\
+ &\quad\le\sqrt{\frac{\delta_N}{2}}+\eta_N
+ =\varepsilon_N.
+ \end{aligned}
+ \tag{S.6}\label{eq:token-triangle}
+\]
+由 $\nu_N=(x_N)_*\mu_N$ 以及
+$q_N(x_N(h))=s_N(h)$，式 \eqref{eq:token-triangle} 的左侧正是
+$d_{\nu_N}(G_N^{\mathrm{next}},Q_{q_N}R_N)$，故
+\eqref{eq:transformer-token-bound} 成立。
+
+再固定 $h$ 并记 $s=s_N(h)$。按 $K_N$ 生成 token $a$ 后，
+\[
+ q_N(x_N(ha))=s_N(ha)=F_N(s,a).
+\]
+因此，$K_NQ_{q_N}(x_N(h),\cdot)$ 是把
+$\widehat P_N(\cdot\mid h)$ 经确定性映射
+$a\mapsto F_N(s,a)$ 推前所得的分布；由
+\eqref{eq:transformer-macro-kernel}，
+$Q_{q_N}L_N(x_N(h),\cdot)$ 是把
+$R_N(s,\cdot)$ 经同一映射推前所得的分布。TV 距离在 Markov kernel、特别是在确定性映射的推前下不增加，故
+\[
+ \begin{aligned}
+ &\left\|K_NQ_{q_N}(x_N(h),\cdot)
+       -Q_{q_N}L_N(x_N(h),\cdot)\right\|_{\TV}\\
+ &\qquad\le
+ \left\|\widehat P_N(\cdot\mid h)
+       -R_N(s_N(h),\cdot)\right\|_{\TV}.
+ \end{aligned}
+\]
+对 $h\sim\mu_N$ 取期望并应用 \eqref{eq:token-triangle}，即得
+\eqref{eq:transformer-closure-bound}。最后，$q_N$ 的像为 $S_N$，复杂度结论就是 \eqref{eq:T1-complexity}。
+\end{proof}
+
+\begin{remark}[精确情形]
+若 $\eta_N=\delta_N=0$，两项加权误差均为零。只有当 $\mu_N$ 对声明历史具有全支撑时，这才进一步推出所有相关历史上的逐点等式；没有全支撑时，零加权误差仍不约束零质量历史。
+\end{remark}
+
+\subsection{可选的近似递推扩展}
+
+精确递推式 \eqref{eq:T1-recursion} 可以被一个单独计量的缺陷替代。保留 T1 的读出与复杂度部分，并给定候选更新 $F_N$，定义
+\[
+ \zeta_N
+ :=\mathbb E_{\substack{h\sim\mu_N\\
+                         a\sim\widehat P_N(\cdot\mid h)}}
+ \one\!\left\{s_N(ha)\ne F_N(s_N(h),a)\right\}.
+ \tag{S.7}\label{eq:recursion-defect}
+\]
+
+\begin{proposition}[近似递推]
+\label{prop:transformer-approx-recursion}
+在 T2、T3 与 T1 的读出和复杂度条件下，下一 token 界
+\eqref{eq:transformer-token-bound} 不变，而以
+\eqref{eq:transformer-macro-kernel} 定义的 $L_N$ 满足
+\[
+ d_{\nu_N}(K_NQ_{q_N},Q_{q_N}L_N)
+ \le\varepsilon_N+\zeta_N.
+ \tag{S.8}\label{eq:approx-recursion-bound}
+\]
+\end{proposition}
+
+\begin{proof}
+固定 $h$ 并令 $s=s_N(h)$。把实际宏观后继
+$s_N(ha)$ 与候选后继 $F_N(s,a)$ 用同一个
+$a\sim\widehat P_N(\cdot\mid h)$ 耦合。两者的分布之 TV 距离不超过该耦合下的不一致概率。再把
+$\widehat P_N(\cdot\mid h)$ 与 $R_N(s,\cdot)$ 经同一个候选映射
+$a\mapsto F_N(s,a)$ 推前，推前后的 TV 距离不超过推前前的距离。因此
+\[
+ \begin{aligned}
+ &\left\|K_NQ_{q_N}(x_N(h),\cdot)
+       -Q_{q_N}L_N(x_N(h),\cdot)\right\|_{\TV}\\
+ &\quad\le
+ \mathbb P_{a\sim\widehat P_N(\cdot\mid h)}
+ \{s_N(ha)\ne F_N(s_N(h),a)\}
+ +\left\|\widehat P_N(\cdot\mid h)-R_N(s_N(h),\cdot)\right\|_{\TV}.
+ \end{aligned}
+\]
+对 $h\sim\mu_N$ 取期望；第一项为 $\zeta_N$，第二项由
+\eqref{eq:token-triangle} 至多为 $\varepsilon_N$。
+\end{proof}
+
+\subsection{由一步闭合到固定时长的状态边缘}
+
+定理 \ref{thm:transformer-weighted-closure} 只给出一个声明分布下的一步结论。要控制自由生成的多个时刻，必须在实际 rollout 分布上逐时刻验证相应的一步误差。
+
+\begin{proposition}[固定时长的宏观状态边缘]
+\label{prop:transformer-fixed-horizon}
+固定 $N$ 并略去下标。令 $\xi_0\in\Delta(X^{\mathrm{reach}})$ 为初始完整状态分布，
+\[
+ \xi_t:=\xi_0K^t,
+ \qquad p_t:=\xi_tQ_q,
+ \qquad \widehat p_t:=(\xi_0Q_q)L^t.
+\]
+若对 $t=0,\ldots,T-1$ 有
+\[
+ d_{\xi_t}(KQ_q,Q_qL)\le e_t,
+ \tag{S.9}\label{eq:rollout-one-step}
+\]
+则
+\[
+ \|p_T-\widehat p_T\|_{\TV}
+ \le\sum_{t=0}^{T-1}e_t.
+ \tag{S.10}\label{eq:fixed-horizon-bound}
+\]
+若 $L$ 的 Dobrushin 系数
+\[
+ \alpha(L):=\sup_{s,s'}\|L(s,\cdot)-L(s',\cdot)\|_{\TV}
+\]
+满足 $\alpha(L)\le\rho<1$，则更精确地
+\[
+ \|p_T-\widehat p_T\|_{\TV}
+ \le\sum_{t=0}^{T-1}\rho^{T-1-t}e_t.
+ \tag{S.11}\label{eq:fixed-horizon-contraction}
+\]
+特别地，若 $e_t\le e$，右侧不超过
+$e(1-\rho^T)/(1-\rho)$。
+\end{proposition}
+
+\begin{proof}
+记 $E_t:=\|p_t-\widehat p_t\|_{\TV}$。混合分布之间的 TV 距离不超过逐行 TV 距离的相应加权平均，且 Markov kernel 不扩张 TV，故
+\[
+ \begin{aligned}
+ E_{t+1}
+ &=\|\xi_tKQ_q-\widehat p_tL\|_{\TV}\\
+ &\le\|\xi_tKQ_q-\xi_tQ_qL\|_{\TV}
+     +\|p_tL-\widehat p_tL\|_{\TV}\\
+ &\le e_t+E_t.
+ \end{aligned}
+\]
+由 $E_0=0$ 递推即得 \eqref{eq:fixed-horizon-bound}。若
+$\alpha(L)\le\rho$，Dobrushin 收缩给出
+$\|p_tL-\widehat p_tL\|_{\TV}\le\rho E_t$，于是
+$E_{t+1}\le e_t+\rho E_t$；展开递推即得
+\eqref{eq:fixed-horizon-contraction}。
+\end{proof}
+
+\begin{remark}[固定时长与增长时长]
+对固定 $T$，只要各时刻 rollout 上的 $e_{N,t}\to0$，式
+\eqref{eq:fixed-horizon-bound} 就给出边缘误差趋零。若时长 $T_N$ 随系统规模增长，则还需
+$\sum_{t<T_N}e_{N,t}\to0$，或使用具有统一收缩常数的界。这里的收缩只控制宏观状态边缘；已经输出的完整 token 轨迹需要另行作顺序耦合，不能由状态边缘收缩自动推出。
+\end{remark}
+
+\subsection{与正文联合判据的关系}
+\label{sec:transformer-gamma-relation}
+
+正文的 $\Gamma_N$ 是操作性微观核上的、任务保真的、最坏情形系统族判据；定理
+\ref{thm:transformer-weighted-closure} 是给定 Transformer 与给定历史分布上的候选构造。二者有三项本质差异。
+
+\begin{enumerate}
+ \item \textbf{误差范数不同。}
+ Transformer 定理使用 $d_{\nu_N}$，因而忽略零质量状态并允许小质量状态有大误差；$\Gamma_N$ 使用所有操作性微观状态上的最坏逐行误差。要对齐，必须直接证明统一逐行界，或者给操作性微观核上的验证分布一个下质量界 $\omega_N>0$，并要求
+ $\varepsilon_N/\omega_N\to0$（近似递推时改为
+ $(\varepsilon_N+\zeta_N)/\omega_N\to0$）。仅有每个有限 $N$ 的全支撑不够，因为最小质量可能随 $N$ 快速趋零。
+
+ \item \textbf{信息层级与任务条件不同。}
+ Transformer 定理的 $q_N$ 首先是可达完整状态上的预测状态读出，$B_N$ 在 T1 中只作为预先固定的复杂度基线；而 $\Gamma_N$ 只在由微观探针与允许动力学生成的操作性微观核上比较严格信息商，并要求声明任务精确因子化。要对齐，需证明存在满射 $\bar q_N:B_N\twoheadrightarrow S_N$ 使
+ $q_N=\bar q_N\circ p_N$，并且 $\bar q_N$ 是相对于 $B_N$ 的真正信息商，满足
+ $\bar g_N=\widetilde g_N\circ\bar q_N$。此外，正文 $\bar g_N$ 是确定性任务映射，而下一 token 预测是随机任务通道。式
+ \eqref{eq:transformer-token-bound} 只给出后者的近似读出；要么另选一个被 $\bar q_N$ 精确保留的确定性任务，要么把随机任务通道的缺陷显式加入扩展版指标，不能直接套用正文的精确任务约束。
+
+ \item \textbf{系统族量词不同。}
+ Transformer 定理为一个固定模型、解码规则和参考分布构造一个 $q_N$ 与 $L_N$；$\Gamma_N$ 对预先声明的 kernel 族取最坏情形，并在全部任务保真分区中优化。要对齐，同一个分区 $\pi_N$ 必须对族中每个 kernel 都满足统一闭合界，且
+ $|\pi_N|/|B_N|\to0$。若语义要求整个系统族共享同一个宏观 kernel，还必须把“逐 kernel 选择 $L$”强化为“存在一个共同的 $L_N$”；这对应不同的极小极大量词，不能隐式互换。
+\end{enumerate}
+
+下面的直接推论说明这些额外条件为何恰好足够。
+
+\begin{proposition}[对齐后给出 $\Gamma_N$ 的上界]
+\label{prop:transformer-gamma-alignment}
+设 $B_N$、任务 $\bar g_N$ 与 kernel 族
+$\bar{\mathcal K}_N$ 均按正文预先声明。若 Transformer 候选在操作性核上诱导满射
+$\bar q_N:B_N\twoheadrightarrow Y_N$，令
+$\pi_N:=\ker\bar q_N$，并且
+\[
+ \bar g_N=\widetilde g_N\circ\bar q_N,
+ \qquad \frac{|Y_N|}{|B_N|}\le c_N,
+\]
+且对每个 $\bar K\in\bar{\mathcal K}_N$ 都存在宏观 kernel
+$L_{N,\bar K}$ 使
+\[
+ \sup_{b\in B_N}
+ \left\|\bar KQ_{\bar q_N}(b,\cdot)
+       -Q_{\bar q_N}L_{N,\bar K}(b,\cdot)\right\|_{\TV}
+ \le r_N,
+ \tag{S.12}\label{eq:gamma-aligned-row-bound}
+\]
+则（沿用正文以纤维直径定义的 $\Gamma_N$）
+\[
+ \Gamma_N\le\max\{c_N,2r_N\}.
+ \tag{S.13}\label{eq:gamma-candidate-upper}
+\]
+因而 $c_N,r_N\to0$ 蕴含 $\Gamma_N\to0$。
+\end{proposition}
+
+\begin{proof}
+任务因子化说明 $\pi_N$ 属于 $\Gamma_N$ 极小化所允许的任务保真分区集。式
+\eqref{eq:gamma-aligned-row-bound} 说明该候选分区的最坏闭合半径不超过 $r_N$。同一纤维内任意两行分别距同一个宏观行至多 $r_N$，故三角不等式给出纤维预测直径至多 $2r_N$；其相对状态数不超过 $c_N$。把这个可行候选代入 $\Gamma_N$ 的定义即可得到
+\eqref{eq:gamma-candidate-upper}。
+\end{proof}
+
+如果式 \eqref{eq:gamma-aligned-row-bound} 仅由加权证书推导，可在已经完成操作性核因子化之后使用如下简单换算：若验证分布
+$\beta_{N,\bar K}$ 满足
+$\min_{b\in B_N}\beta_{N,\bar K}(b)\ge\omega_N>0$，且相应加权逐行缺陷对所有 $\bar K$ 均不超过 $e_N$，则每一行缺陷至多为
+$e_N/\omega_N$。此时命题中可取 $r_N=e_N/\omega_N$。这一换算往往很弱，正说明分布加权成功本身不是最坏情形证书。
+
+\subsection{结论边界}
+
+定理证明的是生成行为存在一个低状态数、近似可递推的任务商。它没有证明：语言必然满足 T1；有限样本成功必然给出 T2；指定神经层必然满足强化的 T3；hidden states 位于低维流形；候选状态能够被高效发现、解释或实现；以及固定时长结论在无额外条件时延伸到增长时长。把这些命题与本节结论分开，是将 Transformer 构造例与正文一般判据正确对齐所必需的。

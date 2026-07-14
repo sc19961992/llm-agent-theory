@@ -1,0 +1,51 @@
+\section{候选宏观表示从哪里来}
+\label{sec:construction}
+
+定理~\ref{thm:gamma-characterization} 判断一个系统族何时有低复杂度闭合表示，却不保证任意系统都满足判据。具体证明通常需要构造候选分区。三类常见来源是守恒或充分任务、残余对称和递推预测状态。
+
+\subsection{守恒任务与残余对称}
+
+若任务变量 $\bar g(b)$ 的下一步分布只依赖当前任务值，则 $s=\bar g$ 本身闭合，并达到任何任务保真表示可能具有的最少 $|O|$ 个状态。注意“任务标签少”本身不够；所需的实质条件正是其转移对任务纤维保持一致。
+
+设有限群 $H$ 作用在 $B$ 上，轨道映射为 $q_H:B\twoheadrightarrow B/H$。若任务在轨道上不变，并定义统一近似等变缺陷
+\[
+\eps_H(\bar\cK)
+:=
+\sup_{\bar K\in\bar\cK,\,h\in H,\,b\in B}
+\left\|\bar K(hb,\cdot)-h_*\bar K(b,\cdot)\right\|_{\TV},
+\]
+则推前到轨道空间不会增加 TV 距离，且 $q_H\circ h=q_H$，故
+\begin{equation}
+D_{\bar\cK}(\ker q_H)\le\eps_H(\bar\cK),
+\qquad
+\eta_{\ker q_H}(\bar\cK)\le\eps_H(\bar\cK).
+\label{eq:symmetry-certificate}
+\end{equation}
+因此，任务兼容、轨道数为 $o(|B_N|)$ 且 $\eps_{H_N}\to0$ 的群作用直接给出 LC 的充分证书。故障--修复例中的坐标置换群给出精确情形。训练是否以高概率形成某个残余对称相是另一条概率命题，不能由式~\eqref{eq:symmetry-certificate} 反推；完整区分见附录~\ref{app:structural-certificates}。
+
+\subsection{预测状态与 Transformer 接口}
+
+把历史按“对未来给出相同预测”分组，是计算力学中因果状态的核心构造\citep{CrutchfieldYoung1989,ShaliziCrutchfield2001}。对自回归 Transformer\citep{VaswaniEtAl2017}，配套附件《Transformer 自回归预测状态：分布加权构造定理》（补充材料 S1）证明了下面的专用结果；其证明不重复收入主论文 PDF。
+
+\begin{theorem}[Transformer 预测状态构造，简述]
+\label{thm:transformer-interface}
+设目标语言在声明的历史分布 $\mu_N$ 下有 $m_N$ 个可递归更新的预测状态，其下一 token 读出误差为 $\eta_N$；Transformer 相对目标语言的总体额外交叉熵为 $\delta_N$；且预测状态可由 Transformer 的完整推理状态确定。记完整状态的诱导分布为 $\nu_N$。则可显式构造状态表示 $q_N$、下一 token 读出 $R_N$ 和宏观转移 $L_N$，使分布加权 TV 意义下
+\begin{align}
+d_{\nu_N}(G_N^{\mathrm{next}},Q_{q_N}R_N)
+&\le \eta_N+\sqrt{\delta_N/2},\label{eq:transformer-readout}\\
+d_{\nu_N}(K_NQ_{q_N},Q_{q_N}L_N)
+&\le \eta_N+\sqrt{\delta_N/2}.
+\label{eq:transformer-closure}
+\end{align}
+若预测状态递推本身另有缺陷 $\zeta_N$，第二个上界增加 $\zeta_N$。
+\end{theorem}
+
+这个结果补足了一般理论没有提供的步骤：它从语言的低复杂度预测结构、总体下一 token 学习成功和状态可读出性出发，构造候选 $q_N,R_N,L_N$。但它不是定理~\ref{thm:gamma-characterization} 的字面特例：
+
+\begin{enumerate}
+  \item 式~\eqref{eq:transformer-readout}--\eqref{eq:transformer-closure} 使用 $\nu_N$ 加权误差，而 $\Gamma_N$ 使用全状态最坏误差；
+  \item 下一 token 是随机任务通道，而正文主定理使用确定性任务 $g_N$；
+  \item Transformer 的预测状态数 $m_N$ 只有在表示经操作性微观商 $p_N$ 因子化、且 $m_N/|B_N|\to0$ 时，才与正文复杂度基线对齐。
+\end{enumerate}
+
+若要推出最坏情形 LC，还需覆盖下界或统一误差把 $d_{\nu_N}$ 提升到 $d_\infty$，并把随机任务通道纳入相应双误差版本。若 $q_N$ 只能读取完整历史，结论是生成行为的低复杂度商；只有它能从指定 hidden states 或 KV cache 中稳定读出，才支持内部神经表征结论。本文不从行为闭合推出参数空间必在低维流形上。

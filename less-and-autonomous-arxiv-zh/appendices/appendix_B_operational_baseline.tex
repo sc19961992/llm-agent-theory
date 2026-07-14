@@ -1,0 +1,207 @@
+\section{操作性微观基线：构造、最小性与填充不变性}
+\label{app:operational-baseline}
+
+原始编码的状态数不是表示不变量：给每个状态附加一个不影响任何指定观测和
+动力学的复制标签，就能任意放大它。本附录给出正文所用操作性微观空间的完整
+构造。这个空间相对于预先声明的探针与允许动力学族是规范的；它不是脱离系统
+边界的绝对``真实微观空间''。
+
+\subsection{共同稳定的观测代数}
+
+设 $X$ 为有限集，$u:X\twoheadrightarrow U$ 是在选择宏观表示之前固定的微观
+探针，$\cK\subseteq\Stoch(X,X)$ 是非空允许动力学族。令
+\[
+  \cA^{\mathrm{mic}}_0:=u^*\mathbb R^U
+\]
+并递归定义
+\begin{equation}
+  \cA^{\mathrm{mic}}_{n+1}
+  :=\operatorname{alg}\!\left(
+      \cA^{\mathrm{mic}}_n
+      \cup\bigcup_{K\in\cK}P_K\cA^{\mathrm{mic}}_n
+    \right),
+  \label{eq:app-micro-algebra-iteration}
+\end{equation}
+其中 $\operatorname{alg}$ 表示 $\mathbb R^X$ 内生成的最小含幺点乘子代数。
+
+\begin{theorem}[操作性微观商]
+\label{thm:app-operational-core}
+序列~\eqref{eq:app-micro-algebra-iteration} 在有限步后稳定。设稳定代数为
+$\cA_{\mathrm{mic}}$，并令其诱导分区的商映射为
+\[
+  p:X\twoheadrightarrow B.
+\]
+则：
+\begin{enumerate}
+  \item 存在唯一 $\bar u:B\to U$ 使 $u=\bar u\circ p$；
+  \item 对每个 $K\in\cK$，存在唯一 $\bar K\in\Stoch(B,B)$ 使
+  \begin{equation}
+    KQ_p=Q_p\bar K;
+    \label{eq:app-operational-intertwining}
+  \end{equation}
+  \item $p$ 是同时满足前两项的最粗确定性商：若
+  $p':X\twoheadrightarrow B'$ 保留 $u$，并且每个 $K\in\cK$ 都在 $p'$
+  上精确闭合，则存在唯一满射 $s:B'\twoheadrightarrow B$ 使
+  $p=s\circ p'$。
+\end{enumerate}
+因此 $(B,\bar u,\{\bar K:K\in\cK\})$ 在典范同构意义下唯一。
+\end{theorem}
+
+\begin{proof}
+代数序列单调增加。每次严格增加都会提高其作为 $\mathbb R^X$ 子空间的维数，
+故至多有限次严格增加；一旦相邻两项相等，式~\eqref{eq:app-micro-algebra-iteration}
+保证其后各项也相等。在稳定处，
+\[
+  P_K\cA_{\mathrm{mic}}\subseteq\cA_{\mathrm{mic}}
+  \qquad(K\in\cK).
+\]
+有限观测代数与分区的对应由引理~\ref{lem:app-finite-algebra-partition} 给出：
+$\cA_{\mathrm{mic}}=p^*\mathbb R^B$。于是
+定理~\ref{thm:app-four-equivalences} 的观测闭合条件对每个 $K$ 成立，逐一给出
+唯一 $\bar K$ 与式~\eqref{eq:app-operational-intertwining}。又因
+$u^*\mathbb R^U\subseteq\cA_{\mathrm{mic}}$，$u$ 在 $p$ 的每个纤维上
+常值，故唯一分解为 $u=\bar u\circ p$。
+
+现设 $p'$ 满足题设条件。其分区代数
+$\cA_{p'}:=(p')^*\mathbb R^{B'}$ 包含 $u^*\mathbb R^U$，并对全部
+$P_K$ 不变。对 $n$ 归纳可得
+$\cA^{\mathrm{mic}}_n\subseteq\cA_{p'}$，从而
+$\cA_{\mathrm{mic}}\subseteq\cA_{p'}$。代数包含方向与分区细化方向相反，
+所以 $p'$ 的每个纤维包含于某个 $p$ 的纤维；即 $p$ 在 $p'$ 上常值。
+因此存在唯一 $s:B'\twoheadrightarrow B$ 使 $p=s\circ p'$。满射性来自
+$p,p'$ 的满射性。
+\end{proof}
+
+\subsection{等价的稳定分区细化}
+
+令 $\Pi_0$ 为 $u$ 的纤维分区。已知 $\Pi_n$ 后，定义 $\Pi_{n+1}$ 所对应的
+等价关系为
+\begin{equation}
+ x\equiv_{n+1}x'
+ \quad\Longleftrightarrow\quad
+ \begin{cases}
+   x\equiv_nx',\\
+   K(x,C)=K(x',C),&
+   \forall K\in\cK,\ \forall C\in\Pi_n.
+ \end{cases}
+ \label{eq:app-stable-refinement}
+\end{equation}
+
+\begin{proposition}[稳定分区算法]
+\label{prop:app-stable-refinement}
+$\Pi_n$ 正是 $\cA_n^{\mathrm{mic}}$ 的分区。序列在有限步后稳定，稳定分区
+就是 $p:X\twoheadrightarrow B$ 的纤维分区。它是所有细化 $u$ 的纤维分区、
+并对每个 $K\in\cK$ strong-lumpable 的分区中最粗者。
+\end{proposition}
+
+\begin{proof}
+若 $\Pi_n$ 对应 $\cA_n^{\mathrm{mic}}$，则该代数由块指示函数
+$\{\one_C:C\in\Pi_n\}$ 张成，且
+\[
+  (P_K\one_C)(x)=K(x,C).
+\]
+生成代数所诱导的等价关系恰要求旧块标签相同，并要求所有上述函数值相同；
+这就是式~\eqref{eq:app-stable-refinement}。由 $n=0$ 归纳得到第一项，终止性
+与定理~\ref{thm:app-operational-core} 相同。稳定时，块转移概率在每个块内
+对每个 $K$ 恒定，故由定理~\ref{thm:app-four-equivalences} 得到共同
+strong lumpability。反之，任一满足题设的稳定分区代数都包含初始代数且对
+全部 $P_K$ 不变，定理~\ref{thm:app-operational-core} 的最小性证明说明它
+必细化 $p$ 的分区。
+\end{proof}
+
+当 $\cK$ 是有限且各转移概率可比较时，式~\eqref{eq:app-stable-refinement}
+给出直接有限算法；对抽象无限核族，它仍是数学刻画，但不自动给出有限输入
+意义下的可执行检验程序。
+
+若任务 $g:X\twoheadrightarrow O$ 由已声明微观信息确定，即 $g=t\circ u$，
+则存在唯一 $\bar g:B\twoheadrightarrow O$ 使 $g=\bar g\circ p$。正文所称
+宏观表示是 $B$ 的任务保真商
+\[
+  s:B\twoheadrightarrow Y,
+  \qquad \bar g=r\circ s.
+\]
+只有在 $|Y|<|B|$ 时，$s$ 才是严格信息商。状态比 $|Y|/|B|$ 在这个信息
+关系固定之后才具有本文所需的操作含义。
+
+\begin{proposition}[约化前后闭合缺陷相同]
+\label{prop:app-operational-defect-equality}
+对任意 $K\in\cK$、其诱导核 $\bar K$、任务保真商
+$s:B\twoheadrightarrow Y$ 以及任意 $L\in\Stoch(Y,Y)$，令
+$q=s\circ p$，则
+\begin{equation}
+ d_\infty(KQ_q,Q_qL)
+ =
+ d_\infty(\bar KQ_s,Q_sL).
+ \label{eq:app-operational-defect-equality}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+由 $Q_q=Q_pQ_s$ 和式~\eqref{eq:app-operational-intertwining}，
+\[
+ KQ_q=Q_p\bar KQ_s,
+ \qquad
+ Q_qL=Q_pQ_sL.
+\]
+$p$ 满射，故引理~\ref{lem:app-surjective-pullback} 表明前复合 $Q_p$
+保持行最大距离，得到式~\eqref{eq:app-operational-defect-equality}。
+\end{proof}
+
+\subsection{精确复制填充不变性}
+
+写 $[M]:=\{1,\ldots,M\}$。设原动力学族以同一索引集表示为
+$\cK=\{K_\theta:\theta\in\Theta\}$。考虑
+\[
+ X^{(M)}:=X\times[M],
+ \qquad
+ u^{(M)}(x,i):=u(x),
+ \qquad
+ g^{(M)}(x,i):=g(x),
+\]
+以及核族 $\cK^{(M)}=\{K_\theta^{(M)}:\theta\in\Theta\}$，并假设
+\begin{equation}
+ \sum_{j=1}^M
+ K_\theta^{(M)}\bigl((x,i),(x',j)\bigr)
+ =K_\theta(x,x')
+ \quad
+ (\theta,x,x',i).
+ \label{eq:app-exact-padding}
+\end{equation}
+
+\begin{theorem}[无意义复制填充不变性]
+\label{thm:app-padding-invariance}
+在条件~\eqref{eq:app-exact-padding} 下，填充系统的操作性微观空间
+$B^{(M)}$ 与 $B$ 典范同构；该同构下，对应索引 $\theta$ 的诱导核相同。
+因而任一任务保真商 $s:B\twoheadrightarrow Y$ 的状态比 $|Y|/|B|$、精确
+闭合性质及正文定义的最坏行闭合缺陷均不随 $M$ 改变。
+\end{theorem}
+
+\begin{proof}
+对稳定分区细化做归纳。初始分区的块具有
+$C\times[M]$ 的形式，其中 $C$ 是 $u$ 的一个纤维。若 $\Pi_n^{(M)}$
+由原分区 $\Pi_n$ 的块如此提升，则对任意 $C\in\Pi_n$，
+\begin{align*}
+ K_\theta^{(M)}\bigl((x,i),C\times[M]\bigr)
+ &=\sum_{x'\in C}\sum_{j=1}^M
+   K_\theta^{(M)}\bigl((x,i),(x',j)\bigr)\\
+ &=\sum_{x'\in C}K_\theta(x,x')
+ =K_\theta(x,C).
+\end{align*}
+该值与复制标签 $i$ 无关，而且两个原状态在下一轮是否被分开，恰由原系统
+的对应块转移概率决定。因此
+\[
+  \Pi_n^{(M)}=\{C\times[M]:C\in\Pi_n\}
+\]
+对每个 $n$ 成立。稳定后，$C\times[M]\mapsto C$ 给出
+$B^{(M)}\cong B$。
+
+对两个稳定块 $C,D$，填充后诱导核从 $C\times[M]$ 到 $D\times[M]$
+的概率由上式等于原诱导核从 $C$ 到 $D$ 的概率，所以对应诱导核相同。
+任意后续商 $s$ 的状态数不变；其交换式两边在此同构下逐行相同，故精确性质
+与 $d_\infty$ 缺陷也不变。
+\end{proof}
+
+定理~\ref{thm:app-padding-invariance} 只排除满足
+式~\eqref{eq:app-exact-padding} 的\emph{精确}无意义标签。若标签对探针或有限
+时间动力学有小但非零影响，是否把它视为可忽略自由度取决于另行声明的测量
+分辨率、统计置信度与时间尺度；本定理没有给出与这些选择无关的阈值。

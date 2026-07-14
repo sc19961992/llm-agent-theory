@@ -1,0 +1,68 @@
+\section{标准 Borel、随机粗粒化与连续时间}
+\label{app:extensions}
+
+本附录记录有限确定性理论的三个自然推广。它们说明交换式的适用方向，不把有限分区紧致性或最优化达到无条件搬到更一般空间。标准 Borel kernel 与正则条件概率的背景可参见\citet{Kallenberg2021}。
+
+\subsection{标准 Borel 空间中的确定性因子}
+
+设 $X,Y$ 为标准 Borel 空间，$s:X\to Y$ 为可测满射，$K:X\rightsquigarrow X$ 为 Markov kernel。若对每个 Borel 集 $A\subseteq Y$，数值
+\[
+K(x,s^{-1}(A))
+\]
+只依赖 $s(x)$，并且由此定义的函数
+\[
+y\longmapsto K(x,s^{-1}(A)),\qquad s(x)=y,
+\]
+对每个 $A$ 都可测，则
+\[
+L(y,A):=K(x,s^{-1}(A)),\qquad s(x)=y,
+\]
+良定义且给出 Markov kernel $L:Y\rightsquigarrow Y$，满足
+\[
+KQ_s=Q_sL.
+\]
+反向蕴含显然成立。这是有限纤维判据的逐集合版本。
+
+可测性条件不可省略。任意可测等价关系的抽象商未必仍是标准 Borel 空间，逐纤维定义的值也未必自动组成 kernel。更进一步，有限理论中“枚举分区”和“紧单纯形上最优值达到”的论证都不再自动成立；需要限制候选因子族、选定拓扑并证明紧致性或下半连续性。
+
+在观测语言中，确定性因子对应子 $\sigma$-代数 $s^{-1}(\mathcal B(Y))$。精确闭合要求 Markov 算子把该子 $\sigma$-代数上的有界可测函数保持在其中。并非每个子 $\sigma$-代数都能由一个良好的标准 Borel 商无损表示，因此“子 $\sigma$-代数版本”和“商空间版本”的等价也需要可数生成等正则条件。
+
+\subsection{随机粗粒化 kernel}
+
+令 $Q:X\rightsquigarrow Y$ 本身为 Markov kernel。随机粗粒化的精确交换式仍为
+\begin{equation}
+KQ=QL.
+\label{eq:random-intertwining}
+\end{equation}
+它表示：先微观演化再随机编码，与先随机编码再按 $L$ 演化具有相同的一步边缘分布。Rogers--Pitman 型 Markov functions 提供了与 link kernel 相容的投影框架\citep{RogersPitman1981}；在抽象层面，随机映射可由 Markov category 统一组织\citep{Fritz2020}。
+
+随机 $Q$ 与确定性商有三点本质差别：
+\begin{enumerate}
+  \item 它通常不对应 $X$ 的一个分区，因而不能直接用块数定义复杂度；
+  \item 即使式~\eqref{eq:random-intertwining} 可解，$L$ 也可能不唯一。例如 $Q(x,\cdot)=\nu$ 与 $x$ 无关时，只要 $\nu L=\nu$，多种 $L$ 都满足交换式；
+  \item 一步边缘交换不自动指定微观路径与宏观路径的联合耦合，也不自动保证所有初始宏观分布都可由微观初态实现。
+\end{enumerate}
+
+近似情形可继续使用
+$d_\infty(KQ,QL)$，固定 $Q$ 时最优 $L$ 在有限 $Y$ 上仍由紧致性达到；但若同时优化 $Q$，需要另选随机表示的复杂度或信息约束。本文没有把这一选择塞入 $\Gamma_N$。
+
+\subsection{有限状态连续时间}
+
+令 $G$ 与 $\bar G$ 分别是有限状态空间 $X,Y$ 上的保守生成元，$Q_s$ 为确定性粗粒化。若
+\begin{equation}
+GQ_s=Q_s\bar G,
+\label{eq:generator-intertwining}
+\end{equation}
+则对所有 $t\ge0$，幂级数逐项给出
+\begin{equation}
+e^{tG}Q_s=Q_se^{t\bar G}.
+\label{eq:semigroup-intertwining}
+\end{equation}
+反之，若式~\eqref{eq:semigroup-intertwining} 对 $t$ 的某个零邻域成立，对 $t=0$ 求导即得式~\eqref{eq:generator-intertwining}。因此有限连续时间精确闭合可在生成元或半群层面等价检查。
+
+近似生成元关系不能仅凭形式指数就得到对所有时间一致的小误差；有限维 Duhamel 公式给出
+\[
+e^{tG}Q_s-Q_se^{t\bar G}
+=\int_0^t e^{(t-r)G}(GQ_s-Q_s\bar G)e^{r\bar G}\dd r,
+\]
+具体范数界取决于所用算子范数和半群收缩。一般状态空间还涉及生成元定义域、强连续性、闭包和 martingale problem，可参见\citet{EthierKurtz1986}。这些解析条件独立于本文的有限一步 $\Gamma_N$ 判据。

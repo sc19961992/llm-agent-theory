@@ -1,0 +1,220 @@
+\section{误差复合、时间传播与时间尺度边界}
+\label{app:composition-time}
+
+本附录区分两种不同的累积：多个表示层依次粗粒化是\emph{空间复合}，同一
+近似因子反复演化是\emph{时间迭代}。二者使用同一全变差工具，但量词和可
+解释的结论不同。
+
+\subsection{两层与多层空间复合}
+
+设
+\[
+ Q:(X,K)\longrightarrow(Y,L),
+ \qquad
+ R:(Y,L)\longrightarrow(Z,M)
+\]
+是 Markov 通道，其中记号只表示其源、靶动力学，并不预设交换式精确成立。
+
+\begin{theorem}[近似动力学因子的复合]
+\label{thm:app-factor-composition}
+有
+\begin{equation}
+ \partial_{K,M}(QR)
+ \le
+ \alpha(R)\partial_{K,L}(Q)+\partial_{L,M}(R).
+ \label{eq:app-two-layer-composition}
+\end{equation}
+特别地，若两个缺陷分别不超过 $\eps$ 与 $\delta$，则复合缺陷不超过
+$\alpha(R)\eps+\delta\le\eps+\delta$。
+\end{theorem}
+
+\begin{proof}
+由三角不等式和引理~\ref{lem:app-tv-contraction}，
+\begin{align*}
+ d_\infty(KQR,QRM)
+ &\le d_\infty((KQ)R,(QL)R)
+      +d_\infty(Q(LR),Q(RM))\\
+ &\le \alpha(R)d_\infty(KQ,QL)+d_\infty(LR,RM).
+\end{align*}
+\end{proof}
+
+因此，一个同时记录缺陷上界与通道收缩率的证书
+$(Q,\eps_Q,\rho_Q)$ 可按
+\begin{equation}
+ (\eps_Q,\rho_Q)\star(\eps_R,\rho_R)
+ :=(\rho_R\eps_Q+\eps_R,\rho_Q\rho_R)
+ \label{eq:app-certificate-composition}
+\end{equation}
+复合。结合律来自普通乘法的结合律与
+\[
+ \rho_S(\rho_R\eps_Q+\eps_R)+\eps_S
+ =(\rho_S\rho_R)\eps_Q+\rho_S\eps_R+\eps_S.
+\]
+只记录误差而丢弃 $\rho$ 时仍有加法上界，但固定某个正误差阈值的态射集合
+一般不对复合封闭。
+
+\begin{corollary}[多层空间误差]
+\label{cor:app-multilayer-composition}
+对
+\[
+ Q_i:(X_{i-1},K_{i-1})\to(X_i,K_i),
+ \qquad
+ \eps_i:=\partial_{K_{i-1},K_i}(Q_i),
+\]
+令 $Q_{1:n}:=Q_1\cdots Q_n$。则
+\begin{align}
+ d_\infty(K_0Q_{1:n},Q_{1:n}K_n)
+ &\le\sum_{i=1}^n
+ \alpha(Q_{i+1}\cdots Q_n)\eps_i
+ \label{eq:app-multilayer-exact-alpha}\\
+ &\le\sum_{i=1}^n\eps_i
+       \prod_{j=i+1}^n\alpha(Q_j)
+ \le\sum_{i=1}^n\eps_i,
+ \label{eq:app-multilayer-product-alpha}
+\end{align}
+其中空后缀按恒等通道处理，其误差权重取 $1$。
+\end{corollary}
+
+\begin{proof}
+在有限维有符号核空间中作望远镜展开：
+\[
+ K_0Q_{1:n}-Q_{1:n}K_n
+ =\sum_{i=1}^n Q_1\cdots Q_{i-1}
+   (K_{i-1}Q_i-Q_iK_i)Q_{i+1}\cdots Q_n.
+\]
+前复合不增加行全变差范数，后复合至多乘以后缀的 Dobrushin 系数；三角
+不等式给出式~\eqref{eq:app-multilayer-exact-alpha}。再用
+$\alpha(Q_{i+1}\cdots Q_n)\le\prod_{j=i+1}^n\alpha(Q_j)$ 得到其余各式。
+\end{proof}
+
+\subsection{终端宏观边缘的多步误差}
+
+\begin{theorem}[同一因子的 $n$ 步终端误差]
+\label{thm:app-multistep-marginal}
+若 $\partial_{K,L}(Q)\le\eps$，则对每个整数 $n\ge1$，
+\begin{equation}
+ d_\infty(K^nQ,QL^n)
+ \le \eps\sum_{j=0}^{n-1}\alpha(L^j).
+ \label{eq:app-multistep-general}
+\end{equation}
+若 $\alpha(L)\le\rho<1$，则
+\begin{equation}
+ d_\infty(K^nQ,QL^n)
+ \le\eps\frac{1-\rho^n}{1-\rho}
+ \le\frac{\eps}{1-\rho};
+ \label{eq:app-multistep-contracting}
+\end{equation}
+不加收缩假设时仍有
+\begin{equation}
+ d_\infty(K^nQ,QL^n)\le n\eps.
+ \label{eq:app-multistep-linear}
+\end{equation}
+这些界也控制任意初始分布 $\mu$ 的终端边缘
+$\|\mu K^nQ-\mu QL^n\|_{\TV}$。
+\end{theorem}
+
+\begin{proof}
+将行全变差范数延拓到行和为零的有符号核，使用恒等式
+\[
+ K^nQ-QL^n
+ =\sum_{i=0}^{n-1}K^i(KQ-QL)L^{n-1-i}.
+\]
+每项的前复合不扩张，后复合至多乘以
+$\alpha(L^{n-1-i})$；求和并重编号得到
+式~\eqref{eq:app-multistep-general}。由
+$\alpha(L^j)\le\alpha(L)^j$ 得到几何级数界；只用
+$\alpha(L^j)\le1$ 则得到线性界。最后应用
+式~\eqref{eq:app-mixture-bound}。
+\end{proof}
+
+式~\eqref{eq:app-multistep-contracting} 只控制时间 $n$ 的\emph{终端宏观
+分布}。它不说明整段路径的早期偏差被后来混合所删除。
+
+\subsection{确定性粗粒化的路径误差}
+
+\begin{theorem}[宏观路径耦合]
+\label{thm:app-path-coupling}
+设 $q:X\twoheadrightarrow Y$，且
+$\partial_{K,L}(Q_q)\le\eps\le1$。令 $(X_t)_{t\ge0}$ 是任意初始分布
+$\mu$ 下的 $K$-链，并令 $Z_t=q(X_t)$。令 $(Y_t)_{t\ge0}$ 是初始分布
+$\mu Q_q$、转移核 $L$ 的 Markov 链。则
+\begin{equation}
+ \left\|
+ \operatorname{Law}(Z_0,\ldots,Z_n)
+ -\operatorname{Law}(Y_0,\ldots,Y_n)
+ \right\|_{\TV}
+ \le1-(1-\eps)^n
+ \le n\eps.
+ \label{eq:app-path-bound}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+单步缺陷意味着对每个 $x$，
+\[
+ \left\|
+ \operatorname{Law}(q(X_{t+1})\mid X_t=x)
+ -L(q(x),\cdot)
+ \right\|_{\TV}\le\eps.
+\]
+给定任一正概率宏观历史 $Z_{0:t}=z_{0:t}$，$X_t$ 的条件分布支撑在
+$q^{-1}(z_t)$ 上。因此 $Z_{t+1}$ 的条件分布是上述纤维内分布的凸组合，
+与 $L(z_t,\cdot)$ 仍相距至多 $\eps$。
+
+从共同初态开始递归构造耦合：只要此前两条宏观路径相同，就对上述两个下一步
+条件分布使用最大耦合，使下一状态继续相同的条件概率至少为 $1-\eps$；一旦
+分离，按保持各自正确边缘的任意方式继续。经过 $n$ 次转移仍完全相同的概率
+至少为 $(1-\eps)^n$。耦合不等式给出第一界，Bernoulli 不等式给出第二界。
+\end{proof}
+
+确定性假设不能直接删去。若 $Q$ 是随机通道，方程 $KQ=QL$ 只约束每一时刻
+的通道输出边缘；它没有规定跨时间如何联合采样输出。例如取
+$K=\Id_X$、$L=\Id_Y$，并令 $Q$ 的某行是非退化分布，则交换式精确成立，
+但若每个时刻独立地从 $Q(X_t,\cdot)$ 重采样，所得输出路径会变化，而
+$L$-链保持不变。随机粗粒化的路径结论需要额外的联合耦合或 link consistency
+条件。
+
+\subsection{增长时间尺度上需要什么}
+
+考虑随规模 $N$ 变化的证书
+\[
+ \partial_{K_N,L_N}(Q_N)\le\eps_N,
+ \qquad \eps_N\longrightarrow0,
+\]
+以及观察时长 $T_N$。由前述定理可以严格区分三种情形：
+\begin{enumerate}
+ \item 对每个固定 $T$，$\eps_N\to0$ 足以使终端误差和确定性粗粒化的路径
+  误差趋零。
+ \item 若 $T_N\to\infty$ 且没有统一收缩信息，一个直接充分条件是
+ \begin{equation}
+   T_N\eps_N\longrightarrow0.
+   \label{eq:app-growing-horizon-linear}
+ \end{equation}
+ 对终端边缘，更精确的充分条件是
+ \begin{equation}
+   \eps_N\sum_{j=0}^{T_N-1}\alpha(L_N^j)\longrightarrow0.
+   \label{eq:app-growing-horizon-alpha}
+ \end{equation}
+ \item 若存在与 $N$ 无关的 $\rho<1$ 使 $\alpha(L_N)\le\rho$，则
+ $\eps_N/(1-\rho)\to0$ 控制所有 $T_N$ 的终端宏观边缘；但整段路径仍只由
+ 式~\eqref{eq:app-path-bound} 一般性控制，收缩不能抹去路径中已经记录的偏差。
+\end{enumerate}
+
+一步误差趋零本身不足以控制任意增长时长。一个最小示例是
+$X=Y=\{0,1\}$、$Q=\Id$、$L=\Id$，而 $K_\eps$ 从 $0$ 以概率
+$\eps$ 跳到吸收态 $1$、从 $1$ 保持不动。此时
+\[
+ d_\infty(K_\eps Q,QL)=\eps,
+\]
+但从 $0$ 出发，在 $n$ 步后与 $L$-链终端分布的全变差距离为
+\[
+ 1-(1-\eps)^n.
+\]
+取 $n=\lfloor1/\eps\rfloor$，该量不趋于零。这个例子只说明\emph{给定近似
+因子证书}的传播边界；由于这里 $Q=\Id$，若重新把 $L$ 与表示一同优化当然可
+取 $L=K_\eps$ 并得到零缺陷。
+
+因此，正文的系统族主定理是一步陈述。把它提升到固定有限时间是直接推论；
+把它提升到随规模增长的时间尺度，必须另加
+式~\eqref{eq:app-growing-horizon-alpha}、统一混合、或其他明确的稳定性条件，
+不能只从 $\Gamma_N\to0$ 推出。

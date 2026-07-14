@@ -1,0 +1,64 @@
+\section{操作性微观状态与任务相对宏观表示}
+\label{sec:operational}
+
+\subsection{有限操作性呈现}
+
+设 $X$ 为非空有限集合，$\cK\subseteq\Stoch(X,X)$ 为非空 Markov kernel 族。给定满射
+\[
+u:X\twoheadrightarrow U,
+\]
+称为\emph{微观探针}：它汇总在当前系统边界内事先声明为有操作意义的微观观测。给定非恒定任务
+\[
+g=t\circ u:X\twoheadrightarrow O.
+\]
+四元组 $(X,\cK,u,g)$ 称为一个有限操作性呈现。$u$ 和 $\cK$ 都属于问题设定；改变它们可能改变何谓可区分的微观状态。
+
+从 $\Pi_0=\ker u$ 开始构造分区。已知 $\Pi_n$ 后，只在每个旧块内部继续区分状态：$x,x'$ 在 $\Pi_{n+1}$ 中同块，当且仅当它们在 $\Pi_n$ 中同块，且对每个 $K\in\cK$、每个 $C\in\Pi_n$，
+\[
+K(x,C)=K(x',C).
+\]
+分区至多严格细化 $|X|-1$ 次，故稳定于 $\Pi_\infty$。记
+\[
+p:X\twoheadrightarrow B:=X/\Pi_\infty.
+\]
+称 $B$ 为该呈现的\emph{操作性微观空间}。
+
+\begin{proposition}[操作性微观基线]
+\label{prop:operational-baseline}
+上述构造满足：
+\begin{enumerate}
+  \item 存在唯一的 $\bar u:B\to U$ 与 $\bar g:B\to O$，使 $u=\bar u\circ p$、$g=\bar g\circ p$；
+  \item 对每个 $K\in\cK$，存在唯一 $\bar K\in\Stoch(B,B)$，使
+  \[
+  KQ_p=Q_p\bar K;
+  \]
+  \item 在同时满足前两项的确定性商中，$p$ 最粗：若 $q:X\twoheadrightarrow Z$ 保留 $u$ 且使每个 $K$ 闭合，则存在唯一满射 $h:Z\twoheadrightarrow B$ 使 $p=h\circ q$。
+\end{enumerate}
+\end{proposition}
+
+命题的证明是稳定分区细化的标准有限论证，见附录~\ref{app:operational-baseline}。它没有声称 $B$ 是绝对的物理微观层；它只是在 $(u,\cK)$ 固定后，删除所有既不被探针区分、也不会被允许动力学在未来放大的精确冗余。
+
+\subsection{先比较信息，再比较状态数}
+
+从现在起在规范空间 $B$ 上讨论宏观状态。一个\emph{任务保真宏观表示}是满射
+\[
+s:B\twoheadrightarrow Y,
+\qquad
+\bar g=r\circ s
+\]
+其中 $r:Y\to O$。若 $s$ 非单射，则它是严格信息商，确实遗忘了至少一个操作性微观差异。等价地，在有限函数空间中有
+\[
+\bar g^{*}\mathbb R^O
+\subseteq
+s^{*}\mathbb R^Y
+\subsetneq
+\mathbb R^B.
+\]
+本文用 $|Y|/|B|$ 衡量这种已经由信息关系认证的压缩，而不直接使用可被编码填充任意放大的 $|X|$。
+
+\begin{proposition}[严格复制填充不变性]
+\label{prop:padding}
+若把每个 $x\in X$ 替换成任意多个复制 $(x,a)$，并令探针、任务和全部动力学都忽略复制标签且不让该标签影响未来可观测分布，则填充后构造出的操作性微观空间与 $B$ 规范同构；诱导核、任务以及所有后续候选 $s$ 的闭合缺陷不变。
+\end{proposition}
+
+完整构造见附录~\ref{app:operational-baseline}。该命题排除的是\emph{精确}无意义填充；“几乎无意义”的额外变量属于近似建模问题，不能由等式定义的 $B$ 自动消除。

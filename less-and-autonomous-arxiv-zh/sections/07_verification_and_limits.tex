@@ -1,0 +1,43 @@
+\section{可检验性、估计稳健性与结论边界}
+\label{sec:verification}
+
+\subsection{“可检验”具体意味着什么}
+
+对固定有限 $B$、有限 rational kernel 族和给定任务，可以枚举任务保真分区，对每个分区直接计算 $D_{\bar\cK}(\pi)$，从而精确求 $\Gamma$；也可以把固定分区的最优宏观核写成有限维线性规划。这个结论只保证可终止，不保证高效：分区数按 Bell 数增长。若核含一般可计算实数，只能把结果逼近到给定精度；若 $\bar\cK$ 是无限族，则还需要紧致连续参数化、可控有限覆盖、解析上界或相应 oracle，才能处理对 $\bar K$ 的上确界。单个或有限多个 $N$ 的数值结果也不能单独证明 $N\to\infty$ 的渐近命题。
+
+\subsection{固定操作性空间后的估计稳健性}
+
+设真实与估计诱导核按同一参数 $\theta$ 配对，并且在已经固定的 $B_N$ 上
+\[
+\sup_\theta d_\infty(\bar K_{N,\theta},\widehat{\bar K}_{N,\theta})
+\le\delta_N.
+\]
+
+\begin{proposition}[证书扰动界]
+\label{prop:estimation-robustness}
+对每个候选分区 $\pi$，
+\[
+\bigl|D_{\bar\cK_N}(\pi)-D_{\widehat{\bar\cK}_N}(\pi)\bigr|
+\le2\delta_N,
+\]
+并且
+\[
+|\Gamma_N-\widehat\Gamma_N|\le2\delta_N.
+\]
+\end{proposition}
+
+\begin{proof}
+确定性推前不增加 TV 距离，所以每个投影后的行分布改变至多 $\delta_N$。一对行的距离因此改变至多 $2\delta_N$；依次取最大、上确界仍保持该界。最后，对所有候选 $\pi$ 取式~\eqref{eq:Gamma} 的最小值，目标函数逐点相差至多 $2\delta_N$，故最小值也满足同一界。
+\end{proof}
+
+命题假定 $B_N$ 已固定。由精确等式构造的操作性微观分区可能在任意小 kernel 扰动下被细化，因此该命题不保证从有限样本稳定恢复 $B_N$ 本身。实证工作若未知 $B_N$，需要先声明近似微观基线或额外的间隔条件。
+
+\subsection{四条必须保留的边界}
+
+\paperclaim{量词边界。}正文允许每个 $\bar K$ 选择自己的最优 $L$。若现实问题要求跨环境共享同一宏观动力学，必须研究更强的 $\min_L\sup_{\bar K}$；二者不能交换。附录~\ref{app:examples-counterexamples}给出有限反例。
+
+\paperclaim{时间边界。}精确交换式可以迭代到任意步。一步近似闭合在无额外收缩时通常只给固定 $T$ 的 $T\eps$ 上界；若时间窗 $T_N$ 随规模增长，需要 $T_N\eps_N\to0$ 或统一收缩。时间尺度因此是对基础判据的独立强化，而不是被暗含的结论。
+
+\paperclaim{复杂度边界。}状态类别少不等于公式描述短、参数少、求值快、样本复杂度低、语义清晰或几何维数低。这些性质可以与 $|Y|$ 一致，也可以完全不同；若它们对应用重要，必须另行定义和证明。
+
+\paperclaim{认识论边界。}任务、探针和允许动力学先于定理给定。结论是相对于这些选择的；它不证明唯一、观察者无关或本体论意义上的“真正宏观层”，也不把任务上成功等同于因果机制已经识别。

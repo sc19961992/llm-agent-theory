@@ -1,0 +1,151 @@
+\section{有限 Markov 核与全变差工具}
+\label{app:markov-tv}
+
+本附录固定全文的行向量约定，并汇集后续证明所需的全变差估计。除非另有说明，本附录中的集合均非空且有限。
+
+\subsection{核、确定性通道与观测算子}
+
+从 $S$ 到 $T$ 的 Markov 核是函数
+\[
+  K:S\times T\longrightarrow[0,1],
+  \qquad
+  \sum_{t\in T}K(s,t)=1\quad(s\in S).
+\]
+全体此类核记为 $\Stoch(S,T)$。若 $K\in\Stoch(S,T)$、
+$L\in\Stoch(T,U)$，则按
+\[
+  (KL)(s,u):=\sum_{t\in T}K(s,t)L(t,u)
+\]
+复合。概率分布视为单行 Markov 核，因此 $(\mu K)(t)=
+\sum_s\mu(s)K(s,t)$。
+
+映射 $q:S\to T$ 诱导确定性核
+\[
+  Q_q(s,t):=\one_{\{q(s)=t\}}.
+\]
+相应推前分布记为
+\[
+  q_*\mu:=\mu Q_q,
+  \qquad
+  (q_*\mu)(t)=\sum_{s:q(s)=t}\mu(s).
+\]
+若 $q$ 满射，则 $Q_q$ 的行恰好包含 $T$ 上的全部 Dirac 分布。对函数
+$f:T\to\mathbb R$，核的观测算子定义为
+\[
+  (P_Kf)(s):=\sum_{t\in T}K(s,t)f(t).
+\]
+于是 $P_{KL}=P_KP_L$，并且 $P_{Q_q}f=f\circ q$。有限空间中，
+$K$ 由 $P_K$ 唯一决定。
+
+对 $A\subseteq T$，简记 $K(s,A):=\sum_{t\in A}K(s,t)$。确定性
+粗粒化后的第 $s$ 行分布满足
+\[
+  (KQ_q)(s,\bar t)=K\bigl(s,q^{-1}(\bar t)\bigr).
+\]
+
+\subsection{全变差距离与行一致距离}
+
+对 $T$ 上两个概率分布 $\mu,\nu$，定义
+\begin{equation}
+  \|\mu-\nu\|_{\TV}
+  :=\frac12\sum_{t\in T}|\mu(t)-\nu(t)|.
+  \label{eq:app-tv-def}
+\end{equation}
+有限空间上的等价表达为
+\begin{equation}
+  \|\mu-\nu\|_{\TV}
+  =\max_{A\subseteq T}|\mu(A)-\nu(A)|.
+  \label{eq:app-tv-events}
+\end{equation}
+特别地，全变差距离属于 $[0,1]$。对同型核 $A,B\in\Stoch(S,T)$，定义
+\begin{equation}
+  d_\infty(A,B)
+  :=\max_{s\in S}\|A(s,\cdot)-B(s,\cdot)\|_{\TV}.
+  \label{eq:app-dinfty}
+\end{equation}
+这是有限维核空间上的度量。它直接控制任意初始分布：
+\begin{equation}
+  \|\mu A-\mu B\|_{\TV}\le d_\infty(A,B).
+  \label{eq:app-mixture-bound}
+\end{equation}
+本文以 $\Delta(T)$ 记 $T$ 上概率分布的单纯形。
+
+\begin{lemma}[满射确定性前复合保持行最大值]
+\label{lem:app-surjective-pullback}
+若 $q:S\twoheadrightarrow T$ 且 $A,B\in\Stoch(T,U)$，则
+\[
+  d_\infty(Q_qA,Q_qB)=d_\infty(A,B).
+\]
+\end{lemma}
+
+\begin{proof}
+$Q_qA$ 在 $s$ 处的行就是 $A(q(s),\cdot)$；满射性保证对 $s$ 取最大值
+与对 $t\in T$ 取最大值相同。
+\end{proof}
+
+\subsection{Dobrushin 系数}
+
+下述系数源于 Dobrushin 对非齐次 Markov 链的工作；其作为全变差收缩系数的现代算子表述可参见\citet{Dobrushin1956,GaubertQu2015}。本文仍给出有限情形的自足证明，以固定行随机约定。
+
+对 $R\in\Stoch(T,U)$，定义
+\begin{equation}
+  \alpha(R):=\max_{t,t'\in T}
+  \|R(t,\cdot)-R(t',\cdot)\|_{\TV}\in[0,1].
+  \label{eq:app-dobrushin}
+\end{equation}
+
+\begin{lemma}[全变差非扩张与 Dobrushin 收缩]
+\label{lem:app-tv-contraction}
+只要类型匹配，就有
+\begin{align}
+  d_\infty(CA,CB)&\le d_\infty(A,B),
+  \label{eq:app-left-contraction}\\
+  d_\infty(AR,BR)&\le \alpha(R)d_\infty(A,B),
+  \label{eq:app-right-contraction}\\
+  \alpha(RS)&\le\alpha(R)\alpha(S).
+  \label{eq:app-alpha-submultiplicative}
+\end{align}
+\end{lemma}
+
+\begin{proof}
+对每个源状态 $x$，$(CA)(x,\cdot)$ 与 $(CB)(x,\cdot)$ 是分别以同一组
+权重 $C(x,c)$ 混合 $A(c,\cdot)$ 与 $B(c,\cdot)$ 所得。由 $\ell^1$
+范数的凸性，
+\[
+ \|(CA)(x,\cdot)-(CB)(x,\cdot)\|_{\TV}
+ \le \sum_c C(x,c)\|A(c,\cdot)-B(c,\cdot)\|_{\TV},
+\]
+取最大值得到式~\eqref{eq:app-left-contraction}。
+
+为证第二式，先取 $T$ 上概率分布 $\mu,\nu$，令
+$r=\|\mu-\nu\|_{\TV}$。$r=0$ 时结论显然；否则令
+\[
+  \mu_+:=\frac{(\mu-\nu)_+}{r},
+  \qquad
+  \mu_-:=\frac{(\mu-\nu)_-}{r}.
+\]
+正负部分的总质量均为 $r$，故 $\mu_+,\mu_-$ 是概率分布，且
+\[
+ \mu R-\nu R
+ =r\sum_{t,t'}\mu_+(t)\mu_-(t')
+   \bigl(R(t,\cdot)-R(t',\cdot)\bigr).
+\]
+再用凸性与式~\eqref{eq:app-dobrushin}，得到
+\[
+  \|\mu R-\nu R\|_{\TV}
+  \le\alpha(R)\|\mu-\nu\|_{\TV}.
+\]
+逐行取 $\mu=A(x,\cdot)$、$\nu=B(x,\cdot)$ 即得
+式~\eqref{eq:app-right-contraction}。最后，将同一分布收缩不等式用于
+$R(t,\cdot)$、$R(t',\cdot)$ 后取 $t,t'$ 的最大值，得到
+式~\eqref{eq:app-alpha-submultiplicative}。
+\end{proof}
+
+\begin{remark}
+若 $q:S\to T$ 是确定性映射，则 $\alpha(Q_q)=0$ 当且仅当 $q$ 为常值；
+否则 $\alpha(Q_q)=1$。因此，确定性粗粒化虽然不会放大全变差误差，却通常
+不会在这个最坏状态度量下产生严格收缩。
+\end{remark}
+
+后文所有近似结论都使用同一个 $d_\infty$。更换为平均分布加权距离会改变
+量词和可见的坏状态；除非另行给定采样分布，二者不能互相替代。

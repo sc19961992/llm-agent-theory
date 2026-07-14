@@ -1,0 +1,184 @@
+\section{结构证书：任务、对称与相事件}
+\label{app:structural-certificates}
+
+本附录证明几类候选宏观表示的充分条件，并把“动力学对某子群近似等变”与“训练随机性形成某种对称相”严格分开。为简化记号，本附录直接把已经规范化的操作性微观空间记为 $B$。
+
+\subsection{任务本身何时闭合}
+
+\begin{proposition}[任务充分性]
+\label{prop:task-sufficiency}
+设 $g:B\twoheadrightarrow O$。对 kernel $K$，下列条件等价：
+\begin{enumerate}
+  \item 存在 $L:O\rightsquigarrow O$ 使 $KQ_g=Q_gL$；
+  \item 当 $g(b)=g(b')$ 时，对每个 $o\in O$ 都有
+  \[
+  K(b,g^{-1}(o))=K(b',g^{-1}(o)).
+  \]
+\end{enumerate}
+若条件成立，则 $g$ 是状态数最少的任务保真闭合表示。
+\end{proposition}
+
+\begin{proof}
+前两项是附录~\ref{app:exact-theory}中纤维判据对 $q=g$ 的应用。任何任务保真表示 $s$ 都满足 $g=r\circ s$，故 $|s(B)|\ge|O|$；$g$ 本身恰有 $|O|$ 个状态。
+\end{proof}
+
+因此，守恒量或任务标签只有在其下一步分布由当前标签决定时才直接成为宏观状态；标签较少本身不是闭合证书。
+
+\subsection{任务兼容残余对称}
+
+设有限群 $H$ 作用在 $B$ 上，轨道映射为 $q_H:B\twoheadrightarrow B/H$。对分布 $\mu$ 定义 $h_*\mu(A)=\mu(h^{-1}A)$。对 kernel 族 $\cK$ 定义
+\[
+\eps_H(\cK)
+:=
+\sup_{K\in\cK,\,h\in H,\,b\in B}
+\|K(hb,\cdot)-h_*K(b,\cdot)\|_{\TV}.
+\]
+
+\begin{theorem}[残余对称闭合证书]
+\label{thm:symmetry-certificate-app}
+若 $g(hb)=g(b)$ 对所有 $h,b$ 成立，则 $q_H$ 任务保真，并且
+\[
+D_{\cK}(\ker q_H)
+\le \eps_H(\cK),
+\qquad
+\eta_{\ker q_H}(\cK)
+\le \eps_H(\cK).
+\]
+因而
+\[
+c_{\cK}^{\eps_H(\cK)}(g)\le |B/H|.
+\]
+\end{theorem}
+
+\begin{proof}
+任务在轨道上常值，故唯一因子化为 $g=r_H\circ q_H$。若 $b'=hb$，则 $q_H\circ h=q_H$；确定性推前不增加 TV 距离，从而
+\[
+\begin{aligned}
+\|q_{H*}K(b',\cdot)-q_{H*}K(b,\cdot)\|_{\TV}
+&=\|q_{H*}K(hb,\cdot)-q_{H*}h_*K(b,\cdot)\|_{\TV}\\
+&\le\|K(hb,\cdot)-h_*K(b,\cdot)\|_{\TV}.
+\end{aligned}
+\]
+对所有同轨道状态及 $K$ 取上确界得到直径界，再由引理~\ref{lem:radius-diameter}得到闭合界。轨道分区是一个具有 $|B/H|$ 个状态的可行表示。
+\end{proof}
+
+若只有估计 kernel $\widehat K_\theta$，且
+$\sup_\theta d_\infty(K_\theta,\widehat K_\theta)\le\delta$，三角不等式给出
+\[
+\eps_H(\{K_\theta\})
+\le
+\eps_H(\{\widehat K_\theta\})+2\delta.
+\]
+若 $H$ 也是从同一数据中搜索得到，误差界必须同时覆盖整个候选群族，或用独立数据重新验证。
+
+\subsection{近似平稳态的投影}
+
+\begin{proposition}[近似平稳态投影]
+\label{prop:stationary-projection}
+设 $Q:X\rightsquigarrow Y$，$K:X\rightsquigarrow X$，$L:Y\rightsquigarrow Y$，且
+\[
+d_\infty(KQ,QL)\le\eps,
+\qquad
+\|\mu K-\mu\|_{\TV}\le\beta.
+\]
+则 $\nu=\mu Q$ 满足
+\[
+\|\nu L-\nu\|_{\TV}\le\eps+\beta.
+\]
+若 $L$ 的 Dobrushin 系数 $\alpha(L)\le\rho<1$，则 $L$ 有唯一平稳分布 $\pi_L$，且
+\[
+\|\mu Q-\pi_L\|_{\TV}
+\le\frac{\eps+\beta}{1-\rho}.
+\]
+\end{proposition}
+
+\begin{proof}
+由混合凸性和推前非扩张，
+\[
+\|\mu QL-\mu Q\|_{\TV}
+\le\|\mu QL-\mu KQ\|_{\TV}
++\|\mu KQ-\mu Q\|_{\TV}
+\le\eps+\beta.
+\]
+若 $\alpha(L)\le\rho<1$，则 $\lambda\mapsto\lambda L$ 在有限单纯形上严格压缩，存在唯一不动点。再由
+\[
+\|\nu-\pi_L\|_{\TV}
+\le\|\nu-\nu L\|_{\TV}
++\|\nu L-\pi_LL\|_{\TV}
+\le\eps+\beta+\rho\|\nu-\pi_L\|_{\TV}
+\]
+移项即得。
+\end{proof}
+
+长期稳定性在这里来自近似平稳性和收缩，而不来自“对称破缺”这个词本身。
+
+\subsection{闭合证书事件与相结构事件}
+
+考虑训练或选相概率空间 $(\Omega_N,\cF_N,\mathbb P_N)$。随机结果 $\omega$ 决定动力学族 $\cK_{N,\omega}$、相 kernel $K^{\mathrm{ph}}_{N,\omega}\in\cK_{N,\omega}$、相分布 $\mu_{N,\omega}$ 以及预先从一个候选群族中选出的子群 $H_{N,\omega}\le G_N$。以下对象均假定可测。
+
+对 $H<G$ 和分布 $\mu$，定义群内缺陷与群外分离
+\[
+\kappa_H(\mu):=\max_{h\in H}\|h_*\mu-\mu\|_{\TV},
+\qquad
+\lambda_H(\mu):=\min_{u\in G\setminus H}\|u_*\mu-\mu\|_{\TV}.
+\]
+直接使用“所有近似保持 $\mu$ 的元素”未必得到子群，因此应先给出候选子群，再检验 $\kappa_H$ 与 $\lambda_H$。若 $\|\widehat\mu-\mu\|_{\TV}\le d$，则
+\[
+\kappa_H(\mu)\le\kappa_H(\widehat\mu)+2d,
+\qquad
+\lambda_H(\mu)\ge\lambda_H(\widehat\mu)-2d.
+\]
+
+给定非负序列 $a_N,\eps_N,\beta_N,\gamma_N,\kappa_N$ 和 $\ell_N>\kappa_N$，定义闭合证书事件
+\[
+\mathsf E_N^{\mathrm{cert}}
+=\left\{
+\begin{array}{l}
+g_N(hb)=g_N(b)\quad\forall h\in H_{N,\omega},b\in B_N,\\
+|B_N/H_{N,\omega}|/|B_N|\le a_N,\\
+\eps_{H_{N,\omega}}(\cK_{N,\omega})\le\eps_N
+\end{array}
+\right\},
+\]
+以及相结构事件
+\[
+\mathsf E_N^{\mathrm{phase}}
+=\left\{
+\begin{array}{l}
+H_{N,\omega}\subsetneq G_N,\\
+\kappa_{H_{N,\omega}}(\mu_{N,\omega})\le\kappa_N
+<\ell_N\le\lambda_{H_{N,\omega}}(\mu_{N,\omega}),\\
+\|\mu_{N,\omega}K^{\mathrm{ph}}_{N,\omega}-\mu_{N,\omega}\|_{\TV}\le\beta_N,\\
+\eps_{G_N}(\{K^{\mathrm{ph}}_{N,\omega}\})\le\gamma_N
+\end{array}
+\right\}.
+\]
+
+\begin{theorem}[两类事件的独立后果]
+\label{thm:two-events}
+在 $\mathsf E_N^{\mathrm{cert}}$ 上，轨道商满足
+\[
+\eta_{q_{H_{N,\omega}}}(\cK_{N,\omega})\le\eps_N,
+\qquad
+c_{\cK_{N,\omega}}^{\eps_N}(g_N)\le a_N|B_N|.
+\]
+在 $\mathsf E_N^{\mathrm{phase}}$ 上，每个 $u_*\mu_{N,\omega}$ 都是相 kernel 的
+$(\beta_N+\gamma_N)$-近似平稳分布；同一左陪集内的相关相距离至多 $\kappa_N$，不同左陪集间距离至少 $\ell_N$。这两个结论在逻辑上互不推出。
+\end{theorem}
+
+\begin{proof}
+证书事件的结论直接来自定理~\ref{thm:symmetry-certificate-app}。对相事件，省略下标，近似等变性和混合凸性给出
+\[
+\|(u_*\mu)K^{\mathrm{ph}}-u_*(\mu K^{\mathrm{ph}})\|_{\TV}\le\gamma_N,
+\]
+再与 $\|\mu K^{\mathrm{ph}}-\mu\|_{\TV}\le\beta_N$ 合并。群作用保持 TV 距离，且
+\[
+\|u_*\mu-v_*\mu\|_{\TV}
+=\|(v^{-1}u)_*\mu-\mu\|_{\TV};
+\]
+根据 $v^{-1}u$ 是否属于 $H$，分别使用 $\kappa_H$ 或 $\lambda_H$。第一个证明不使用相分布，第二个证明不使用任务兼容或轨道压缩，因此二者独立。
+\end{proof}
+
+若两事件的失败概率分别不超过 $\delta_N^{\mathrm{cert}}$ 与
+$\delta_N^{\mathrm{phase}}$，其交集概率至少为
+$1-\delta_N^{\mathrm{cert}}-\delta_N^{\mathrm{phase}}$。只有在所有规模共同定义于同一概率空间，且失败概率之和可求和时，第一 Borel--Cantelli 引理才给出“几乎处处最终总成立”的沿规模结论；这不是 Markov 时间路径结论。

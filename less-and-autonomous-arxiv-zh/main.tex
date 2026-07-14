@@ -1,0 +1,59 @@
+% !TEX program = xelatex
+\documentclass[UTF8,fontset=fandol,11pt,a4paper]{ctexart}
+\input{macros}
+
+\title{\bfseries 少而自治：\\[0.35em]
+\Large 有限随机系统中宏观规律的任务相对判据\\[0.8em]
+\normalsize \textit{Few and Autonomous: A Task-Relative Criterion for Macroscopic Laws in Finite Stochastic Systems}}
+\author{石琛}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+微观描述何时能够被真正简化，而不是通过改变编码或添加无意义标签制造表面压缩？本文研究有限 Markov 动力学族中的任务相对宏观规律。我们首先由预先声明的微观探针与允许动力学构造操作性微观状态空间，并只把它的严格任务保真信息商称为宏观表示。对每个任务保真分区，我们定义相对状态数和纤维预测直径；后者直接衡量被合并的微观状态对下一宏观状态是否给出一致预测。本文证明，一个系统族存在相对状态数与逐动力学优化后的最坏一步闭合误差同时趋零的宏观表示，当且仅当可检验联合指标 $\Gamma_N$ 趋于零。该判据无须预先指定宏观转移核；每个有限规模上的最少状态表示和固定表示的最优宏观转移核均实际达到。作为非平凡正例，可交换故障--修复系统的 $2^N$ 个微观配置可被精确压缩为、且最少需要 $N+1$ 个故障数状态，并对整个参数族闭合。本文还说明残余对称和 Transformer 预测状态如何构造候选宏观表示；其中 Transformer 结论采用分布加权误差，因而是与一般理论相接的专用例子，而非最坏情形主定理的字面特例。本文不主张所有复杂系统都有低复杂度规律，也不把状态数等同于描述长度、计算成本、因果自治或低维几何。
+
+\medskip
+\noindent\textbf{关键词：}Markov 粗粒化；lumpability；宏观闭合；任务保真；预测状态；Transformer
+\end{abstract}
+
+\begin{center}
+\begin{minipage}{0.94\textwidth}
+\small
+\textbf{English abstract.}
+We study when a family of finite stochastic systems admits a task-preserving macroscopic representation that is simultaneously small relative to an operational microscopic baseline and approximately autonomous. A directly verifiable index $\Gamma_N$, built from relative partition size and within-fiber predictive diameter, is shown to vanish if and only if such representations exist. A permutation-invariant fault--repair family gives a nontrivial exact example with $2^N$ microscopic configurations and a provably minimal $(N+1)$-state macroscopic chain. The result is task-relative and one-step; it does not assert universal simplicity, efficient discovery, causal autonomy, or long-horizon accuracy.
+\end{minipage}
+\end{center}
+
+\clearpage
+\tableofcontents
+\clearpage
+
+\input{sections/01_introduction}
+\input{sections/02_operational_microstates}
+\input{sections/03_closure_and_fibers}
+\input{sections/04_main_criterion}
+\input{sections/05_fault_repair_example}
+\input{sections/06_construction_routes}
+\input{sections/07_verification_and_limits}
+\input{sections/08_discussion}
+
+\appendix
+\input{appendices/appendix_A_markov_tv}
+\input{appendices/appendix_B_operational_baseline}
+\input{appendices/appendix_C_exact_theory}
+\input{appendices/appendix_D_approximate_theory}
+\input{appendices/appendix_E_composition_time}
+\input{appendices/appendix_F_structural_certificates}
+\input{appendices/appendix_G_examples_counterexamples}
+\input{appendices/appendix_H_extensions}
+\input{appendices/appendix_I_categories}
+
+\clearpage
+\begingroup
+\sloppy
+\bibliographystyle{unsrtnat}
+\bibliography{references/references}
+\endgroup
+\end{document}

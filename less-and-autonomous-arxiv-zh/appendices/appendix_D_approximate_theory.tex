@@ -1,0 +1,305 @@
+\section{近似闭合：最优核、纤维直径与复杂度曲线}
+\label{app:approximate-theory}
+
+精确交换式在估计误差下不稳定；本附录把交换式缺陷作为近似对象。所有
+存在性结论都来自有限维紧性，不应被解释为高效发现算法。
+
+\subsection{固定连接通道的最优宏观核}
+
+设 $K\in\Stoch(X,X)$、$L\in\Stoch(Y,Y)$，且
+$Q\in\Stoch(X,Y)$。定义
+\begin{equation}
+  \partial_{K,L}(Q):=d_\infty(KQ,QL).
+  \label{eq:app-factor-defect}
+\end{equation}
+当该量不超过 $\eps$ 时，称 $Q$ 为从 $(X,K)$ 到 $(Y,L)$ 的
+$\eps$-近似动力学因子。这里 $K,L$ 仍是严格归一化的 Markov 核；近似的
+只是交换关系。
+
+固定 $K,Q$，令
+\begin{equation}
+  \eta_Q(K)
+  :=\min_{L\in\Stoch(Y,Y)}\partial_{K,L}(Q),
+  \qquad
+  \operatorname{Opt}_Q(K)
+  :=\argmin_{L\in\Stoch(Y,Y)}\partial_{K,L}(Q).
+  \label{eq:app-eta-fixed-q}
+\end{equation}
+
+\begin{theorem}[有限空间上的最优核达到]
+\label{thm:app-optimal-kernel}
+$\operatorname{Opt}_Q(K)$ 非空、紧且凸。因此
+式~\eqref{eq:app-eta-fixed-q} 中写的是最小值而非下确界。最优核一般不唯一。
+\end{theorem}
+
+\begin{proof}
+$\Stoch(Y,Y)$ 是有限维欧氏空间中的非空紧凸多面体。映射
+$L\mapsto QL$ 仿射，而
+\[
+ L\longmapsto d_\infty(KQ,QL)
+ =\max_{x\in X}\frac12\sum_{y\in Y}
+   |(KQ)(x,y)-(QL)(x,y)|
+\]
+是连续凸函数，故在紧集上达到最小值。最优集是紧集的闭子集。若
+$L_1,L_2$ 均最优，则目标的凸性说明它们的任意凸组合目标值不超过最小值，
+因而仍等于最小值。
+\end{proof}
+
+随机 $Q$ 下，即使 $\eta_Q(K)=0$，宏观核也未必唯一，因为线性映射
+$L\mapsto QL$ 可能不单射。下节的确定性满射情形在零误差时没有这一歧义。
+
+\subsection{确定性分区的 Chebyshev 中心公式}
+
+令 $q:X\twoheadrightarrow Y$，并记
+\[
+  p_x^q:=(KQ_q)(x,\cdot)\in\Delta(Y),
+  \qquad
+  p_x^q(y)=K\bigl(x,q^{-1}(y)\bigr).
+\]
+简记 $\eta_q(K):=\eta_{Q_q}(K)$，并定义纤维预测直径
+\begin{equation}
+  D_q(K):=\max_{q(x)=q(x')}
+  \|p_x^q-p_{x'}^q\|_{\TV}.
+  \label{eq:app-fiber-diameter}
+\end{equation}
+
+\begin{theorem}[纤维 Chebyshev 中心]
+\label{thm:app-chebyshev-center}
+有
+\begin{equation}
+ \eta_q(K)
+ =\max_{y\in Y}
+   \min_{p\in\Delta(Y)}
+   \max_{x\in q^{-1}(y)}\|p_x^q-p\|_{\TV},
+ \label{eq:app-chebyshev-formula}
+\end{equation}
+并且
+\begin{equation}
+  \boxed{\frac12D_q(K)\le\eta_q(K)\le D_q(K).}
+  \label{eq:app-diameter-radius}
+\end{equation}
+此外，
+\begin{equation}
+ \eta_q(K)=0
+ \quad\Longleftrightarrow\quad
+ D_q(K)=0
+ \quad\Longleftrightarrow\quad
+ q\text{ 对 }K\text{ strong-lumpable}.
+ \label{eq:app-zero-approx-exact}
+\end{equation}
+此时诱导宏观核唯一。
+\end{theorem}
+
+\begin{proof}
+因为 $(Q_qL)(x,\cdot)=L(q(x),\cdot)$，
+\[
+ \partial_{K,L}(Q_q)
+ =\max_{y\in Y}\max_{x\in q^{-1}(y)}
+   \|p_x^q-L(y,\cdot)\|_{\TV}.
+\]
+$L$ 的不同行可以彼此独立地在 $\Delta(Y)$ 中选择；每个单纯形紧致，故每个
+纤维的最小包围半径达到。先逐纤维选中心再取最坏纤维，得到
+式~\eqref{eq:app-chebyshev-formula}。
+
+对同一纤维中的 $x,x'$ 与任意中心 $p$，三角不等式给出
+\[
+ \|p_x^q-p_{x'}^q\|_{\TV}
+ \le\|p_x^q-p\|_{\TV}+\|p-p_{x'}^q\|_{\TV}.
+\]
+所以每个包围半径至少是相应直径的一半，得到左侧不等式。反过来，在每个
+纤维任选代表 $x_y$ 并取中心 $p_{x_y}^q$，该纤维内全部距离不超过全局直径，
+得到右侧不等式。半径为零当且仅当每个纤维内所有 $p_x^q$ 相同；由
+定理~\ref{thm:app-four-equivalences}，这正是 strong lumpability。共同的
+纤维分布逐行唯一确定宏观核。
+\end{proof}
+
+界~\eqref{eq:app-diameter-radius} 的常数不能仅凭度量空间三角不等式改进；
+本文只使用它建立误差为零和误差趋零的等价，不声称 $D_q/2$ 总是精确半径。
+
+\subsection{动力学族中的量词顺序}
+
+若同一表示 $q$ 要服务于一族动力学 $\cK\subseteq\Stoch(X,X)$，本文采用
+\begin{equation}
+ \boxed{
+ \eta_q(\cK)
+ :=\sup_{K\in\cK}\eta_q(K)
+ =\sup_{K\in\cK}\min_{L_K\in\Stoch(Y,Y)}
+ d_\infty(KQ_q,Q_qL_K).}
+ \label{eq:app-sup-min}
+\end{equation}
+这里同一个 $q$ 必须适用于整族动力学，但宏观核 $L_K$ 可以随 $K$ 改变。
+这是\emph{$\sup_K\min_L$}，不是共享单一核所要求的
+\begin{equation}
+ \eta_q^{\mathrm{shared}}(\cK)
+ :=\min_{L\in\Stoch(Y,Y)}\sup_{K\in\cK}
+ d_\infty(KQ_q,Q_qL).
+ \label{eq:app-min-sup}
+\end{equation}
+紧性与目标函数的下半连续性保证式~\eqref{eq:app-min-sup} 的最小值也达到，
+且一般只有
+\begin{equation}
+  \sup_K\min_L d_\infty(KQ_q,Q_qL)
+  \le
+  \min_L\sup_K d_\infty(KQ_q,Q_qL).
+  \label{eq:app-minimax-order}
+\end{equation}
+除非另行证明二者相等，正文的系统族判据不产生一个对所有 $K$ 通用的转移核。
+
+定义
+\begin{equation}
+  D_q(\cK):=\sup_{K\in\cK}D_q(K).
+  \label{eq:app-family-diameter}
+\end{equation}
+若 $q=q_\pi$ 来自分区 $\pi$，正文的记号就是
+$\eta_\pi(\cK):=\eta_{q_\pi}(\cK)$ 与
+$D_{\cK}(\pi):=D_{q_\pi}(\cK)$。
+逐 $K$ 应用定理~\ref{thm:app-chebyshev-center} 后取上确界，得到
+\begin{equation}
+  \frac12D_q(\cK)\le\eta_q(\cK)\le D_q(\cK).
+  \label{eq:app-family-diameter-radius}
+\end{equation}
+因此 $D_q(\cK)\to0$ 与本文所用
+$\sup_K\min_L$ 缺陷趋零等价到固定常数，而不需要先估计任何 $L_K$。
+
+\subsection{任务相对复杂度--误差曲线}
+
+设 $g:X\twoheadrightarrow O$ 非恒定。称分区 $\pi$ 任务保真，如果同一
+$\pi$-块中的状态具有相同 $g$ 值；等价地，其商映射
+$q_\pi:X\twoheadrightarrow X/\pi$ 允许唯一读出 $r_\pi$ 使
+$g=r_\pi\circ q_\pi$。对 $|O|\le m\le|X|$，令
+\[
+ \mathfrak P_m(g):=
+ \left\{\pi:\pi\text{ 任务保真且 }|\pi|\le m\right\}.
+\]
+并定义
+\begin{equation}
+  \mathcal E_{K,g}(m):=\min_{\pi\in\mathfrak P_m(g)}\eta_{q_\pi}(K).
+  \label{eq:app-complexity-error-curve}
+\end{equation}
+
+\begin{theorem}[复杂度--误差曲线的有限达到]
+\label{thm:app-complexity-error-curve}
+对每个允许的 $m$，式~\eqref{eq:app-complexity-error-curve} 的最小值由某个
+任务保真分区及其最优宏观核达到，并且：
+\begin{enumerate}
+  \item $m\mapsto\mathcal E_{K,g}(m)$ 单调不增；
+  \item $\mathcal E_{K,g}(|X|)=0$；
+  \item $\mathcal E_{K,g}(m)=0$ 当且仅当存在至多 $m$ 状态的精确任务保真自治商；
+  \item $c_K(g)=\min\{m:\mathcal E_{K,g}(m)=0\}$。
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+有限集只有有限多个分区，$\mathfrak P_m(g)$ 非空且有限；例如 $g$ 的纤维
+分区属于其中。对每个固定分区，定理~\ref{thm:app-optimal-kernel} 给出最优
+宏观核，所以外层最小值也达到。增大 $m$ 只扩张可行集，得到单调性。离散
+分区在 $m=|X|$ 时可行，并以 $L=K$ 实现零误差。最后，
+式~\eqref{eq:app-zero-approx-exact} 把零误差与精确闭合等同，再结合
+式~\eqref{eq:app-exact-complexity-min} 即得其余两项。
+\end{proof}
+
+对误差容限 $\tau\ge0$，定义
+\begin{equation}
+ c_K^\tau(g)
+ :=\min\{ |\pi|:\pi\text{ 任务保真且 }\eta_{q_\pi}(K)\le\tau\}.
+ \label{eq:app-tolerance-complexity}
+\end{equation}
+离散分区保证可行集非空；有限性保证最小状态数与相应最优核均达到。此外
+\begin{equation}
+ |O|\le c_K^\tau(g)\le|X|,
+ \qquad
+ c_K^0(g)=c_K(g),
+\end{equation}
+且 $c_K^\tau(g)$ 随 $\tau$ 单调不增。近似情形通常没有唯一最粗分区；规范
+对象是最优值曲线及各点的全部最优解集合。
+
+把 $\eta_{q_\pi}(K)$ 换成式~\eqref{eq:app-sup-min} 的
+$\eta_{q_\pi}(\cK)$，上述有限达到与单调性逐字成立。关键仍是：外层在有限
+个任务保真分区上取最小值；内层对每个 $K$ 分别优化 $L_K$。
+
+\subsection{估计核下的稳健性}
+
+\begin{proposition}[固定通道的模型误差转移]
+\label{prop:app-model-perturbation}
+对同型核 $K,\widehat K\in\Stoch(X,X)$、
+$L,\widehat L\in\Stoch(Y,Y)$ 和固定 $Q\in\Stoch(X,Y)$，
+\begin{align}
+ \left|\partial_{K,L}(Q)-
+ \partial_{\widehat K,\widehat L}(Q)\right|
+ &\le \alpha(Q)d_\infty(K,\widehat K)
+       +d_\infty(L,\widehat L),
+ \label{eq:app-defect-perturbation}\\
+ |\eta_Q(K)-\eta_Q(\widehat K)|
+ &\le \alpha(Q)d_\infty(K,\widehat K).
+ \label{eq:app-eta-perturbation}
+\end{align}
+\end{proposition}
+
+\begin{proof}
+度量的反三角不等式、引理~\ref{lem:app-tv-contraction} 分别给出
+\begin{align*}
+ &\left|d_\infty(KQ,QL)-d_\infty(\widehat KQ,Q\widehat L)\right|\\
+ &\qquad\le d_\infty(KQ,\widehat KQ)+d_\infty(QL,Q\widehat L)\\
+ &\qquad\le \alpha(Q)d_\infty(K,\widehat K)+d_\infty(L,\widehat L).
+\end{align*}
+若第二个核固定为同一 $L$，两个关于 $L$ 的优化目标在整个紧可行集上一致
+相差至多第一项；分别代入对方的最优解即得
+式~\eqref{eq:app-eta-perturbation}。
+\end{proof}
+
+\begin{corollary}[确定性分区与复杂度曲线的稳健性]
+\label{cor:app-diameter-curve-robustness}
+若 $d_\infty(K,\widehat K)\le\delta$，则对每个满射分区 $q$，
+\begin{align}
+ |\eta_q(K)-\eta_q(\widehat K)|&\le\delta,
+ \label{eq:app-eta-q-robust}\\
+ |D_q(K)-D_q(\widehat K)|&\le2\delta,
+ \label{eq:app-diameter-robust}\\
+ |\mathcal E_{K,g}(m)-\mathcal E_{\widehat K,g}(m)|&\le\delta.
+ \label{eq:app-curve-robust}
+\end{align}
+因而
+\begin{equation}
+ c_K^{\tau+\delta}(g)\le c_{\widehat K}^{\tau}(g),
+ \qquad
+ c_{\widehat K}^{\tau+\delta}(g)\le c_K^\tau(g).
+ \label{eq:app-horizontal-robustness}
+\end{equation}
+\end{corollary}
+
+\begin{proof}
+非恒定任务保真 $q$ 满足 $\alpha(Q_q)=1$，而常值情形只会给出更强界；
+式~\eqref{eq:app-eta-q-robust} 来自
+命题~\ref{prop:app-model-perturbation}。每个投影行在 $K$ 与
+$\widehat K$ 下相距至多 $\delta$；对任意一对行使用反三角不等式，得其
+两两距离变化至多 $2\delta$，取最大值得到
+式~\eqref{eq:app-diameter-robust}。对每个同一分区的 $\eta$ 值使用第一式，
+再分别代入对方曲线的最优分区，得到式~\eqref{eq:app-curve-robust}。若某分区
+在 $\widehat K$ 下误差不超过 $\tau$，则它在 $K$ 下误差不超过
+$\tau+\delta$；交换二者即得式~\eqref{eq:app-horizontal-robustness}。
+\end{proof}
+
+最后给出正文 $\Gamma$ 判据所需的直接稳健形式。设同一有限操作性微观空间
+$B$ 上有同索引核族 $\{K_\theta\}_{\theta\in\Theta}$ 与估计族
+$\{\widehat K_\theta\}_{\theta\in\Theta}$，且
+\[
+ \sup_{\theta\in\Theta}d_\infty(K_\theta,\widehat K_\theta)
+ \le\delta.
+\]
+对任务保真分区 $\pi$，沿用
+$D_{\cK}(\pi)=\sup_\theta D_{q_\pi}(K_\theta)$，并定义
+\begin{equation}
+ \Gamma(B,\cK,g)
+ :=\min_{\pi\text{ 任务保真}}
+ \max\left\{\frac{|\pi|}{|B|},D_{\cK}(\pi)\right\}.
+ \label{eq:app-gamma-definition}
+\end{equation}
+式~\eqref{eq:app-diameter-robust} 对 $\theta$ 一致成立，故
+\begin{equation}
+ \left|\Gamma(B,\cK,g)-
+ \Gamma(B,\widehat{\cK},g)\right|\le2\delta.
+ \label{eq:app-gamma-robustness}
+\end{equation}
+这是确定性的模型扰动结论。只有在另行给出
+$d_\infty(K_\theta,\widehat K_\theta)$ 的统计置信界后，它才成为高概率
+统计证书；本文不从有限性本身推出样本复杂度。

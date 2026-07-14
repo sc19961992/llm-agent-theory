@@ -1,0 +1,24 @@
+% !TEX program = xelatex
+\documentclass[UTF8,fontset=fandol,11pt,a4paper]{ctexart}
+\input{../macros}
+
+\title{\bfseries 补充材料 S1：\\Transformer 自回归预测状态的分布加权构造定理}
+\author{石琛}
+\date{}
+\hypersetup{
+  pdftitle={补充材料 S1：Transformer 自回归预测状态的分布加权构造定理},
+  pdfauthor={石琛}
+}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+本补充材料给出《少而自治：有限随机系统中宏观规律的任务相对判据》正文所引用的 Transformer 专用构造定理及完整证明。结论使用声明历史分布下的加权全变差距离，依赖低复杂度递推预测状态、总体下一 token 学习成功和预测状态可读出三个条件；它不是主论文最坏状态 $\Gamma_N$ 判据的无条件特例。
+\end{abstract}
+
+\tableofcontents
+\clearpage
+\input{S1_transformer_predictive_states}
+
+\end{document}

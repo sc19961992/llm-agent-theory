@@ -1,0 +1,60 @@
+\section{范畴化组织与误差证书复合}
+\label{app:categories}
+
+本附录说明范畴语言如何压缩交换式与复合证明；它是组织工具，不是中心定理的额外前提。Markov category 的系统性框架见\citet{Fritz2020}。
+
+\subsection{随机映射与动力学态射}
+
+有限集合与 Markov kernels 构成范畴 $\mathbf{FinStoch}$：对象是有限集合，态射复合为 kernel 乘法，恒等态射为确定性恒等 kernel。普通映射 $q:X\to Y$ 嵌入为确定性 kernel $Q_q$。
+
+把一个随机动力系统记为对象 $(X,K)$。从 $(X,K)$ 到 $(Y,L)$ 的精确动力学态射是满足
+\[
+KQ=QL
+\]
+的 kernel $Q:X\rightsquigarrow Y$。若 $R:(Y,L)\to(Z,M)$ 也是精确态射，则
+\[
+K(QR)=(KQ)R=(QL)R=Q(LR)=Q(RM)=(QR)M,
+\]
+故 $QR$ 仍是精确态射。确定性任务保真粗粒化只是其中 $Q=Q_q$ 且任务三角形交换的一类态射。
+
+\subsection{近似证书的加法复合}
+
+若
+\[
+d_\infty(KQ,QL)\le\eps,
+\qquad
+d_\infty(LR,RM)\le\delta,
+\]
+则 kernel 前、后复合的 TV 非扩张性给出
+\[
+\begin{aligned}
+d_\infty(KQR,QRM)
+&\le d_\infty(KQR,QLR)+d_\infty(QLR,QRM)\\
+&\le\eps+\delta.
+\end{aligned}
+\]
+因此精确态射形成普通范畴；近似态射可视为带非负误差标签、复合时误差相加的证书系统。这个结论对应附录~\ref{app:composition-time}的两层空间误差界。
+
+若另有任务通道 $G_X:X\rightsquigarrow O$、$G_Y:Y\rightsquigarrow O$ 且
+$d_\infty(G_X,QG_Y)\le\tau$，再与下一层任务证书复合，任务误差同样由三角不等式相加。动力学闭合误差与任务读出误差应分别记录；把二者压成一个数只是记账选择。
+
+\subsection{观测算子的对偶图景}
+
+以线性算子推进观测量的观点可追溯到 Koopman 的经典工作\citep{Koopman1931}；这里仅使用它在有限随机核上的初等版本。
+
+kernel $K:X\rightsquigarrow Y$ 诱导线性观测算子
+\[
+P_K:\mathbb R^Y\to\mathbb R^X,
+\qquad
+(P_Kf)(x)=\sum_yK(x,y)f(y),
+\]
+且 $P_{KL}=P_KP_L$。确定性 $q:X\to Y$ 对应拉回
+$P_{Q_q}f=f\circ q$。交换式
+$KQ_q=Q_qL$ 等价于
+\[
+P_K(q^*f)=q^*(P_Lf)
+\qquad\forall f\in\mathbb R^Y,
+\]
+即 $q^*\mathbb R^Y$ 是 $P_K$-不变的、含常数且逐点乘法闭合的观测代数。附录~\ref{app:exact-theory}证明，在有限集合上这类代数恰与分区对应。
+
+这个对偶说明“宏观空间”“闭合观测代数”和“交换方块”是同一有限结构的三种表述，并不产生三条不同的存在定理。非平凡性始终来自任务保真、严格信息商和误差控制。

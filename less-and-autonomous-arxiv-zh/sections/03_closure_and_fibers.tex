@@ -1,0 +1,67 @@
+\section{闭合、纤维预测与最优宏观核}
+\label{sec:closure}
+
+对同一有限输入空间上的 kernels 定义最坏行总变差距离
+\[
+d_\infty(K,K'):=\max_x\|K(x,\cdot)-K'(x,\cdot)\|_{\TV},
+\qquad
+\|\mu-\nu\|_{\TV}:=\frac12\sum_z|\mu(z)-\nu(z)|.
+\]
+
+给定满射 $s:B\twoheadrightarrow Y$，令 $Q_s$ 表示其确定性 kernel。对 $\bar K\in\Stoch(B,B)$，若存在 $L\in\Stoch(Y,Y)$ 使
+\begin{equation}
+\bar KQ_s=Q_sL,
+\label{eq:exact-closure}
+\end{equation}
+则称 $s$ 对 $\bar K$ \emph{精确闭合}。这正是对所有初始分布成立的 strong lumpability 条件\citep{KemenySnell1976,Buchholz1994}：当 $s(b)=s(b')$ 时，对每个宏观块 $C=s^{-1}(y')$，
+\[
+\bar K(b,C)=\bar K(b',C).
+\]
+
+令 $\pi$ 为 $B$ 的一个任务保真分区，即每个块都包含在某个 $\bar g$ 纤维中；记商映射 $s_\pi:B\twoheadrightarrow B/\pi$。定义该分区对整个允许动力学族的闭合缺陷
+\begin{equation}
+\eta_\pi(\bar\cK)
+:=
+\sup_{\bar K\in\bar\cK}
+\min_{L\in\Stoch(B/\pi,B/\pi)}
+d_\infty(\bar KQ_{s_\pi},Q_{s_\pi}L).
+\label{eq:eta-pi}
+\end{equation}
+这里同一个 $\pi$ 服务于所有 $\bar K$，但宏观 kernel $L$ 可以依赖 $\bar K$。因此量词是 $\sup_{\bar K}\min_L$；要求单个共享 $L$ 的 $\min_L\sup_{\bar K}$ 是另一项更强问题。
+
+对 $b\in B$ 定义其下一宏观块分布
+\[
+p^{\pi}_{\bar K,b}(C):=\bar K(b,C),
+\qquad C\in\pi,
+\]
+并定义\emph{统一纤维预测直径}
+\begin{equation}
+D_{\bar\cK}(\pi)
+:=
+\sup_{\bar K\in\bar\cK}
+\max_{s_\pi(b)=s_\pi(b')}
+\bigl\|p^{\pi}_{\bar K,b}-p^{\pi}_{\bar K,b'}\bigr\|_{\TV}.
+\label{eq:fiber-diameter}
+\end{equation}
+它不包含未知的宏观核，只比较将被合并的状态是否对下一宏观块作出一致预测。
+
+\begin{lemma}[纤维半径--直径夹逼]
+\label{lem:radius-diameter}
+对任意有限 $B$、任务保真分区 $\pi$ 和非空动力学族 $\bar\cK$，
+\begin{equation}
+\frac12D_{\bar\cK}(\pi)
+\le
+\eta_\pi(\bar\cK)
+\le
+D_{\bar\cK}(\pi).
+\label{eq:radius-diameter}
+\end{equation}
+对每个固定的 $(\bar K,\pi)$，式~\eqref{eq:eta-pi} 内的最优 $L$ 实际达到。
+\end{lemma}
+
+\begin{proof}
+固定 $\bar K$ 与一个纤维 $F=s_\pi^{-1}(y)$。$L(y,\cdot)$ 的选择是在有限单纯形 $\Delta(B/\pi)$ 中，为集合
+$\{p^{\pi}_{\bar K,b}:b\in F\}$ 选一个总变差 Chebyshev 中心。若最优半径为 $r_F$、直径为 $d_F$，三角不等式给出 $d_F\le2r_F$；任取集合内一点作中心又给出 $r_F\le d_F$。单纯形紧致、目标连续，故中心达到。各行 $L(y,\cdot)$ 可独立选择，先对纤维取最大、再对 $\bar K$ 取上确界，即得式~\eqref{eq:radius-diameter}。
+\end{proof}
+
+因子 $2$ 对一般度量集合不能去掉。附录~\ref{app:approximate-theory}给出精确的纤维中心公式、最优核集合、复杂度--误差曲线和估计扰动证明。精确闭合时 $D_{\bar\cK}(\pi)=0$，引理退化为经典纤维判据。

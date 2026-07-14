@@ -1,0 +1,279 @@
+\section{精确闭合：四个等价判据与最小任务商}
+\label{app:exact-theory}
+
+本附录证明有限确定性粗粒化的精确理论。核心量词是：同一宏观初态必须对
+\emph{所有}微观初态分布给出同一宏观下一步分布。这正是本文使用 strong
+lumpability、而非只对某一类初始分布成立的弱版本的原因。
+
+\subsection{因子分解的四个等价形式}
+
+设 $q_X:X\twoheadrightarrow\bar X$、$q_Y:Y\twoheadrightarrow\bar Y$ 为
+满射，$K\in\Stoch(X,Y)$。
+
+\begin{theorem}[有限确定性粗粒化的四个等价判据]
+\label{thm:app-four-equivalences}
+以下命题等价。
+\begin{enumerate}
+  \item 存在 $\bar K\in\Stoch(\bar X,\bar Y)$ 使
+  \begin{equation}
+    KQ_{q_Y}=Q_{q_X}\bar K.
+    \label{eq:app-exact-square}
+  \end{equation}
+  该 $\bar K$ 必唯一。
+  \item 若 $q_X(x)=q_X(x')$，则对每个 $\bar y\in\bar Y$，
+  \begin{equation}
+    K\bigl(x,q_Y^{-1}(\bar y)\bigr)
+    =K\bigl(x',q_Y^{-1}(\bar y)\bigr).
+    \label{eq:app-block-probability}
+  \end{equation}
+  等价地，上式对任意 $\bar A\subseteq\bar Y$ 的原像成立。
+  \item 粗粒化观测空间在 $P_K$ 下闭合：
+  \begin{equation}
+    P_K\bigl(q_Y^*\mathbb R^{\bar Y}\bigr)
+    \subseteq q_X^*\mathbb R^{\bar X}.
+    \label{eq:app-observable-invariance}
+  \end{equation}
+  \item 对任意 $\mu,\nu\in\Delta(X)$，
+  \begin{equation}
+   q_{X*}\mu=q_{X*}\nu
+   \quad\Longrightarrow\quad
+   q_{Y*}(\mu K)=q_{Y*}(\nu K).
+   \label{eq:app-distribution-autonomy}
+  \end{equation}
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+$1\Rightarrow2$：由式~\eqref{eq:app-exact-square}，
+\[
+ K\bigl(x,q_Y^{-1}(\bar y)\bigr)
+ =(KQ_{q_Y})(x,\bar y)
+ =\bar K(q_X(x),\bar y),
+\]
+故该值只依赖 $q_X(x)$。
+
+$2\Rightarrow1$：对 $\bar x\in\bar X$ 任选 $x\in q_X^{-1}(\bar x)$，定义
+\[
+  \bar K(\bar x,\bar y)
+  :=K\bigl(x,q_Y^{-1}(\bar y)\bigr).
+\]
+条件~\eqref{eq:app-block-probability} 保证定义与代表元无关；非负性和行和为
+$1$ 来自 $K$ 与 $q_Y$ 的满射性。逐行即得
+式~\eqref{eq:app-exact-square}。若另有 $\bar K'$ 满足该式，则对任意
+$\bar x$ 选取 $q_X(x)=\bar x$，有
+$\bar K(\bar x,\cdot)=(KQ_{q_Y})(x,\cdot)=\bar K'(\bar x,\cdot)$，
+故唯一。
+
+$1\Rightarrow3$：对 $\bar f\in\mathbb R^{\bar Y}$，
+\[
+ P_K(q_Y^*\bar f)
+ =P_{KQ_{q_Y}}\bar f
+ =P_{Q_{q_X}\bar K}\bar f
+ =q_X^*(P_{\bar K}\bar f).
+\]
+
+$3\Rightarrow2$：取 $\bar f=\one_{\{\bar y\}}$。则
+\[
+  P_K(q_Y^*\bar f)(x)
+  =K\bigl(x,q_Y^{-1}(\bar y)\bigr)
+\]
+按条件在 $q_X$ 的纤维上常值。对多个 $\bar y$ 求和即得到事件版本。
+
+$1\Rightarrow4$：对任意 $\mu$，
+\[
+  q_{Y*}(\mu K)=\mu KQ_{q_Y}
+  =\mu Q_{q_X}\bar K=(q_{X*}\mu)\bar K.
+\]
+因此相同的宏观初始分布产生相同的宏观输出分布。
+
+$4\Rightarrow2$：对同一 $q_X$ 纤维中的 $x,x'$，取
+$\mu=\delta_x$、$\nu=\delta_{x'}$，再读取每个 $\bar y$ 的概率即可。
+\end{proof}
+
+\begin{corollary}[齐次系统的全过程投影]
+\label{cor:app-exact-process}
+若 $K\in\Stoch(X,X)$、$q:X\twoheadrightarrow\bar X$ 且
+$KQ_q=Q_q\bar K$，则
+\[
+  K^nQ_q=Q_q\bar K^n\qquad(n\ge0).
+\]
+对任意微观初始分布，以 $K$ 演化的链 $(X_t)$ 的投影 $(q(X_t))$ 是以
+$\bar K$ 为转移核的 Markov 链。
+\end{corollary}
+
+\begin{proof}
+第一式由归纳直接得到。给定 $X_t=x$ 时，$q(X_{t+1})$ 的条件分布为
+$\bar K(q(x),\cdot)$；在给定任意宏观历史且当前宏观状态为 $\bar x$ 后，
+对纤维 $q^{-1}(\bar x)$ 上的微观条件分布取混合，结果仍为
+$\bar K(\bar x,\cdot)$。这就是 Markov 性。
+\end{proof}
+
+\subsection{有限观测代数就是分区代数}
+
+称 $\cA\subseteq\mathbb R^X$ 为观测代数，如果它是包含常数函数且对点乘
+封闭的线性子空间。定义
+\[
+ x\sim_{\cA}x'
+ \quad\Longleftrightarrow\quad
+ f(x)=f(x')\quad\forall f\in\cA,
+\]
+并记商映射为 $q_{\cA}:X\twoheadrightarrow X_{\cA}$。
+
+\begin{lemma}[有限观测代数--分区对应]
+\label{lem:app-finite-algebra-partition}
+对有限 $X$，
+\begin{equation}
+  \cA=q_{\cA}^*\mathbb R^{X_{\cA}},
+  \qquad
+  \dim\cA=|X_{\cA}|.
+  \label{eq:app-algebra-partition}
+\end{equation}
+反之，每个分区商 $q:X\twoheadrightarrow Y$ 都给出观测代数
+$q^*\mathbb R^Y$。两个满射给出同一代数，当且仅当其纤维分区相同。
+\end{lemma}
+
+\begin{proof}
+按定义，$\cA$ 中每个函数都在 $\sim_{\cA}$ 的等价类上常值，故
+$\cA\subseteq q_{\cA}^*\mathbb R^{X_{\cA}}$。反过来，固定一个等价类
+$C$。对每个其他等价类 $D$，可取 $f_D\in\cA$ 使其在 $C,D$ 上的常值
+$a_D,b_D$ 不同。仿射多项式
+\[
+  h_D:=\frac{f_D-b_D\one}{a_D-b_D}\in\cA
+\]
+在 $C$ 上为 $1$、在 $D$ 上为 $0$。有限乘积
+$\prod_{D\ne C}h_D$ 就是 $\one_C$；只有一个等价类时取空乘积 $\one$。
+因此所有块指示函数均在 $\cA$ 中，任何块上常值函数也在其中，得到第一式。
+拉回沿满射为单射，块指示函数又线性无关，故维数等式成立。反向陈述直接由
+点乘和常数闭合得到。
+\end{proof}
+
+\begin{theorem}[闭合观测代数与自治商]
+\label{thm:app-closed-algebra}
+设 $K\in\Stoch(X,X)$，$\cA\subseteq\mathbb R^X$ 是观测代数。则
+\[
+  P_K\cA\subseteq\cA
+\]
+当且仅当存在唯一 $K_{\cA}\in\Stoch(X_{\cA},X_{\cA})$ 使
+\[
+  KQ_{q_{\cA}}=Q_{q_{\cA}}K_{\cA}.
+\]
+\end{theorem}
+
+\begin{proof}
+由引理~\ref{lem:app-finite-algebra-partition}，
+$\cA=q_{\cA}^*\mathbb R^{X_{\cA}}$。所述不变性正是
+定理~\ref{thm:app-four-equivalences} 的条件~3。
+\end{proof}
+
+常数代数和 $\mathbb R^X$ 对每个 $P_K$ 都闭合，分别对应一状态商与恒等商。
+所以``某个闭合商存在''本身没有非平凡内容；必须指定不可丢弃的任务观测。
+
+\subsection{任务相对最小精确商}
+
+设 $g:X\twoheadrightarrow O$ 是非恒定任务观测。令
+\begin{equation}
+  \cA_0:=g^*\mathbb R^O,
+  \qquad
+  \cA_{n+1}:=\operatorname{alg}(\cA_n\cup P_K\cA_n).
+  \label{eq:app-task-algebra-iteration}
+\end{equation}
+
+\begin{theorem}[任务相对的最小精确宏观模型]
+\label{thm:app-minimal-task-quotient}
+迭代~\eqref{eq:app-task-algebra-iteration} 在某个
+$\tau\le |X|-|O|$ 处稳定；记稳定代数为 $\cA_*$，商为
+$q_*:X\twoheadrightarrow X_*$。则：
+\begin{enumerate}
+  \item $\cA_*$ 是包含 $\cA_0$ 的最小 $P_K$-不变观测代数；
+  \item 存在唯一 $K_*\in\Stoch(X_*,X_*)$ 与唯一 $r_*:X_*\to O$，使
+  \begin{equation}
+    KQ_{q_*}=Q_{q_*}K_*,
+    \qquad
+    g=r_*\circ q_*;
+    \label{eq:app-minimal-task-square}
+  \end{equation}
+  \item 若另有满射 $q:X\twoheadrightarrow Y$、读出 $r:Y\to O$ 与
+  $L\in\Stoch(Y,Y)$ 满足
+  \[
+    g=r\circ q,
+    \qquad
+    KQ_q=Q_qL,
+  \]
+  则存在唯一满射 $s:Y\twoheadrightarrow X_*$ 使
+  \begin{equation}
+    q_*=s\circ q,
+    \qquad r=r_*\circ s,
+    \qquad LQ_s=Q_sK_*.
+    \label{eq:app-minimal-universal-property}
+  \end{equation}
+\end{enumerate}
+换言之，$q_*$ 是全部任务保真精确自治商中最粗者。
+\end{theorem}
+
+\begin{proof}
+$\cA_n$ 单调增加；每次严格增加至少使维数增加 $1$。由于
+$\dim\cA_0=|O|$、$\dim\mathbb R^X=|X|$，至多发生
+$|X|-|O|$ 次严格增加。稳定时
+$P_K\cA_*\subseteq\cA_*$。若 $\mathcal B$ 是任意包含 $\cA_0$ 的
+$P_K$-不变观测代数，则从 $\cA_0\subseteq\mathcal B$ 出发归纳得到
+$\cA_n\subseteq\mathcal B$，故 $\cA_*\subseteq\mathcal B$。这证明第一项。
+
+定理~\ref{thm:app-closed-algebra} 给出唯一 $K_*$。又因
+$\cA_0\subseteq\cA_*$，$g$ 在 $q_*$ 的纤维上常值，故定义
+$r_*(q_*(x)):=g(x)$；它良定义且因 $q_*$ 满射而唯一。
+
+对第三项，候选 $q$ 的分区代数
+$\cA_q:=q^*\mathbb R^Y$ 包含 $\cA_0$，且由精确交换式和
+定理~\ref{thm:app-four-equivalences} 对 $P_K$ 不变。最小性给出
+$\cA_*\subseteq\cA_q$，所以 $q(x)=q(x')$ 推出 $q_*(x)=q_*(x')$；
+存在唯一满射 $s$ 使 $q_*=s\circ q$。由
+$r\circ q=g=r_*\circ s\circ q$ 与 $q$ 满射，得到 $r=r_*\circ s$。
+最后，
+\[
+ Q_qLQ_s=KQ_qQ_s=KQ_{q_*}
+ =Q_{q_*}K_*=Q_qQ_sK_*.
+\]
+满射 $q$ 的各行覆盖 $Y$ 的全部 Dirac 分布，因此可消去左侧的 $Q_q$，
+得到 $LQ_s=Q_sK_*$。
+\end{proof}
+
+\begin{definition}[精确任务相对自治复杂度]
+\label{def:app-exact-complexity}
+定义
+\begin{equation}
+ c_K(g):=|X_*|=\dim\cA_*.
+ \label{eq:app-exact-complexity}
+\end{equation}
+\end{definition}
+
+定理~\ref{thm:app-minimal-task-quotient} 立即给出
+\begin{equation}
+ c_K(g)=
+ \min\left\{|Y|:
+ \begin{array}{l}
+ \exists q:X\twoheadrightarrow Y,\ \exists r:Y\to O,\
+ \exists L\in\Stoch(Y,Y),\quad
+ g=r\circ q,\ KQ_q=Q_qL
+ \end{array}\right\}.
+ \label{eq:app-exact-complexity-min}
+\end{equation}
+因此，任务相对的严格精确压缩存在，当且仅当
+\begin{equation}
+  |O|\le c_K(g)<|X|.
+  \label{eq:app-nontrivial-exact}
+\end{equation}
+若按本文约定 $g$ 非恒定，则左端至少为 $2$。该结论不保证右侧严格不等式：
+一般有限 Markov 核可能迫使任务分区一直细化到离散分区。
+
+迭代的分区版本从 $g$ 的纤维开始，并反复按
+\[
+ x\equiv_{n+1}x'
+ \Longleftrightarrow
+ \left\{
+ \begin{array}{l}
+ x\equiv_nx',\\
+ K(x,C)=K(x',C)\quad\forall C\in\Pi_n
+ \end{array}\right.
+\]
+细化；命题~\ref{prop:app-stable-refinement} 的同一证明表明它有限终止于
+$q_*$。这给出有限模型上的构造算法，但没有给出大状态空间中的计算效率保证。
