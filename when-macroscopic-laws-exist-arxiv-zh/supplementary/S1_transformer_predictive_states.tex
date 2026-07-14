@@ -2,7 +2,7 @@
 \label{app:transformer-predictive-states}
 \label{supp:transformer}
 
-本节把正文中关于 Transformer 的构造例写成一个自包含的有限状态定理。它回答的范围很窄：在一个已经固定边界的自回归生成系统中，如果语言本身具有少量、可递推的预测状态，模型又学到了相应的下一 token 条件分布，而且这些预测状态能从模型完整状态中读出，那么这些状态构成一个分布加权意义下近似闭合的宏观过程。本节不证明三个前提对任意语言或任意 Transformer 自动成立。
+本节把正文中关于 Transformer 的构造例写成一个自包含的有限状态定理。它回答的范围很窄：在一个已经固定边界的自回归生成系统中，如果语言本身具有少量、可递推的预测状态，模型又学到了相应的下一 token 条件分布，而且这些预测状态能从模型完整状态中读出，那么状态数比例给出相对于声明基线的压缩项，递推性与学习误差界共同给出分布加权闭合。本节不证明三个前提对任意语言或任意 Transformer 自动成立。
 
 \subsection{系统边界与统一记号}
 
@@ -68,7 +68,7 @@ $F_N:S_N\times\mathcal V_N\to S_N$，使所有相关扩展满足
  \frac{|S_N|}{|B_N|}\le\lambda_N.
  \tag{T1c}\label{eq:T1-complexity}
 \]
-式 \eqref{eq:T1-recursion} 是自治性的结构前提；仅有少状态的下一 token 读出并不足以推出闭合。
+式 \eqref{eq:T1-recursion} 是闭合的结构前提；仅有少状态的下一 token 读出并不足以推出闭合。
 
 \paragraph{假设 T2（总体下一 token 学习）.}
 以自然对数计算 KL 散度，并假定
@@ -298,7 +298,7 @@ $E_{t+1}\le e_t+\rho E_t$；展开递推即得
 $\sum_{t<T_N}e_{N,t}\to0$，或使用具有统一收缩常数的界。这里的收缩只控制宏观状态边缘；已经输出的完整 token 轨迹需要另行作顺序耦合，不能由状态边缘收缩自动推出。
 \end{remark}
 
-\subsection{与正文联合判据的关系}
+\subsection{与正文压缩—闭合判据的关系}
 \label{sec:transformer-gamma-relation}
 
 正文的 $\Gamma_N$ 是操作性微观核上的、任务保真的、最坏情形系统族判据；定理

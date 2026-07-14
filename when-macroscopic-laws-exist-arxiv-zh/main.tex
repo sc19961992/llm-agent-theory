@@ -1,0 +1,60 @@
+% !TEX program = xelatex
+\documentclass[UTF8,fontset=fandol,11pt,a4paper]{ctexart}
+\input{macros}
+
+\title{\bfseries 宏观规律何时存在？\\[0.35em]
+\Large 有限随机系统中的压缩—闭合判据\\[0.8em]
+\normalsize \textit{When Do Macroscopic Laws Exist? A Compression--Closure Criterion for Finite Stochastic Systems}}
+\author{石琛}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+宏观规律何时存在？本文把这一问题限定为有限 Markov 动力学族中的任务相对、一步问题：是否存在一列任务保真表示，使每个规模上的同一表示既相对于操作性微观基线实现渐近压缩，又具有趋于精确的动力学闭合。我们首先由预先声明的微观探针与允许动力学构造操作性微观状态空间，并只把它的严格任务保真信息商列为候选宏观表示。对每个候选分区，我们定义相对状态数和纤维预测直径；后者直接衡量被归入同一宏观状态的微观状态是否对下一宏观状态给出一致预测。本文证明，这样的低复杂度宏观规律存在，当且仅当不含未知宏观转移核的联合指标 $\Gamma_N$ 趋于零。该压缩—闭合判据要求同一分区的相对状态数与纤维预测直径同时趋零。对每个固定规模和给定误差容限，最少状态分区实际达到；对每个固定动力学与固定分区，最优宏观转移核实际达到。作为非平凡正例，可交换故障--修复系统的 $2^N$ 个微观配置可被精确压缩为、且最少需要 $N+1$ 个故障数状态，并对整个参数族闭合。本文还说明残余对称和 Transformer 预测状态如何构造候选宏观表示；其中 Transformer 结论采用分布加权误差，因而是与一般理论相接的专用例子，而非最坏情形主定理的字面特例。本文不主张所有复杂系统都有低复杂度规律，也不把状态数等同于描述长度、计算成本、因果自治或低维几何。
+
+\medskip
+\noindent\textbf{关键词：}Markov 粗粒化；状态压缩；宏观闭合；任务保真；压缩—闭合判据；lumpability；预测状态
+\end{abstract}
+
+\begin{center}
+\begin{minipage}{0.94\textwidth}
+\small
+\textbf{English abstract.}
+We ask when a family of finite stochastic systems admits a task-relative, low-complexity macroscopic law. We formalize this as the existence of a sequence of task-preserving quotients whose relative state counts and optimized worst-case one-step closure defects both tend to zero. An explicit index $\Gamma_N$, requiring no prespecified macroscopic transition kernel, vanishes if and only if such a sequence exists. A permutation-invariant fault--repair family gives a nontrivial exact example with $2^N$ microscopic configurations and a provably minimal $(N+1)$-state macroscopic chain. The criterion is task-relative and one-step; it does not assert universal simplicity, efficient discovery, causal autonomy, or long-horizon accuracy.
+\end{minipage}
+\end{center}
+
+\clearpage
+\tableofcontents
+\clearpage
+
+\input{sections/01_introduction}
+\input{sections/02_operational_microstates}
+\input{sections/03_closure_and_fibers}
+\input{sections/04_main_criterion}
+\input{sections/05_fault_repair_example}
+\input{sections/06_construction_routes}
+\input{sections/07_verification_and_limits}
+\input{sections/08_discussion}
+
+\clearpage
+\appendix
+\input{appendices/appendix_A_markov_tv}
+\input{appendices/appendix_B_operational_baseline}
+\input{appendices/appendix_C_exact_theory}
+\input{appendices/appendix_D_approximate_theory}
+\input{appendices/appendix_E_composition_time}
+\input{appendices/appendix_F_structural_certificates}
+\input{appendices/appendix_G_examples_counterexamples}
+\input{appendices/appendix_H_extensions}
+\input{appendices/appendix_I_categories}
+
+\clearpage
+\begingroup
+\sloppy
+\bibliographystyle{unsrtnat}
+\bibliography{references/references}
+\endgroup
+\end{document}

@@ -21,7 +21,7 @@ arXiv 的“Non-English submissions”页面目前说明：非英文投稿可以
 3. 保留全部被 `\input` 或 `\bibliography` 引用的源文件。
 4. 上传 `references/references.bib`；若自动 BibTeX 处理失败，可同时提供本地生成的 `main.bbl`。
 5. 删除编译中间文件和未引用附件；不要上传本地生成的 PDF 作为 TeX 源稿的一部分。
-6. 投稿元数据使用英文标题、英文摘要和拉丁字母作者名，并在 Comments 中注明包含中文版本。
+6. 投稿元数据使用英文标题 `When Do Macroscopic Laws Exist? A Compression–Closure Criterion for Finite Stochastic Systems`、英文摘要和拉丁字母作者名，并在 Comments 中注明包含中文版本。
 7. 不使用 `\today`；版本日期由投稿记录给出。
 
 ## 编译器选择

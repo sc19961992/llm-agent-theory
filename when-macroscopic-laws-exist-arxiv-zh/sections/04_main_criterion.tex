@@ -1,4 +1,4 @@
-\section{主定理：少而自治的可检验充要条件}
+\section{主定理：宏观规律的压缩—闭合判据}
 \label{sec:criterion}
 
 考虑有限操作性系统族
@@ -21,6 +21,8 @@
 \widehat c_{\cK_N,u_N}^{\,\tau_N}(g_N)=o(|B_N|).
 \label{eq:LC}
 \end{equation}
+本文称满足 LC 的系统族存在任务相对的低复杂度宏观规律：式~\eqref{eq:LC}
+中的 $o(|B_N|)$ 是压缩要求，$\tau_N\to0$ 是闭合要求，并且两者必须由同一列任务保真分区同时实现。
 
 现在定义不含候选宏观核的联合指标
 \begin{equation}
@@ -35,7 +37,7 @@ D_{\bar\cK_N}(\pi)
 \label{eq:Gamma}
 \end{equation}
 
-\begin{theorem}[操作性低复杂度闭合的纤维刻画]
+\begin{theorem}[宏观规律的压缩—闭合充要判据]
 \label{thm:gamma-characterization}
 下列三项等价：
 \begin{enumerate}
@@ -45,14 +47,27 @@ D_{\bar\cK_N}(\pi)
   \frac{|Y_N|}{|B_N|}\to0,
   \qquad
   \sup_{\bar K\in\bar\cK_N}
-  \min_L d_\infty(\bar KQ_{s_N},Q_{s_N}L)\to0;
+  \min_{L\in\Stoch(Y_N,Y_N)}
+  d_\infty(\bar KQ_{s_N},Q_{s_N}L)\to0;
   \]
   \item $\Gamma_N\to0$。
 \end{enumerate}
 \end{theorem}
 
+条件 2 中的最优宏观核允许随 $N$ 和 $\bar K$ 改变；要求整个动力学族共享同一个宏观核是更强的量词。
+
 \begin{proof}
-条件 1 与 2 只是把式~\eqref{eq:relative-complexity}中的最优分区写成商映射。若条件 2 成立，令 $\pi_N$ 为 $s_N$ 的纤维分区。由引理~\ref{lem:radius-diameter}，
+先证条件 1 与 2 等价。若条件 1 成立，对相应的 $\tau_N$ 选择达到式~\eqref{eq:relative-complexity}最小值的分区 $\pi_N$，并令 $s_N:B_N\twoheadrightarrow Y_N$ 为其商映射。则 $s_N$ 任务保真，$|Y_N|/|B_N|\to0$，且
+$\eta_{\pi_N}(\bar\cK_N)\le\tau_N\to0$，故条件 2 成立。反之，若条件 2 成立，令
+\[
+e_N:=\sup_{\bar K\in\bar\cK_N}
+\min_{L\in\Stoch(Y_N,Y_N)}
+d_\infty(\bar KQ_{s_N},Q_{s_N}L).
+\]
+则 $e_N\to0$，且
+$\widehat c_{\cK_N,u_N}^{\,e_N}(g_N)\le|Y_N|=o(|B_N|)$，所以取 $\tau_N=e_N$ 即得条件 1。
+
+再证条件 2 与 3 等价。若条件 2 成立，令 $\pi_N$ 为 $s_N$ 的纤维分区。由引理~\ref{lem:radius-diameter}，
 \[
 D_{\bar\cK_N}(\pi_N)\le2\eta_{\pi_N}(\bar\cK_N)\to0,
 \]
@@ -60,7 +75,7 @@ D_{\bar\cK_N}(\pi_N)\le2\eta_{\pi_N}(\bar\cK_N)\to0,
 $\eta_{\pi_N}(\bar\cK_N)\le D_{\bar\cK_N}(\pi_N)\to0$，得到条件 2。
 \end{proof}
 
-定理~\ref{thm:gamma-characterization} 的内容不是“只要寻找就一定能找到规律”。它给出一个需要对具体系统族验证的充要条件：存在低复杂度宏观规律，恰好意味着存在任务保真分组，使相对分组数和组内预测分歧同时消失。循环链反例表明，有限 Markov 性本身不保证该条件，见附录~\ref{app:examples-counterexamples}。
+定理~\ref{thm:gamma-characterization} 的内容不是“只要寻找就一定能找到规律”。它把存在性化为一个需要对具体系统族验证的分区判据：必须存在同一列任务保真分组，使相对分组数和组内预测分歧同时消失。指标 $\Gamma_N$ 不含未知宏观转移核；纤维半径--直径引理保证它与最优一步闭合误差等价。循环链反例表明，有限 Markov 性本身不保证该条件，见附录~\ref{app:examples-counterexamples}。
 
 \begin{corollary}[有限达到与必要快检]
 \label{cor:attainment-output}
