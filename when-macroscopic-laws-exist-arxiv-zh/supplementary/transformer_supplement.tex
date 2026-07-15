@@ -2,11 +2,11 @@
 \documentclass[UTF8,fontset=fandol,11pt,a4paper]{ctexart}
 \input{../macros}
 
-\title{\bfseries 补充材料 S1：\\Transformer 自回归预测状态的分布加权构造定理}
+\title{\bfseries 附录 J（独立编译版）：\\Transformer 预测状态：分布加权构造与主判据对齐}
 \author{石琛}
 \date{}
 \hypersetup{
-  pdftitle={补充材料 S1：Transformer 自回归预测状态的分布加权构造定理},
+  pdftitle={附录 J（独立编译版）：Transformer 预测状态：分布加权构造与主判据对齐},
   pdfauthor={石琛}
 }
 
@@ -14,11 +14,13 @@
 \maketitle
 
 \begin{abstract}
-本补充材料给出《宏观规律何时存在？有限随机系统中的压缩—闭合判据》正文所引用的 Transformer 专用构造定理及完整证明。预测状态数给出相对于预先声明基线的状态数压缩项，递推性、总体下一 token 学习成功和预测状态可读出共同给出声明历史分布下的加权闭合。该结果是与主论文判据相接的分布加权候选构造；只有补足操作性因子化、任务对齐、最坏状态控制和系统族量词后，才能成为 $\Gamma_N$ 证书。
+本文件是《宏观规律何时存在？有限随机系统中的压缩—闭合判据》附录 J 的独立编译版本，内容与主论文中的附录完全相同。该附录给出 Transformer 预测状态的分布加权构造定理、完整证明以及与正文压缩—闭合判据的对齐条件；只有补足操作性因子化、任务对齐、最坏状态控制和系统族量词后，分布加权候选才能成为 $\Gamma_N$ 证书。
 \end{abstract}
 
 \tableofcontents
 \clearpage
-\input{S1_transformer_predictive_states}
+\newcommand{\TransformerEquationPrefix}{S}
+\renewcommand{\thesection}{S1}
+\input{../appendices/appendix_J_transformer_predictive_states}
 
 \end{document}

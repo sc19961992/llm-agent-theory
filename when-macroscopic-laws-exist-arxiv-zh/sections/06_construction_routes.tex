@@ -1,11 +1,13 @@
-\section{候选宏观表示从哪里来}
+\section{从判据到证书：候选表示如何产生}
 \label{sec:construction}
 
-定理~\ref{thm:gamma-characterization} 判断一个系统族何时有低复杂度闭合表示，却不保证任意系统都满足判据。具体证明通常需要构造候选分区。三类常见来源是守恒或充分任务、残余对称和递推预测状态。
+定理~\ref{thm:gamma-characterization} 判断候选是否足够压缩且闭合，却不替具体模型发现候选分区。实际证明通常分成两步：先由任务充分性、对称性或预测结构提出一个表示，再把它的状态比例与纤维预测分歧代入 $\Gamma_N$。本节给出三种常见的充分路线；它们都不是主定理暗含的必要机制。
 
-\subsection{守恒任务与残余对称}
+\subsection{任务本身已经足够}
 
-若任务变量 $\bar g(b)$ 的下一步分布只依赖当前任务值，则 $s=\bar g$ 本身闭合，并达到任何任务保真表示可能具有的最少 $|O|$ 个状态。注意“任务标签少”本身不够；所需的实质条件正是其转移对任务纤维保持一致。
+若任务变量 $\bar g(b)$ 的下一步分布只依赖当前任务值，则 $s=\bar g$ 本身精确闭合。任何任务保真表示至少需要 $|O|$ 个状态，所以它同时达到状态数的绝对下界。关键条件是任务纤维内的转移一致，而不是“任务标签很少”；循环链正说明后者单独并无作用。
+
+\subsection{残余对称给出轨道证书}
 
 设有限群 $H$ 作用在 $B$ 上，轨道映射为 $q_H:B\twoheadrightarrow B/H$。若任务在轨道上不变，并定义统一近似等变缺陷
 \[
@@ -14,38 +16,42 @@
 \sup_{\bar K\in\bar\cK,\,h\in H,\,b\in B}
 \left\|\bar K(hb,\cdot)-h_*\bar K(b,\cdot)\right\|_{\TV},
 \]
-则推前到轨道空间不会增加 TV 距离，且 $q_H\circ h=q_H$，故
+则确定性推前不增加 TV 距离，且 $q_H\circ h=q_H$，因而
 \begin{equation}
 D_{\bar\cK}(\ker q_H)\le\eps_H(\bar\cK),
 \qquad
 \eta_{\ker q_H}(\bar\cK)\le\eps_H(\bar\cK).
 \label{eq:symmetry-certificate}
 \end{equation}
-因此，任务兼容、轨道数为 $o(|B_N|)$ 且 $\eps_{H_N}\to0$ 的群作用直接给出 LC 的充分证书。故障--修复例中的坐标置换群给出精确情形。训练是否以高概率形成某个残余对称相是另一条概率命题，不能由式~\eqref{eq:symmetry-certificate} 反推；完整区分见附录~\ref{app:structural-certificates}。
+若轨道数满足 $|B_N/H_N|=o(|B_N|)$，任务在轨道上不变，且 $\eps_{H_N}(\bar\cK_N)\to0$，轨道分区便直接证明 $\Gamma_N\to0$。故障--修复系统中的坐标置换给出 $\eps_{H_N}=0$ 的精确例子。
 
-\subsection{预测状态与 Transformer 接口}
+这里需要区分两个问题：式~\eqref{eq:symmetry-certificate} 检验一个已经给定的轨道表示是否闭合；训练或随机机制是否以高概率形成某种残余对称相，则是另一项概率命题。两者不存在无条件蕴含，完整条件和反模型见附录~\ref{app:structural-certificates}。
 
-把历史按“对未来给出相同预测”分组，是计算力学中因果状态的核心构造\citep{CrutchfieldYoung1989,ShaliziCrutchfield2001}。对自回归 Transformer\citep{VaswaniEtAl2017}，配套附件《Transformer 自回归预测状态：分布加权构造定理》（补充材料 S1）证明了下面的专用结果；其证明不重复收入主论文 PDF。
+\subsection{Transformer 预测状态：先构造，再对齐}
 
-\begin{theorem}[Transformer 预测状态构造，简述]
-\label{thm:transformer-interface}
-设目标语言在声明的历史分布 $\mu_N$ 下有 $m_N$ 个可递归更新的预测状态，其下一 token 读出误差为 $\eta_N$；Transformer 相对目标语言的总体额外交叉熵为 $\delta_N$；且预测状态可由 Transformer 的完整推理状态确定。记完整状态的诱导分布为 $\nu_N$。则可显式构造状态表示 $q_N$、下一 token 读出 $R_N$ 和宏观转移 $L_N$，使分布加权 TV 意义下
-\begin{align}
-d_{\nu_N}(G_N^{\mathrm{next}},Q_{q_N}R_N)
-&\le \eta_N+\sqrt{\delta_N/2},\label{eq:transformer-readout}\\
-d_{\nu_N}(K_NQ_{q_N},Q_{q_N}L_N)
-&\le \eta_N+\sqrt{\delta_N/2}.
-\label{eq:transformer-closure}
-\end{align}
-若预测状态递推本身另有缺陷 $\zeta_N$，第二个上界增加 $\zeta_N$。
-\end{theorem}
+把历史按未来预测分组，是计算力学中预测状态构造的基本思路\citep{CrutchfieldYoung1989,ShaliziCrutchfield2001}。附录~\ref{app:transformer-predictive-states} 将该思路用于固定边界的自回归 Transformer\citep{VaswaniEtAl2017}，并把结论分成两个逻辑层次。
 
-这个结果补足了一般理论没有提供的步骤：它从语言的低复杂度预测结构、总体下一 token 学习成功和状态可读出性出发，构造候选 $q_N,R_N,L_N$。但它不是定理~\ref{thm:gamma-characterization} 的字面特例：
+\paperclaim{分布加权候选。}
+若参考语言具有少量且可递推的预测状态（T1），Transformer 在声明历史分布下学到总体下一 token 条件分布（T2），并且预测状态可以从完整推理状态读出（T3），则可以显式构造预测状态读出 $q_N$、token 读出 $R_N$ 和宏观转移 $L_N$。令
+\[
+\varepsilon_N=\eta_N+\sqrt{\delta_N/2},
+\]
+其中 $\eta_N$ 是参考语言的预测状态读出误差，$\delta_N$ 是模型相对参考语言的总体条件 KL 误差。附录~\ref{app:transformer-predictive-states}证明：下一 token 误差与一步闭合误差在声明状态分布 $\nu_N$ 加权的 TV 意义下均不超过 $\varepsilon_N$；若预测状态只有近似递推，闭合界再加递推缺陷 $\zeta_N$。
 
-\begin{enumerate}
-  \item 式~\eqref{eq:transformer-readout}--\eqref{eq:transformer-closure} 使用 $\nu_N$ 加权误差，而 $\Gamma_N$ 使用全状态最坏误差；
-  \item 下一 token 是随机任务通道，而正文主定理使用确定性任务 $g_N$；
-  \item Transformer 的预测状态数 $m_N$ 只有在表示经操作性微观商 $p_N$ 因子化、且 $m_N/|B_N|\to0$ 时，才与正文复杂度基线对齐。
-\end{enumerate}
+\paperclaim{接入最坏情形判据。}
+加权候选还不是正文的 $\Gamma_N$ 证书。若进一步证明：$q_N$ 经操作性微观空间 $B_N$ 因子化并精确保留正文声明的确定性任务；其像 $Y_N$ 满足
+\[
+\frac{|Y_N|}{|B_N|}\le c_N;
+\]
+并且对每个 $\bar K\in\bar\cK_N$ 都存在相应的宏观核 $L_{N,\bar K}$，使全状态最坏逐行误差满足
+\[
+d_\infty(\bar KQ_{q_N},Q_{q_N}L_{N,\bar K})\le r_N,
+\]
+那么同一纤维内两行到共同宏观行的距离都不超过 $r_N$，三角不等式给出纤维直径至多 $2r_N$，从而
+\begin{equation}
+\Gamma_N\le\max\{c_N,2r_N\}.
+\label{eq:transformer-gamma-bridge}
+\end{equation}
+因此 $c_N,r_N\to0$ 足以推出正文意义下的 $\Gamma_N\to0$。完整定理、Pinsker--Jensen 误差推导、近似递推、多步边缘界和式~\eqref{eq:transformer-gamma-bridge}的严格对齐命题均见附录~\ref{app:transformer-predictive-states}。
 
-若要推出最坏情形 LC，还需覆盖下界或统一误差把 $d_{\nu_N}$ 提升到 $d_\infty$，并把随机任务通道纳入相应双误差版本。若 $q_N$ 只能读取完整历史，结论是生成行为的低复杂度商；只有它能从指定 hidden states 或 KV cache 中稳定读出，才支持内部神经表征结论。本文不从行为闭合推出参数空间必在低维流形上。
+从分布加权误差到 $r_N$ 仍需统一逐行控制，或足以把平均界提升为最坏界的覆盖质量条件；随机的下一 token 通道也不能自动替代确定性任务的精确保真。若 $q_N$ 只保证从完整历史读取，结论是生成行为的低复杂度预测商；只有它能从指定 hidden states 或 KV cache 中稳定读出，才进一步支持内部表征结论。上述任何条件都不推出参数空间或 hidden states 必位于低维流形。

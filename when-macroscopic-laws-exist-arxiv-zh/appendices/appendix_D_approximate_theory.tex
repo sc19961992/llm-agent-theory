@@ -1,4 +1,4 @@
-\section{近似闭合：最优核、纤维直径与复杂度曲线}
+\section{近似闭合：最优核、纤维直径与复杂度--误差前沿}
 \label{app:approximate-theory}
 
 精确交换式在估计误差下不稳定；本附录把交换式缺陷作为近似对象，并给出主判据的闭合项。纤维半径--直径关系把含未知宏观核的最优闭合误差化为可由分区直接计算的预测直径。所有存在性结论都来自有限维紧性，不应被解释为高效发现算法。
@@ -160,9 +160,10 @@ $D_{\cK}(\pi):=D_{q_\pi}(\cK)$。
 因此 $D_q(\cK)\to0$ 与本文所用
 $\sup_K\min_L$ 缺陷趋零等价到固定常数，而不需要先估计任何 $L_K$。
 
-\subsection{任务相对复杂度--误差曲线}
+\subsection{核族的任务相对复杂度--误差前沿}
 
-设 $g:X\twoheadrightarrow O$ 非恒定。称分区 $\pi$ 任务保真，如果同一
+设 $g:X\twoheadrightarrow O$ 非恒定，
+$\cK\subseteq\Stoch(X,X)$ 非空。称分区 $\pi$ 任务保真，如果同一
 $\pi$-块中的状态具有相同 $g$ 值；等价地，其商映射
 $q_\pi:X\twoheadrightarrow X/\pi$ 允许唯一读出 $r_\pi$ 使
 $g=r_\pi\circ q_\pi$。对 $|O|\le m\le|X|$，令
@@ -170,51 +171,90 @@ $g=r_\pi\circ q_\pi$。对 $|O|\le m\le|X|$，令
  \mathfrak P_m(g):=
  \left\{\pi:\pi\text{ 任务保真且 }|\pi|\le m\right\}.
 \]
-并定义
-\begin{equation}
-  \mathcal E_{K,g}(m):=\min_{\pi\in\mathfrak P_m(g)}\eta_{q_\pi}(K).
-  \label{eq:app-complexity-error-curve}
-\end{equation}
+定义复杂度--误差前沿与直径前沿
+\begin{align}
+  \mathcal E_{\cK,g}(m)
+  &:=\min_{\pi\in\mathfrak P_m(g)}\eta_{q_\pi}(\cK),
+  \label{eq:app-complexity-error-curve}\\
+  \mathcal D_{\cK,g}(m)
+  &:=\min_{\pi\in\mathfrak P_m(g)}D_{q_\pi}(\cK).
+  \label{eq:app-diameter-frontier}
+\end{align}
 
-\begin{theorem}[复杂度--误差曲线的有限达到]
+\begin{theorem}[核族复杂度--误差前沿的有限达到]
 \label{thm:app-complexity-error-curve}
-对每个允许的 $m$，式~\eqref{eq:app-complexity-error-curve} 的最小值由某个
-任务保真分区及其最优宏观核达到，并且：
+对每个允许的 $m$，式~\eqref{eq:app-complexity-error-curve} 与
+式~\eqref{eq:app-diameter-frontier} 的外层最小值都由任务保真分区达到；
+对每个固定分区与每个固定 $K\in\cK$，内层最优宏观 kernel 也达到。
+并且：
 \begin{enumerate}
-  \item $m\mapsto\mathcal E_{K,g}(m)$ 单调不增；
-  \item $\mathcal E_{K,g}(|X|)=0$；
-  \item $\mathcal E_{K,g}(m)=0$ 当且仅当存在至多 $m$ 状态的精确任务保真闭合商；
-  \item $c_K(g)=\min\{m:\mathcal E_{K,g}(m)=0\}$。
+  \item $m\mapsto\mathcal E_{\cK,g}(m)$ 单调不增；
+  \item $\mathcal E_{\cK,g}(|X|)=0$；
+  \item $\mathcal E_{\cK,g}(m)=0$ 当且仅当存在一个至多 $m$ 状态、
+  对全部 $K\in\cK$ 精确闭合的任务保真商；
+  \item
+  \begin{equation}
+  c_{\cK}^{0}(g)
+  =\min\{m:\mathcal E_{\cK,g}(m)=0\}.
+  \label{eq:app-exact-frontier-threshold}
+  \end{equation}
 \end{enumerate}
+这里没有声称 $\sup_{K\in\cK}$ 必由某个 $K$ 达到。
 \end{theorem}
 
 \begin{proof}
-有限集只有有限多个分区，$\mathfrak P_m(g)$ 非空且有限；例如 $g$ 的纤维
-分区属于其中。对每个固定分区，定理~\ref{thm:app-optimal-kernel} 给出最优
-宏观核，所以外层最小值也达到。增大 $m$ 只扩张可行集，得到单调性。离散
-分区在 $m=|X|$ 时可行，并以 $L=K$ 实现零误差。最后，
-式~\eqref{eq:app-zero-approx-exact} 把零误差与精确闭合等同，再结合
-式~\eqref{eq:app-exact-complexity-min} 即得其余两项。
+有限集只有有限多个分区，$\mathfrak P_m(g)$ 非空且有限；例如离散分区在
+$m=|X|$ 时属于其中。对每个固定分区与固定 $K$，
+定理~\ref{thm:app-optimal-kernel} 给出最优宏观核。虽然核族可以无限，
+$\eta_{q_\pi}(\cK)$ 对每个分区仍是一个良定义的上确界；外层只在有限个
+分区上取最小值，故达到。增大 $m$ 只扩张可行集，得到单调性。离散分区
+以 $L_K=K$ 对每个 $K$ 实现零误差。
+
+$\eta_{q_\pi}(\cK)=0$ 当且仅当
+$\eta_{q_\pi}(K)=0$ 对全部 $K\in\cK$ 成立；由
+式~\eqref{eq:app-zero-approx-exact}，这等价于 $q_\pi$ 对整个核族共同
+精确闭合。再结合定理~\ref{thm:app-minimal-task-quotient} 与
+式~\eqref{eq:app-exact-complexity-min}，得到后两项。
 \end{proof}
 
 对误差容限 $\tau\ge0$，定义
 \begin{equation}
- c_K^\tau(g)
- :=\min\{ |\pi|:\pi\text{ 任务保真且 }\eta_{q_\pi}(K)\le\tau\}.
+ c_{\cK}^\tau(g)
+ :=\min\{ |\pi|:\pi\text{ 任务保真且 }
+                    \eta_{q_\pi}(\cK)\le\tau\}.
  \label{eq:app-tolerance-complexity}
 \end{equation}
-离散分区保证可行集非空；有限性保证最小状态数与相应最优核均达到。此外
+则
 \begin{equation}
- |O|\le c_K^\tau(g)\le|X|,
- \qquad
- c_K^0(g)=c_K(g),
+ c_{\cK}^\tau(g)
+ =\min\{m:\mathcal E_{\cK,g}(m)\le\tau\},
+ \label{eq:app-tolerance-frontier-inverse}
 \end{equation}
-且 $c_K^\tau(g)$ 随 $\tau$ 单调不增。近似情形通常没有唯一最粗分区；规范
-对象是最优值曲线及各点的全部最优解集合。
+并且
+\begin{equation}
+ |O|\le c_{\cK}^\tau(g)\le|X|.
+\end{equation}
+$c_{\cK}^\tau(g)$ 随 $\tau$ 单调不增；在 $\tau=0$ 时，它与
+附录~\ref{app:exact-theory} 构造的最粗精确任务商状态数一致。
 
-把 $\eta_{q_\pi}(K)$ 换成式~\eqref{eq:app-sup-min} 的
-$\eta_{q_\pi}(\cK)$，上述有限达到与单调性逐字成立。关键仍是：外层在有限
-个任务保真分区上取最小值；内层对每个 $K$ 分别优化 $L_K$。
+逐分区使用式~\eqref{eq:app-family-diameter-radius} 并取最小值，得到
+\begin{equation}
+ \frac12\mathcal D_{\cK,g}(m)
+ \le\mathcal E_{\cK,g}(m)
+ \le\mathcal D_{\cK,g}(m).
+ \label{eq:app-frontier-radius-diameter}
+\end{equation}
+因此两条前沿的零点与渐近趋零行为相同。精确情形由
+定理~\ref{thm:app-minimal-task-quotient} 给出唯一最粗商；当 $\tau>0$ 时，
+达到同一最优状态数或同一前沿值的分区一般不可比较，故不应声称存在唯一
+最粗的近似最优分区。规范对象是前沿及各点的全部最优解集合。
+
+当 $\cK=\{K\}$ 时，简记
+\[
+ \mathcal E_{K,g}:=\mathcal E_{\{K\},g},
+ \qquad
+ c_K^\tau(g):=c_{\{K\}}^\tau(g).
+\]
 
 \subsection{估计核下的稳健性}
 

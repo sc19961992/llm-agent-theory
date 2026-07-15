@@ -1,47 +1,79 @@
-\section{主定理：宏观规律的压缩—闭合判据}
+\section{系统族：宏观规律的压缩--闭合判据}
 \label{sec:criterion}
 
-考虑有限操作性系统族
+上一节为每个有限系统给出了一条达到的复杂度--误差前沿。现在考虑系统规模
+增长时，这条前沿能否同时逼近低相对复杂度与低闭合误差。设
 \[
 (X_N,\cK_N,u_N,g_N),
 \qquad |B_N|\longrightarrow\infty,
 \]
-并沿用第~\ref{sec:operational}节构造的 $p_N:X_N\twoheadrightarrow B_N$、诱导任务 $\bar g_N$ 和诱导动力学族 $\bar\cK_N$。
+并沿用第~\ref{sec:operational}节的操作性微观空间 $B_N$、诱导任务
+$\bar g_N$ 和诱导核族 $\bar\cK_N$。简记
+\[
+c_N^\tau:=c_{\bar\cK_N}^{\tau}(\bar g_N).
+\]
 
-对容限 $\tau\ge0$ 定义任务相对最小状态数
+称系统族具有\emph{任务相对低复杂度近似闭合性质}（LC），如果存在
+$\tau_N\to0$ 使
 \begin{equation}
-\widehat c_{\cK_N,u_N}^{\,\tau}(g_N)
-:=
-\min\bigl\{|\pi|:\pi\text{ 细化 }\ker\bar g_N,
-\ \eta_\pi(\bar\cK_N)\le\tau\bigr\}.
-\label{eq:relative-complexity}
-\end{equation}
-离散分区始终可行，故最小值存在。称系统族具有\emph{任务相对低复杂度近似闭合性质}（LC），如果存在 $\tau_N\to0$ 使
-\begin{equation}
-\widehat c_{\cK_N,u_N}^{\,\tau_N}(g_N)=o(|B_N|).
+c_N^{\tau_N}=o(|B_N|).
 \label{eq:LC}
 \end{equation}
-本文称满足 LC 的系统族存在任务相对的低复杂度宏观规律：式~\eqref{eq:LC}
-中的 $o(|B_N|)$ 是压缩要求，$\tau_N\to0$ 是闭合要求，并且两者必须由同一列任务保真分区同时实现。
+这要求同一列任务保真表示同时承担两件事：其状态数相对于操作性微观基线
+趋零，其最优一步闭合误差也趋零。
 
-现在定义不含候选宏观核的联合指标
-\begin{equation}
-\boxed{
+\subsection{联合指标是前沿到原点的距离}
+
+沿用式~\eqref{eq:diameter-frontier} 的直径前沿，定义
+\begin{align}
 \Gamma_N
-:=
+&:=
+\min_{|O_N|\le m\le|B_N|}
+\max\left\{
+\frac{m}{|B_N|},
+\mathcal D_{\bar\cK_N,\bar g_N}(m)
+\right\}
+\nonumber\\
+&=
 \min_{\pi\,\text{细化}\,\ker\bar g_N}
 \max\left\{
 \frac{|\pi|}{|B_N|},
 D_{\bar\cK_N}(\pi)
-\right\}.}
+\right\}.
 \label{eq:Gamma}
-\end{equation}
+\end{align}
+第一行把 $\Gamma_N$ 表示为归一化复杂度--直径前沿到原点的
+$\ell^\infty$ 距离；第二行是不需要先计算整条前沿的直接形式。两式相等：
+任一大小为 $k$ 的分区在第一行取 $m=k$ 给出相同或更小的候选值；反之，
+达到 $\mathcal D(m)$ 的分区实际大小不超过 $m$，在第二行给出相同或更小的
+候选值。
 
-\begin{theorem}[宏观规律的压缩—闭合充要判据]
+为比较含未知宏观核的真实闭合目标，记
+\begin{equation}
+\Lambda_N
+:=
+\min_{\pi\,\text{细化}\,\ker\bar g_N}
+\max\left\{
+\frac{|\pi|}{|B_N|},
+\eta_\pi(\bar\cK_N)
+\right\}.
+\label{eq:Lambda}
+\end{equation}
+有限分区集保证 $\Gamma_N$ 与 $\Lambda_N$ 的外层最小值都实际达到；对每个
+固定候选和每个固定 $\bar K$，最优宏观 kernel 也实际达到。近似最优分区
+本身不必唯一。
+
+\begin{theorem}[宏观规律的压缩--闭合充要判据]
 \label{thm:gamma-characterization}
-下列三项等价：
+对每个 $N$ 都有定量夹逼
+\begin{equation}
+\frac12\Gamma_N\le\Lambda_N\le\Gamma_N.
+\label{eq:gamma-lambda-sandwich}
+\end{equation}
+因此下列三项等价：
 \begin{enumerate}
-  \item 系统族满足 LC；
+  \item 系统族满足 LC，即存在 $\tau_N\to0$ 使
+  $c_N^{\tau_N}=o(|B_N|)$；
   \item 存在任务保真满射 $s_N:B_N\twoheadrightarrow Y_N$，使
   \[
   \frac{|Y_N|}{|B_N|}\to0,
@@ -54,40 +86,53 @@ D_{\bar\cK_N}(\pi)
 \end{enumerate}
 \end{theorem}
 
-条件 2 中的最优宏观核允许随 $N$ 和 $\bar K$ 改变；要求整个动力学族共享同一个宏观核是更强的量词。
-
 \begin{proof}
-先证条件 1 与 2 等价。若条件 1 成立，对相应的 $\tau_N$ 选择达到式~\eqref{eq:relative-complexity}最小值的分区 $\pi_N$，并令 $s_N:B_N\twoheadrightarrow Y_N$ 为其商映射。则 $s_N$ 任务保真，$|Y_N|/|B_N|\to0$，且
-$\eta_{\pi_N}(\bar\cK_N)\le\tau_N\to0$，故条件 2 成立。反之，若条件 2 成立，令
+对任意任务保真分区，令
+$a_\pi:=|\pi|/|B_N|$。由引理~\ref{lem:radius-diameter}，
 \[
-e_N:=\sup_{\bar K\in\bar\cK_N}
-\min_{L\in\Stoch(Y_N,Y_N)}
-d_\infty(\bar KQ_{s_N},Q_{s_N}L).
+\frac12\max\{a_\pi,D_{\bar\cK_N}(\pi)\}
+\le
+\max\{a_\pi,\eta_\pi(\bar\cK_N)\}
+\le
+\max\{a_\pi,D_{\bar\cK_N}(\pi)\}.
 \]
-则 $e_N\to0$，且
-$\widehat c_{\cK_N,u_N}^{\,e_N}(g_N)\le|Y_N|=o(|B_N|)$，所以取 $\tau_N=e_N$ 即得条件 1。
+对全部分区取最小值得式~\eqref{eq:gamma-lambda-sandwich}。
 
-再证条件 2 与 3 等价。若条件 2 成立，令 $\pi_N$ 为 $s_N$ 的纤维分区。由引理~\ref{lem:radius-diameter}，
-\[
-D_{\bar\cK_N}(\pi_N)\le2\eta_{\pi_N}(\bar\cK_N)\to0,
-\]
-且 $|\pi_N|/|B_N|=|Y_N|/|B_N|\to0$，故 $\Gamma_N\to0$。反之，有限分区集保证式~\eqref{eq:Gamma} 的最小值由某个 $\pi_N$ 达到。若 $\Gamma_N\to0$，则 $|\pi_N|/|B_N|\to0$ 且 $D_{\bar\cK_N}(\pi_N)\to0$；再次由引理~\ref{lem:radius-diameter}，
-$\eta_{\pi_N}(\bar\cK_N)\le D_{\bar\cK_N}(\pi_N)\to0$，得到条件 2。
+若 LC 成立，选择达到 $c_N^{\tau_N}$ 的分区，便有
+$\Lambda_N\le\max\{c_N^{\tau_N}/|B_N|,\tau_N\}\to0$。反之，选择达到
+$\Lambda_N$ 的分区 $\pi_N$；若 $\Lambda_N\to0$，则
+$|\pi_N|/|B_N|\to0$ 且
+$\eta_{\pi_N}(\bar\cK_N)\to0$。取
+$\tau_N:=\eta_{\pi_N}(\bar\cK_N)$，则
+$c_N^{\tau_N}\le|\pi_N|=o(|B_N|)$，即得 LC。因此 LC 等价于
+$\Lambda_N\to0$，再由式~\eqref{eq:gamma-lambda-sandwich} 等价于条件 3。
+
+最后，任务保真满射与其纤维分区一一对应，且条件 2 中的第二个量恰为该
+分区的 $\eta$；所以条件 2 也等价于 $\Lambda_N\to0$。
 \end{proof}
 
-定理~\ref{thm:gamma-characterization} 的内容不是“只要寻找就一定能找到规律”。它把存在性化为一个需要对具体系统族验证的分区判据：必须存在同一列任务保真分组，使相对分组数和组内预测分歧同时消失。指标 $\Gamma_N$ 不含未知宏观转移核；纤维半径--直径引理保证它与最优一步闭合误差等价。循环链反例表明，有限 Markov 性本身不保证该条件，见附录~\ref{app:examples-counterexamples}。
+条件 2 中的最优宏观 kernel 允许随 $N$ 和 $\bar K$ 改变；要求整个允许
+动力学族共享同一个 $L$ 是更强的 $\min_L\sup_{\bar K}$ 问题。定理也没有
+断言所有有限系统族都满足条件：它把存在性化为同一列任务保真分区上的联合
+判据。若取达到 $\Gamma_N$ 的分区，则其相对状态数不超过 $\Gamma_N$，且
+由式~\eqref{eq:radius-diameter}，其真实最优闭合缺陷也不超过
+$\Gamma_N$；因此每个有限规模上的证书是可达到的。
 
-\begin{corollary}[有限达到与必要快检]
+\begin{corollary}[任务输出规模的必要条件]
 \label{cor:attainment-output}
-对每个固定 $N$ 和容限 $\tau$，式~\eqref{eq:relative-complexity} 的最小状态数实际达到；对固定 $(\bar K,\pi)$，最优宏观核实际达到。若 LC 成立，则必有
+若系统族满足 LC，则
 \[
 \frac{|O_N|}{|B_N|}\to0.
 \]
-后一条件一般不充分。
+该条件一般不充分。
 \end{corollary}
 
 \begin{proof}
-有限集合只有有限个分区；固定分区的核空间是紧单纯形。任务保真要求 $|\pi|\ge|O_N|$，代入 LC 即得必要性。
+任务保真要求每个候选分区至少有 $|O_N|$ 个块，故
+$|O_N|\le c_N^{\tau_N}=o(|B_N|)$。
 \end{proof}
 
-有限达到只说明最优对象存在，不说明能高效发现，也不说明其描述长度最短。$\Gamma_N$ 的实际检验范围和样本误差见第~\ref{sec:verification}节。
+有限达到只说明满足给定目标的最优对象存在，不说明它能被高效发现，也不
+说明其描述长度、参数量或计算成本最小。$\Gamma_N$ 的实际检验范围和估计
+误差见第~\ref{sec:verification}节；循环链反例说明有限 Markov 性本身不能
+推出 $\Gamma_N\to0$，见附录~\ref{app:examples-counterexamples}。

@@ -12,7 +12,7 @@
 \maketitle
 
 \begin{abstract}
-宏观规律何时存在？本文把这一问题限定为有限 Markov 动力学族中的任务相对、一步问题：是否存在一列任务保真表示，使每个规模上的同一表示既相对于操作性微观基线实现渐近压缩，又具有趋于精确的动力学闭合。我们首先由预先声明的微观探针与允许动力学构造操作性微观状态空间，并只把它的严格任务保真信息商列为候选宏观表示。对每个候选分区，我们定义相对状态数和纤维预测直径；后者直接衡量被归入同一宏观状态的微观状态是否对下一宏观状态给出一致预测。本文证明，这样的低复杂度宏观规律存在，当且仅当不含未知宏观转移核的联合指标 $\Gamma_N$ 趋于零。该压缩—闭合判据要求同一分区的相对状态数与纤维预测直径同时趋零。对每个固定规模和给定误差容限，最少状态分区实际达到；对每个固定动力学与固定分区，最优宏观转移核实际达到。作为非平凡正例，可交换故障--修复系统的 $2^N$ 个微观配置可被精确压缩为、且最少需要 $N+1$ 个故障数状态，并对整个参数族闭合。本文还说明残余对称和 Transformer 预测状态如何构造候选宏观表示；其中 Transformer 结论采用分布加权误差，因而是与一般理论相接的专用例子，而非最坏情形主定理的字面特例。本文不主张所有复杂系统都有低复杂度规律，也不把状态数等同于描述长度、计算成本、因果自治或低维几何。
+本文研究一个有限状态且边界明确的问题：给定任务、微观观测和允许的 Markov 动力学，何时能够把大量微观状态归并为少量宏观状态，同时保留任务并使宏观状态近似自行演化？为避免通过复制无意义标签制造伪压缩，我们先构造对严格冗余不变的操作性微观空间。在该空间上，本文依次建立两个有限规模基准：任务保真且精确闭合的唯一最粗商，以及允许误差时实际达到的复杂度--闭合前沿。对增长系统族，我们再定义只依赖任务分区及纤维预测分歧的指标 $\Gamma_N$，并证明 $\Gamma_N\to0$ 当且仅当存在同一列任务保真表示，其相对状态数与最优最坏行闭合误差同时趋零。因而，该指标给出了本文设定下低复杂度宏观规律存在的压缩--闭合充要判据，而不是规律普遍存在的假设。可交换故障--修复系统给出非平凡正例：$2^N$ 个配置的唯一最粗精确任务商恰有 $N+1$ 个故障数状态；带单点任务的循环链则满足 $\Gamma_N=1$，说明有限性本身不保证宏观简化。正文最后说明残余对称和 Transformer 预测状态如何提供候选表示；Transformer 的完整分布加权构造保留在附录，并明确列出其成为最坏情形 $\Gamma_N$ 证书所需的额外对齐条件。标准 Borel 空间、随机粗粒化、连续时间、相结构和范畴表述也完整保留在附录，但不被写成有限主定理已经证明的推广。
 
 \medskip
 \noindent\textbf{关键词：}Markov 粗粒化；状态压缩；宏观闭合；任务保真；压缩—闭合判据；lumpability；预测状态
@@ -22,7 +22,7 @@
 \begin{minipage}{0.94\textwidth}
 \small
 \textbf{English abstract.}
-We ask when a family of finite stochastic systems admits a task-relative, low-complexity macroscopic law. We formalize this as the existence of a sequence of task-preserving quotients whose relative state counts and optimized worst-case one-step closure defects both tend to zero. An explicit index $\Gamma_N$, requiring no prespecified macroscopic transition kernel, vanishes if and only if such a sequence exists. A permutation-invariant fault--repair family gives a nontrivial exact example with $2^N$ microscopic configurations and a provably minimal $(N+1)$-state macroscopic chain. The criterion is task-relative and one-step; it does not assert universal simplicity, efficient discovery, causal autonomy, or long-horizon accuracy.
+We ask when a family of finite stochastic systems admits a task-relative, low-complexity macroscopic law. After quotienting exact operational redundancies, we identify the unique coarsest task-preserving exact quotient and the attained complexity--closure frontier for each finite system. We then define an explicit index $\Gamma_N$, requiring no prespecified macroscopic transition kernel, and prove that $\Gamma_N\to0$ if and only if one sequence of task-preserving quotients has both vanishing relative state count and vanishing optimized worst-row one-step closure defect. A permutation-invariant fault--repair family gives a nontrivial exact example with $2^N$ microscopic configurations and a minimal $(N+1)$-state quotient, whereas a marked cycle has $\Gamma_N=1$. Transformer predictive states and several mathematical extensions are retained as scoped appendices. The criterion is task-relative and one-step; it does not assert universal simplicity, efficient discovery, causal autonomy, or long-horizon accuracy.
 \end{minipage}
 \end{center}
 
@@ -45,11 +45,12 @@ We ask when a family of finite stochastic systems admits a task-relative, low-co
 \input{appendices/appendix_B_operational_baseline}
 \input{appendices/appendix_C_exact_theory}
 \input{appendices/appendix_D_approximate_theory}
-\input{appendices/appendix_E_composition_time}
+\input{appendices/appendix_E_examples_counterexamples}
 \input{appendices/appendix_F_structural_certificates}
-\input{appendices/appendix_G_examples_counterexamples}
+\input{appendices/appendix_G_composition_time}
 \input{appendices/appendix_H_extensions}
 \input{appendices/appendix_I_categories}
+\input{appendices/appendix_J_transformer_predictive_states}
 
 \clearpage
 \begingroup

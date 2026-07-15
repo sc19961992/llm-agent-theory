@@ -1,68 +1,135 @@
-\section{标准 Borel、随机粗粒化与连续时间}
+\section{主判据之外的三个扩展接口}
 \label{app:extensions}
 
-本附录记录有限确定性理论的三个自然推广。它们说明交换式的适用方向，不把有限分区紧致性或最优化达到无条件搬到更一般空间。标准 Borel kernel 与正则条件概率的背景可参见\citet{Kallenberg2021}。
+本附录不陈述 $\Gamma_N$ 充要判据在更一般设定中的完整推广。它只证明：在
+表示已经给定时，标准 Borel 因子、随机通道和有限状态连续时间模型中哪些
+交换式仍然良定义，以及还缺少哪些条件才能恢复正文的存在性、最优化达到与
+可检验性。正文主定理始终限于有限状态、离散时间和确定性任务保真商。标准
+Borel kernel 与正则条件概率的背景可参见\citet{Kallenberg2021}。
 
-\subsection{标准 Borel 空间中的确定性因子}
+\subsection{给定标准 Borel 因子的精确闭合}
 
-设 $X,Y$ 为标准 Borel 空间，$s:X\to Y$ 为可测满射，$K:X\rightsquigarrow X$ 为 Markov kernel。若对每个 Borel 集 $A\subseteq Y$，数值
+\begin{proposition}[标准 Borel 空间中的固定因子判据]
+\label{prop:borel-fixed-factor}
+设 $X,Y$ 为标准 Borel 空间，$s:X\to Y$ 为可测满射，
+$K:X\rightsquigarrow X$ 为 Markov kernel。对每个 Borel 集
+$A\subseteq Y$，假设
 \[
 K(x,s^{-1}(A))
 \]
-只依赖 $s(x)$，并且由此定义的函数
+在 $s$ 的每条纤维上常值，并且由此诱导的函数
 \[
-y\longmapsto K(x,s^{-1}(A)),\qquad s(x)=y,
+y\longmapsto K(x,s^{-1}(A)),
+\qquad s(x)=y,
 \]
-对每个 $A$ 都可测，则
+是可测的。则
 \[
-L(y,A):=K(x,s^{-1}(A)),\qquad s(x)=y,
+L(y,A):=K(x,s^{-1}(A)),
+\qquad s(x)=y,
 \]
-良定义且给出 Markov kernel $L:Y\rightsquigarrow Y$，满足
-\[
+良定义且给出唯一 Markov kernel $L:Y\rightsquigarrow Y$，满足
+\begin{equation}
 KQ_s=Q_sL.
-\]
-反向蕴含显然成立。这是有限纤维判据的逐集合版本。
+\label{eq:borel-fixed-factor}
+\end{equation}
+反之，式~\eqref{eq:borel-fixed-factor}蕴含上述纤维常值性与诱导函数的
+可测性。
+\end{proposition}
 
-可测性条件不可省略。任意可测等价关系的抽象商未必仍是标准 Borel 空间，逐纤维定义的值也未必自动组成 kernel。更进一步，有限理论中“枚举分区”和“紧单纯形上最优值达到”的论证都不再自动成立；需要限制候选因子族、选定拓扑并证明紧致性或下半连续性。
+\begin{proof}
+纤维常值性保证 $L$ 不依赖代表元。固定 $y$ 后，
+$A\mapsto L(y,A)$ 从 $K(x,\cdot)$ 经逆像 $s^{-1}$ 得到，因而是概率测度；
+对每个 $A$ 的可测性由假设给出，所以 $L$ 是 Markov kernel。满射性给出
+唯一性，交换式按每个 Borel 集逐点验证。反向结论直接读取交换式两侧在
+$x$ 处对事件 $A$ 的取值即可。
+\end{proof}
 
-在观测语言中，确定性因子对应子 $\sigma$-代数 $s^{-1}(\mathcal B(Y))$。精确闭合要求 Markov 算子把该子 $\sigma$-代数上的有界可测函数保持在其中。并非每个子 $\sigma$-代数都能由一个良好的标准 Borel 商无损表示，因此“子 $\sigma$-代数版本”和“商空间版本”的等价也需要可数生成等正则条件。
+可测性条件不可省略。任意可测等价关系的抽象商未必仍是标准 Borel 空间，
+逐纤维定义的值也未必自动组成 kernel。在观测语言中，给定因子对应子
+$\sigma$-代数 $s^{-1}(\mathcal B(Y))$；精确闭合要求 Markov 算子保持其中的
+有界可测观测量。并非每个子 $\sigma$-代数都能由良好的标准 Borel 商无损
+表示，商空间表述与子 $\sigma$-代数表述的等价需要可数生成等额外正则性。
 
-\subsection{随机粗粒化 kernel}
+命题~\ref{prop:borel-fixed-factor}只是\emph{给定 $s$ 后}的精确因子判据。
+一般 Borel 情形尚未指定与有限块数对应的复杂度泛函，也没有给出紧致候选
+因子类、目标函数下半连续性、最优值达到或可终止检验程序，因此它不是正文
+$\Gamma_N$ 定理的 Borel 版本。
 
-令 $Q:X\rightsquigarrow Y$ 本身为 Markov kernel。随机粗粒化的精确交换式仍为
+\subsection{随机粗粒化的一步交织接口}
+
+令 $Q:X\rightsquigarrow Y$ 本身为 Markov kernel。随机粗粒化的精确交换式为
 \begin{equation}
 KQ=QL.
 \label{eq:random-intertwining}
 \end{equation}
-它表示：先微观演化再随机编码，与先随机编码再按 $L$ 演化具有相同的一步边缘分布。Rogers--Pitman 型 Markov functions 提供了与 link kernel 相容的投影框架\citep{RogersPitman1981}；在抽象层面，随机映射可由 Markov category 统一组织\citep{Fritz2020}。
+它只表示：先微观演化再随机编码，与先随机编码再按 $L$ 演化，具有相同的
+一步输出边缘。Rogers--Pitman 型 Markov functions 提供了与 link kernel
+相容的投影框架\citep{RogersPitman1981}；随机映射及其复合也可由 Markov
+category 组织\citep{Fritz2020}。
 
-随机 $Q$ 与确定性商有三点本质差别：
+随机 $Q$ 与正文的确定性商有四点本质差别：
 \begin{enumerate}
-  \item 它通常不对应 $X$ 的一个分区，因而不能直接用块数定义复杂度；
-  \item 即使式~\eqref{eq:random-intertwining} 可解，$L$ 也可能不唯一。例如 $Q(x,\cdot)=\nu$ 与 $x$ 无关时，只要 $\nu L=\nu$，多种 $L$ 都满足交换式；
-  \item 一步边缘交换不自动指定微观路径与宏观路径的联合耦合，也不自动保证所有初始宏观分布都可由微观初态实现。
+  \item 它通常不对应 $X$ 的分区，不能直接用块数定义复杂度；
+  \item 若没有任务保真或信息约束，常值噪声通道即可产生任务无关的平凡交织：
+  当 $Q(x,\cdot)=\nu$ 时，只要 $\nu L=\nu$，式~\eqref{eq:random-intertwining}
+  就成立；
+  \item 即使交换式可解，$L$ 也可能不唯一，上述常值通道已经给出例子；
+  \item 一步边缘交换不指定微观路径与宏观路径的联合耦合，也不保证所有宏观
+  初始分布都能由微观初态实现。
 \end{enumerate}
 
-近似情形可继续使用
-$d_\infty(KQ,QL)$，固定 $Q$ 时最优 $L$ 在有限 $Y$ 上仍由紧致性达到；但若同时优化 $Q$，需要另选随机表示的复杂度或信息约束。本文没有把这一选择塞入 $\Gamma_N$。
+近似情形仍可使用 $d_\infty(KQ,QL)$。固定 $Q$ 且 $Y$ 有限时，最优 $L$
+仍由有限概率单纯形的紧致性达到；但若同时优化 $Q$，一个完整判据还必须指定
+任务通道保真条件、随机表示的复杂度或信息约束、排除平凡通道的非退化条件、
+候选 $Q$ 的紧致性，以及需要路径结论时的 link consistency 或联合耦合。
+本文没有为这些选择定义随机通道版本的 $\Gamma_N$。
 
-\subsection{有限状态连续时间}
+\subsection{有限状态连续时间的固定因子关系}
 
-令 $G$ 与 $\bar G$ 分别是有限状态空间 $X,Y$ 上的保守生成元，$Q_s$ 为确定性粗粒化。若
+令 $G$ 与 $\bar G$ 分别是有限状态空间 $X,Y$ 上的保守生成元，$Q$ 为任意
+类型匹配的 Markov 通道。对行和为零的矩阵 $A$，记
+\[
+\|A\|_{\infty,\TV}
+:=\max_x\frac12\sum_y|A(x,y)|.
+\]
+
+\begin{proposition}[生成元交织、半群交织与有限时间误差]
+\label{prop:continuous-time-fixed-factor}
+若
 \begin{equation}
-GQ_s=Q_s\bar G,
+GQ=Q\bar G,
 \label{eq:generator-intertwining}
 \end{equation}
-则对所有 $t\ge0$，幂级数逐项给出
+则对所有 $t\ge0$，
 \begin{equation}
-e^{tG}Q_s=Q_se^{t\bar G}.
+e^{tG}Q=Qe^{t\bar G}.
 \label{eq:semigroup-intertwining}
 \end{equation}
-反之，若式~\eqref{eq:semigroup-intertwining} 对 $t$ 的某个零邻域成立，对 $t=0$ 求导即得式~\eqref{eq:generator-intertwining}。因此有限连续时间精确闭合可在生成元或半群层面等价检查。
-
-近似生成元关系不能仅凭形式指数就得到对所有时间一致的小误差；有限维 Duhamel 公式给出
+反之，若式~\eqref{eq:semigroup-intertwining}在 $t=0$ 的某个右邻域成立，则
+式~\eqref{eq:generator-intertwining}成立。更一般地，若
 \[
-e^{tG}Q_s-Q_se^{t\bar G}
-=\int_0^t e^{(t-r)G}(GQ_s-Q_s\bar G)e^{r\bar G}\dd r,
+\|GQ-Q\bar G\|_{\infty,\TV}\le\eps,
 \]
-具体范数界取决于所用算子范数和半群收缩。一般状态空间还涉及生成元定义域、强连续性、闭包和 martingale problem，可参见\citet{EthierKurtz1986}。这些解析条件独立于本文的有限一步 $\Gamma_N$ 判据。
+则对每个 $t\ge0$，
+\begin{equation}
+\|e^{tG}Q-Qe^{t\bar G}\|_{\infty,\TV}
+\le t\eps.
+\label{eq:continuous-time-linear-bound}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+精确方向可由矩阵幂级数逐项推出；反向在 $t=0$ 取右导数即可。近似方向使用
+有限维 Duhamel 公式
+\[
+e^{tG}Q-Qe^{t\bar G}
+=\int_0^t e^{(t-r)G}(GQ-Q\bar G)e^{r\bar G}\dd r.
+\]
+左右两个 Markov 半群分别对最大行 TV 范数和行和为零的有符号测度非扩张，
+故被积式范数至多为 $\eps$；积分得到式~\eqref{eq:continuous-time-linear-bound}。
+\end{proof}
+
+这个命题是固定通道、固定有限时间的关系。它没有定义连续时间系统族上的压缩
+复杂度，也没有给出随规模增长的统一时间界。一般状态空间还涉及生成元定义域、
+强连续性、闭包和 martingale problem，可参见\citet{EthierKurtz1986}。这些
+解析条件独立于本文的有限离散一步 $\Gamma_N$ 判据。

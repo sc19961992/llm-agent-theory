@@ -1,9 +1,10 @@
-\section{误差复合、时间传播与时间尺度边界}
+\section{闭合证书的复合、平稳投影与时间尺度边界}
 \label{app:composition-time}
 
 本附录区分两种不同的累积：多个表示层依次粗粒化是\emph{空间复合}，同一
 近似因子反复演化是\emph{时间迭代}。二者使用同一全变差工具，但量词和可
-解释的结论不同。
+解释的结论不同。这里的时间结论始终从一个已经给定的近似闭合证书出发；它们
+不把正文的一步 $\Gamma_N$ 判据自动升级为任意增长时间窗上的结论。
 
 \subsection{两层与多层空间复合}
 
@@ -38,8 +39,26 @@ $\alpha(R)\eps+\delta\le\eps+\delta$。
 \end{align*}
 \end{proof}
 
-因此，一个同时记录缺陷上界与通道收缩率的证书
-$(Q,\eps_Q,\rho_Q)$ 可按
+称
+\[
+ (Q;\eps_Q,\rho_Q):(X,K)\longrightarrow(Y,L)
+\]
+为一个\emph{带收缩标签的近似因子证书}，若
+\begin{equation}
+ \partial_{K,L}(Q)\le\eps_Q,
+ \qquad
+ \alpha(Q)\le\rho_Q,
+ \qquad
+ \eps_Q\ge0,
+ \quad \rho_Q\in[0,1].
+ \label{eq:app-contraction-labelled-certificate}
+\end{equation}
+这里 $\rho_Q$ 控制的是表示通道 $Q$ 的 Dobrushin 系数，不是宏观动力学
+$L$ 的混合率。若 $Q$ 是非恒定确定性通道，通常只能取 $\rho_Q=1$。
+
+若 $(Q;\eps_Q,\rho_Q)$ 与 $(R;\eps_R,\rho_R)$ 类型相接，则
+定理~\ref{thm:app-factor-composition}和 Dobrushin 系数的次乘性说明，复合
+$QR$ 可按
 \begin{equation}
  (\eps_Q,\rho_Q)\star(\eps_R,\rho_R)
  :=(\rho_R\eps_Q+\eps_R,\rho_Q\rho_R)
@@ -50,8 +69,8 @@ $(Q,\eps_Q,\rho_Q)$ 可按
  \rho_S(\rho_R\eps_Q+\eps_R)+\eps_S
  =(\rho_S\rho_R)\eps_Q+\rho_S\eps_R+\eps_S.
 \]
-只记录误差而丢弃 $\rho$ 时仍有加法上界，但固定某个正误差阈值的态射集合
-一般不对复合封闭。
+只记录误差而丢弃 $\rho$ 时仍有加法上界，但固定某个正误差阈值的未标记
+通道集合一般不对复合封闭。
 
 \begin{corollary}[多层空间误差]
 \label{cor:app-multilayer-composition}
@@ -130,6 +149,48 @@ $\alpha(L^j)\le1$ 则得到线性界。最后应用
 式~\eqref{eq:app-multistep-contracting} 只控制时间 $n$ 的\emph{终端宏观
 分布}。它不说明整段路径的早期偏差被后来混合所删除。
 
+\subsection{近似平稳状态的投影}
+
+\begin{proposition}[近似平稳状态投影]
+\label{prop:stationary-projection}
+设 $Q:X\rightsquigarrow Y$、$K:X\rightsquigarrow X$、
+$L:Y\rightsquigarrow Y$，且
+\[
+d_\infty(KQ,QL)\le\eps,
+\qquad
+\|\mu K-\mu\|_{\TV}\le\beta.
+\]
+则 $\nu=\mu Q$ 满足
+\[
+\|\nu L-\nu\|_{\TV}\le\eps+\beta.
+\]
+若 $\alpha(L)\le\rho<1$，则 $L$ 有唯一平稳分布 $\pi_L$，且
+\[
+\|\mu Q-\pi_L\|_{\TV}
+\le\frac{\eps+\beta}{1-\rho}.
+\]
+\end{proposition}
+
+\begin{proof}
+由混合凸性和推前非扩张，
+\[
+\|\mu QL-\mu Q\|_{\TV}
+\le\|\mu QL-\mu KQ\|_{\TV}
++\|\mu KQ-\mu Q\|_{\TV}
+\le\eps+\beta.
+\]
+若 $\alpha(L)\le\rho<1$，则 $\lambda\mapsto\lambda L$ 在有限概率单纯形上
+严格压缩，因而存在唯一不动点。再由
+\[
+\|\nu-\pi_L\|_{\TV}
+\le\|\nu-\nu L\|_{\TV}
++\|\nu L-\pi_LL\|_{\TV}
+\le\eps+\beta+\rho\|\nu-\pi_L\|_{\TV}
+\]
+移项即得。这里的长期稳定性来自近似平稳性与宏观收缩，不来自相结构或
+“对称破缺”这一名称本身。
+\end{proof}
+
 \subsection{确定性粗粒化的路径误差}
 
 \begin{theorem}[宏观路径耦合]
@@ -185,12 +246,12 @@ $L$-链保持不变。随机粗粒化的路径结论需要额外的联合耦合�
 \begin{enumerate}
  \item 对每个固定 $T$，$\eps_N\to0$ 足以使终端误差和确定性粗粒化的路径
   误差趋零。
- \item 若 $T_N\to\infty$ 且没有统一收缩信息，一个直接充分条件是
+ \item 对确定性粗粒化的完整路径，一个不依赖额外结构的直接充分条件是
  \begin{equation}
    T_N\eps_N\longrightarrow0.
    \label{eq:app-growing-horizon-linear}
  \end{equation}
- 对终端边缘，更精确的充分条件是
+ 对终端边缘，则有更精确的充分条件
  \begin{equation}
    \eps_N\sum_{j=0}^{T_N-1}\alpha(L_N^j)\longrightarrow0.
    \label{eq:app-growing-horizon-alpha}
@@ -214,7 +275,9 @@ $\eps$ 跳到吸收态 $1$、从 $1$ 保持不动。此时
 因子证书}的传播边界；由于这里 $Q=\Id$，若重新把 $L$ 与表示一同优化当然可
 取 $L=K_\eps$ 并得到零缺陷。
 
-因此，正文的系统族主定理是一步陈述。把它提升到固定有限时间是直接推论；
-把它提升到随规模增长的时间尺度，必须另加
-式~\eqref{eq:app-growing-horizon-alpha}、统一混合、或其他明确的稳定性条件，
+因此，正文的系统族主定理是一步陈述。把它提升到固定有限时间是直接推论。
+在增长时间窗上，终端边缘需要式~\eqref{eq:app-growing-horizon-alpha}、统一
+混合或其他明确的稳定性条件；完整路径一般需要
+式~\eqref{eq:app-growing-horizon-linear}或更强的路径级耦合条件。宏观收缩
+只能改善终端边缘界，不能抹去路径中已经发生并被记录的偏差。这两类强化都
 不能只从 $\Gamma_N\to0$ 推出。

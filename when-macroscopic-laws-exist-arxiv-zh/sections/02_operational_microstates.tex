@@ -1,6 +1,10 @@
 \section{操作性微观状态与任务相对宏观表示}
 \label{sec:operational}
 
+对有限集 $S,T$，以 $\Stoch(S,T)$ 记从 $S$ 到 $T$ 的行随机 Markov
+kernel；通道按从左到右的次序复合。映射 $q:S\to T$ 所诱导的确定性 kernel
+记为 $Q_q$。全变差、复合和行向量约定集中列于附录~\ref{app:markov-tv}。
+
 \subsection{有限操作性呈现}
 
 设 $X$ 为非空有限集合，$\cK\subseteq\Stoch(X,X)$ 为非空 Markov kernel 族。给定满射
@@ -62,3 +66,5 @@ s^{*}\mathbb R^Y
 \end{proposition}
 
 完整构造见附录~\ref{app:operational-baseline}。该命题排除的是\emph{精确}无意义填充；“几乎无意义”的额外变量属于近似建模问题，不能由等式定义的 $B$ 自动消除。
+
+从此，复杂度的分母固定为 $|B|$。下一步要回答的是：继续遗忘 $B$ 中的差异以后，宏观状态能否在不回看微观状态的情况下预测自身的下一步；同时还要确认，这一规范化没有暗中改变闭合误差。

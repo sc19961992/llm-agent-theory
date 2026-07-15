@@ -149,53 +149,57 @@ $p$ 满射，故引理~\ref{lem:app-surjective-pullback} 表明前复合 $Q_p$
 
 \subsection{精确复制填充不变性}
 
-写 $[M]:=\{1,\ldots,M\}$。设原动力学族以同一索引集表示为
-$\cK=\{K_\theta:\theta\in\Theta\}$。考虑
+设原动力学族以同一索引集表示为
+$\cK=\{K_\theta:\theta\in\Theta\}$。给每个 $x\in X$ 任取一个非空有限
+复制标签集 $A_x$，并考虑不交并
 \[
- X^{(M)}:=X\times[M],
+ X^{(A)}:=\{(x,a):x\in X,\ a\in A_x\},
  \qquad
- u^{(M)}(x,i):=u(x),
+ u^{(A)}(x,a):=u(x),
  \qquad
- g^{(M)}(x,i):=g(x),
+ g^{(A)}(x,a):=g(x),
 \]
-以及核族 $\cK^{(M)}=\{K_\theta^{(M)}:\theta\in\Theta\}$，并假设
+以及核族 $\cK^{(A)}=\{K_\theta^{(A)}:\theta\in\Theta\}$。假设复制标签
+既不改变下一原状态的分布，也不携带可影响该分布的隐藏记忆，即
 \begin{equation}
- \sum_{j=1}^M
- K_\theta^{(M)}\bigl((x,i),(x',j)\bigr)
+ \sum_{a'\in A_{x'}}
+ K_\theta^{(A)}\bigl((x,a),(x',a')\bigr)
  =K_\theta(x,x')
  \quad
- (\theta,x,x',i).
+ (\theta,x,x',a\in A_x).
  \label{eq:app-exact-padding}
 \end{equation}
+对 $C\subseteq X$，简记
+$C^{(A)}:=\{(x,a):x\in C,\ a\in A_x\}$。
 
 \begin{theorem}[无意义复制填充不变性]
 \label{thm:app-padding-invariance}
 在条件~\eqref{eq:app-exact-padding} 下，填充系统的操作性微观空间
-$B^{(M)}$ 与 $B$ 典范同构；该同构下，对应索引 $\theta$ 的诱导核相同。
+$B^{(A)}$ 与 $B$ 典范同构；该同构下，对应索引 $\theta$ 的诱导核相同。
 因而任一任务保真商 $s:B\twoheadrightarrow Y$ 的状态比 $|Y|/|B|$、精确
-闭合性质及正文定义的最坏行闭合缺陷均不随 $M$ 改变。
+闭合性质及正文定义的最坏行闭合缺陷均不受各复制数 $|A_x|$ 影响。
 \end{theorem}
 
 \begin{proof}
 对稳定分区细化做归纳。初始分区的块具有
-$C\times[M]$ 的形式，其中 $C$ 是 $u$ 的一个纤维。若 $\Pi_n^{(M)}$
+$C^{(A)}$ 的形式，其中 $C$ 是 $u$ 的一个纤维。若 $\Pi_n^{(A)}$
 由原分区 $\Pi_n$ 的块如此提升，则对任意 $C\in\Pi_n$，
 \begin{align*}
- K_\theta^{(M)}\bigl((x,i),C\times[M]\bigr)
- &=\sum_{x'\in C}\sum_{j=1}^M
-   K_\theta^{(M)}\bigl((x,i),(x',j)\bigr)\\
+ K_\theta^{(A)}\bigl((x,a),C^{(A)}\bigr)
+ &=\sum_{x'\in C}\sum_{a'\in A_{x'}}
+   K_\theta^{(A)}\bigl((x,a),(x',a')\bigr)\\
  &=\sum_{x'\in C}K_\theta(x,x')
  =K_\theta(x,C).
 \end{align*}
-该值与复制标签 $i$ 无关，而且两个原状态在下一轮是否被分开，恰由原系统
+该值与复制标签 $a$ 无关，而且两个原状态在下一轮是否被分开，恰由原系统
 的对应块转移概率决定。因此
 \[
-  \Pi_n^{(M)}=\{C\times[M]:C\in\Pi_n\}
+  \Pi_n^{(A)}=\{C^{(A)}:C\in\Pi_n\}
 \]
-对每个 $n$ 成立。稳定后，$C\times[M]\mapsto C$ 给出
-$B^{(M)}\cong B$。
+对每个 $n$ 成立。稳定后，$C^{(A)}\mapsto C$ 给出
+$B^{(A)}\cong B$。
 
-对两个稳定块 $C,D$，填充后诱导核从 $C\times[M]$ 到 $D\times[M]$
+对两个稳定块 $C,D$，填充后诱导核从 $C^{(A)}$ 到 $D^{(A)}$
 的概率由上式等于原诱导核从 $C$ 到 $D$ 的概率，所以对应诱导核相同。
 任意后续商 $s$ 的状态数不变；其交换式两边在此同构下逐行相同，故精确性质
 与 $d_\infty$ 缺陷也不变。

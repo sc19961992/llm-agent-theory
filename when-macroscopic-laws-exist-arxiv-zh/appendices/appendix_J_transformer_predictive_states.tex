@@ -1,6 +1,7 @@
-\section{Transformer 自回归预测状态：分布加权构造定理}
+\providecommand{\TransformerEquationPrefix}{\thesection}
+
+\section{Transformer 预测状态：分布加权构造与主判据对齐}
 \label{app:transformer-predictive-states}
-\label{supp:transformer}
 
 本节把正文中关于 Transformer 的构造例写成一个自包含的有限状态定理。它回答的范围很窄：在一个已经固定边界的自回归生成系统中，如果语言本身具有少量、可递推的预测状态，模型又学到了相应的下一 token 条件分布，而且这些预测状态能从模型完整状态中读出，那么状态数比例给出相对于声明基线的压缩项，递推性与学习误差界共同给出分布加权闭合。本节不证明三个前提对任意语言或任意 Transformer 自动成立。
 
@@ -98,7 +99,7 @@ $F_N:S_N\times\mathcal V_N\to S_N$，使所有相关扩展满足
 \[
  L_N(s,s')
  :=\sum_{\substack{a\in\mathcal V_N:\,F_N(s,a)=s'}}R_N(s,a).
- \tag{S.1}\label{eq:transformer-macro-kernel}
+ \tag{\TransformerEquationPrefix.1}\label{eq:transformer-macro-kernel}
 \]
 
 \begin{theorem}[自回归预测状态的分布加权闭合]
@@ -106,21 +107,21 @@ $F_N:S_N\times\mathcal V_N\to S_N$，使所有相关扩展满足
 在假设 \textup{T1--T3} 下，令
 \[
  \varepsilon_N:=\eta_N+\sqrt{\frac{\delta_N}{2}}.
- \tag{S.2}\label{eq:transformer-epsilon}
+ \tag{\TransformerEquationPrefix.2}\label{eq:transformer-epsilon}
 \]
 则
 \[
  d_{\nu_N}\!\left(
  G_N^{\mathrm{next}},Q_{q_N}R_N
  \right)\le\varepsilon_N,
- \tag{S.3}\label{eq:transformer-token-bound}
+ \tag{\TransformerEquationPrefix.3}\label{eq:transformer-token-bound}
 \]
 以及
 \[
  d_{\nu_N}\!\left(
  K_NQ_{q_N},Q_{q_N}L_N
  \right)\le\varepsilon_N.
- \tag{S.4}\label{eq:transformer-closure-bound}
+ \tag{\TransformerEquationPrefix.4}\label{eq:transformer-closure-bound}
 \]
 同时，候选宏观过程使用 $|S_N|$ 个状态，并满足
 $|S_N|/|B_N|\le\lambda_N$。因此，若
@@ -143,7 +144,7 @@ $\eta_N,\delta_N,\lambda_N\to0$，则下一 token 读出误差、一步闭合误
  \mathbb E_{h\sim\mu_N}
  \left\|P_N(\cdot\mid h)-\widehat P_N(\cdot\mid h)\right\|_{\TV}
  \le\sqrt{\frac{\delta_N}{2}}.
- \tag{S.5}\label{eq:pinsker-average}
+ \tag{\TransformerEquationPrefix.5}\label{eq:pinsker-average}
 \]
 由 TV 三角不等式、\eqref{eq:T1-readout} 与
 \eqref{eq:pinsker-average}，
@@ -160,7 +161,7 @@ $\eta_N,\delta_N,\lambda_N\to0$，则下一 token 读出误差、一步闭合误
  &\quad\le\sqrt{\frac{\delta_N}{2}}+\eta_N
  =\varepsilon_N.
  \end{aligned}
- \tag{S.6}\label{eq:token-triangle}
+ \tag{\TransformerEquationPrefix.6}\label{eq:token-triangle}
 \]
 由 $\nu_N=(x_N)_*\mu_N$ 以及
 $q_N(x_N(h))=s_N(h)$，式 \eqref{eq:token-triangle} 的左侧正是
@@ -202,7 +203,7 @@ $R_N(s,\cdot)$ 经同一映射推前所得的分布。TV 距离在 Markov kernel
  :=\mathbb E_{\substack{h\sim\mu_N\\
                          a\sim\widehat P_N(\cdot\mid h)}}
  \one\!\left\{s_N(ha)\ne F_N(s_N(h),a)\right\}.
- \tag{S.7}\label{eq:recursion-defect}
+ \tag{\TransformerEquationPrefix.7}\label{eq:recursion-defect}
 \]
 
 \begin{proposition}[近似递推]
@@ -213,7 +214,7 @@ $R_N(s,\cdot)$ 经同一映射推前所得的分布。TV 距离在 Markov kernel
 \[
  d_{\nu_N}(K_NQ_{q_N},Q_{q_N}L_N)
  \le\varepsilon_N+\zeta_N.
- \tag{S.8}\label{eq:approx-recursion-bound}
+ \tag{\TransformerEquationPrefix.8}\label{eq:approx-recursion-bound}
 \]
 \end{proposition}
 
@@ -252,13 +253,13 @@ $a\mapsto F_N(s,a)$ 推前，推前后的 TV 距离不超过推前前的距离�
 若对 $t=0,\ldots,T-1$ 有
 \[
  d_{\xi_t}(KQ_q,Q_qL)\le e_t,
- \tag{S.9}\label{eq:rollout-one-step}
+ \tag{\TransformerEquationPrefix.9}\label{eq:rollout-one-step}
 \]
 则
 \[
  \|p_T-\widehat p_T\|_{\TV}
  \le\sum_{t=0}^{T-1}e_t.
- \tag{S.10}\label{eq:fixed-horizon-bound}
+ \tag{\TransformerEquationPrefix.10}\label{eq:fixed-horizon-bound}
 \]
 若 $L$ 的 Dobrushin 系数
 \[
@@ -268,7 +269,7 @@ $a\mapsto F_N(s,a)$ 推前，推前后的 TV 距离不超过推前前的距离�
 \[
  \|p_T-\widehat p_T\|_{\TV}
  \le\sum_{t=0}^{T-1}\rho^{T-1-t}e_t.
- \tag{S.11}\label{eq:fixed-horizon-contraction}
+ \tag{\TransformerEquationPrefix.11}\label{eq:fixed-horizon-contraction}
 \]
 特别地，若 $e_t\le e$，右侧不超过
 $e(1-\rho^T)/(1-\rho)$。
@@ -340,12 +341,12 @@ $L_{N,\bar K}$ 使
  \left\|\bar KQ_{\bar q_N}(b,\cdot)
        -Q_{\bar q_N}L_{N,\bar K}(b,\cdot)\right\|_{\TV}
  \le r_N,
- \tag{S.12}\label{eq:gamma-aligned-row-bound}
+ \tag{\TransformerEquationPrefix.12}\label{eq:gamma-aligned-row-bound}
 \]
 则（沿用正文以纤维直径定义的 $\Gamma_N$）
 \[
  \Gamma_N\le\max\{c_N,2r_N\}.
- \tag{S.13}\label{eq:gamma-candidate-upper}
+ \tag{\TransformerEquationPrefix.13}\label{eq:gamma-candidate-upper}
 \]
 因而 $c_N,r_N\to0$ 蕴含 $\Gamma_N\to0$。
 \end{proposition}
@@ -363,4 +364,4 @@ $e_N/\omega_N$。此时命题中可取 $r_N=e_N/\omega_N$。这一换算往往�
 
 \subsection{结论边界}
 
-定理证明的是生成行为存在一个低状态数、近似可递推的任务商。它没有证明：语言必然满足 T1；有限样本成功必然给出 T2；指定神经层必然满足强化的 T3；hidden states 位于低维流形；候选状态能够被高效发现、解释或实现；以及固定时长结论在无额外条件时延伸到增长时长。把这些命题与本节结论分开，是将 Transformer 构造例与正文一般判据正确对齐所必需的。
+定理证明的是生成行为存在一个低状态数、近似可递推的预测表示。它没有证明：语言必然满足 T1；有限样本成功必然给出 T2；指定神经层必然满足强化的 T3；hidden states 位于低维流形；候选状态能够被高效发现、解释或实现；以及固定时长结论在无额外条件时延伸到增长时长。把这些命题与本节结论分开，是将 Transformer 构造例与正文一般判据正确对齐所必需的。

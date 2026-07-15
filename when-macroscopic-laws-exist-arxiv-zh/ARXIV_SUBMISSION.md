@@ -2,7 +2,7 @@
 
 ## 当前状态
 
-本目录已经按多文件 XeLaTeX 项目组织，入口为根目录的 `main.tex`。中文版正文、附录、补充材料和 BibTeX 数据均随包提供。
+本目录已经按多文件 XeLaTeX 项目组织，入口为根目录的 `main.tex`。中文版正文、附录和 BibTeX 数据均随包提供。Transformer 完整证明已经作为附录 J 输入主论文；`supplementary/transformer_supplement.tex` 只是同一附录的独立编译包装，不是另一份内容。
 
 ## 语言政策
 
@@ -23,6 +23,8 @@ arXiv 的“Non-English submissions”页面目前说明：非英文投稿可以
 5. 删除编译中间文件和未引用附件；不要上传本地生成的 PDF 作为 TeX 源稿的一部分。
 6. 投稿元数据使用英文标题 `When Do Macroscopic Laws Exist? A Compression–Closure Criterion for Finite Stochastic Systems`、英文摘要和拉丁字母作者名，并在 Comments 中注明包含中文版本。
 7. 不使用 `\today`；版本日期由投稿记录给出。
+
+正式上传主论文时，不要再把 `supplementary/transformer_supplement.tex` 作为一份重复补充材料加入稿件；主入口已经收录其唯一内容源。只有在单独分发 Transformer 附录时才使用该包装文件。
 
 ## 编译器选择
 

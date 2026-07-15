@@ -1,23 +1,33 @@
-\section{范畴化组织与误差证书复合}
+\section{交换式的范畴与算子组织：概念性附录}
 \label{app:categories}
 
-本附录说明范畴语言如何压缩交换式与复合证明；它是组织工具，不是中心定理的额外前提。Markov category 的系统性框架见\citet{Fritz2020}。
+本附录只说明范畴语言和观测算子如何组织正文已经证明的交换式。它不参与
+$\Gamma_N$ 存在性证明，不提供新的压缩判据，也不把有限确定性主定理推广到
+任意随机通道或一般状态空间。Markov category 的系统性框架见
+\citet{Fritz2020}。
 
-\subsection{随机映射与动力学态射}
+\subsection{精确交织形成动力学态射}
 
-有限集合与 Markov kernels 构成范畴 $\mathbf{FinStoch}$：对象是有限集合，态射复合为 kernel 乘法，恒等态射为确定性恒等 kernel。普通映射 $q:X\to Y$ 嵌入为确定性 kernel $Q_q$。
+有限集合与 Markov kernels 构成范畴 $\mathbf{FinStoch}$：对象是有限集合，
+态射复合为 kernel 乘法，恒等态射为确定性恒等 kernel。普通映射
+$q:X\to Y$ 嵌入为确定性 kernel $Q_q$。
 
-把一个随机动力系统记为对象 $(X,K)$。从 $(X,K)$ 到 $(Y,L)$ 的精确动力学态射是满足
+把一个随机动力系统记为对象 $(X,K)$。从 $(X,K)$ 到 $(Y,L)$ 的精确动力学
+态射是满足
 \[
 KQ=QL
 \]
-的 kernel $Q:X\rightsquigarrow Y$。若 $R:(Y,L)\to(Z,M)$ 也是精确态射，则
+的 kernel $Q:X\rightsquigarrow Y$。若
+$R:(Y,L)\to(Z,M)$ 也是精确态射，则
 \[
 K(QR)=(KQ)R=(QL)R=Q(LR)=Q(RM)=(QR)M,
 \]
-故 $QR$ 仍是精确态射。确定性任务保真粗粒化只是其中 $Q=Q_q$ 且任务三角形交换的一类态射。
+故 $QR$ 仍是精确态射。恒等 kernel 显然满足交换式，所以这些对象与态射
+确实形成一个普通范畴。正文的确定性任务保真粗粒化只是其中
+$Q=Q_q$ 且任务三角形交换的一类态射；范畴封闭性本身不保证这样的严格信息商
+存在。
 
-\subsection{近似证书的加法复合}
+\subsection{带标签的近似证书只是误差记账}
 
 若
 \[
@@ -33,14 +43,34 @@ d_\infty(KQR,QRM)
 &\le\eps+\delta.
 \end{aligned}
 \]
-因此精确态射形成普通范畴；近似态射可视为带非负误差标签、复合时误差相加的证书系统。这个结论对应附录~\ref{app:composition-time}的两层空间误差界。
+因此，若把误差上界作为证书数据的一部分，可用 $\eps+\delta$ 作为复合后的
+保守标签。附录~\ref{app:composition-time}给出更精细的收缩标签：若同时记录
+\[
+\partial_{K,L}(Q)\le\eps_Q,
+\quad \alpha(Q)\le\rho_Q,
+\qquad
+\partial_{L,M}(R)\le\eps_R,
+\quad \alpha(R)\le\rho_R,
+\]
+则复合标签为
+\[
+(\eps_Q,\rho_Q)\star(\eps_R,\rho_R)
+=(\rho_R\eps_Q+\eps_R,\rho_Q\rho_R).
+\]
+这种记账满足结合律，恒等通道可带标签 $(0,1)$。但若丢弃标签，只保留“缺陷
+不超过某个固定正阈值”的通道类，该通道类一般不对复合封闭。因此本文称其为
+\emph{带标签的近似证书系统}，不把未标记的固定容差关系误称为一个范畴。
 
-若另有任务通道 $G_X:X\rightsquigarrow O$、$G_Y:Y\rightsquigarrow O$ 且
-$d_\infty(G_X,QG_Y)\le\tau$，再与下一层任务证书复合，任务误差同样由三角不等式相加。动力学闭合误差与任务读出误差应分别记录；把二者压成一个数只是记账选择。
+若另有任务通道 $G_X:X\rightsquigarrow O$、
+$G_Y:Y\rightsquigarrow O$ 且
+$d_\infty(G_X,QG_Y)\le\tau$，再与下一层任务证书复合，任务读出误差也可由
+三角不等式累计。动力学闭合误差与任务读出误差应分别记录；把二者压成一个数
+只是记账选择，并不产生新的充要条件。
 
-\subsection{观测算子的对偶图景}
+\subsection{有限确定性商的观测算子对偶}
 
-以线性算子推进观测量的观点可追溯到 Koopman 的经典工作\citep{Koopman1931}；这里仅使用它在有限随机核上的初等版本。
+以线性算子推进观测量的观点可追溯到 Koopman 的经典工作
+\citep{Koopman1931}；这里仅使用它在有限随机核上的初等版本。
 
 kernel $K:X\rightsquigarrow Y$ 诱导线性观测算子
 \[
@@ -49,12 +79,15 @@ P_K:\mathbb R^Y\to\mathbb R^X,
 (P_Kf)(x)=\sum_yK(x,y)f(y),
 \]
 且 $P_{KL}=P_KP_L$。确定性 $q:X\to Y$ 对应拉回
-$P_{Q_q}f=f\circ q$。交换式
-$KQ_q=Q_qL$ 等价于
+$P_{Q_q}f=f\circ q$。交换式 $KQ_q=Q_qL$ 等价于
 \[
 P_K(q^*f)=q^*(P_Lf)
 \qquad\forall f\in\mathbb R^Y,
 \]
-即 $q^*\mathbb R^Y$ 是 $P_K$-不变的、含常数且逐点乘法闭合的观测代数。附录~\ref{app:exact-theory}证明，在有限集合上这类代数恰与分区对应。
+即 $q^*\mathbb R^Y$ 是 $P_K$-不变的、含常数且对逐点乘法封闭的观测代数。
+附录~\ref{app:exact-theory}证明，在有限集合上这类代数恰与分区对应。
 
-这个对偶说明“宏观空间”“闭合观测代数”和“交换方块”是同一有限结构的三种表述，并不产生三条不同的存在定理。非平凡性始终来自任务保真、严格信息商和误差控制。
+因此，“宏观商空间”“闭合观测代数”和“交换方块”是同一有限精确结构的
+三种组织方式，而不是三条不同的存在定理。它们本身既不保证候选商严格压缩，
+也不保证近似最优值达到，更不推出系统族满足 $\Gamma_N\to0$；正文的非平凡性
+仍全部来自任务保真、相对于操作性微观基线的压缩，以及闭合误差控制。

@@ -15,7 +15,7 @@
 | `CrutchfieldYoung1989` | [APS 论文页](https://link.aps.org/doi/10.1103/PhysRevLett.63.105) | Physical Review Letters 63(2), 105–108；用于计算力学和预测状态的历史入口。 |
 | `ShaliziCrutchfield2001` | [Springer 论文页](https://link.springer.com/article/10.1023/A%3A1010388907793)；[arXiv 原始记录](https://arxiv.org/abs/cond-mat/9907176) | Journal of Statistical Physics 104, 817–879；支持 causal states 的预测充分性、递推与适当意义下的最小性。本文没有省略其平稳性、正则条件分布及几乎处处语境后声称无条件有限状态。 |
 | `Fritz2020` | [arXiv 原始记录](https://arxiv.org/abs/1908.07021)；[DOI](https://doi.org/10.1016/j.aim.2020.107239) | Advances in Mathematics 370, 107239；作为 Markov categories、随机 kernels、条件独立与充分性的主引文。未把 Baez 的相关工作误列为这篇 Markov-category 主文献。 |
-| `VaswaniEtAl2017` | [NeurIPS 论文页](https://proceedings.neurips.cc/paper/2017/hash/3f5ee243547dee91fbd053c1c4a845aa-Abstract.html)；[arXiv 原始记录](https://arxiv.org/abs/1706.03762) | 作者、标题、会议和页码；只用于 Transformer 架构背景，不用于支持本文预测状态定理。后者由补充材料自行证明。 |
+| `VaswaniEtAl2017` | [NeurIPS 论文页](https://proceedings.neurips.cc/paper/2017/hash/3f5ee243547dee91fbd053c1c4a845aa-Abstract.html)；[arXiv 原始记录](https://arxiv.org/abs/1706.03762) | 作者、标题、会议和页码；只用于 Transformer 架构背景，不用于支持本文预测状态定理。后者由附录 J 自行证明。 |
 | `Kallenberg2021` | [Springer 图书页](https://link.springer.com/book/10.1007/978-3-030-61871-1) | 第三版、2021、DOI/ISBN；用于标准 Borel 空间、kernel、disintegration 等测度论背景。未据此声称任意可测商都良好。 |
 | `EthierKurtz1986` | [Wiley 图书页](https://onlinelibrary.wiley.com/doi/book/10.1002/9780470316658) | 1986 首版、作者、书名、ISBN/DOI；用于一般连续时间 Markov 过程、生成元和 martingale problem 的背景。有限矩阵指数等式由本文直接证明。 |
 | `Dobrushin1956` | [SIAM/DOI](https://doi.org/10.1137/1101006) | 原始论文题名、期刊、卷期页；用于 Dobrushin 系数的历史归属。 |

@@ -1,6 +1,6 @@
 # 《宏观规律何时存在？》中文版论文包
 
-本目录是论文《宏观规律何时存在？有限随机系统中的压缩—闭合判据》的中文正式稿。正文保留论证主干；完整证明、反例、误差传播、结构证书、范畴化组织及推广分别置于附录；Transformer 专用证明置于独立补充材料。
+本目录是论文《宏观规律何时存在？有限随机系统中的压缩—闭合判据》的中文正式稿。正文保留从操作性基线、有限规模精确商与近似前沿到系统族判据的论证主干；完整证明、反例、误差传播、结构证书、扩展接口、范畴化组织和 Transformer 专用证明均置于附录。
 
 ## 目录
 
@@ -8,7 +8,7 @@
 - `macros.tex`：统一记号与定理环境。
 - `sections/`：正文。
 - `appendices/`：数学附录。
-- `supplementary/`：可独立编译的 Transformer 预测状态补充材料与母稿迁移索引。S1 不并入主论文 PDF，以保持正文和附录主线干净。
+- `supplementary/`：附录 J 的独立编译入口与母稿迁移索引。Transformer 证明的唯一源码位于 `appendices/appendix_J_transformer_predictive_states.tex`；独立入口只包装同一文件，不维护重复副本。
 - `references/references.bib`：正文实际引用的 BibTeX 条目。
 - `references/citation_verification_log.md`：逐项引文核验记录。
 - `ARXIV_SUBMISSION.md`：编译、打包和当前 arXiv 多语言政策说明。
@@ -26,7 +26,7 @@ xelatex main.tex
 
 项目不依赖本机专有字体；中文排版由 `ctex` 的 TeX Live 字体配置处理。不要把 `.aux`、`.log`、`.out`、`.toc` 等中间文件放入 arXiv 上传包。
 
-Transformer 补充材料可单独编译：
+Transformer 附录 J 也可作为独立版本编译：
 
 ```bash
 cd supplementary

@@ -168,102 +168,110 @@ $\cA=q_{\cA}^*\mathbb R^{X_{\cA}}$。所述不变性正是
 常数代数和 $\mathbb R^X$ 对每个 $P_K$ 都闭合，分别对应一状态商与恒等商。
 所以``某个闭合商存在''本身没有非平凡内容；必须指定不可丢弃的任务观测。
 
-\subsection{任务相对最小精确商}
+\subsection{核族的任务相对最小精确商}
 
-设 $g:X\twoheadrightarrow O$ 是非恒定任务观测。令
+正文要求同一个表示服务于一族允许动力学，而允许每个微观 kernel 有自己的
+宏观 kernel。设 $g:X\twoheadrightarrow O$ 是非恒定任务观测，
+$\cK\subseteq\Stoch(X,X)$ 非空。令
 \begin{equation}
   \cA_0:=g^*\mathbb R^O,
   \qquad
-  \cA_{n+1}:=\operatorname{alg}(\cA_n\cup P_K\cA_n).
+  \cA_{n+1}:=
+  \operatorname{alg}\!\left(
+    \cA_n\cup\bigcup_{K\in\cK}P_K\cA_n
+  \right).
   \label{eq:app-task-algebra-iteration}
 \end{equation}
 
-\begin{theorem}[任务相对的最小精确宏观模型]
+\begin{theorem}[核族的任务相对最小精确宏观模型]
 \label{thm:app-minimal-task-quotient}
-迭代~\eqref{eq:app-task-algebra-iteration} 在某个
-$\tau\le |X|-|O|$ 处稳定；记稳定代数为 $\cA_*$，商为
+迭代~\eqref{eq:app-task-algebra-iteration} 在至多 $|X|-|O|$ 次严格增加后
+稳定；记稳定代数为 $\cA_*$，相应商为
 $q_*:X\twoheadrightarrow X_*$。则：
 \begin{enumerate}
-  \item $\cA_*$ 是包含 $\cA_0$ 的最小 $P_K$-不变观测代数；
-  \item 存在唯一 $K_*\in\Stoch(X_*,X_*)$ 与唯一 $r_*:X_*\to O$，使
+  \item $\cA_*$ 是包含 $\cA_0$、并对全部 $P_K$（$K\in\cK$）不变的
+  最小观测代数；
+  \item 存在唯一 $r_*:X_*\to O$，并且对每个 $K\in\cK$ 存在唯一
+  $K_*^{(K)}\in\Stoch(X_*,X_*)$，使
   \begin{equation}
-    KQ_{q_*}=Q_{q_*}K_*,
+    KQ_{q_*}=Q_{q_*}K_*^{(K)},
     \qquad
     g=r_*\circ q_*;
     \label{eq:app-minimal-task-square}
   \end{equation}
-  \item 若另有满射 $q:X\twoheadrightarrow Y$、读出 $r:Y\to O$ 与
-  $L\in\Stoch(Y,Y)$ 满足
+  \item 若另有满射 $q:X\twoheadrightarrow Y$、读出 $r:Y\to O$，并且
+  对每个 $K\in\cK$ 都有 $L_K\in\Stoch(Y,Y)$ 满足
   \[
     g=r\circ q,
     \qquad
-    KQ_q=Q_qL,
+    KQ_q=Q_qL_K,
   \]
   则存在唯一满射 $s:Y\twoheadrightarrow X_*$ 使
   \begin{equation}
     q_*=s\circ q,
     \qquad r=r_*\circ s,
-    \qquad LQ_s=Q_sK_*.
+    \qquad L_KQ_s=Q_sK_*^{(K)}\quad(K\in\cK).
     \label{eq:app-minimal-universal-property}
   \end{equation}
 \end{enumerate}
-换言之，$q_*$ 是全部任务保真精确闭合商中最粗者。
+换言之，$q_*$ 是全部任务保真、并对 $\cK$ 共同精确闭合的确定性商中
+唯一最粗者。
 \end{theorem}
 
 \begin{proof}
 $\cA_n$ 单调增加；每次严格增加至少使维数增加 $1$。由于
 $\dim\cA_0=|O|$、$\dim\mathbb R^X=|X|$，至多发生
 $|X|-|O|$ 次严格增加。稳定时
-$P_K\cA_*\subseteq\cA_*$。若 $\mathcal B$ 是任意包含 $\cA_0$ 的
-$P_K$-不变观测代数，则从 $\cA_0\subseteq\mathcal B$ 出发归纳得到
-$\cA_n\subseteq\mathcal B$，故 $\cA_*\subseteq\mathcal B$。这证明第一项。
+$P_K\cA_*\subseteq\cA_*$ 对每个 $K\in\cK$ 成立。若 $\mathcal B$ 是
+任意包含 $\cA_0$ 且对全部 $P_K$ 不变的观测代数，则从
+$\cA_0\subseteq\mathcal B$ 出发归纳得到
+$\cA_n\subseteq\mathcal B$，故 $\cA_*\subseteq\mathcal B$。这证明
+第一项。
 
-定理~\ref{thm:app-closed-algebra} 给出唯一 $K_*$。又因
-$\cA_0\subseteq\cA_*$，$g$ 在 $q_*$ 的纤维上常值，故定义
-$r_*(q_*(x)):=g(x)$；它良定义且因 $q_*$ 满射而唯一。
+逐个 $K$ 应用定理~\ref{thm:app-closed-algebra}，得到唯一
+$K_*^{(K)}$。又因 $\cA_0\subseteq\cA_*$，$g$ 在 $q_*$ 的纤维上常值，
+故定义 $r_*(q_*(x)):=g(x)$；它良定义且因 $q_*$ 满射而唯一。
 
 对第三项，候选 $q$ 的分区代数
-$\cA_q:=q^*\mathbb R^Y$ 包含 $\cA_0$，且由精确交换式和
-定理~\ref{thm:app-four-equivalences} 对 $P_K$ 不变。最小性给出
-$\cA_*\subseteq\cA_q$，所以 $q(x)=q(x')$ 推出 $q_*(x)=q_*(x')$；
-存在唯一满射 $s$ 使 $q_*=s\circ q$。由
-$r\circ q=g=r_*\circ s\circ q$ 与 $q$ 满射，得到 $r=r_*\circ s$。
-最后，
+$\cA_q:=q^*\mathbb R^Y$ 包含 $\cA_0$，且由各个精确交换式和
+定理~\ref{thm:app-four-equivalences} 对全部 $P_K$ 不变。最小性给出
+$\cA_*\subseteq\cA_q$，所以存在唯一满射 $s$ 使 $q_*=s\circ q$；任务
+读出的等式由 $q$ 满射立即得到。最后，对每个 $K\in\cK$，
 \[
- Q_qLQ_s=KQ_qQ_s=KQ_{q_*}
- =Q_{q_*}K_*=Q_qQ_sK_*.
+ Q_qL_KQ_s=KQ_qQ_s=KQ_{q_*}
+ =Q_{q_*}K_*^{(K)}=Q_qQ_sK_*^{(K)}.
 \]
-满射 $q$ 的各行覆盖 $Y$ 的全部 Dirac 分布，因此可消去左侧的 $Q_q$，
-得到 $LQ_s=Q_sK_*$。
+满射 $q$ 的各行覆盖 $Y$ 的全部 Dirac 分布，可以消去左侧的 $Q_q$，得到
+$L_KQ_s=Q_sK_*^{(K)}$。
 \end{proof}
 
-\begin{definition}[精确任务相对闭合复杂度]
+\begin{definition}[核族的精确任务相对闭合复杂度]
 \label{def:app-exact-complexity}
 定义
 \begin{equation}
- c_K(g):=|X_*|=\dim\cA_*.
+ c_{\cK}^{0}(g):=|X_*|=\dim\cA_*.
  \label{eq:app-exact-complexity}
 \end{equation}
+当 $\cK=\{K\}$ 时简记为 $c_K^0(g)$。
 \end{definition}
 
 定理~\ref{thm:app-minimal-task-quotient} 立即给出
 \begin{equation}
- c_K(g)=
+ c_{\cK}^{0}(g)=
  \min\left\{|Y|:
  \begin{array}{l}
- \exists q:X\twoheadrightarrow Y,\ \exists r:Y\to O,\
- \exists L\in\Stoch(Y,Y),\quad
- g=r\circ q,\ KQ_q=Q_qL
+ \exists q:X\twoheadrightarrow Y,\ \exists r:Y\to O,\quad g=r\circ q,\\
+ \forall K\in\cK\ \exists L_K\in\Stoch(Y,Y),\quad KQ_q=Q_qL_K
  \end{array}\right\}.
  \label{eq:app-exact-complexity-min}
 \end{equation}
-因此，任务相对的严格精确压缩存在，当且仅当
+因此，任务相对的严格共同精确压缩存在，当且仅当
 \begin{equation}
-  |O|\le c_K(g)<|X|.
+  |O|\le c_{\cK}^{0}(g)<|X|.
   \label{eq:app-nontrivial-exact}
 \end{equation}
 若按本文约定 $g$ 非恒定，则左端至少为 $2$。该结论不保证右侧严格不等式：
-一般有限 Markov 核可能迫使任务分区一直细化到离散分区。
+一般有限 Markov 核族可能迫使任务分区一直细化到离散分区。
 
 迭代的分区版本从 $g$ 的纤维开始，并反复按
 \[
@@ -272,8 +280,9 @@ $r\circ q=g=r_*\circ s\circ q$ 与 $q$ 满射，得到 $r=r_*\circ s$。
  \left\{
  \begin{array}{l}
  x\equiv_nx',\\
- K(x,C)=K(x',C)\quad\forall C\in\Pi_n
+ K(x,C)=K(x',C)
+ \quad\forall K\in\cK,\ \forall C\in\Pi_n
  \end{array}\right.
 \]
 细化；命题~\ref{prop:app-stable-refinement} 的同一证明表明它有限终止于
-$q_*$。这给出有限模型上的构造算法，但没有给出大状态空间中的计算效率保证。
+$q_*$。这给出有限输入上的构造算法，但没有给出大状态空间中的计算效率保证。
