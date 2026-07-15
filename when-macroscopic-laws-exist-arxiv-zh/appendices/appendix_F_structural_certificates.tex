@@ -1,13 +1,12 @@
-\section{候选表示的结构证书，以及与相结构的区分}
+\section{候选表示的结构证书与群作用分离结构}
 \label{app:structural-certificates}
 
-正文的 $\Gamma_N$ 判据负责判断候选表示是否同时压缩且闭合，却不自动产生
-候选。本附录前两节给出任务与残余对称所产生的充分证书；最后一节讨论训练或
-选相随机性中的相结构事件。后者描述近似平稳分布的群轨道及其分离，不是
-$\Gamma_N$ 主定理的假设，也不自动产生任务保真压缩。为简化记号，本附录
-直接把已经规范化的操作性微观空间记为 $B$。
+本附录前两节给出任务充分性与群轨道结构产生的候选证书，最后一节研究随机
+构造中的群作用分离事件。前两类证书直接控制状态压缩与闭合误差；群作用分离
+事件描述近似平稳分布的群轨道及其分离。为简化记号，本附录直接把已经规范化
+的可辨微观空间记为 $B$。
 
-\subsection{任务本身何时构成闭合表示}
+\subsection{任务变量的闭合充分性}
 
 \begin{proposition}[任务充分性]
 \label{prop:task-sufficiency}
@@ -29,9 +28,9 @@ $|O|$ 个状态。
 \end{proof}
 
 因此，守恒量或任务标签只有在其下一步分布由当前标签决定时，才直接成为
-闭合宏观状态；标签较少本身不是闭合证书。
+闭合宏观状态；少标签表示还需要纤维内下一标签分布一致这一条件。
 
-\subsection{任务兼容残余对称产生轨道商证书}
+\subsection{任务兼容群作用产生轨道商证书}
 
 设有限群 $H$ 作用在 $B$ 上，轨道映射为
 $q_H:B\twoheadrightarrow B/H$。对分布 $\mu$ 定义
@@ -43,7 +42,7 @@ $h_*\mu(A)=\mu(h^{-1}A)$。对 kernel 族 $\cK$ 定义
 \|K(hb,\cdot)-h_*K(b,\cdot)\|_{\TV}.
 \]
 
-\begin{theorem}[残余对称闭合证书]
+\begin{theorem}[群轨道闭合证书]
 \label{thm:symmetry-certificate-app}
 若 $g(hb)=g(b)$ 对所有 $h,b$ 成立，则 $q_H$ 任务保真，并且
 \[
@@ -84,11 +83,11 @@ $\sup_\theta d_\infty(K_\theta,\widehat K_\theta)\le\delta$，三角不等式给
 若 $H$ 也从同一数据中搜索得到，误差界必须同时覆盖整个候选群族，或用独立
 数据重新验证。
 
-\subsection{闭合证书事件与相结构事件}
+\subsection{闭合证书事件与群作用分离事件}
 
-考虑训练或选相概率空间 $(\Omega_N,\cF_N,\mathbb P_N)$。随机结果 $\omega$
-决定动力学族 $\cK_{N,\omega}$、相 kernel
-$K^{\mathrm{ph}}_{N,\omega}\in\cK_{N,\omega}$、相分布
+考虑随机构造概率空间 $(\Omega_N,\cF_N,\mathbb P_N)$。随机结果 $\omega$
+决定动力学族 $\cK_{N,\omega}$、指定 kernel
+$K^{\mathrm{sep}}_{N,\omega}\in\cK_{N,\omega}$、参考分布
 $\mu_{N,\omega}$，以及预先从有限候选群族中选出的子群
 $H_{N,\omega}\le G_N$。以下对象均假定可测。
 
@@ -101,8 +100,8 @@ $H_{N,\omega}\le G_N$。以下对象均假定可测。
 \lambda_H(\mu):=\min_{u\in G\setminus H}\|u_*\mu-\mu\|_{\TV},
 \]
 并约定 $\lambda_G(\mu):=+\infty$。这个扩展约定使随机候选恰好取
-$H=G$ 时相关对象仍良定义；相结构事件本身仍明确要求 $H<G$。直接使用
-“所有近似保持 $\mu$ 的元素”未必得到子群，因此必须先给出候选子群，再检验
+$H=G$ 时相关对象仍良定义；群作用分离事件明确要求 $H<G$。直接使用
+近似保持 $\mu$ 的元素集合通常缺少群封闭性，因此先给出候选子群，再检验
 $\kappa_H$ 与 $\lambda_H$。若
 $\|\widehat\mu-\mu\|_{\TV}\le d$，则
 \[
@@ -126,22 +125,22 @@ g_N(hb)=g_N(b)\quad
 \end{array}
 \right\},
 \]
-以及相结构事件
+以及群作用分离事件
 \[
-\mathsf E_N^{\mathrm{phase}}
+\mathsf E_N^{\mathrm{sep}}
 =\left\{
 \begin{array}{l}
 H_{N,\omega}\subsetneq G_N,\\
 \kappa_{H_{N,\omega}}(\mu_{N,\omega})\le\kappa_N
 <\ell_N\le\lambda_{H_{N,\omega}}(\mu_{N,\omega}),\\
-\|\mu_{N,\omega}K^{\mathrm{ph}}_{N,\omega}
+\|\mu_{N,\omega}K^{\mathrm{sep}}_{N,\omega}
   -\mu_{N,\omega}\|_{\TV}\le\beta_N,\\
-\eps_{G_N}(\{K^{\mathrm{ph}}_{N,\omega}\})\le\gamma_N
+\eps_{G_N}(\{K^{\mathrm{sep}}_{N,\omega}\})\le\gamma_N
 \end{array}
 \right\}.
 \]
-前一个事件直接检验轨道商是否构成压缩---闭合候选；后一个事件检验某个近似
-平稳分布是否保留 $H$、同时与 $G\setminus H$ 的作用分离。二者回答不同问题。
+前一个事件检验轨道商的压缩---闭合性质；后一个事件检验近似平稳分布的
+$H$-近似不变性及其与 $G\setminus H$ 作用的分离程度。
 
 \begin{theorem}[两类事件分别蕴含的结论]
 \label{thm:two-events}
@@ -151,21 +150,21 @@ H_{N,\omega}\subsetneq G_N,\\
 \qquad
 c_{\cK_{N,\omega}}^{\eps_N}(g_N)\le a_N|B_N|.
 \]
-在 $\mathsf E_N^{\mathrm{phase}}$ 上，对每个 $u\in G_N$，分布
-$u_*\mu_{N,\omega}$ 都是相 kernel 的
-$(\beta_N+\gamma_N)$-近似平稳分布；若 $u,v$ 属于同一左陪集，则相关相的
+在 $\mathsf E_N^{\mathrm{sep}}$ 上，对每个 $u\in G_N$，分布
+$u_*\mu_{N,\omega}$ 都是指定 kernel 的
+$(\beta_N+\gamma_N)$-近似平稳分布；若 $u,v$ 属于同一左陪集，则对应分布的
 TV 距离至多为 $\kappa_N$，若属于不同左陪集，则距离至少为 $\ell_N$。
 \end{theorem}
 
 \begin{proof}
-证书事件的结论直接来自定理~\ref{thm:symmetry-certificate-app}。对相事件，
+证书事件的结论直接来自定理~\ref{thm:symmetry-certificate-app}。对群作用分离事件，
 省略下标，近似等变性和混合凸性给出
 \[
-\|(u_*\mu)K^{\mathrm{ph}}-u_*(\mu K^{\mathrm{ph}})\|_{\TV}
+\|(u_*\mu)K^{\mathrm{sep}}-u_*(\mu K^{\mathrm{sep}})\|_{\TV}
 \le\gamma_N,
 \]
 再与
-$\|\mu K^{\mathrm{ph}}-\mu\|_{\TV}\le\beta_N$ 合并。群作用保持 TV
+$\|\mu K^{\mathrm{sep}}-\mu\|_{\TV}\le\beta_N$ 合并。群作用保持 TV
 距离，且
 \[
 \|u_*\mu-v_*\mu\|_{\TV}
@@ -175,18 +174,18 @@ $\|\mu K^{\mathrm{ph}}-\mu\|_{\TV}\le\beta_N$ 合并。群作用保持 TV
 $\kappa_H$ 与 $\lambda_H$ 即得。
 \end{proof}
 
-\begin{proposition}[两类事件之间不存在普遍蕴含]
-\label{prop:cert-phase-nonimplication}
-在有限系统族的全体可能取值上，既不存在
-$\mathsf E_N^{\mathrm{cert}}\Rightarrow\mathsf E_N^{\mathrm{phase}}$ 的普遍
-蕴含，也不存在反向的普遍蕴含。
+\begin{proposition}[两类事件的双向反例]
+\label{prop:cert-separation-nonimplication}
+在有限系统族的全体可能取值上，两个方向
+$\mathsf E_N^{\mathrm{cert}}\Rightarrow\mathsf E_N^{\mathrm{sep}}$ 与
+$\mathsf E_N^{\mathrm{sep}}\Rightarrow\mathsf E_N^{\mathrm{cert}}$ 均有反例。
 \end{proposition}
 
 \begin{proof}
-反例~\ref{counter:certificate-without-phase}给出闭合证书事件恒成立而相结构
-事件失败的系统族；反例~\ref{counter:phase-without-certificate}给出相结构
-事件恒成立而闭合证书事件失败的系统族。两个例子都可置于一点评率空间，故
-同时排除了确定性情形和一般随机情形中的普遍蕴含。
+反例~\ref{counter:certificate-without-separation}给出闭合证书事件恒成立而群作用
+分离事件失败的系统族；反例~\ref{counter:separation-without-certificate}给出群作用
+分离事件恒成立而闭合证书事件失败的系统族。两个例子都可置于一点评率空间，
+从而覆盖确定性情形，并作为一般随机情形中的反例。
 \end{proof}
 
 最后，若
@@ -194,15 +193,15 @@ $\mathsf E_N^{\mathrm{cert}}\Rightarrow\mathsf E_N^{\mathrm{phase}}$ 的普遍
 \mathbb P_N\bigl((\mathsf E_N^{\mathrm{cert}})^c\bigr)
 \le\delta_N^{\mathrm{cert}},
 \qquad
-\mathbb P_N\bigl((\mathsf E_N^{\mathrm{phase}})^c\bigr)
-\le\delta_N^{\mathrm{phase}},
+\mathbb P_N\bigl((\mathsf E_N^{\mathrm{sep}})^c\bigr)
+\le\delta_N^{\mathrm{sep}},
 \]
 则联合界给出两事件交集的概率至少为
-$1-\delta_N^{\mathrm{cert}}-\delta_N^{\mathrm{phase}}$。只有当所有规模共同
+$1-\delta_N^{\mathrm{cert}}-\delta_N^{\mathrm{sep}}$。若所有规模共同
 定义于同一概率空间，且
 \[
 \sum_{N=1}^{\infty}
-\bigl(\delta_N^{\mathrm{cert}}+\delta_N^{\mathrm{phase}}\bigr)<\infty,
+\bigl(\delta_N^{\mathrm{cert}}+\delta_N^{\mathrm{sep}}\bigr)<\infty,
 \]
-第一 Borel--Cantelli 引理才推出两事件几乎处处从某个规模起同时成立；这里
-不需要跨规模独立性。该结论的索引是系统规模 $N$，不是 Markov 演化时间。
+第一 Borel--Cantelli 引理\citep{Kallenberg2021}推出两事件几乎处处从某个规模起同时成立。该推论
+仅使用可和性；索引 $N$ 表示系统规模。

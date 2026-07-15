@@ -2,11 +2,11 @@
 
 ## 当前状态
 
-本目录已经按多文件 XeLaTeX 项目组织，入口为根目录的 `main.tex`。中文版正文、附录和 BibTeX 数据均随包提供。Transformer 完整证明已经作为附录 J 输入主论文；`supplementary/transformer_supplement.tex` 只是同一附录的独立编译包装，不是另一份内容。
+本目录已经按多文件 XeLaTeX 项目组织，入口为根目录的 `main.tex`。中文版正文、附录和 BibTeX 数据均随包提供。有限自回归模型的完整定理作为附录 J 输入主论文；`supplementary/transformer_supplement.tex` 直接编译同一附录源码。
 
 ## 语言政策
 
-arXiv 的“Non-English submissions”页面目前说明：非英文投稿可以提交，但必须同时提供论文的完整英文版本；多语言稿应先排英文版、再排非英文版。因此，本目录可以作为中文版母稿和中文版本源文件，不能在缺少完整英文版时被标记为“已满足直接投稿条件”。英文标题与英文摘要不能替代完整英文正文。
+arXiv 的“Non-English submissions”页面目前说明：非英文投稿可以提交，同时须提供论文的完整英文版本；多语言稿应先排英文版、再排非英文版。因此，本目录定位为中文版本源文件；满足直接投稿条件还需增加完整英文正文，并将英文版排在中文版本之前。英文标题与英文摘要属于投稿元数据的一部分。
 
 核验入口：
 
@@ -24,7 +24,7 @@ arXiv 的“Non-English submissions”页面目前说明：非英文投稿可以
 6. 投稿元数据使用英文标题 `When Do Macroscopic Laws Exist? A Compression–Closure Criterion for Finite Stochastic Systems`、英文摘要和拉丁字母作者名，并在 Comments 中注明包含中文版本。
 7. 不使用 `\today`；版本日期由投稿记录给出。
 
-正式上传主论文时，不要再把 `supplementary/transformer_supplement.tex` 作为一份重复补充材料加入稿件；主入口已经收录其唯一内容源。只有在单独分发 Transformer 附录时才使用该包装文件。
+主入口已经收录附录 J 的唯一内容源。`supplementary/transformer_supplement.tex` 专用于单独分发和编译该附录，主论文上传包采用 `main.tex` 入口。
 
 ## 编译器选择
 

@@ -1,9 +1,8 @@
 \section{单个有限系统：从精确商到复杂度--误差前沿}
 \label{sec:closure}
 
-第~\ref{sec:operational}节固定了操作性微观空间 $B$，从而排除了仅由编码
-复制产生的虚假压缩。本节先证明在 $B$ 上研究闭合不会改变原系统中的闭合
-误差，再依次回答两个单系统问题：零误差时最少需要多少宏观状态；允许误差
+第~\ref{sec:operational}节固定了可辨微观空间 $B$，从而消除了仅由编码
+复制产生的虚假压缩。本节先证明可辨约化严格保持原系统的闭合误差，再依次回答两个单系统问题：零误差时最少需要多少宏观状态；允许误差
 以后，状态数与闭合误差之间的完整最优折中是什么。
 
 对具有同一有限输入空间的 kernels 定义最坏行总变差距离
@@ -13,7 +12,7 @@ d_\infty(K,K'):=\max_x\|K(x,\cdot)-K'(x,\cdot)\|_{\TV},
 \|\mu-\nu\|_{\TV}:=\frac12\sum_z|\mu(z)-\nu(z)|.
 \]
 
-\subsection{操作性约化保持闭合误差}
+\subsection{可辨约化保持闭合误差}
 
 沿用命题~\ref{prop:operational-baseline} 的满射
 $p:X\twoheadrightarrow B$。给定满射 $s:B\twoheadrightarrow Y$，令
@@ -36,7 +35,7 @@ $q=s\circ p$；$Q_p,Q_s,Q_q$ 表示相应的确定性 kernels。
 满射 $p$ 使前一对的行恰为后一对全部行的重复，故最大行距离相同。
 \end{proof}
 
-这说明操作性约化并非只改变复杂度分母：对所有按定义经 $B$ 因子化的候选
+可辨约化同时规范复杂度分母并保持闭合缺陷：对所有按定义经 $B$ 因子化的候选
 宏观表示，它严格保持后续的最优闭合误差。完整的代数构造与等式证明见
 附录~\ref{app:operational-baseline}。
 
@@ -52,8 +51,10 @@ $\bar K\in\Stoch(B,B)$ 存在 $L\in\Stoch(Y,Y)$ 使
 strong lumpability 条件\citep{KemenySnell1976,Buchholz1994}：同一
 $s$-纤维中的状态必须对每个下一宏观块给出相同转移概率。
 
-以下有限精确结论给出近似理论的零误差基准。这里同一个表示必须服务于整个
-允许动力学族，但每个微观 kernel 可以诱导自己的宏观 kernel。
+单个有限链的最粗 ordinary lumping 可由稳定分区细化构造
+\citep{DerisaviEtAl2003}。以下有限精确结论同时预先保留任务，并要求同一个
+表示服务于整个允许动力学族；每个微观 kernel 可以诱导自己的宏观 kernel。
+该结论给出近似理论的零误差基准。
 对函数 $f:B\to\mathbb R$，记
 \[
 (P_{\bar K}f)(b):=\sum_{b'\in B}\bar K(b,b')f(b')
@@ -100,17 +101,22 @@ $P_{\bar K}$ 不变，因而必包含该最小稳定代数，得到最粗性与�
 普适性质和分区细化证明见附录~\ref{app:exact-theory}。
 \end{proof}
 
-精确闭合的含义不只是一条一步交换式。对每个固定
+一步交换式进一步给出全部整数时刻的半群交换。对每个固定
 $\bar K\in\bar\cK$ 和 $t\in\mathbb N_0$，
 \[
  \bar K^tQ_{s_*}=Q_{s_*}(L^*_{\bar K})^t,
 \]
 并且从任意微观初始分布出发，投影过程 $s_*(X_t)$ 本身是以
 $L^*_{\bar K}$ 演化的 Markov 链。定理~\ref{thm:minimal-exact-task-quotient}
-确定了复杂度--误差图的零误差端点；它不保证式~\eqref{eq:strict-exact-compression}
-的右侧严格成立。
+确定了复杂度--误差图的零误差端点。严格压缩恰在
+$c_{\bar\cK}^{0}(\bar g)<|B|$ 时出现；恒等尺度
+$c_{\bar\cK}^{0}(\bar g)=|B|$ 也可能成为该端点。
 
 \subsection{允许误差后的复杂度--误差前沿}
+
+固定状态预算下优化聚合误差是 Markov 状态约化中的一条相关路线；例如
+\citet{GeigerEtAl2015}研究平稳 KL divergence rate 目标。本文采用任务保真
+约束和最坏行 TV 缺陷，并把各预算下的最优值组织为如下前沿。
 
 令 $\pi$ 为 $B$ 的一个任务保真分区，即每个 $\pi$-块都包含在某个
 $\bar g$-纤维中；记商映射为
@@ -123,9 +129,9 @@ $s_\pi:B\twoheadrightarrow B/\pi$。定义该分区对整个动力学族的闭�
 d_\infty(\bar KQ_{s_\pi},Q_{s_\pi}L).
 \label{eq:eta-pi}
 \end{equation}
-同一个 $\pi$ 服务于全部 $\bar K$，但 $L$ 可以依赖 $\bar K$；因此本文
-使用 $\sup_{\bar K}\min_L$。要求整个动力学族共享同一个 $L$ 的
-$\min_L\sup_{\bar K}$ 是另一项更强问题。命题~\ref{prop:operational-defect-invariance}
+同一个 $\pi$ 服务于全部 $\bar K$，每个 $\bar K$ 拥有自己的最优 $L$；因此本文
+使用 $\sup_{\bar K}\min_L$。整个动力学族共享同一个 $L$ 对应更强的
+$\min_L\sup_{\bar K}$ 问题。命题~\ref{prop:operational-defect-invariance}
 保证式~\eqref{eq:eta-pi} 与原始空间上复合表示 $s_\pi\circ p$ 的缺陷完全
 相同。
 
@@ -182,8 +188,7 @@ $B$ 只有有限个任务保真分区，固定分区的宏观 kernel 空间是�
 
 精确情形有唯一最粗商；当 $\tau>0$ 时，达到同一最优值的分区一般不可比较，
 也通常不存在唯一最粗者。因此近似理论的规范对象是前沿
-$\mathcal E_{\bar\cK,\bar g}$ 及每一点的最优解集合，而不是预先指定的某个
-“最佳分区”。
+$\mathcal E_{\bar\cK,\bar g}$ 及每一点的最优解集合。
 
 \subsection{纤维预测直径：消去未知宏观核}
 
@@ -201,8 +206,7 @@ D_{\bar\cK}(\pi)
 \bigl\|p^{\pi}_{\bar K,b}-p^{\pi}_{\bar K,b'}\bigr\|_{\TV}.
 \label{eq:fiber-diameter}
 \end{equation}
-它不含未知的宏观 kernel，只检查将被合并的状态是否对下一宏观块给出一致
-预测。
+它完全由候选分区上的下一块分布构成，直接度量同一纤维内状态的预测分歧。
 
 \begin{lemma}[纤维半径--直径夹逼]
 \label{lem:radius-diameter}

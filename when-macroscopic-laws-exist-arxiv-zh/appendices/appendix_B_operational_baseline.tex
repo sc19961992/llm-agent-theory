@@ -1,10 +1,9 @@
-\section{操作性微观基线：构造、最小性与填充不变性}
+\section{可辨微观基线：构造、最小性与填充不变性}
 \label{app:operational-baseline}
 
-原始编码的状态数不是表示不变量：给每个状态附加一个不影响任何指定观测和
-动力学的复制标签，就能任意放大它。本附录给出正文所用操作性微观空间的完整
-构造。这个空间相对于预先声明的探针与允许动力学族是规范的；它不是脱离系统
-边界的绝对``真实微观空间''。它使主判据中的压缩项不受无意义编码填充影响。
+原始编码的状态数会随冗余复制标签任意增大。本附录构造正文所用的可辨微观
+空间；该空间由预先声明的探针与允许动力学族规范确定，并以既定系统边界为
+适用范围。由此得到的压缩项对无意义编码填充保持不变。
 
 \subsection{共同稳定的观测代数}
 
@@ -24,7 +23,7 @@
 \end{equation}
 其中 $\operatorname{alg}$ 表示 $\mathbb R^X$ 内生成的最小含幺点乘子代数。
 
-\begin{theorem}[操作性微观商]
+\begin{theorem}[可辨微观商]
 \label{thm:app-operational-core}
 序列~\eqref{eq:app-micro-algebra-iteration} 在有限步后稳定。设稳定代数为
 $\cA_{\mathrm{mic}}$，并令其诱导分区的商映射为
@@ -110,8 +109,8 @@ strong lumpability。反之，任一满足题设的稳定分区代数都包含�
 \end{proof}
 
 当 $\cK$ 是有限且各转移概率可比较时，式~\eqref{eq:app-stable-refinement}
-给出直接有限算法；对抽象无限核族，它仍是数学刻画，但不自动给出有限输入
-意义下的可执行检验程序。
+给出直接有限算法；对抽象无限核族，该式给出数学刻画，算法化还需要有限输入
+表示及处理上确界的有效程序。
 
 若任务 $g:X\twoheadrightarrow O$ 由已声明微观信息确定，即 $g=t\circ u$，
 则存在唯一 $\bar g:B\twoheadrightarrow O$ 使 $g=\bar g\circ p$。正文所称
@@ -121,7 +120,7 @@ strong lumpability。反之，任一满足题设的稳定分区代数都包含�
   \qquad \bar g=r\circ s.
 \]
 只有在 $|Y|<|B|$ 时，$s$ 才是严格信息商。状态比 $|Y|/|B|$ 在这个信息
-关系固定之后才具有本文所需的操作含义。
+关系固定之后才具有本文所需的判据含义。
 
 \begin{proposition}[约化前后闭合缺陷相同]
 \label{prop:app-operational-defect-equality}
@@ -174,7 +173,7 @@ $C^{(A)}:=\{(x,a):x\in C,\ a\in A_x\}$。
 
 \begin{theorem}[无意义复制填充不变性]
 \label{thm:app-padding-invariance}
-在条件~\eqref{eq:app-exact-padding} 下，填充系统的操作性微观空间
+在条件~\eqref{eq:app-exact-padding} 下，填充系统的可辨微观空间
 $B^{(A)}$ 与 $B$ 典范同构；该同构下，对应索引 $\theta$ 的诱导核相同。
 因而任一任务保真商 $s:B\twoheadrightarrow Y$ 的状态比 $|Y|/|B|$、精确
 闭合性质及正文定义的最坏行闭合缺陷均不受各复制数 $|A_x|$ 影响。
@@ -205,7 +204,7 @@ $B^{(A)}\cong B$。
 与 $d_\infty$ 缺陷也不变。
 \end{proof}
 
-定理~\ref{thm:app-padding-invariance} 只排除满足
-式~\eqref{eq:app-exact-padding} 的\emph{精确}无意义标签。若标签对探针或有限
-时间动力学有小但非零影响，是否把它视为可忽略自由度取决于另行声明的测量
-分辨率、统计置信度与时间尺度；本定理没有给出与这些选择无关的阈值。
+定理~\ref{thm:app-padding-invariance} 适用于满足
+式~\eqref{eq:app-exact-padding} 的\emph{精确}无意义标签。对探针或有限时间
+动力学具有小而非零影响的标签，需要依据另行声明的测量分辨率、统计置信度与
+时间尺度设定近似阈值。

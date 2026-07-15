@@ -1,7 +1,9 @@
 \section{近似闭合：最优核、纤维直径与复杂度--误差前沿}
 \label{app:approximate-theory}
 
-精确交换式在估计误差下不稳定；本附录把交换式缺陷作为近似对象，并给出主判据的闭合项。纤维半径--直径关系把含未知宏观核的最优闭合误差化为可由分区直接计算的预测直径。所有存在性结论都来自有限维紧性，不应被解释为高效发现算法。
+本附录以交换式缺陷定义近似闭合，并给出主判据的闭合项。纤维半径--直径
+关系把含未知宏观核的最优闭合误差化为可由分区直接计算的预测直径。有限维
+紧性保证下述最优值达到；相应计算效率需要另行分析。
 
 \subsection{固定连接通道的最优宏观核}
 
@@ -12,8 +14,8 @@ $Q\in\Stoch(X,Y)$。定义
   \label{eq:app-factor-defect}
 \end{equation}
 当该量不超过 $\eps$ 时，称 $Q$ 为从 $(X,K)$ 到 $(Y,L)$ 的
-$\eps$-近似动力学因子。这里 $K,L$ 仍是严格归一化的 Markov 核；近似的
-只是交换关系。
+$\eps$-近似动力学因子。这里 $K,L$ 保持严格归一化，$\eps$ 仅度量交换关系
+的缺陷。
 
 固定 $K,Q$，令
 \begin{equation}
@@ -45,7 +47,8 @@ $L_1,L_2$ 均最优，则目标的凸性说明它们的任意凸组合目标值�
 \end{proof}
 
 随机 $Q$ 下，即使 $\eta_Q(K)=0$，宏观核也未必唯一，因为线性映射
-$L\mapsto QL$ 可能不单射。下节的确定性满射情形在零误差时没有这一歧义。
+$L\mapsto QL$ 可能不单射。下节的确定性满射情形由满射性保证零误差宏观核
+唯一。
 
 \subsection{确定性分区的 Chebyshev 中心公式}
 
@@ -112,8 +115,8 @@ $L$ 的不同行可以彼此独立地在 $\Delta(Y)$ 中选择；每个单纯形
 纤维分布逐行唯一确定宏观核。
 \end{proof}
 
-界~\eqref{eq:app-diameter-radius} 的常数不能仅凭度量空间三角不等式改进；
-本文只使用它建立误差为零和误差趋零的等价，不声称 $D_q/2$ 总是精确半径。
+界~\eqref{eq:app-diameter-radius} 给出介于 $D_q/2$ 与 $D_q$ 之间的包围半径。
+后文使用其零点和渐近趋零等价；精确 Chebyshev 半径可以严格大于 $D_q/2$。
 
 \subsection{动力学族中的量词顺序}
 
@@ -126,8 +129,8 @@ $L$ 的不同行可以彼此独立地在 $\Delta(Y)$ 中选择；每个单纯形
  d_\infty(KQ_q,Q_qL_K).}
  \label{eq:app-sup-min}
 \end{equation}
-这里同一个 $q$ 必须适用于整族动力学，但宏观核 $L_K$ 可以随 $K$ 改变。
-这是\emph{$\sup_K\min_L$}，不是共享单一核所要求的
+这里同一个 $q$ 适用于整族动力学，宏观核 $L_K$ 可以随 $K$ 改变，因而量词
+顺序为\emph{$\sup_K\min_L$}。共享单一宏观核对应
 \begin{equation}
  \eta_q^{\mathrm{shared}}(\cK)
  :=\min_{L\in\Stoch(Y,Y)}\sup_{K\in\cK}
@@ -142,7 +145,8 @@ $L$ 的不同行可以彼此独立地在 $\Delta(Y)$ 中选择；每个单纯形
   \min_L\sup_K d_\infty(KQ_q,Q_qL).
   \label{eq:app-minimax-order}
 \end{equation}
-除非另行证明二者相等，正文的系统族判据不产生一个对所有 $K$ 通用的转移核。
+正文的系统族判据采用前一种量词；对所有 $K$ 通用的转移核需要另行验证两种
+极小极大量相等或直接控制式~\eqref{eq:app-min-sup}。
 
 定义
 \begin{equation}
@@ -158,7 +162,7 @@ $D_{\cK}(\pi):=D_{q_\pi}(\cK)$。
   \label{eq:app-family-diameter-radius}
 \end{equation}
 因此 $D_q(\cK)\to0$ 与本文所用
-$\sup_K\min_L$ 缺陷趋零等价到固定常数，而不需要先估计任何 $L_K$。
+$\sup_K\min_L$ 缺陷趋零等价到固定常数，并可直接由分区预测直径检验。
 
 \subsection{核族的任务相对复杂度--误差前沿}
 
@@ -199,14 +203,14 @@ $g=r_\pi\circ q_\pi$。对 $|O|\le m\le|X|$，令
   \label{eq:app-exact-frontier-threshold}
   \end{equation}
 \end{enumerate}
-这里没有声称 $\sup_{K\in\cK}$ 必由某个 $K$ 达到。
+这里的外层量是上确界，并允许其不由某个 $K$ 达到。
 \end{theorem}
 
 \begin{proof}
 有限集只有有限多个分区，$\mathfrak P_m(g)$ 非空且有限；例如离散分区在
 $m=|X|$ 时属于其中。对每个固定分区与固定 $K$，
-定理~\ref{thm:app-optimal-kernel} 给出最优宏观核。虽然核族可以无限，
-$\eta_{q_\pi}(\cK)$ 对每个分区仍是一个良定义的上确界；外层只在有限个
+定理~\ref{thm:app-optimal-kernel} 给出最优宏观核。核族允许为无限集，
+$\eta_{q_\pi}(\cK)$ 对每个分区是一个良定义的上确界；外层只在有限个
 分区上取最小值，故达到。增大 $m$ 只扩张可行集，得到单调性。离散分区
 以 $L_K=K$ 对每个 $K$ 实现零误差。
 
@@ -246,8 +250,8 @@ $c_{\cK}^\tau(g)$ 随 $\tau$ 单调不增；在 $\tau=0$ 时，它与
 \end{equation}
 因此两条前沿的零点与渐近趋零行为相同。精确情形由
 定理~\ref{thm:app-minimal-task-quotient} 给出唯一最粗商；当 $\tau>0$ 时，
-达到同一最优状态数或同一前沿值的分区一般不可比较，故不应声称存在唯一
-最粗的近似最优分区。规范对象是前沿及各点的全部最优解集合。
+达到同一最优状态数或同一前沿值的分区一般不可比较。近似理论的规范对象是
+前沿及各点的全部最优解集合。
 
 当 $\cK=\{K\}$ 时，简记
 \[
@@ -318,7 +322,7 @@ $\widehat K$ 下相距至多 $\delta$；对任意一对行使用反三角不等�
 $\tau+\delta$；交换二者即得式~\eqref{eq:app-horizontal-robustness}。
 \end{proof}
 
-最后给出正文 $\Gamma$ 判据所需的直接稳健形式。设同一有限操作性微观空间
+最后给出正文 $\Gamma$ 判据所需的直接稳健形式。设同一有限可辨微观空间
 $B$ 上有同索引核族 $\{K_\theta\}_{\theta\in\Theta}$ 与估计族
 $\{\widehat K_\theta\}_{\theta\in\Theta}$，且
 \[
@@ -341,4 +345,4 @@ $D_{\cK}(\pi)=\sup_\theta D_{q_\pi}(K_\theta)$，并定义
 \end{equation}
 这是确定性的模型扰动结论。只有在另行给出
 $d_\infty(K_\theta,\widehat K_\theta)$ 的统计置信界后，它才成为高概率
-统计证书；本文不从有限性本身推出样本复杂度。
+统计证书；样本复杂度由该置信界及相应估计模型决定。

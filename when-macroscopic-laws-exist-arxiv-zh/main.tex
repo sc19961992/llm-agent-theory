@@ -12,7 +12,7 @@
 \maketitle
 
 \begin{abstract}
-本文研究一个有限状态且边界明确的问题：给定任务、微观观测和允许的 Markov 动力学，何时能够把大量微观状态归并为少量宏观状态，同时保留任务并使宏观状态近似自行演化？为避免通过复制无意义标签制造伪压缩，我们先构造对严格冗余不变的操作性微观空间。在该空间上，本文依次建立两个有限规模基准：任务保真且精确闭合的唯一最粗商，以及允许误差时实际达到的复杂度--闭合前沿。对增长系统族，我们再定义只依赖任务分区及纤维预测分歧的指标 $\Gamma_N$，并证明 $\Gamma_N\to0$ 当且仅当存在同一列任务保真表示，其相对状态数与最优最坏行闭合误差同时趋零。因而，该指标给出了本文设定下低复杂度宏观规律存在的压缩--闭合充要判据，而不是规律普遍存在的假设。可交换故障--修复系统给出非平凡正例：$2^N$ 个配置的唯一最粗精确任务商恰有 $N+1$ 个故障数状态；带单点任务的循环链则满足 $\Gamma_N=1$，说明有限性本身不保证宏观简化。正文最后说明残余对称和 Transformer 预测状态如何提供候选表示；Transformer 的完整分布加权构造保留在附录，并明确列出其成为最坏情形 $\Gamma_N$ 证书所需的额外对齐条件。标准 Borel 空间、随机粗粒化、连续时间、相结构和范畴表述也完整保留在附录，但不被写成有限主定理已经证明的推广。
+本文研究一个边界明确的有限状态问题：给定任务、微观观测和允许的 Markov 动力学，何时能够把大量微观状态归并为较少的宏观状态，同时保留任务并使宏观状态近似自行演化？我们首先构造对严格冗余不变的可辨微观空间。在该空间上，本文建立任务保真且精确闭合的唯一最粗商，以及允许误差时实际达到的复杂度--闭合前沿。对增长系统族，我们定义只依赖任务分区和纤维预测分歧的指标 $\Gamma_N$，并证明 $\Gamma_N\to0$ 当且仅当存在同一列任务保真表示，其相对状态数与最优最坏行闭合误差同时趋零。因此，$\Gamma_N$ 给出本文系统类中低复杂度宏观规律存在的压缩--闭合充要判据。置换对称故障--修复系统提供一个非平凡正例：$2^N$ 个配置的唯一最粗精确任务商恰有 $N+1$ 个故障数状态；单点标记循环链满足 $\Gamma_N=1$，给出不可渐近压缩的对照族。正文进一步说明任务充分性、群对称和递推下一-token表示如何构造候选。附录给出有限自回归模型的分布加权定理，并列出 Transformer 实例提升为最坏情形 $\Gamma_N$ 证书所需的条件；其余附录讨论标准 Borel 空间、随机粗粒化、连续时间、群轨道分离事件和范畴表述的数学接口。
 
 \medskip
 \noindent\textbf{关键词：}Markov 粗粒化；状态压缩；宏观闭合；任务保真；压缩—闭合判据；lumpability；预测状态
@@ -22,7 +22,7 @@
 \begin{minipage}{0.94\textwidth}
 \small
 \textbf{English abstract.}
-We ask when a family of finite stochastic systems admits a task-relative, low-complexity macroscopic law. After quotienting exact operational redundancies, we identify the unique coarsest task-preserving exact quotient and the attained complexity--closure frontier for each finite system. We then define an explicit index $\Gamma_N$, requiring no prespecified macroscopic transition kernel, and prove that $\Gamma_N\to0$ if and only if one sequence of task-preserving quotients has both vanishing relative state count and vanishing optimized worst-row one-step closure defect. A permutation-invariant fault--repair family gives a nontrivial exact example with $2^N$ microscopic configurations and a minimal $(N+1)$-state quotient, whereas a marked cycle has $\Gamma_N=1$. Transformer predictive states and several mathematical extensions are retained as scoped appendices. The criterion is task-relative and one-step; it does not assert universal simplicity, efficient discovery, causal autonomy, or long-horizon accuracy.
+We ask when a family of finite stochastic systems admits a task-relative, low-complexity macroscopic law. After quotienting exact observational and dynamical redundancies, we identify the unique coarsest task-preserving exact quotient and the attained complexity--closure frontier for each finite system. We then define an explicit index $\Gamma_N$, requiring no prespecified macroscopic transition kernel, and prove that $\Gamma_N\to0$ if and only if one sequence of task-preserving quotients has both vanishing relative state count and vanishing optimized worst-row one-step closure defect. A permutation-invariant fault--repair family gives a nontrivial exact example with $2^N$ microscopic configurations and a minimal $(N+1)$-state quotient, whereas a marked cycle has $\Gamma_N=1$. The theorem covers task-relative one-step closure on finite state spaces. An appendix proves a distribution-weighted result for recursive next-token representations of finite autoregressive generators, with Transformers as an instance; further appendices treat standard Borel factors, stochastic coarse-grainings, and continuous-time dynamics under their respective additional hypotheses.
 \end{minipage}
 \end{center}
 

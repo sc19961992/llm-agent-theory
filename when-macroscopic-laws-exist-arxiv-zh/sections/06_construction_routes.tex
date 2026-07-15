@@ -1,13 +1,13 @@
-\section{从判据到证书：候选表示如何产生}
+\section{候选表示的三类充分构造}
 \label{sec:construction}
 
-定理~\ref{thm:gamma-characterization} 判断候选是否足够压缩且闭合，却不替具体模型发现候选分区。实际证明通常分成两步：先由任务充分性、对称性或预测结构提出一个表示，再把它的状态比例与纤维预测分歧代入 $\Gamma_N$。本节给出三种常见的充分路线；它们都不是主定理暗含的必要机制。
+定理~\ref{thm:gamma-characterization} 给出候选表示的判别条件。具体模型可由任务充分性、群对称或预测结构构造候选，再验证其状态比例与纤维预测分歧。本节给出三类常用的充分构造。
 
-\subsection{任务本身已经足够}
+\subsection{任务变量作为充分表示}
 
-若任务变量 $\bar g(b)$ 的下一步分布只依赖当前任务值，则 $s=\bar g$ 本身精确闭合。任何任务保真表示至少需要 $|O|$ 个状态，所以它同时达到状态数的绝对下界。关键条件是任务纤维内的转移一致，而不是“任务标签很少”；循环链正说明后者单独并无作用。
+若任务变量 $\bar g(b)$ 的下一步分布只依赖当前任务值，则 $s=\bar g$ 本身精确闭合。任何任务保真表示至少需要 $|O|$ 个状态，所以它同时达到状态数的绝对下界。任务标签构成精确商的局部条件是任务纤维内的下一任务分布一致；循环链给出标签数很少而该条件失败的情形。
 
-\subsection{残余对称给出轨道证书}
+\subsection{群对称给出轨道证书}
 
 设有限群 $H$ 作用在 $B$ 上，轨道映射为 $q_H:B\twoheadrightarrow B/H$。若任务在轨道上不变，并定义统一近似等变缺陷
 \[
@@ -25,33 +25,33 @@ D_{\bar\cK}(\ker q_H)\le\eps_H(\bar\cK),
 \end{equation}
 若轨道数满足 $|B_N/H_N|=o(|B_N|)$，任务在轨道上不变，且 $\eps_{H_N}(\bar\cK_N)\to0$，轨道分区便直接证明 $\Gamma_N\to0$。故障--修复系统中的坐标置换给出 $\eps_{H_N}=0$ 的精确例子。
 
-这里需要区分两个问题：式~\eqref{eq:symmetry-certificate} 检验一个已经给定的轨道表示是否闭合；训练或随机机制是否以高概率形成某种残余对称相，则是另一项概率命题。两者不存在无条件蕴含，完整条件和反模型见附录~\ref{app:structural-certificates}。
+式~\eqref{eq:symmetry-certificate} 检验给定轨道表示的闭合性。随机候选是否以高概率呈现群轨道分离结构是另一项概率命题；附录~\ref{app:structural-certificates}分别给出两类证书的条件，附录~\ref{app:examples-counterexamples}给出两个方向的反模型。
 
-\subsection{Transformer 预测状态：先构造，再对齐}
+\subsection{递推下一-token表示：Transformer 实例}
 
-把历史按未来预测分组，是计算力学中预测状态构造的基本思路\citep{CrutchfieldYoung1989,ShaliziCrutchfield2001}。附录~\ref{app:transformer-predictive-states} 将该思路用于固定边界的自回归 Transformer\citep{VaswaniEtAl2017}，并把结论分成两个逻辑层次。
+用未来预测组织历史，是计算力学和预测状态表示中的基本思路\citep{CrutchfieldYoung1989,ShaliziCrutchfield2001,LittmanSuttonSingh2001}。附录~\ref{app:transformer-predictive-states}研究固定边界的有限自回归生成器；Transformer\citep{VaswaniEtAl2017}是其中一个实例。该定理只使用模型的条件分布、完整 Markov 状态和确定性 token 更新，结论分为分布加权闭合与最坏情形判据两层。
 
 \paperclaim{分布加权候选。}
-若参考语言具有少量且可递推的预测状态（T1），Transformer 在声明历史分布下学到总体下一 token 条件分布（T2），并且预测状态可以从完整推理状态读出（T3），则可以显式构造预测状态读出 $q_N$、token 读出 $R_N$ 和宏观转移 $L_N$。令
+假设 T1 给定参考条件分布的有限递推下一-token表示 $s_N$、token 读出 $R_N$、更新 $F_N$ 及其相对状态数界，T2 给定模型条件分布相对于参考分布的总体 KL 界，T3 给定该表示从完整推理状态的确定性读出 $q_N$。由 $R_N$ 与 $F_N$ 可显式定义宏观转移 $L_N$。令
 \[
 \varepsilon_N=\eta_N+\sqrt{\delta_N/2},
 \]
-其中 $\eta_N$ 是参考语言的预测状态读出误差，$\delta_N$ 是模型相对参考语言的总体条件 KL 误差。附录~\ref{app:transformer-predictive-states}证明：下一 token 误差与一步闭合误差在声明状态分布 $\nu_N$ 加权的 TV 意义下均不超过 $\varepsilon_N$；若预测状态只有近似递推，闭合界再加递推缺陷 $\zeta_N$。
+其中 $\eta_N$ 是参考过程的下一-token读出误差，$\delta_N$ 是模型相对参考过程的总体条件 KL 误差。附录~\ref{app:transformer-predictive-states}证明：下一 token 误差与一步闭合误差在声明状态分布 $\nu_N$ 加权的 TV 意义下均不超过 $\varepsilon_N$；若该表示只有近似递推，闭合界再加递推缺陷 $\zeta_N$。
 
-\paperclaim{接入最坏情形判据。}
-加权候选还不是正文的 $\Gamma_N$ 证书。若进一步证明：$q_N$ 经操作性微观空间 $B_N$ 因子化并精确保留正文声明的确定性任务；其像 $Y_N$ 满足
+\paperclaim{提升为最坏情形证书。}
+将加权候选提升为正文的 $\Gamma_N$ 证书，令 $Y_N:=S_N$；需要存在满射 $\bar q_N:B_N\twoheadrightarrow Y_N$，使完整状态读出满足 $q_N=\bar q_N\circ p_N$，且 $\bar q_N$ 精确保留正文声明的确定性任务；其像 $Y_N$ 满足
 \[
 \frac{|Y_N|}{|B_N|}\le c_N;
 \]
 并且对每个 $\bar K\in\bar\cK_N$ 都存在相应的宏观核 $L_{N,\bar K}$，使全状态最坏逐行误差满足
 \[
-d_\infty(\bar KQ_{q_N},Q_{q_N}L_{N,\bar K})\le r_N,
+d_\infty(\bar KQ_{\bar q_N},Q_{\bar q_N}L_{N,\bar K})\le r_N,
 \]
 那么同一纤维内两行到共同宏观行的距离都不超过 $r_N$，三角不等式给出纤维直径至多 $2r_N$，从而
 \begin{equation}
 \Gamma_N\le\max\{c_N,2r_N\}.
 \label{eq:transformer-gamma-bridge}
 \end{equation}
-因此 $c_N,r_N\to0$ 足以推出正文意义下的 $\Gamma_N\to0$。完整定理、Pinsker--Jensen 误差推导、近似递推、多步边缘界和式~\eqref{eq:transformer-gamma-bridge}的严格对齐命题均见附录~\ref{app:transformer-predictive-states}。
+因此 $c_N,r_N\to0$ 推出 $\Gamma_N\to0$。完整定理、Pinsker--Jensen 误差推导、近似递推、多步边缘界和式~\eqref{eq:transformer-gamma-bridge}的充分条件见附录~\ref{app:transformer-predictive-states}。
 
-从分布加权误差到 $r_N$ 仍需统一逐行控制，或足以把平均界提升为最坏界的覆盖质量条件；随机的下一 token 通道也不能自动替代确定性任务的精确保真。若 $q_N$ 只保证从完整历史读取，结论是生成行为的低复杂度预测商；只有它能从指定 hidden states 或 KV cache 中稳定读出，才进一步支持内部表征结论。上述任何条件都不推出参数空间或 hidden states 必位于低维流形。
+从分布加权误差得到 $r_N$ 需要统一逐行界或覆盖质量下界。随机下一-token通道与确定性任务保真分别检验。由完整历史读出支持生成行为的基数受控递推表示；经 $B_N$ 因子化后才构成正文意义的信息商。由指定 hidden states 或 KV cache 稳定读出进一步支持内部表征。参数空间或 hidden states 的低维几何属于独立命题。

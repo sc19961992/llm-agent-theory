@@ -7,7 +7,7 @@
 (X_N,\cK_N,u_N,g_N),
 \qquad |B_N|\longrightarrow\infty,
 \]
-并沿用第~\ref{sec:operational}节的操作性微观空间 $B_N$、诱导任务
+并沿用第~\ref{sec:operational}节的可辨微观空间 $B_N$、诱导任务
 $\bar g_N$ 和诱导核族 $\bar\cK_N$。简记
 \[
 c_N^\tau:=c_{\bar\cK_N}^{\tau}(\bar g_N).
@@ -19,7 +19,7 @@ $\tau_N\to0$ 使
 c_N^{\tau_N}=o(|B_N|).
 \label{eq:LC}
 \end{equation}
-这要求同一列任务保真表示同时承担两件事：其状态数相对于操作性微观基线
+这要求同一列任务保真表示同时承担两件事：其状态数相对于可辨微观基线
 趋零，其最优一步闭合误差也趋零。
 
 \subsection{联合指标是前沿到原点的距离}
@@ -43,7 +43,7 @@ D_{\bar\cK_N}(\pi)
 \label{eq:Gamma}
 \end{align}
 第一行把 $\Gamma_N$ 表示为归一化复杂度--直径前沿到原点的
-$\ell^\infty$ 距离；第二行是不需要先计算整条前沿的直接形式。两式相等：
+$\ell^\infty$ 距离；第二行直接在全部任务保真分区上优化。两式相等：
 任一大小为 $k$ 的分区在第一行取 $m=k$ 给出相同或更小的候选值；反之，
 达到 $\mathcal D(m)$ 的分区实际大小不超过 $m$，在第二行给出相同或更小的
 候选值。
@@ -111,9 +111,8 @@ $\Lambda_N\to0$，再由式~\eqref{eq:gamma-lambda-sandwich} 等价于条件 3�
 分区的 $\eta$；所以条件 2 也等价于 $\Lambda_N\to0$。
 \end{proof}
 
-条件 2 中的最优宏观 kernel 允许随 $N$ 和 $\bar K$ 改变；要求整个允许
-动力学族共享同一个 $L$ 是更强的 $\min_L\sup_{\bar K}$ 问题。定理也没有
-断言所有有限系统族都满足条件：它把存在性化为同一列任务保真分区上的联合
+条件 2 中的最优宏观 kernel 允许随 $N$ 和 $\bar K$ 改变；整个允许
+动力学族共享同一个 $L$ 对应更强的 $\min_L\sup_{\bar K}$ 问题。定理把存在性化为同一列任务保真分区上的联合
 判据。若取达到 $\Gamma_N$ 的分区，则其相对状态数不超过 $\Gamma_N$，且
 由式~\eqref{eq:radius-diameter}，其真实最优闭合缺陷也不超过
 $\Gamma_N$；因此每个有限规模上的证书是可达到的。
@@ -124,7 +123,7 @@ $\Gamma_N$；因此每个有限规模上的证书是可达到的。
 \[
 \frac{|O_N|}{|B_N|}\to0.
 \]
-该条件一般不充分。
+充分性还要求纤维预测直径同时趋零。
 \end{corollary}
 
 \begin{proof}
@@ -132,7 +131,5 @@ $\Gamma_N$；因此每个有限规模上的证书是可达到的。
 $|O_N|\le c_N^{\tau_N}=o(|B_N|)$。
 \end{proof}
 
-有限达到只说明满足给定目标的最优对象存在，不说明它能被高效发现，也不
-说明其描述长度、参数量或计算成本最小。$\Gamma_N$ 的实际检验范围和估计
-误差见第~\ref{sec:verification}节；循环链反例说明有限 Markov 性本身不能
-推出 $\Gamma_N\to0$，见附录~\ref{app:examples-counterexamples}。
+有限达到确立每个规模上的最优对象。计算效率、描述长度、参数量和求值成本属于独立问题。$\Gamma_N$ 的实际检验范围和估计
+误差见第~\ref{sec:verification}节；附录~\ref{app:examples-counterexamples}给出 $\Gamma_N=1$ 的循环链边界例。

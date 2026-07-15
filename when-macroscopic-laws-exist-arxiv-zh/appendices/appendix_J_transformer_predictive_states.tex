@@ -1,9 +1,10 @@
 \providecommand{\TransformerEquationPrefix}{\thesection}
 
-\section{Transformer 预测状态：分布加权构造与主判据对齐}
+\section{自回归模型的递推下一-token表示：分布加权闭合与
+\texorpdfstring{$\Gamma_N$}{Gamma-N} 判据}
 \label{app:transformer-predictive-states}
 
-本节把正文中关于 Transformer 的构造例写成一个自包含的有限状态定理。它回答的范围很窄：在一个已经固定边界的自回归生成系统中，如果语言本身具有少量、可递推的预测状态，模型又学到了相应的下一 token 条件分布，而且这些预测状态能从模型完整状态中读出，那么状态数比例给出相对于声明基线的压缩项，递推性与学习误差界共同给出分布加权闭合。本节不证明三个前提对任意语言或任意 Transformer 自动成立。
+本节给出一个自包含的有限状态定理。它适用于边界固定的自回归生成器，只使用实际采样条件分布、完整 Markov 状态和 token 驱动的状态更新；Transformer\citep{VaswaniEtAl2017} 是主要实例，证明本身不依赖 attention 或特定参数化。假设参考条件分布具有相对状态数受控的递推下一-token表示，模型条件分布满足总体 KL 界，且该表示与模型完整状态相容。定理据此控制给定表示的分布加权下一-token误差与一步闭合误差。
 
 \subsection{系统边界与统一记号}
 
@@ -12,9 +13,9 @@
  P_N(\,\cdot\mid h),\qquad \widehat P_N(\,\cdot\mid h)
  \in\Delta(\mathcal V_N)
 \]
-分别为参考语言与 Transformer 在历史 $h$ 后的下一 token 条件分布，并令 $\mu_N\in\Delta(\mathcal H_N)$ 为预先声明的历史分布。$P_N$ 必须在所有声明历史上有定义；若自由生成会离开这些历史，则离开部分属于部署失配，不能继续由同一个 $\mu_N$ 下的结论覆盖。
+分别为参考过程与模型在历史 $h$ 后的下一 token 条件分布，并令 $\mu_N\in\Delta(\mathcal H_N)$ 为预先声明的历史分布。这里 $\widehat P_N$ 表示经过温度、截断或其他固定解码变换后的实际采样分布；确定性解码对应 Dirac 分布。$P_N$ 在全部声明历史上有定义，结论覆盖 $\mu_N$ 赋予质量的历史；自由生成到达其他历史时需要相应 rollout 分布上的附加界。
 
-令 $X_N^{\mathrm{reach}}$ 为可达的完整推理状态集，$x_N(h)\in X_N^{\mathrm{reach}}$ 为读取 $h$ 后的状态。完整状态包括使下一步生成满足 Markov 性所需的全部量，例如历史、位置、KV cache、解码器状态以及已纳入模型边界的环境状态。形式上，假定下式右端只依赖 $x_N(h)$：
+令 $X_N^{\mathrm{reach}}$ 为可达的完整推理状态集，$x_N(h)\in X_N^{\mathrm{reach}}$ 为读取 $h$ 后的状态。完整状态包括使下一步生成满足 Markov 性所需的全部量；对 Transformer，可包括历史、位置、KV cache、解码器状态以及已纳入模型边界的环境状态。形式上，假定下式右端只依赖 $x_N(h)$：
 \[
  \begin{aligned}
  G_N^{\mathrm{next}}(x_N(h),a)
@@ -26,6 +27,12 @@
  \end{aligned}
 \]
 若相同完整状态可能由多个历史表示，这一假定同时要求上述条件分布与 token 后继状态保持一致；把完整历史纳入状态即可保证它。
+
+为与正文的复杂度基线比较，再把 $X_N^{\mathrm{reach}}$ 作为有限观测--动力学呈现的原始状态空间，并记其可辨微观商为
+\[
+ p_N:X_N^{\mathrm{reach}}\twoheadrightarrow B_N.
+\]
+T1c 仅使用基数比 $|S_N|/|B_N|$；读出 $q_N$ 经 $B_N$ 因子化以及任务保真属于本附录最后一节提升为 $\Gamma_N$ 证书时加入的条件。
 
 对确定性映射 $f:A\to B$，记其对应的通道为
 \[
@@ -43,13 +50,13 @@
  \qquad
  \|p-r\|_{\TV}:=\frac12\sum_z|p(z)-r(z)|.
 \]
-这个距离只控制 $\nu_N$ 实际赋予质量的状态，不是全状态最坏情形距离。
+该距离是 $\nu_N$ 支撑上的平均逐行 TV 距离；全状态最坏情形由正文的 $d_\infty$ 度量。
 
 \subsection{三个假设}
 
-以下三个假设分别描述语言结构、学习误差与内部可读出性；三者不能相互替代。
+以下三个假设共同描述参考过程的递推表示、模型分布误差及该表示与完整状态的相容性。
 
-\paragraph{假设 T1（低复杂度递推预测状态）.}
+\paragraph{假设 T1（低相对状态数的递推下一-token表示）.}
 存在有限集合 $S_N$、满射 $s_N:\mathcal H_N\twoheadrightarrow S_N$、读出 kernel
 $R_N:S_N\rightsquigarrow\mathcal V_N$ 和确定性更新
 $F_N:S_N\times\mathcal V_N\to S_N$，使所有相关扩展满足
@@ -64,14 +71,14 @@ $F_N:S_N\times\mathcal V_N\to S_N$，使所有相关扩展满足
  \le \eta_N.
  \tag{T1b}\label{eq:T1-readout}
 \]
-相对于正文中事先固定的操作性微观基线 $B_N$，还要求
+相对于正文中事先固定的可辨微观基线 $B_N$，还要求
 \[
  \frac{|S_N|}{|B_N|}\le\lambda_N.
  \tag{T1c}\label{eq:T1-complexity}
 \]
-式 \eqref{eq:T1-recursion} 是闭合的结构前提；仅有少状态的下一 token 读出并不足以推出闭合。
+式 \eqref{eq:T1-recursion} 提供闭合所需的递推结构；T1b 单独给出的下一-token读出误差只控制输出分布。
 
-\paragraph{假设 T2（总体下一 token 学习）.}
+\paragraph{假设 T2（总体下一-token KL 界）.}
 以自然对数计算 KL 散度，并假定
 \[
  \delta_N
@@ -82,16 +89,16 @@ $F_N:S_N\times\mathcal V_N\to S_N$，使所有相关扩展满足
  \right)<\infty.
  \tag{T2}\label{eq:T2-kl}
 \]
-这是声明分布上的总体额外交叉熵。有限训练集或测试集上的经验成功若没有泛化界，不能代替 \eqref{eq:T2-kl}。
+这是声明分布上的总体额外交叉熵。从有限训练或测试误差得到式~\eqref{eq:T2-kl} 需要相应的总体泛化界。
 
-\paragraph{假设 T3（预测状态可由完整状态确定）.}
+\paragraph{假设 T3（递推表示与完整状态相容）.}
 在可达状态上存在确定性满射
 \[
  q_N:X_N^{\mathrm{reach}}\twoheadrightarrow S_N,
  \qquad q_N(x_N(h))=s_N(h).
  \tag{T3}\label{eq:T3-readout}
 \]
-如果 $q_N$ 允许读取完整历史，这通常是一个构造条件；如果要求 $q_N$ 只能读取指定层的 hidden states 或 KV cache，它就是需要独立验证的神经表征假设。
+允许 $q_N$ 读取完整历史时，T3 通常是构造性相容条件；限制 $q_N$ 只能读取指定层的 hidden states 或 KV cache 时，T3 成为需要独立验证的神经表征假设。
 
 \subsection{加权 TV 定理与证明}
 
@@ -102,7 +109,7 @@ $F_N:S_N\times\mathcal V_N\to S_N$，使所有相关扩展满足
  \tag{\TransformerEquationPrefix.1}\label{eq:transformer-macro-kernel}
 \]
 
-\begin{theorem}[自回归预测状态的分布加权闭合]
+\begin{theorem}[递推下一-token表示的分布加权闭合]
 \label{thm:transformer-weighted-closure}
 在假设 \textup{T1--T3} 下，令
 \[
@@ -123,13 +130,13 @@ $F_N:S_N\times\mathcal V_N\to S_N$，使所有相关扩展满足
  \right)\le\varepsilon_N.
  \tag{\TransformerEquationPrefix.4}\label{eq:transformer-closure-bound}
 \]
-同时，候选宏观过程使用 $|S_N|$ 个状态，并满足
+同时，候选表示及其一步宏观核使用 $|S_N|$ 个状态，并满足
 $|S_N|/|B_N|\le\lambda_N$。因此，若
 $\eta_N,\delta_N,\lambda_N\to0$，则下一 token 读出误差、一步闭合误差与相对状态数同时趋于零。
 \end{theorem}
 
 \begin{proof}
-固定 $h\in\mathcal H_N$。Pinsker 不等式给出
+固定 $h\in\mathcal H_N$。Pinsker 不等式\citep{CoverThomas2006}给出
 \[
  \left\|P_N(\cdot\mid h)-\widehat P_N(\cdot\mid h)\right\|_{\TV}
  \le
@@ -192,7 +199,7 @@ $R_N(s,\cdot)$ 经同一映射推前所得的分布。TV 距离在 Markov kernel
 \end{proof}
 
 \begin{remark}[精确情形]
-若 $\eta_N=\delta_N=0$，两项加权误差均为零。只有当 $\mu_N$ 对声明历史具有全支撑时，这才进一步推出所有相关历史上的逐点等式；没有全支撑时，零加权误差仍不约束零质量历史。
+若 $\eta_N=\delta_N=0$，两项加权误差均为零。全支撑的 $\mu_N$ 把该结论提升为全部相关历史上的逐点等式；一般 $\mu_N$ 给出其支撑上的结论。
 \end{remark}
 
 \subsection{可选的近似递推扩展}
@@ -240,7 +247,7 @@ $a\mapsto F_N(s,a)$ 推前，推前后的 TV 距离不超过推前前的距离�
 
 \subsection{由一步闭合到固定时长的状态边缘}
 
-定理 \ref{thm:transformer-weighted-closure} 只给出一个声明分布下的一步结论。要控制自由生成的多个时刻，必须在实际 rollout 分布上逐时刻验证相应的一步误差。
+定理 \ref{thm:transformer-weighted-closure} 给出声明分布下的一步结论。自由生成的多时刻控制需要在实际 rollout 分布上逐时刻验证相应的一步误差。
 
 \begin{proposition}[固定时长的宏观状态边缘]
 \label{prop:transformer-fixed-horizon}
@@ -296,38 +303,37 @@ $E_{t+1}\le e_t+\rho E_t$；展开递推即得
 \begin{remark}[固定时长与增长时长]
 对固定 $T$，只要各时刻 rollout 上的 $e_{N,t}\to0$，式
 \eqref{eq:fixed-horizon-bound} 就给出边缘误差趋零。若时长 $T_N$ 随系统规模增长，则还需
-$\sum_{t<T_N}e_{N,t}\to0$，或使用具有统一收缩常数的界。这里的收缩只控制宏观状态边缘；已经输出的完整 token 轨迹需要另行作顺序耦合，不能由状态边缘收缩自动推出。
+$\sum_{t<T_N}e_{N,t}\to0$，或使用具有统一收缩常数的界。这里的收缩控制宏观状态边缘；完整 token 轨迹由另行给出的顺序耦合控制。
 \end{remark}
 
 \subsection{与正文压缩—闭合判据的关系}
 \label{sec:transformer-gamma-relation}
 
-正文的 $\Gamma_N$ 是操作性微观核上的、任务保真的、最坏情形系统族判据；定理
-\ref{thm:transformer-weighted-closure} 是给定 Transformer 与给定历史分布上的候选构造。二者有三项本质差异。
+正文的 $\Gamma_N$ 是可辨微观空间上的、任务保真的、最坏情形系统族判据；定理
+\ref{thm:transformer-weighted-closure} 控制给定自回归模型、给定递推表示与给定历史分布上的加权误差。将后者提升为前者需要以下三项条件。
 
 \begin{enumerate}
  \item \textbf{误差范数不同。}
- Transformer 定理使用 $d_{\nu_N}$，因而忽略零质量状态并允许小质量状态有大误差；$\Gamma_N$ 使用所有操作性微观状态上的最坏逐行误差。要对齐，必须直接证明统一逐行界，或者给操作性微观核上的验证分布一个下质量界 $\omega_N>0$，并要求
+ 加权定理使用 $d_{\nu_N}$，因而忽略零质量状态并允许小质量状态有大误差；$\Gamma_N$ 使用全部可辨微观状态上的最坏逐行误差。所需提升可以来自统一逐行界，也可以来自可辨微观空间上验证分布的质量下界 $\omega_N>0$，并要求
  $\varepsilon_N/\omega_N\to0$（近似递推时改为
- $(\varepsilon_N+\zeta_N)/\omega_N\to0$）。仅有每个有限 $N$ 的全支撑不够，因为最小质量可能随 $N$ 快速趋零。
+ $(\varepsilon_N+\zeta_N)/\omega_N\to0$）。每个有限 $N$ 的全支撑还需配合最小质量的渐近控制。
 
  \item \textbf{信息层级与任务条件不同。}
- Transformer 定理的 $q_N$ 首先是可达完整状态上的预测状态读出，$B_N$ 在 T1 中只作为预先固定的复杂度基线；而 $\Gamma_N$ 只在由微观探针与允许动力学生成的操作性微观核上比较严格信息商，并要求声明任务精确因子化。要对齐，需证明存在满射 $\bar q_N:B_N\twoheadrightarrow S_N$ 使
+ 加权定理的 $q_N$ 是可达完整状态上的递推表示读出，$B_N$ 在 T1 中作为预先固定的复杂度基线；$\Gamma_N$ 在由微观探针与允许动力学生成的可辨微观空间上比较严格信息商，并要求声明任务精确因子化。所需条件是存在满射 $\bar q_N:B_N\twoheadrightarrow S_N$ 使
  $q_N=\bar q_N\circ p_N$，并且 $\bar q_N$ 是相对于 $B_N$ 的真正信息商，满足
- $\bar g_N=\widetilde g_N\circ\bar q_N$。此外，正文 $\bar g_N$ 是确定性任务映射，而下一 token 预测是随机任务通道。式
- \eqref{eq:transformer-token-bound} 只给出后者的近似读出；要么另选一个被 $\bar q_N$ 精确保留的确定性任务，要么把随机任务通道的缺陷显式加入扩展版指标，不能直接套用正文的精确任务约束。
+ $\bar g_N=\widetilde g_N\circ\bar q_N$。正文 $\bar g_N$ 是确定性任务映射，下一-token预测是随机通道。可以另选一个被 $\bar q_N$ 精确保留的确定性任务，也可以在扩展指标中显式加入随机任务通道的缺陷；两种方案分别对应精确与近似任务约束。
 
  \item \textbf{系统族量词不同。}
- Transformer 定理为一个固定模型、解码规则和参考分布构造一个 $q_N$ 与 $L_N$；$\Gamma_N$ 对预先声明的 kernel 族取最坏情形，并在全部任务保真分区中优化。要对齐，同一个分区 $\pi_N$ 必须对族中每个 kernel 都满足统一闭合界，且
- $|\pi_N|/|B_N|\to0$。若语义要求整个系统族共享同一个宏观 kernel，还必须把“逐 kernel 选择 $L$”强化为“存在一个共同的 $L_N$”；这对应不同的极小极大量词，不能隐式互换。
+ 加权定理固定模型、解码规则、参考分布及 T1--T3 中的表示；$\Gamma_N$ 对预先声明的 kernel 族取最坏情形，并在全部任务保真分区中优化。所需条件是同一个分区 $\pi_N$ 对族中每个 kernel 都满足统一闭合界，且
+ $|\pi_N|/|B_N|\to0$。整个系统族共享同一个宏观 kernel 对应“存在一个共同的 $L_N$”这一更强量词。
 \end{enumerate}
 
-下面的直接推论说明这些额外条件为何恰好足够。
+下面的命题给出这些附加条件下的直接上界。
 
-\begin{proposition}[对齐后给出 $\Gamma_N$ 的上界]
+\begin{proposition}[最坏情形条件给出的 $\Gamma_N$ 上界]
 \label{prop:transformer-gamma-alignment}
 设 $B_N$、任务 $\bar g_N$ 与 kernel 族
-$\bar{\mathcal K}_N$ 均按正文预先声明。若 Transformer 候选在操作性核上诱导满射
+$\bar{\mathcal K}_N$ 均按正文预先声明。若自回归候选在可辨微观空间上诱导满射
 $\bar q_N:B_N\twoheadrightarrow Y_N$，令
 $\pi_N:=\ker\bar q_N$，并且
 \[
@@ -357,11 +363,11 @@ $L_{N,\bar K}$ 使
 \eqref{eq:gamma-candidate-upper}。
 \end{proof}
 
-如果式 \eqref{eq:gamma-aligned-row-bound} 仅由加权证书推导，可在已经完成操作性核因子化之后使用如下简单换算：若验证分布
+若式 \eqref{eq:gamma-aligned-row-bound} 由加权证书推导，可在已经完成可辨微观因子化之后使用如下换算：若验证分布
 $\beta_{N,\bar K}$ 满足
 $\min_{b\in B_N}\beta_{N,\bar K}(b)\ge\omega_N>0$，且相应加权逐行缺陷对所有 $\bar K$ 均不超过 $e_N$，则每一行缺陷至多为
-$e_N/\omega_N$。此时命题中可取 $r_N=e_N/\omega_N$。这一换算往往很弱，正说明分布加权成功本身不是最坏情形证书。
+$e_N/\omega_N$。此时命题中可取 $r_N=e_N/\omega_N$；较小的 $\omega_N$ 相应放大该上界。
 
-\subsection{结论边界}
+\subsection{定理的适用范围}
 
-定理证明的是生成行为存在一个低状态数、近似可递推的预测表示。它没有证明：语言必然满足 T1；有限样本成功必然给出 T2；指定神经层必然满足强化的 T3；hidden states 位于低维流形；候选状态能够被高效发现、解释或实现；以及固定时长结论在无额外条件时延伸到增长时长。把这些命题与本节结论分开，是将 Transformer 构造例与正文一般判据正确对齐所必需的。
+在假定递推表示及其完整状态读出存在后，定理证明模型对该表示的分布加权下一-token误差与一步闭合误差受控。现实应用分别需要验证 T1 的参考过程结构、T2 的总体泛化界、指定神经层版本的 T3、计算可发现性以及增长时长条件。Hidden states 的低维流形结构是独立的几何命题。

@@ -1,13 +1,11 @@
 \section{判据边界的正例与反例}
 \label{app:examples-counterexamples}
 
-本附录集中说明正文判据的边界。循环链说明有限状态性不保证低复杂度宏观
-规律；一个三状态例子说明对称性只是构造证书而非必要条件；双环境例子说明
-逐环境选择宏观核与要求共享宏观核是不同量词；最后两个系统族分别否定
-闭合证书事件与相结构事件之间的两个普遍蕴含。它们不是彼此无关的例子汇编，
-而是逐项排除正文结论最容易遭遇的过强解读。
+本附录给出五类判据边界：循环链的微观尺度障碍、无群等变性的精确闭合、
+逐环境宏观核与共享宏观核的量词差异，以及闭合证书事件与群作用分离事件
+两个方向的反例。
 
-\subsection{有限状态性不保证压缩---闭合}
+\subsection{循环链的微观尺度障碍}
 
 \begin{counterexample}[循环链]
 \label{counter:cycle}
@@ -17,7 +15,7 @@ $K_N(x,x+1)=1$，任务为 $g_N(x)=\one_{\{x=0\}}$。若 $0\le\tau<1/2$，
 \[
 c_{K_N}^{\tau}(g_N)=N,
 \]
-系统族不满足 LC。
+因此该系统族的相对状态复杂度保持为 $1$，不满足 LC。
 \end{counterexample}
 
 \begin{proof}
@@ -29,9 +27,9 @@ $x\ne y$，可选 $t$ 使其中一个状态等于 $0$、另一个不等于 $0$�
 保真矛盾。
 \end{proof}
 
-\subsection{闭合不以微观对称为必要条件}
+\subsection{无群等变性的精确闭合}
 
-\begin{example}[无交换对称的闭合商]
+\begin{example}[无群等变性的闭合商]
 \label{ex:closure-without-symmetry}
 取 $B=\{1,2,3\}$，分区 $\pi=\{\{1,2\},\{3\}\}$，并令
 \[
@@ -41,12 +39,12 @@ K=\begin{pmatrix}
 0.1&0.2&0.7
 \end{pmatrix}.
 \]
-前两行到两个分区块的概率都为 $(0.7,0.3)$，所以 $\pi$ 精确闭合；但交换
-状态 $1,2$ 并不保持完整 kernel。由此可见，微观群等变性是方便的充分
-证书，不是闭合的必要条件。
+前两行到两个分区块的概率都为 $(0.7,0.3)$，所以 $\pi$ 精确闭合。交换
+状态 $1,2$ 的完整 kernel 行不同。这说明群等变性提供一种充分构造，精确闭合
+也可以由其他结构产生。
 \end{example}
 
-\subsection{逐环境宏观核不等于共享宏观核}
+\subsection{逐环境宏观核与共享宏观核的量词差异}
 
 \begin{counterexample}[两个量词次序]
 \label{counter:environment-specific-versus-shared}
@@ -59,7 +57,7 @@ $L^{(0)}(y,\cdot)=\delta_0$ 与 $L^{(1)}(y,\cdot)=\delta_1$，故
 \sup_{i\in\{0,1\}}\min_L
 d_\infty(K^{(i)}Q_q,Q_qL)=0.
 \]
-但任意共享 $L$ 的每一行都必须同时逼近 $\delta_0$ 与 $\delta_1$。由三角
+任意共享 $L$ 的每一行都必须同时逼近 $\delta_0$ 与 $\delta_1$。由三角
 不等式其最坏误差至少为 $1/2$，而取均匀分布行可以达到该值。因此
 \[
 \min_L\sup_{i\in\{0,1\}}
@@ -67,10 +65,10 @@ d_\infty(K^{(i)}Q_q,Q_qL)=\frac12.
 \]
 \end{counterexample}
 
-\subsection{闭合证书不推出破缺相}
+\subsection{闭合证书成立而群作用分离失败}
 
-\begin{counterexample}[精确轨道压缩而无精确破缺相]
-\label{counter:certificate-without-phase}
+\begin{counterexample}[精确轨道压缩与单一群不变分布]
+\label{counter:certificate-without-separation}
 取第~\ref{sec:fault-repair}节中 $a,b\in(0,1)$ 的故障--修复链，并令
 $G_N=H_N=\mathfrak S_N$ 按坐标置换作用。把所有对象放在一点评率空间上。
 任务在轨道上不变，动力学精确 $G_N$-等变，而且轨道就是故障数水平集，故
@@ -82,17 +80,17 @@ $G_N=H_N=\mathfrak S_N$ 按坐标置换作用。把所有对象放在一点评�
 所以附录~\ref{app:structural-certificates}的闭合证书事件可取
 $a_N=(N+1)/2^N$、$\eps_N=0$ 而恒成立。
 
-另一方面，$H_N=G_N$ 已不满足相结构事件要求的
-$H_N\subsetneq G_N$。更实质地，$a,b>0$ 时有限链不可约，因而有唯一平稳
-分布；精确 $G_N$-等变性迫使该分布在整个 $G_N$ 下不变。故在
-$\beta_N=\gamma_N=\kappa_N=0$、$\ell_N>0$ 的精确阈值下，不存在由该平稳
-分布产生的群外分离破缺相。闭合轨道商本身不推出相形成。
+$H_N=G_N$ 不满足群作用分离事件要求的 $H_N\subsetneq G_N$。更实质地，
+$a,b>0$ 时有限链不可约，因而有唯一平稳分布；精确 $G_N$-等变性迫使该分布
+在整个 $G_N$ 下不变。因此在
+$\beta_N=\gamma_N=\kappa_N=0$、$\ell_N>0$ 的精确阈值下，群外分离条件
+失败。该系统同时具有精确闭合轨道商和单一群不变平稳分布。
 \end{counterexample}
 
-\subsection{破缺相不推出闭合压缩证书}
+\subsection{群作用分离成立而闭合压缩证书失败}
 
-\begin{counterexample}[精确破缺相而无任务压缩]
-\label{counter:phase-without-certificate}
+\begin{counterexample}[精确群作用分离与恒等任务]
+\label{counter:separation-without-certificate}
 令
 \[
 B_N=\{+,-\}\times\{1,\ldots,N\},
@@ -107,16 +105,15 @@ $K_N$ 对 $G_N$ 精确等变，$\mu_N$ 精确平稳，且
 \qquad
 \lambda_{H_N}(\mu_N)=1.
 \]
-因此相结构事件可取
+因此群作用分离事件可取
 $\beta_N=\gamma_N=\kappa_N=0$、$\ell_N=1$ 而恒成立。可是恒等任务迫使
 每个任务保真表示都是单射，尤其
 \[
 c_{\{K_N\}}^\tau(g_N)=|B_N|
 \qquad\text{对每个 }\tau\ge0,
 \]
-且 $|B_N/H_N|/|B_N|=1$。故任取 $a_N<1$，闭合证书事件都失败。相形成
-本身不提供任务保真压缩。
+且 $|B_N/H_N|/|B_N|=1$。故任取 $a_N<1$，闭合证书事件都失败。该例表明
+群作用分离条件可以与恒等尺度的任务复杂度同时出现。
 \end{counterexample}
 
-综上，正文判据需要具体压缩与闭合证书；有限性、对称性、逐环境可闭合或
-相形成中的任何一项，都不能单独替代这一联合要求。
+这些例子共同表明，正文判据需要任务保真、状态压缩与闭合控制的联合证书。
