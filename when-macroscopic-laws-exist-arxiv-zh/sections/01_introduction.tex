@@ -9,25 +9,25 @@
 在任务、微观探针、允许动力学和一步误差度量预先固定后，是否存在一列任务保真表示，使其相对状态数与最优闭合误差同时趋于零？
 \end{quote}
 
-微观探针和允许动力学共同确定当前问题中的可辨微观状态。本文先删除对两者均严格冗余的复制标签，再以所得状态数作为复杂度分母。任务保真排除丢失任务的常值表示，严格压缩排除没有简化的恒等表示，闭合条件则要求候选表示具有自身的一步动力学。三个条件由同一表示同时承担。单个有限系统由最粗精确任务商和复杂度--闭合前沿刻画；增长系统族由不含预设宏观转移核的指标 $\Gamma_N$ 刻画。
+微观探针和允许动力学共同确定当前问题中的可辨微观状态。本文先删除对两者均严格冗余的复制标签，再以所得状态数作为复杂度分母。任务保真排除丢失任务的常值表示，严格压缩排除没有简化的恒等表示，闭合条件则要求候选表示具有自身的一步动力学。三个条件由同一表示同时承担。单个有限系统由最粗精确任务商和复杂度--闭合误差前沿刻画；增长系统族由不含预设宏观转移核的指标 $\Gamma_N$ 刻画。
 
 \subsection{主要结果}
 
 全文的结论分为三个层次。
 
 \begin{enumerate}
-  \item \textbf{有限规模的规范基准。} 可辨约化保持后续商的最坏行闭合误差。在约化空间上，对任意非空允许核族，都存在重标记意义下唯一的最粗任务保真精确闭合商；允许误差后，每个状态预算对应的最小闭合误差实际达到，并形成单调的复杂度--闭合前沿。
-  \item \textbf{增长系统族的充要判据。} 纤维预测直径直接比较将被合并的状态对下一宏观块的预测。由半径--直径夹逼，$\Gamma_N\to0$ 当且仅当存在同一列任务保真分区，使相对状态数与最优最坏行闭合误差同时趋零；这也等价于某列趋零容限下的最小状态数为 $o(|B_N|)$。
-  \item \textbf{判据的成立与失败。} 置换对称故障--修复系统把 $2^N$ 个配置精确压缩为且最少需要 $N+1$ 个故障数状态，故 $\Gamma_N\to0$；单点标记循环链有 $\Gamma_N=1$。两个系统族分别给出判据成立与失败的完整计算。
+  \item \textbf{有限规模的规范基准。} 可辨约化保持后续商的最坏行闭合误差。在约化空间上，对任意非空允许核族，都存在重标记意义下唯一的最粗任务保真精确闭合商；允许误差后，每个状态预算对应的最小闭合误差实际达到，并形成单调的复杂度--闭合误差前沿。
+  \item \textbf{增长系统族的等价表征。} 纤维预测直径直接比较将被合并的状态对下一宏观块的预测。由半径--直径夹逼，$\Gamma_N\to0$ 当且仅当存在同一列任务保真分区，使相对状态数与最优最坏行闭合误差同时趋零；这也等价于某列趋零容限下的最小状态数为 $o(|B_N|)$。
+  \item \textbf{宏观规律存在性的成立与失败。} 置换对称故障--修复系统的唯一最粗精确任务商具有 $N+1$ 个故障数状态，其完整前沿给出 $\Gamma_N=\min\{1/N,(N+1)/2^N\}\to0$；单点标记循环链有 $\Gamma_N=1$。两个系统族分别给出 LC 成立与失败的完整计算。
 \end{enumerate}
 
 本文用“最简”专指\emph{状态数最少}。公式长度、参数数量、计算成本、样本复杂度和语义可解释性属于不同的复杂度概念。
 
 \subsection{与既有工作的关系}
 
-给定分区后，有限 Markov 链的精确聚合属于 lumpability 的经典问题\citep{KemenySnell1976,Buchholz1994}；Markov functions 与线性不变性给出相关的投影条件\citep{RogersPitman1981,GurvitsLedoux2005}。概率互模拟和状态空间最小化从行为等价与分区细化角度研究相近结构\citep{LarsenSkou1991,DerisaviEtAl2003}。近似聚合文献研究瞬态误差传播\citep{MichelSiegle2025}以及固定状态预算下的 KL 聚合目标\citep{GeigerEtAl2015}。计算力学中的因果状态和预测状态表示以未来预测构造状态\citep{CrutchfieldYoung1989,ShaliziCrutchfield2001,LittmanSuttonSingh2001}；群对称也可直接产生保持 Markov 性的轨道聚合\citep{BanischLima2015}。本文把这些工具组织为一条任务相对的逻辑链：可辨复杂度基线、有限系统的精确端点与近似前沿，以及增长系统族的压缩--闭合充要判据。
+给定分区后，有限 Markov 链的精确聚合属于 lumpability 的经典问题\citep{KemenySnell1976,Buchholz1994}；Markov functions 与线性不变性给出相关的投影条件\citep{RogersPitman1981,GurvitsLedoux2005}。概率互模拟和状态空间最小化从行为等价与分区细化角度研究相近结构\citep{LarsenSkou1991,DerisaviEtAl2003}。近似聚合文献研究瞬态误差传播\citep{MichelSiegle2025}以及固定状态预算下的 KL 聚合目标\citep{GeigerEtAl2015}。计算力学中的因果状态和预测状态表示以未来预测构造状态\citep{CrutchfieldYoung1989,ShaliziCrutchfield2001,LittmanSuttonSingh2001}；群对称也可直接产生保持 Markov 性的轨道聚合\citep{BanischLima2015}。本文把这些工具组织为一条任务相对的逻辑链：可辨复杂度基线、有限系统的精确端点与近似前沿，以及增长系统族的压缩--闭合等价表征。
 
-任务充分性、群对称和递推下一-token表示为候选表示提供三类充分构造。有限自回归模型的分布加权定理及 Transformer 实例提升为最坏情形判据的条件见附录~\ref{app:transformer-predictive-states}。Markov category 为随机映射及其复合提供统一语言\citep{Fritz2020}。标准 Borel 空间、随机粗粒化和连续时间需要各自的可测性、复杂度或分析条件，相关接口集中置于附录。
+任务充分性、群对称和递推下一 token 表示为候选表示提供三类充分构造。有限自回归模型的分布加权定理及其用于 Transformer 时提升为最坏情形判据的条件见附录~\ref{app:transformer-predictive-states}。Markov category 为随机映射及其复合提供统一语言\citep{Fritz2020}。标准 Borel 空间、随机粗粒化和连续时间需要各自的可测性、复杂度或分析条件，相关接口集中置于附录。
 
 \subsection{论证路线与结论边界}
 
@@ -37,7 +37,7 @@
 \begin{aligned}
 &\text{可辨微观规范化}
 \longrightarrow\text{最粗精确任务商}
-\longrightarrow\text{复杂度--闭合前沿}
+\longrightarrow\text{复杂度--闭合误差前沿}
 \\[-0.2em]
 &\hspace{5em}\longrightarrow\text{纤维预测判据}
 \longrightarrow\Gamma_N\text{ 系统族判据}
@@ -45,6 +45,6 @@
 \end{aligned}
 \]
 
-第~\ref{sec:operational}节固定微观复杂度分母；第~\ref{sec:closure}节处理单个有限系统的精确端点和近似前沿；第~\ref{sec:criterion}节给出系统族判据；第~\ref{sec:fault-repair}节计算一个成立族和一个失败族。第~\ref{sec:construction}节讨论任务充分性、群对称和递推下一-token表示三类候选构造；第~\ref{sec:verification}节说明有限检验、估计稳健性与时间边界；第~\ref{sec:discussion}节总结扩展接口和开放问题。独立证明、辅助反例及扩展材料统一置于附录。
+第~\ref{sec:operational}节固定微观复杂度分母；第~\ref{sec:closure}节处理单个有限系统的精确端点和近似前沿；第~\ref{sec:criterion}节给出系统族的等价表征；第~\ref{sec:fault-repair}节计算一个满足 LC 的系统族和一个不满足 LC 的系统族。第~\ref{sec:construction}节讨论任务充分性、群对称和递推下一 token 表示三类候选构造；第~\ref{sec:verification}节说明有限检验、估计稳健性与时间边界；第~\ref{sec:discussion}节总结扩展接口和开放问题。独立证明、辅助反例及扩展材料统一置于附录。
 
 本文的闭合专指给定动力学族与误差范数下的一步 Markov 闭合。长时间准确、跨分布泛化、因果干预自治、内部神经表征、低维流形和高效发现分别需要附加定义与条件。

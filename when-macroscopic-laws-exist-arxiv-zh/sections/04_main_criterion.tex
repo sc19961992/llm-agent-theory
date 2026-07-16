@@ -1,7 +1,7 @@
 \section{系统族：宏观规律的压缩--闭合判据}
 \label{sec:criterion}
 
-上一节为每个有限系统给出了一条达到的复杂度--误差前沿。现在考虑系统规模
+上一节为每个有限系统给出了一条达到的复杂度--闭合误差前沿。现在考虑系统规模
 增长时，这条前沿能否同时逼近低相对复杂度与低闭合误差。设
 \[
 (X_N,\cK_N,u_N,g_N),
@@ -60,10 +60,10 @@ $\ell^\infty$ 距离；第二行直接在全部任务保真分区上优化。两
 \label{eq:Lambda}
 \end{equation}
 有限分区集保证 $\Gamma_N$ 与 $\Lambda_N$ 的外层最小值都实际达到；对每个
-固定候选和每个固定 $\bar K$，最优宏观 kernel 也实际达到。近似最优分区
+固定候选和每个固定 $\bar K$，最优宏观核也实际达到。近似最优分区
 本身不必唯一。
 
-\begin{theorem}[宏观规律的压缩--闭合充要判据]
+\begin{theorem}[压缩--闭合联合指标的表征定理]
 \label{thm:gamma-characterization}
 对每个 $N$ 都有定量夹逼
 \begin{equation}
@@ -111,7 +111,14 @@ $\Lambda_N\to0$，再由式~\eqref{eq:gamma-lambda-sandwich} 等价于条件 3�
 分区的 $\eta$；所以条件 2 也等价于 $\Lambda_N\to0$。
 \end{proof}
 
-条件 2 中的最优宏观 kernel 允许随 $N$ 和 $\bar K$ 改变；整个允许
+定理~\ref{thm:gamma-characterization} 的定位是表征定理：三项等价把 LC 的
+存在性定义、达到的复杂度--闭合误差前沿和一列任务保真分区对应起来；其中的
+定量内容是式~\eqref{eq:gamma-lambda-sandwich}，它用不含未知宏观核的纤维
+预测直径在常数因子内表征真实闭合目标。该表征仍以任务保真分区为候选类；
+第~\ref{sec:verification}节给出有限枚举程序及其 Bell 数规模，第~\ref{sec:construction}节
+给出可绕开完整枚举的模型结构证书。
+
+条件 2 中的最优宏观核允许随 $N$ 和 $\bar K$ 改变；整个允许
 动力学族共享同一个 $L$ 对应更强的 $\min_L\sup_{\bar K}$ 问题。定理把存在性化为同一列任务保真分区上的联合
 判据。若取达到 $\Gamma_N$ 的分区，则其相对状态数不超过 $\Gamma_N$，且
 由式~\eqref{eq:radius-diameter}，其真实最优闭合缺陷也不超过

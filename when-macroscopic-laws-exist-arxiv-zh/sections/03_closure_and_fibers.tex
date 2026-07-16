@@ -1,11 +1,11 @@
-\section{单个有限系统：从精确商到复杂度--误差前沿}
+\section{单个有限系统：从精确商到复杂度--闭合误差前沿}
 \label{sec:closure}
 
 第~\ref{sec:operational}节固定了可辨微观空间 $B$，从而消除了仅由编码
 复制产生的虚假压缩。本节先证明可辨约化严格保持原系统的闭合误差，再依次回答两个单系统问题：零误差时最少需要多少宏观状态；允许误差
 以后，状态数与闭合误差之间的完整最优折中是什么。
 
-对具有同一有限输入空间的 kernels 定义最坏行总变差距离
+对具有同一有限输入空间的核定义最坏行总变差距离
 \[
 d_\infty(K,K'):=\max_x\|K(x,\cdot)-K'(x,\cdot)\|_{\TV},
 \qquad
@@ -16,7 +16,7 @@ d_\infty(K,K'):=\max_x\|K(x,\cdot)-K'(x,\cdot)\|_{\TV},
 
 沿用命题~\ref{prop:operational-baseline} 的满射
 $p:X\twoheadrightarrow B$。给定满射 $s:B\twoheadrightarrow Y$，令
-$q=s\circ p$；$Q_p,Q_s,Q_q$ 表示相应的确定性 kernels。
+$q=s\circ p$；$Q_p,Q_s,Q_q$ 表示相应的确定性核。
 
 \begin{proposition}[约化前后闭合缺陷相同]
 \label{prop:operational-defect-invariance}
@@ -30,7 +30,7 @@ $q=s\circ p$；$Q_p,Q_s,Q_q$ 表示相应的确定性 kernels。
 \end{proposition}
 
 \begin{proof}
-由 $Q_q=Q_pQ_s$ 与 $KQ_p=Q_p\bar K$，等式两边所比较的两对 kernels
+由 $Q_q=Q_pQ_s$ 与 $KQ_p=Q_p\bar K$，等式两边所比较的两对核
 分别为 $Q_p\bar KQ_s$ 与 $Q_pQ_sL$，以及 $\bar KQ_s$ 与 $Q_sL$。
 满射 $p$ 使前一对的行恰为后一对全部行的重复，故最大行距离相同。
 \end{proof}
@@ -48,12 +48,13 @@ $\bar K\in\Stoch(B,B)$ 存在 $L\in\Stoch(Y,Y)$ 使
  \label{eq:exact-closure}
 \end{equation}
 则称 $s$ 对 $\bar K$\emph{精确闭合}。这是对所有微观初始分布成立的
-strong lumpability 条件\citep{KemenySnell1976,Buchholz1994}：同一
+强可聚合性（strong lumpability）条件\citep{KemenySnell1976,Buchholz1994}：同一
 $s$-纤维中的状态必须对每个下一宏观块给出相同转移概率。
 
-单个有限链的最粗 ordinary lumping 可由稳定分区细化构造
+单个有限链满足上述条件的最粗分区可由稳定分区细化构造；Derisavi 等称其为
+ordinary lumping
 \citep{DerisaviEtAl2003}。以下有限精确结论同时预先保留任务，并要求同一个
-表示服务于整个允许动力学族；每个微观 kernel 可以诱导自己的宏观 kernel。
+表示服务于整个允许动力学族；每个微观核可以诱导自己的宏观核。
 该结论给出近似理论的零误差基准。
 对函数 $f:B\to\mathbb R$，记
 \[
@@ -108,11 +109,11 @@ $\bar K\in\bar\cK$ 和 $t\in\mathbb N_0$，
 \]
 并且从任意微观初始分布出发，投影过程 $s_*(X_t)$ 本身是以
 $L^*_{\bar K}$ 演化的 Markov 链。定理~\ref{thm:minimal-exact-task-quotient}
-确定了复杂度--误差图的零误差端点。严格压缩恰在
+确定了复杂度--闭合误差图的零误差端点。严格压缩恰在
 $c_{\bar\cK}^{0}(\bar g)<|B|$ 时出现；恒等尺度
 $c_{\bar\cK}^{0}(\bar g)=|B|$ 也可能成为该端点。
 
-\subsection{允许误差后的复杂度--误差前沿}
+\subsection{允许误差后的复杂度--闭合误差前沿}
 
 固定状态预算下优化聚合误差是 Markov 状态约化中的一条相关路线；例如
 \citet{GeigerEtAl2015}研究平稳 KL divergence rate 目标。本文采用任务保真
@@ -155,11 +156,11 @@ c_{\bar\cK}^{\tau}(\bar g)
 \end{equation}
 当核族为单点集 $\{\bar K\}$ 时，下标简记为 $\bar K$。
 
-\begin{theorem}[复杂度--误差前沿的有限达到]
+\begin{theorem}[复杂度--闭合误差前沿的有限达到]
 \label{thm:complexity-error-frontier}
 对每个 $m$，式~\eqref{eq:complexity-error-frontier} 的最小值由某个任务
 保真分区达到；对该分区和每个固定 $\bar K$，式~\eqref{eq:eta-pi} 内的
-最优宏观 kernel 也达到。此外：
+最优宏观核也达到。此外：
 \begin{enumerate}
   \item $m\mapsto\mathcal E_{\bar\cK,\bar g}(m)$ 单调不增，且
   $\mathcal E_{\bar\cK,\bar g}(|B|)=0$；
@@ -179,7 +180,7 @@ c_{\bar\cK}^{\tau}(\bar g)
 \end{theorem}
 
 \begin{proof}
-$B$ 只有有限个任务保真分区，固定分区的宏观 kernel 空间是紧单纯形，故
+$B$ 只有有限个任务保真分区，固定分区的宏观核空间是紧单纯形，故
 所述最小值均达到。增大 $m$ 只扩张可行分区集；离散分区在 $m=|B|$ 时
 给出零误差。误差为零等价于对全部 $\bar K$ 精确闭合，再用
 定理~\ref{thm:minimal-exact-task-quotient} 得到第二项。第三项由两边定义
@@ -228,7 +229,7 @@ D_{\bar\cK}(\pi).
 $\bar K$ 取上确界即得结论。完整中心公式见附录~\ref{app:approximate-theory}。
 \end{proof}
 
-定义不含宏观 kernel 的直径前沿
+定义不含宏观核的直径前沿
 \begin{equation}
  \mathcal D_{\bar\cK,\bar g}(m)
  :=\min_{\pi\in\mathfrak P_m(\bar g)}D_{\bar\cK}(\pi).

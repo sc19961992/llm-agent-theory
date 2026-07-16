@@ -1,4 +1,4 @@
-\section{近似闭合：最优核、纤维直径与复杂度--误差前沿}
+\section{近似闭合：最优核、纤维直径与复杂度--闭合误差前沿}
 \label{app:approximate-theory}
 
 本附录以交换式缺陷定义近似闭合，并给出主判据的闭合项。纤维半径--直径
@@ -86,7 +86,7 @@ $L\mapsto QL$ 可能不单射。下节的确定性满射情形由满射性保证
  \quad\Longleftrightarrow\quad
  D_q(K)=0
  \quad\Longleftrightarrow\quad
- q\text{ 对 }K\text{ strong-lumpable}.
+ q\text{ 对 }K\text{ 强可聚合}.
  \label{eq:app-zero-approx-exact}
 \end{equation}
 此时诱导宏观核唯一。
@@ -111,7 +111,7 @@ $L$ 的不同行可以彼此独立地在 $\Delta(Y)$ 中选择；每个单纯形
 所以每个包围半径至少是相应直径的一半，得到左侧不等式。反过来，在每个
 纤维任选代表 $x_y$ 并取中心 $p_{x_y}^q$，该纤维内全部距离不超过全局直径，
 得到右侧不等式。半径为零当且仅当每个纤维内所有 $p_x^q$ 相同；由
-定理~\ref{thm:app-four-equivalences}，这正是 strong lumpability。共同的
+定理~\ref{thm:app-four-equivalences}，这正是强可聚合性。共同的
 纤维分布逐行唯一确定宏观核。
 \end{proof}
 
@@ -164,7 +164,7 @@ $D_{\cK}(\pi):=D_{q_\pi}(\cK)$。
 因此 $D_q(\cK)\to0$ 与本文所用
 $\sup_K\min_L$ 缺陷趋零等价到固定常数，并可直接由分区预测直径检验。
 
-\subsection{核族的任务相对复杂度--误差前沿}
+\subsection{核族的任务相对复杂度--闭合误差前沿}
 
 设 $g:X\twoheadrightarrow O$ 非恒定，
 $\cK\subseteq\Stoch(X,X)$ 非空。称分区 $\pi$ 任务保真，如果同一
@@ -175,7 +175,7 @@ $g=r_\pi\circ q_\pi$。对 $|O|\le m\le|X|$，令
  \mathfrak P_m(g):=
  \left\{\pi:\pi\text{ 任务保真且 }|\pi|\le m\right\}.
 \]
-定义复杂度--误差前沿与直径前沿
+定义复杂度--闭合误差前沿与直径前沿
 \begin{align}
   \mathcal E_{\cK,g}(m)
   &:=\min_{\pi\in\mathfrak P_m(g)}\eta_{q_\pi}(\cK),
@@ -185,11 +185,11 @@ $g=r_\pi\circ q_\pi$。对 $|O|\le m\le|X|$，令
   \label{eq:app-diameter-frontier}
 \end{align}
 
-\begin{theorem}[核族复杂度--误差前沿的有限达到]
+\begin{theorem}[核族复杂度--闭合误差前沿的有限达到]
 \label{thm:app-complexity-error-curve}
 对每个允许的 $m$，式~\eqref{eq:app-complexity-error-curve} 与
 式~\eqref{eq:app-diameter-frontier} 的外层最小值都由任务保真分区达到；
-对每个固定分区与每个固定 $K\in\cK$，内层最优宏观 kernel 也达到。
+对每个固定分区与每个固定 $K\in\cK$，内层最优宏观核也达到。
 并且：
 \begin{enumerate}
   \item $m\mapsto\mathcal E_{\cK,g}(m)$ 单调不增；

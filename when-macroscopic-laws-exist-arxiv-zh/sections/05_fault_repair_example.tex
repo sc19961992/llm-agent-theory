@@ -1,4 +1,4 @@
-\section{判据的两端：一个成立族与一个失败族}
+\section{宏观规律存在性的两端：一个成立族与一个失败族}
 \label{sec:fault-repair}
 
 以下两个有限 Markov 系统族分别实现 $\Gamma_N\to0$ 与 $\Gamma_N=1$。正例同时给出精确最小商、有限规模前沿和系统族证书；反例在三个层次上均保持微观尺度。
@@ -9,7 +9,7 @@
 \[
 B_N=X_N=\{0,1\}^N,
 \]
-其中 $x_i=1$ 表示第 $i$ 个部件故障，并取恒等微观探针。每一步均匀选择一个部件：若它故障，则以概率 $a\in(0,1]$ 修复；若它正常，则以概率 $b\in[0,1]$ 故障；否则保持不变。记相应 kernel 为 $K_{N,a,b}$。任务只判断系统是否完全无故障：
+其中 $x_i=1$ 表示第 $i$ 个部件故障，并取恒等微观探针。每一步均匀选择一个部件：若它故障，则以概率 $a\in(0,1]$ 修复；若它正常，则以概率 $b\in[0,1]$ 故障；否则保持不变。记相应核为 $K_{N,a,b}$。任务只判断系统是否完全无故障：
 \[
 g_N(x)=\one_{\{|x|=0\}},
 \qquad |x|:=\sum_{i=1}^N x_i.
@@ -17,11 +17,11 @@ g_N(x)=\one_{\{|x|=0\}},
 
 \begin{theorem}[故障数商的精确闭合与最小性]
 \label{thm:fault-repair}
-固定 $a_->0$，令
+固定 $0<a_-\le1$，令
 \[
 \cK_N:=\{K_{N,a,b}:a\in[a_-,1],\ b\in[0,1]\}.
 \]
-故障数映射 $q_N(x)=|x|$ 是整个核族共同的唯一最粗任务保真精确闭合商。其诱导状态空间为 $Y_N=\{0,1,\ldots,N\}$，且对每个 $(a,b)$ 的宏观 kernel 满足
+故障数映射 $q_N(x)=|x|$ 是整个核族共同的唯一最粗任务保真精确闭合商。其诱导状态空间为 $Y_N=\{0,1,\ldots,N\}$，且对每个 $(a,b)$ 的宏观核满足
 \begin{align}
 L_{N,a,b}(k,k-1)&=\frac{ak}{N},\nonumber\\
 L_{N,a,b}(k,k+1)&=\frac{b(N-k)}{N},\label{eq:fault-repair-L}\\
@@ -51,6 +51,67 @@ c^0_{\cK_N}(g_N)=N+1,
 从 $\ell>k$ 个故障出发，每步至多修复一个部件，$k$ 步内不可能清零，矛盾。
 因此不同故障数必须分开，$q_N$ 就是唯一最粗共同精确商，状态数为 $N+1$。
 其分区直径为零，而 $|B_N|=2^N$，其余两式随即成立。
+\end{proof}
+
+\begin{corollary}[故障--修复族的完整有限规模前沿]
+\label{cor:fault-repair-frontier}
+对定理~\ref{thm:fault-repair} 的核族和任务，在
+$2\le m\le2^N$ 上有
+\begin{equation}
+\mathcal D_{\cK_N,g_N}(m)=
+\begin{cases}
+1/N,&2\le m\le N,\\
+0,&N+1\le m\le2^N,
+\end{cases}
+\qquad
+\mathcal E_{\cK_N,g_N}(m)=
+\begin{cases}
+1/(2N),&2\le m\le N,\\
+0,&N+1\le m\le2^N.
+\end{cases}
+\label{eq:fault-repair-frontiers}
+\end{equation}
+因此，对每个 $\tau\ge0$，
+\begin{equation}
+c_{\cK_N}^{\tau}(g_N)=
+\begin{cases}
+N+1,&0\le\tau<1/(2N),\\
+2,&\tau\ge1/(2N),
+\end{cases}
+\qquad
+\Gamma_N=\min\left\{\frac1N,\frac{N+1}{2^N}\right\}.
+\label{eq:fault-repair-exact-gamma}
+\end{equation}
+\end{corollary}
+
+\begin{proof}
+先取二块任务分区
+$\pi_{\mathrm{task}}=\{\{0^N\},B_N\setminus\{0^N\}\}$。
+对固定 $K_{N,a,b}$，非零块中一个故障的状态下一步清零概率为 $a/N$，
+两个及以上故障的状态下一步清零概率为零；零故障块是单点。因此
+\[
+D_{K_{N,a,b}}(\pi_{\mathrm{task}})=\frac aN,
+\qquad
+\eta_{\pi_{\mathrm{task}}}(K_{N,a,b})=\frac a{2N}.
+\]
+第二个等式来自区间 $[0,a/N]$ 在 Bernoulli 分布线段上的 Chebyshev 中点。
+对参数族取上确界，分别得到 $1/N$ 和 $1/(2N)$ 的可行上界。
+
+再取族内的纯修复核 $K_*:=K_{N,1,0}$。定理~\ref{thm:fault-repair}
+证明中的未来任务分布论证同样表明：$K_*$ 的任何任务保真精确闭合分区至少
+需要 $N+1$ 块。故任何至多 $N$ 块的任务保真分区 $\pi$ 都满足
+$D_{K_*}(\pi)>0$。$K_*$ 从任一状态到每个 $\pi$-块的概率均为 $1/N$
+的整数倍，所以两个不同的投影行分布之 TV 距离至少为 $1/N$。于是
+\[
+D_{\cK_N}(\pi)\ge\frac1N,
+\qquad
+\eta_\pi(\cK_N)\ge\frac12D_{\cK_N}(\pi)\ge\frac1{2N}.
+\]
+这与二块任务分区的上界相合，得到式~\eqref{eq:fault-repair-frontiers}；
+$N+1$ 块的故障数分区给出其余零值。式~\eqref{eq:fault-repair-exact-gamma}
+中的最小状态数由前沿的定义直接得到。最后，预算 $2\le m\le N$ 的
+$\Gamma_N$ 目标最小值为 $1/N$，因为 $2/2^N\le1/N$；零直径预算中的
+最小目标值为 $(N+1)/2^N$。两者取小即得精确 $\Gamma_N$。
 \end{proof}
 
 这个例子中的任务只有“零个故障/至少一个故障”两个输出，而任务未来的精确闭合预测恰需 $N+1$ 个状态。最粗宏观状态记录当前故障数，即保持任务未来所需的最少中间信息。

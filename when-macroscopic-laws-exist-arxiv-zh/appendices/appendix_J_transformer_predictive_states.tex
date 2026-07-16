@@ -1,10 +1,10 @@
 \providecommand{\TransformerEquationPrefix}{\thesection}
 
-\section{自回归模型的递推下一-token表示：分布加权闭合与
+\section{自回归模型的递推下一 token 表示：分布加权闭合与
 \texorpdfstring{$\Gamma_N$}{Gamma-N} 判据}
 \label{app:transformer-predictive-states}
 
-本节给出一个自包含的有限状态定理。它适用于边界固定的自回归生成器，只使用实际采样条件分布、完整 Markov 状态和 token 驱动的状态更新；Transformer\citep{VaswaniEtAl2017} 是主要实例，证明本身不依赖 attention 或特定参数化。假设参考条件分布具有相对状态数受控的递推下一-token表示，模型条件分布满足总体 KL 界，且该表示与模型完整状态相容。定理据此控制给定表示的分布加权下一-token误差与一步闭合误差。
+本节给出一个自包含的有限状态定理。它适用于边界固定的自回归生成器，只使用实际采样条件分布、完整 Markov 状态和 token 驱动的状态更新；Transformer\citep{VaswaniEtAl2017} 是目标应用之一，证明本身不依赖 attention 或特定参数化。假设参考条件分布具有相对状态数受控的递推下一 token 表示，模型条件分布满足总体 KL 界，且该表示与模型完整状态相容。定理据此控制给定表示的分布加权下一 token 误差与一步闭合误差；具体 Transformer 是否满足这些条件需要独立验证。
 
 \subsection{系统边界与统一记号}
 
@@ -56,8 +56,8 @@ T1c 仅使用基数比 $|S_N|/|B_N|$；读出 $q_N$ 经 $B_N$ 因子化以及任
 
 以下三个假设共同描述参考过程的递推表示、模型分布误差及该表示与完整状态的相容性。
 
-\paragraph{假设 T1（低相对状态数的递推下一-token表示）.}
-存在有限集合 $S_N$、满射 $s_N:\mathcal H_N\twoheadrightarrow S_N$、读出 kernel
+\paragraph{假设 T1（低相对状态数的递推下一 token 表示）.}
+存在有限集合 $S_N$、满射 $s_N:\mathcal H_N\twoheadrightarrow S_N$、读出核
 $R_N:S_N\rightsquigarrow\mathcal V_N$ 和确定性更新
 $F_N:S_N\times\mathcal V_N\to S_N$，使所有相关扩展满足
 \[
@@ -76,9 +76,9 @@ $F_N:S_N\times\mathcal V_N\to S_N$，使所有相关扩展满足
  \frac{|S_N|}{|B_N|}\le\lambda_N.
  \tag{T1c}\label{eq:T1-complexity}
 \]
-式 \eqref{eq:T1-recursion} 提供闭合所需的递推结构；T1b 单独给出的下一-token读出误差只控制输出分布。
+式 \eqref{eq:T1-recursion} 提供闭合所需的递推结构；T1b 单独给出的下一 token 读出误差只控制输出分布。
 
-\paragraph{假设 T2（总体下一-token KL 界）.}
+\paragraph{假设 T2（总体下一 token KL 界）.}
 以自然对数计算 KL 散度，并假定
 \[
  \delta_N
@@ -90,6 +90,13 @@ $F_N:S_N\times\mathcal V_N\to S_N$，使所有相关扩展满足
  \tag{T2}\label{eq:T2-kl}
 \]
 这是声明分布上的总体额外交叉熵。从有限训练或测试误差得到式~\eqref{eq:T2-kl} 需要相应的总体泛化界。
+由于这里采用正向 KL，有限性还要求对 $\mu_N$-几乎处处的历史满足
+\[
+ P_N(\cdot\mid h)\ll\widehat P_N(\cdot\mid h).
+\]
+因此，top-$k$ 或 nucleus 解码要求参考过程在全部被截断 token 上赋零概率；
+贪心 Dirac 解码要求参考条件分布是与实际贪心解码相同的 Dirac 分布。一般截断解码可改为
+对截断前模型分布验证 KL，再把解码变换造成的 TV 误差单独计入。
 
 \paragraph{假设 T3（递推表示与完整状态相容）.}
 在可达状态上存在确定性满射
@@ -102,14 +109,14 @@ $F_N:S_N\times\mathcal V_N\to S_N$，使所有相关扩展满足
 
 \subsection{加权 TV 定理与证明}
 
-根据 $R_N$ 和 $F_N$ 定义候选宏观转移 kernel
+根据 $R_N$ 和 $F_N$ 定义候选宏观转移核
 \[
  L_N(s,s')
  :=\sum_{\substack{a\in\mathcal V_N:\,F_N(s,a)=s'}}R_N(s,a).
  \tag{\TransformerEquationPrefix.1}\label{eq:transformer-macro-kernel}
 \]
 
-\begin{theorem}[递推下一-token表示的分布加权闭合]
+\begin{theorem}[递推下一 token 表示的分布加权闭合]
 \label{thm:transformer-weighted-closure}
 在假设 \textup{T1--T3} 下，令
 \[
@@ -184,7 +191,7 @@ $\widehat P_N(\cdot\mid h)$ 经确定性映射
 $a\mapsto F_N(s,a)$ 推前所得的分布；由
 \eqref{eq:transformer-macro-kernel}，
 $Q_{q_N}L_N(x_N(h),\cdot)$ 是把
-$R_N(s,\cdot)$ 经同一映射推前所得的分布。TV 距离在 Markov kernel、特别是在确定性映射的推前下不增加，故
+$R_N(s,\cdot)$ 经同一映射推前所得的分布。TV 距离在 Markov 核、特别是在确定性映射的推前下不增加，故
 \[
  \begin{aligned}
  &\left\|K_NQ_{q_N}(x_N(h),\cdot)
@@ -283,7 +290,7 @@ $e(1-\rho^T)/(1-\rho)$。
 \end{proposition}
 
 \begin{proof}
-记 $E_t:=\|p_t-\widehat p_t\|_{\TV}$。混合分布之间的 TV 距离不超过逐行 TV 距离的相应加权平均，且 Markov kernel 不扩张 TV，故
+记 $E_t:=\|p_t-\widehat p_t\|_{\TV}$。混合分布之间的 TV 距离不超过逐行 TV 距离的相应加权平均，且 Markov 核不扩张 TV，故
 \[
  \begin{aligned}
  E_{t+1}
@@ -321,26 +328,26 @@ $\sum_{t<T_N}e_{N,t}\to0$，或使用具有统一收缩常数的界。这里的�
  \item \textbf{信息层级与任务条件不同。}
  加权定理的 $q_N$ 是可达完整状态上的递推表示读出，$B_N$ 在 T1 中作为预先固定的复杂度基线；$\Gamma_N$ 在由微观探针与允许动力学生成的可辨微观空间上比较严格信息商，并要求声明任务精确因子化。所需条件是存在满射 $\bar q_N:B_N\twoheadrightarrow S_N$ 使
  $q_N=\bar q_N\circ p_N$，并且 $\bar q_N$ 是相对于 $B_N$ 的真正信息商，满足
- $\bar g_N=\widetilde g_N\circ\bar q_N$。正文 $\bar g_N$ 是确定性任务映射，下一-token预测是随机通道。可以另选一个被 $\bar q_N$ 精确保留的确定性任务，也可以在扩展指标中显式加入随机任务通道的缺陷；两种方案分别对应精确与近似任务约束。
+ $\bar g_N=\widetilde g_N\circ\bar q_N$。正文 $\bar g_N$ 是确定性任务映射，下一 token 预测是随机通道。可以另选一个被 $\bar q_N$ 精确保留的确定性任务，也可以在扩展指标中显式加入随机任务通道的缺陷；两种方案分别对应精确与近似任务约束。
 
  \item \textbf{系统族量词不同。}
- 加权定理固定模型、解码规则、参考分布及 T1--T3 中的表示；$\Gamma_N$ 对预先声明的 kernel 族取最坏情形，并在全部任务保真分区中优化。所需条件是同一个分区 $\pi_N$ 对族中每个 kernel 都满足统一闭合界，且
- $|\pi_N|/|B_N|\to0$。整个系统族共享同一个宏观 kernel 对应“存在一个共同的 $L_N$”这一更强量词。
+ 加权定理固定模型、解码规则、参考分布及 T1--T3 中的表示；$\Gamma_N$ 对预先声明的核族取最坏情形，并在全部任务保真分区中优化。所需条件是同一个分区 $\pi_N$ 对族中每个核都满足统一闭合界，且
+ $|\pi_N|/|B_N|\to0$。整个系统族共享同一个宏观核对应“存在一个共同的 $L_N$”这一更强量词。
 \end{enumerate}
 
 下面的命题给出这些附加条件下的直接上界。
 
 \begin{proposition}[最坏情形条件给出的 $\Gamma_N$ 上界]
 \label{prop:transformer-gamma-alignment}
-设 $B_N$、任务 $\bar g_N$ 与 kernel 族
+设 $B_N$、任务 $\bar g_N$ 与核族
 $\bar{\mathcal K}_N$ 均按正文预先声明。若自回归候选在可辨微观空间上诱导满射
 $\bar q_N:B_N\twoheadrightarrow Y_N$，令
 $\pi_N:=\ker\bar q_N$，并且
 \[
  \bar g_N=\widetilde g_N\circ\bar q_N,
- \qquad \frac{|Y_N|}{|B_N|}\le c_N,
+ \qquad \frac{|Y_N|}{|B_N|}\le \chi_N,
 \]
-且对每个 $\bar K\in\bar{\mathcal K}_N$ 都存在宏观 kernel
+且对每个 $\bar K\in\bar{\mathcal K}_N$ 都存在宏观核
 $L_{N,\bar K}$ 使
 \[
  \sup_{b\in B_N}
@@ -351,23 +358,32 @@ $L_{N,\bar K}$ 使
 \]
 则（沿用正文以纤维直径定义的 $\Gamma_N$）
 \[
- \Gamma_N\le\max\{c_N,2r_N\}.
+ \Gamma_N\le\max\{\chi_N,2r_N\}.
  \tag{\TransformerEquationPrefix.13}\label{eq:gamma-candidate-upper}
 \]
-因而 $c_N,r_N\to0$ 蕴含 $\Gamma_N\to0$。
+因而 $\chi_N,r_N\to0$ 蕴含 $\Gamma_N\to0$。
 \end{proposition}
 
 \begin{proof}
 任务因子化说明 $\pi_N$ 属于 $\Gamma_N$ 极小化所允许的任务保真分区集。式
-\eqref{eq:gamma-aligned-row-bound} 说明该候选分区的最坏闭合半径不超过 $r_N$。同一纤维内任意两行分别距同一个宏观行至多 $r_N$，故三角不等式给出纤维预测直径至多 $2r_N$；其相对状态数不超过 $c_N$。把这个可行候选代入 $\Gamma_N$ 的定义即可得到
+\eqref{eq:gamma-aligned-row-bound} 说明该候选分区的最坏闭合半径不超过 $r_N$。同一纤维内任意两行分别距同一个宏观行至多 $r_N$，故三角不等式给出纤维预测直径至多 $2r_N$；其相对状态数不超过 $\chi_N$。把这个可行候选代入 $\Gamma_N$ 的定义即可得到
 \eqref{eq:gamma-candidate-upper}。
 \end{proof}
 
 若式 \eqref{eq:gamma-aligned-row-bound} 由加权证书推导，可在已经完成可辨微观因子化之后使用如下换算：若验证分布
 $\beta_{N,\bar K}$ 满足
 $\min_{b\in B_N}\beta_{N,\bar K}(b)\ge\omega_N>0$，且相应加权逐行缺陷对所有 $\bar K$ 均不超过 $e_N$，则每一行缺陷至多为
-$e_N/\omega_N$。此时命题中可取 $r_N=e_N/\omega_N$；较小的 $\omega_N$ 相应放大该上界。
+$e_N/\omega_N$。此时命题中可取 $r_N=e_N/\omega_N$。由于 $\beta_{N,\bar K}$ 是 $B_N$ 上的概率分布，
+\[
+ \omega_N\le\frac1{|B_N|},
+ \qquad
+ \frac{e_N}{\omega_N}\to0
+ \ \Longrightarrow\
+ e_N=o(|B_N|^{-1}).
+\]
+在精确递推且 $e_N=\varepsilon_N=\eta_N+\sqrt{\delta_N/2}$ 时，这条路线至少要求
+$\eta_N=o(|B_N|^{-1})$ 与 $\delta_N=o(|B_N|^{-2})$；非均匀覆盖可能要求更快的收敛。统一逐行界可以直接替代该质量下界路线。
 
 \subsection{定理的适用范围}
 
-在假定递推表示及其完整状态读出存在后，定理证明模型对该表示的分布加权下一-token误差与一步闭合误差受控。现实应用分别需要验证 T1 的参考过程结构、T2 的总体泛化界、指定神经层版本的 T3、计算可发现性以及增长时长条件。Hidden states 的低维流形结构是独立的几何命题。
+在假定递推表示及其完整状态读出存在后，定理证明模型对该表示的分布加权下一 token 误差与一步闭合误差受控。现实应用分别需要验证 T1 的参考过程结构、T2 的支持集与总体泛化界、指定神经层版本的 T3、计算可发现性以及增长时长条件。Hidden states 的低维流形结构是独立的几何命题。

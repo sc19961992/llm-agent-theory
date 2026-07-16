@@ -31,6 +31,8 @@ Transformer 附录 J 也可作为独立版本编译：
 ```bash
 cd supplementary
 xelatex transformer_supplement.tex
+bibtex transformer_supplement
+xelatex transformer_supplement.tex
 xelatex transformer_supplement.tex
 ```
 

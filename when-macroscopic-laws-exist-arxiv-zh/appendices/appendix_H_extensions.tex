@@ -4,7 +4,7 @@
 本附录研究固定表示下的三个扩展接口：标准 Borel 可测因子的精确闭合、随机
 通道的一步边缘交织，以及有限状态连续时间的生成元与半群关系。相应的系统族
 $\Gamma_N$ 判据还需要各自的复杂度、紧性、最优达到与可检验性条件。正文主
-定理适用于有限状态、离散时间和确定性任务保真商。标准 Borel kernel 与正则
+定理适用于有限状态、离散时间和确定性任务保真商。标准 Borel 核与正则
 条件概率的背景可参见\citet{Kallenberg2021}；标准 Borel 空间和 Borel
 等价关系的描述集合论背景见\citet{Kechris1995}。
 
@@ -13,7 +13,7 @@ $\Gamma_N$ 判据还需要各自的复杂度、紧性、最优达到与可检验
 \begin{proposition}[标准 Borel 空间中的固定因子判据]
 \label{prop:borel-fixed-factor}
 设 $X,Y$ 为标准 Borel 空间，$s:X\to Y$ 为可测满射，
-$K:X\rightsquigarrow X$ 为 Markov kernel。对每个 Borel 集
+$K:X\rightsquigarrow X$ 为 Markov 核。对每个 Borel 集
 $A\subseteq Y$，假设
 \[
 K(x,s^{-1}(A))
@@ -28,7 +28,7 @@ y\longmapsto K(x,s^{-1}(A)),
 L(y,A):=K(x,s^{-1}(A)),
 \qquad s(x)=y,
 \]
-良定义且给出唯一 Markov kernel $L:Y\rightsquigarrow Y$，满足
+良定义且给出唯一 Markov 核 $L:Y\rightsquigarrow Y$，满足
 \begin{equation}
 KQ_s=Q_sL.
 \label{eq:borel-fixed-factor}
@@ -40,14 +40,14 @@ KQ_s=Q_sL.
 \begin{proof}
 纤维常值性保证 $L$ 不依赖代表元。固定 $y$ 后，
 $A\mapsto L(y,A)$ 从 $K(x,\cdot)$ 经逆像 $s^{-1}$ 得到，因而是概率测度；
-对每个 $A$ 的可测性由假设给出，所以 $L$ 是 Markov kernel。满射性给出
+对每个 $A$ 的可测性由假设给出，所以 $L$ 是 Markov 核。满射性给出
 唯一性，交换式按每个 Borel 集逐点验证。反向结论直接读取交换式两侧在
 $x$ 处对事件 $A$ 的取值即可。
 \end{proof}
 
 该判据把可测性作为显式条件。一般 Borel 等价关系可以是 nonsmooth 的，此时
 抽象商缺少实现上述命题所需的标准 Borel 结构\citep{Kechris1995}；逐纤维
-定义的值组成 kernel 还需要整体可测性。在观测语言中，给定因子对应子
+定义的值组成核还需要整体可测性。在观测语言中，给定因子对应子
 $\sigma$-代数 $s^{-1}(\mathcal B(Y))$；精确闭合要求 Markov 算子保持其中的
 有界可测观测量。标准 Borel 商的无损实现以及商空间表述与子 $\sigma$-代数
 表述的等价，需要可数生成等额外正则性。
@@ -58,13 +58,14 @@ $\sigma$-代数 $s^{-1}(\mathcal B(Y))$；精确闭合要求 Markov 算子保持
 
 \subsection{随机粗粒化的一步交织接口}
 
-令 $Q:X\rightsquigarrow Y$ 本身为 Markov kernel。随机粗粒化的精确交换式为
+本小节回到有限状态空间。令 $X,Y$ 为非空有限集，并取 $K\in\Stoch(X,X)$、
+$Q\in\Stoch(X,Y)$ 与 $L\in\Stoch(Y,Y)$。随机粗粒化的精确交换式为
 \begin{equation}
 KQ=QL.
 \label{eq:random-intertwining}
 \end{equation}
 它表示：先微观演化再随机编码，与先随机编码再按 $L$ 演化，具有相同的一步
-输出边缘。Rogers--Pitman 型 Markov functions 提供了与 link kernel
+输出边缘。Rogers--Pitman 型 Markov functions 提供了与连接核（link kernel）
 相容的投影框架\citep{RogersPitman1981}；随机映射及其复合也可由 Markov
 category 组织\citep{Fritz2020}。
 
@@ -80,7 +81,7 @@ category 组织\citep{Fritz2020}。
   分布可由微观初态实现。
 \end{enumerate}
 
-近似情形仍可使用 $d_\infty(KQ,QL)$。固定 $Q$ 且 $Y$ 有限时，最优 $L$
+近似情形仍可使用 $d_\infty(KQ,QL)$。固定 $Q$ 时，最优 $L$
 仍由有限概率单纯形的紧致性达到；同时优化 $Q$ 的完整判据还必须指定
 任务通道保真条件、随机表示的复杂度或信息约束、排除平凡通道的非退化条件、
 候选 $Q$ 的紧致性，以及需要路径结论时的 link consistency 或联合耦合。

@@ -7,57 +7,35 @@ Markov category 的系统性框架见\citet{Fritz2020}。
 
 \subsection{精确交织形成动力学态射}
 
-有限集合与 Markov kernels 构成范畴 $\mathbf{FinStoch}$：对象是有限集合，
-态射复合为 kernel 乘法，恒等态射为确定性恒等 kernel。普通映射
-$q:X\to Y$ 嵌入为确定性 kernel $Q_q$。
+有限集合与 Markov 核构成范畴 $\mathbf{FinStoch}$：对象是有限集合，
+态射复合为核乘法，恒等态射为确定性恒等核。普通映射
+$q:X\to Y$ 嵌入为确定性核 $Q_q$。
 
 把一个随机动力系统记为对象 $(X,K)$。从 $(X,K)$ 到 $(Y,L)$ 的精确动力学
 态射是满足
 \[
 KQ=QL
 \]
-的 kernel $Q:X\rightsquigarrow Y$。若
+的核 $Q:X\rightsquigarrow Y$。若
 $R:(Y,L)\to(Z,M)$ 也是精确态射，则
 \[
 K(QR)=(KQ)R=(QL)R=Q(LR)=Q(RM)=(QR)M,
 \]
-故 $QR$ 仍是精确态射。恒等 kernel 显然满足交换式，所以这些对象与态射
+故 $QR$ 仍是精确态射。恒等核显然满足交换式，所以这些对象与态射
 确实形成一个普通范畴。正文的确定性任务保真粗粒化对应其中
 $Q=Q_q$ 且任务三角形交换的一类态射；严格信息商的存在还需要任务保真与
 状态压缩条件。
 
 \subsection{带收缩标签的近似证书及其复合律}
 
-若
-\[
-d_\infty(KQ,QL)\le\eps,
-\qquad
-d_\infty(LR,RM)\le\delta,
-\]
-则 kernel 前、后复合的 TV 非扩张性给出
-\[
-\begin{aligned}
-d_\infty(KQR,QRM)
-&\le d_\infty(KQR,QLR)+d_\infty(QLR,QRM)\\
-&\le\eps+\delta.
-\end{aligned}
-\]
-因此，若把误差上界作为证书数据的一部分，可用 $\eps+\delta$ 作为复合后的
-保守标签。附录~\ref{app:composition-time}给出更精细的收缩标签：若同时记录
-\[
-\partial_{K,L}(Q)\le\eps_Q,
-\quad \alpha(Q)\le\rho_Q,
-\qquad
-\partial_{L,M}(R)\le\eps_R,
-\quad \alpha(R)\le\rho_R,
-\]
-则复合标签为
+附录~\ref{app:composition-time} 已证明近似动力学因子的复合界。把闭合误差
+上界与通道收缩系数记为标签 $(\eps,\rho)$ 时，复合标签为
 \[
 (\eps_Q,\rho_Q)\star(\eps_R,\rho_R)
 =(\rho_R\eps_Q+\eps_R,\rho_Q\rho_R).
 \]
-这种记账满足结合律，恒等通道可带标签 $(0,1)$。未标记的固定正容差关系一般
-不对复合封闭；\emph{带标签的近似证书系统}通过显式累计误差保持复合闭合。
+该运算满足结合律，恒等通道的标签为 $(0,1)$。因此，精确动力学态射的普通
+范畴可以扩充为带误差与收缩标签的证书系统；标签复合显式记录误差传播。
 
 若另有任务通道 $G_X:X\rightsquigarrow O$、
 $G_Y:Y\rightsquigarrow O$ 且
@@ -71,7 +49,7 @@ Koopman 在确定性 Hamilton 系统中用线性算子推进观测量
 \citep{Koopman1931}。下文的 $P_K$ 是这一观点对有限随机核的直接线性扩展，
 所需性质由矩阵计算自足给出。
 
-kernel $K:X\rightsquigarrow Y$ 诱导线性观测算子
+核 $K:X\rightsquigarrow Y$ 诱导线性观测算子
 \[
 P_K:\mathbb R^Y\to\mathbb R^X,
 \qquad
@@ -87,6 +65,6 @@ P_K(q^*f)=q^*(P_Lf)
 附录~\ref{app:exact-theory}证明，在有限集合上这类代数恰与分区对应。
 
 因此，“宏观商空间”“闭合观测代数”和“交换方块”是同一有限精确结构的
-三种等价表示。严格压缩、近似最优值达到与系统族满足 $\Gamma_N\to0$ 分别
-依赖任务保真和可辨微观基线、候选集的有限性或紧性，以及闭合误差的跨规模
-控制。
+三种等价表示。任务保真由任务因子化保证，压缩由相对状态数度量，近似最优值
+达到依赖候选集的有限性或紧性，系统族满足 $\Gamma_N\to0$ 则依赖状态比例与
+闭合误差的跨规模联合控制。

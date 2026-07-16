@@ -3,7 +3,7 @@
 
 \subsection{主结果的数学含义}
 
-对单个有限系统，精确理论回答“零误差时最少必须保留多少状态”，复杂度--闭合前沿回答“给定状态预算时最小误差是多少”。对增长系统族，$\Gamma_N$ 判断这些有限规模前沿能否同时趋向零复杂度比例和零闭合误差。三个层次共同构成宏观规律的压缩--闭合判据。
+对单个有限系统，精确理论回答“零误差时最少必须保留多少状态”，复杂度--闭合误差前沿回答“给定状态预算时最小误差是多少”。对增长系统族，$\Gamma_N$ 判断这些有限规模前沿能否同时趋向零复杂度比例和零闭合误差。三个层次共同构成宏观规律的压缩--闭合判据。
 
 该判据相对于任务和允许动力学定义。相同动力学在不同任务下可以产生不同的最粗精确商和近似前沿；相同任务在不同允许动力学族下也可以从可压缩变为不可压缩。置换对称故障--修复链与循环链表明，可被遗忘的任务相关差异由具体动力学结构决定。
 
@@ -12,21 +12,19 @@
 有限确定性定理依赖有限分区集、概率单纯形紧致和逐点纤维检验。附录~\ref{app:extensions}给出标准 Borel 因子、随机通道和有限状态连续时间在固定表示下的接口结论；相应的系统族判据还需建立复杂度、紧性与极限条件。
 
 \paperclaim{标准 Borel 空间。}
-给定到标准 Borel 空间的良好可测因子时，可以讨论 kernel 的精确因子化；相关 kernel 背景见\citet{Kallenberg2021}。一般 Borel 等价关系可以是 nonsmooth 的，此时抽象商缺少所需的标准 Borel 实现\citep{Kechris1995}，候选因子类也成为无限类。附录给出固定可测因子的精确因子判据；Borel 系统族版本还需候选类紧性、复杂度泛函和最优达到条件。
+给定到标准 Borel 空间的良好可测因子时，可以讨论核的精确因子化；相关核理论背景见\citet{Kallenberg2021}。一般 Borel 等价关系可以是 nonsmooth 的，此时抽象商缺少所需的标准 Borel 实现\citep{Kechris1995}，候选因子类也成为无限类。附录给出固定可测因子的精确因子判据；Borel 系统族版本还需候选类紧性、复杂度泛函和最优达到条件。
 
 \paperclaim{随机粗粒化。}
-把确定性 $Q_s$ 替换为 Markov kernel $Q:B\rightsquigarrow Y$ 后，$KQ=QL$ 是良定义的通道交织式，并与 Markov functions 和 Markov category 的语言相接\citep{RogersPitman1981,Fritz2020}。随机通道版本的存在判据需要定义任务保真、信息复杂度、非退化条件、最优达到和路径语义；这些条件同时排除与任务无关的常值交织。
+把确定性 $Q_s$ 替换为 Markov 核 $Q:B\rightsquigarrow Y$ 后，$KQ=QL$ 是良定义的通道交织式，并与 Markov functions 和 Markov category 的语言相接\citep{RogersPitman1981,Fritz2020}。随机通道版本的存在判据需要定义任务保真、信息复杂度、非退化条件、最优达到和路径语义；这些条件同时排除与任务无关的常值交织。
 
 \paperclaim{连续时间。}
 有限状态下，生成元交换式 $GQ_s=Q_s\bar G$ 推出半群交换式 $e^{tG}Q_s=Q_se^{t\bar G}$；生成元缺陷还给出固定时间的 Duhamel 误差界。本文主定理采用离散时间；无限维连续时间扩展涉及定义域、强连续性和 martingale problem\citep{EthierKurtz1986}。
 
-附录~\ref{app:structural-certificates}研究随机候选中的群作用分离事件及其与闭合证书的关系。附录~\ref{app:categories}给出交换式、观测代数与复合证书的范畴组织。压缩、最优达到和 $\Gamma_N\to0$ 分别由正文的任务保真、有限达到和系统族条件保证。
+附录~\ref{app:structural-certificates}研究随机候选中的群作用分离事件及其与闭合证书的关系。附录~\ref{app:categories}给出交换式、观测代数与复合证书的范畴组织。任务保真限定候选表示不丢失声明任务，状态比例度量压缩，有限分区集与紧概率单纯形保证最优达到；$\Gamma_N\to0$ 由状态比例和纤维预测直径的联合系统族条件刻画。
 
-\subsection{Transformer 例子与 \texorpdfstring{$\Gamma_N$}{Gamma-N} 判据的关系}
+\subsection{Transformer 条件式接口与 \texorpdfstring{$\Gamma_N$}{Gamma-N} 的关系}
 
-附录~\ref{app:transformer-predictive-states}证明一个适用于有限自回归生成器的条件式定理，Transformer 是其主要实例。T1 假设参考条件分布具有相对状态数受控的递推下一-token表示，T2 给出模型条件分布的总体 KL 界，T3 给出该表示从完整推理状态的读出。在这些假设下，宏观转移由 T1 中的读出和更新显式定义，其分布加权 token 误差与一步闭合误差至多为 $\eta_N+\sqrt{\delta_N/2}$。定理控制给定候选的误差；候选表示及其状态数界属于 T1--T3 的条件。
-
-该候选成为正文 $\Gamma_N$ 证书还需三项条件：经可辨微观空间因子化并精确保留声明任务；状态数相对于同一 $B_N$ 渐近变小；对全部允许核取得统一最坏行闭合界。式~\eqref{eq:transformer-gamma-bridge}给出相应上界。现实应用需要分别验证参考分布的 T1、总体泛化形式的 T2、指定神经层读出形式的 T3 和最坏状态覆盖；低维几何属于额外经验命题。
+附录~\ref{app:transformer-predictive-states}证明适用于有限自回归生成器的条件式定理，并把 Transformer 作为目标应用。具体模型成为正文的 $\Gamma_N$ 证书，还需验证 T1--T3、正向 KL 的支持集条件、经可辨微观空间的任务保真因子化，以及对全部允许核的统一最坏行闭合界；式~\eqref{eq:transformer-gamma-bridge}给出相应上界。
 
 \subsection{后续工作}
 

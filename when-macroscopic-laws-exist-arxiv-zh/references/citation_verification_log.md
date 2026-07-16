@@ -32,7 +32,7 @@
 
 - 本文使用的有限链条件是 Kemeny–Snell 的 lumpability，现代常称 strong lumpability；在 Buchholz 的术语中对应 ordinary lumpability。Buchholz 的 exact lumpability 是另一条件。
 - 单链最粗 ordinary lumping、稳定分区细化、Dobrushin 收缩、causal-state 最小性和固定预算 Markov 聚合均已有直接文献坐标。本文在正文中明确标出这些既有结果的适用范围。
-- 本文的复杂度--闭合前沿采用任务保真约束和最坏行 TV 缺陷；Geiger 等采用平稳 KL divergence rate。两者属于相关优化结构，目标函数与量词不同。
-- 附录 J 的定理适用于有限自回归生成器，Transformer 是实例。Vaswani 等只承担架构背景；T1--T3、KL 到加权 TV 的传递以及 $\Gamma_N$ 上界均以本文列出的假设和证明为准。
+- 本文的复杂度--闭合误差前沿采用任务保真约束和最坏行 TV 缺陷；Geiger 等采用平稳 KL divergence rate。两者属于相关优化结构，目标函数与量词不同。
+- 附录 J 的定理适用于有限自回归生成器，Transformer 是目标应用之一，具体模型仍需独立验证 T1--T3。Vaswani 等只承担架构背景；KL 到加权 TV 的传递以及 $\Gamma_N$ 上界均以本文列出的假设和证明为准。
 - 标准 Borel kernel 的背景由 Kallenberg 支持；一般 Borel 等价关系的 smoothness 边界由 Kechris 支持。附录 H 只证明固定良好因子的接口结论。
-- 本文的主要数学对象包括可辨微观基线、任务保真的共同精确商、复杂度--闭合前沿、纤维预测直径以及系统族指标 $\Gamma_N$。所有定理的证明均在正文或附录中给出，文献用于定位既有定义、结果与邻近研究。
+- 本文的主要数学对象包括可辨微观基线、任务保真的共同精确商、复杂度--闭合误差前沿、纤维预测直径以及系统族指标 $\Gamma_N$。所有定理的证明均在正文或附录中给出，文献用于定位既有定义、结果与邻近研究。

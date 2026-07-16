@@ -1,7 +1,7 @@
 \section{判据边界的正例与反例}
 \label{app:examples-counterexamples}
 
-本附录给出五类判据边界：循环链的微观尺度障碍、无群等变性的精确闭合、
+本附录给出五类判据边界：循环链的微观尺度障碍、无非平凡状态置换对称的精确闭合、
 逐环境宏观核与共享宏观核的量词差异，以及闭合证书事件与群作用分离事件
 两个方向的反例。
 
@@ -9,13 +9,13 @@
 
 \begin{counterexample}[循环链]
 \label{counter:cycle}
-对 $N\ge2$，令 $B_N=\mathbb Z/N\mathbb Z$，确定性 kernel 为
+对 $N\ge2$，令 $B_N=\mathbb Z/N\mathbb Z$，确定性核为
 $K_N(x,x+1)=1$，任务为 $g_N(x)=\one_{\{x=0\}}$。若 $0\le\tau<1/2$，
-任何任务保真且闭合缺陷不超过 $\tau$ 的分区都只能是离散分区。因此
+任何任务保真且闭合缺陷不超过 $\tau$ 的分区都只能是离散分区，故
 \[
 c_{K_N}^{\tau}(g_N)=N,
 \]
-因此该系统族的相对状态复杂度保持为 $1$，不满足 LC。
+该系统族的相对状态复杂度保持为 $1$，不满足 LC。
 \end{counterexample}
 
 \begin{proof}
@@ -27,9 +27,9 @@ $x\ne y$，可选 $t$ 使其中一个状态等于 $0$、另一个不等于 $0$�
 保真矛盾。
 \end{proof}
 
-\subsection{无群等变性的精确闭合}
+\subsection{无非平凡状态置换对称的精确闭合}
 
-\begin{example}[无群等变性的闭合商]
+\begin{example}[无非平凡状态置换对称的闭合商]
 \label{ex:closure-without-symmetry}
 取 $B=\{1,2,3\}$，分区 $\pi=\{\{1,2\},\{3\}\}$，并令
 \[
@@ -39,9 +39,10 @@ K=\begin{pmatrix}
 0.1&0.2&0.7
 \end{pmatrix}.
 \]
-前两行到两个分区块的概率都为 $(0.7,0.3)$，所以 $\pi$ 精确闭合。交换
-状态 $1,2$ 的完整 kernel 行不同。这说明群等变性提供一种充分构造，精确闭合
-也可以由其他结构产生。
+前两行到两个分区块的概率都为 $(0.7,0.3)$，所以 $\pi$ 精确闭合。三个
+对角元 $K(1,1)=0.1$、$K(2,2)=0.5$、$K(3,3)=0.7$ 两两不同；任何满足
+$K(hi,hj)=K(i,j)$ 的状态置换 $h$ 都必须逐点固定，故该核没有非平凡状态
+置换对称。群等变性提供一种充分构造，精确闭合也可以由其他结构产生。
 \end{example}
 
 \subsection{逐环境宏观核与共享宏观核的量词差异}
@@ -49,7 +50,7 @@ K=\begin{pmatrix}
 \begin{counterexample}[两个量词次序]
 \label{counter:environment-specific-versus-shared}
 令 $B=\{0,1\}\times\{a,b\}$，$Y=\{0,1\}$，$q(y,z)=y$，任务取
-$g=q$。构造两个 kernels：$K^{(0)}$ 的下一宏观状态恒为 $0$，
+$g=q$。构造两个核：$K^{(0)}$ 的下一宏观状态恒为 $0$，
 $K^{(1)}$ 的下一宏观状态恒为 $1$；纤维内第二坐标可按任意固定规则更新。
 则 $q$ 对两者都精确闭合，分别对应
 $L^{(0)}(y,\cdot)=\delta_0$ 与 $L^{(1)}(y,\cdot)=\delta_1$，故
@@ -70,7 +71,7 @@ d_\infty(K^{(i)}Q_q,Q_qL)=\frac12.
 \begin{counterexample}[精确轨道压缩与单一群不变分布]
 \label{counter:certificate-without-separation}
 取第~\ref{sec:fault-repair}节中 $a,b\in(0,1)$ 的故障--修复链，并令
-$G_N=H_N=\mathfrak S_N$ 按坐标置换作用。把所有对象放在一点评率空间上。
+$G_N=H_N=\mathfrak S_N$ 按坐标置换作用。把所有对象放在单点概率空间上。
 任务在轨道上不变，动力学精确 $G_N$-等变，而且轨道就是故障数水平集，故
 \[
 \eps_{H_N}(\{K_{N,a,b}\})=0,
@@ -98,7 +99,7 @@ B_N=\{+,-\}\times\{1,\ldots,N\},
 g_N=\Id_{B_N},
 \]
 $G_N=\mathbb Z_2$ 交换第一坐标，$H_N=\{e\}$，
-$K_N=\Id_{B_N}$，$\mu_N=\delta_{(+,1)}$，并仍取一点评率空间。此时
+$K_N=\Id_{B_N}$，$\mu_N=\delta_{(+,1)}$，并仍取单点概率空间。此时
 $K_N$ 对 $G_N$ 精确等变，$\mu_N$ 精确平稳，且
 \[
 \kappa_{H_N}(\mu_N)=0,
@@ -106,7 +107,7 @@ $K_N$ 对 $G_N$ 精确等变，$\mu_N$ 精确平稳，且
 \lambda_{H_N}(\mu_N)=1.
 \]
 因此群作用分离事件可取
-$\beta_N=\gamma_N=\kappa_N=0$、$\ell_N=1$ 而恒成立。可是恒等任务迫使
+$\beta_N=\gamma_N=\kappa_N=0$、$\ell_N=1$ 而恒成立。恒等任务迫使
 每个任务保真表示都是单射，尤其
 \[
 c_{\{K_N\}}^\tau(g_N)=|B_N|
