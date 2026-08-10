@@ -34,7 +34,7 @@
 确定性推前不增加 TV 距离，所以每个投影后的行分布改变至多 $\delta_N$；一对行的距离因此改变至多 $2\delta_N$。依次取最大值、对核族取上确界，仍保持该界；最后对任务保真分区取最小值，得到 $\Gamma_N$ 的同一扰动界。
 \end{proof}
 
-这里“$B_N$ 已经固定”是实质条件。可辨微观分区由精确等式定义，任意小的核扰动都可能使它细化。有限样本恢复 $B_N$ 需要另行声明近似等价阈值、统计间隔或测量分辨率；上面的命题在固定 $B_N$ 后控制候选分区的闭合误差。
+这里“$B_N$ 已经固定”是实质条件。可辨微观分区由精确等式定义，任意小的核扰动都可能使它细化。因而命题~\ref{prop:estimation-robustness}只给出条件稳健性：它不证明从原始呈现 $(X_N,\cK_N,u_N)$ 到 $B_N$、再到 $\Gamma_N$ 的整个映射连续。特别地，大量近似复制而非精确复制的标签可能扩大 $|B_N|$，同时改变后续状态比例。有限样本恢复 $B_N$ 需要另行声明近似等价阈值、统计间隔或测量分辨率；建立包含基线选择在内的整体稳健性，需要把近似可辨关系纳入定义。
 
 \subsection{从一步闭合到时间轴}
 
@@ -67,7 +67,23 @@ d_{\TV}(\text{两种长度 }T\text{ 的宏观路径律})
 \le T\varepsilon.
 \label{eq:body-path-bound}
 \end{equation}
-所以 $T_N\varepsilon_N\to0$ 是增长路径窗的直接充分条件。统一收缩控制终端边缘；完整路径仍由逐时误差累计或更强的顺序耦合控制。$\Gamma_N\to0$ 提供某列候选的一步误差趋零，增长时间窗还需给出 $T_N$、收缩率或路径耦合条件。完整推导和近似证书的空间复合见附录~\ref{app:composition-time}。
+这类近似互模拟到有限路径 TV 的耦合界也见\citet{BianAbate2017}。所以 $T_N\varepsilon_N\to0$ 是增长路径窗的直接充分条件。统一收缩控制终端边缘；完整路径仍由逐时误差累计或更强的顺序耦合控制。$\Gamma_N\to0$ 提供某列候选的一步误差趋零，增长时间窗还需给出 $T_N$、收缩率或路径耦合条件。完整推导和近似证书的空间复合见附录~\ref{app:composition-time}。
+
+\begin{remark}[跨规模时间单位必须预先固定]
+\label{rem:time-refinement}
+一步判据会如实记录所选择的时钟，因此不能对随 $N$ 任意细化的时间单位保持不变。令 $P_N$ 为命题~\ref{prop:cycle-obstruction}中的确定性循环位移，并取
+\[
+ K_N^{(\varepsilon)}=(1-\varepsilon_N)I+\varepsilon_NP_N,
+ \qquad 0<\varepsilon_N\le1.
+\]
+沿用单点标记任务，并记相应联合指标为 $\Gamma_N^{(\varepsilon)}$。对任意非离散任务保真分区，循环传播论证保证存在同块状态，其位移后继落入不同块；恒等部分留在共同的当前块，故这两条投影行的 TV 距离恰为 $\varepsilon_N$，而任意同块行的距离又至多为 $\varepsilon_N$。因此当 $N\ge3$ 时，二块任务分区与离散分区分别给出
+\begin{equation}
+ \Gamma_N^{(\varepsilon)}
+ =\max\left\{\frac2N,\varepsilon_N\right\}.
+ \label{eq:lazy-cycle-gamma}
+\end{equation}
+事件时钟 $\varepsilon_N=1$ 下该值为 $1$；若只通过插入越来越多的空闲步令 $\varepsilon_N\to0$，它却趋于零。这不反驳一步表征定理，而是说明跨规模应用必须固定物理时间单位或活动率；若自然观察窗随 $1/\varepsilon_N$ 增长，则还必须同时使用本节的增长时间条件。
+\end{remark}
 
 \subsection{判据的适用边界}
 

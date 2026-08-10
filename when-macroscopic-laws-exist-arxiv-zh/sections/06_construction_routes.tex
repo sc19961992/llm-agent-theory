@@ -1,7 +1,7 @@
-\section{候选表示的三类充分构造}
+\section{两类结构证书与一个条件式接口}
 \label{sec:construction}
 
-定理~\ref{thm:gamma-characterization} 给出宏观规律存在性的等价表征。具体模型可由任务充分性、群对称或预测结构构造候选，再验证其状态比例与纤维预测分歧。本节给出三类常用的充分构造。
+定理~\ref{thm:gamma-characterization} 给出 LC 的等价表征。具体模型可先由任务充分性或群对称构造候选，再验证其状态比例与纤维预测分歧；这两类条件直接产生正文意义的结构证书。本节最后另列一个有限自回归模型的条件式接口，其结论与适用范围不等同于对具体神经模型的验证。
 
 \subsection{任务变量作为充分表示}
 
@@ -27,9 +27,9 @@ D_{\bar\cK}(\ker q_H)\le\eps_H(\bar\cK),
 
 式~\eqref{eq:symmetry-certificate} 检验给定轨道表示的闭合性。随机候选是否以高概率呈现群作用分离结构是另一项概率命题；附录~\ref{app:structural-certificates}分别给出两类证书的条件，附录~\ref{app:examples-counterexamples}给出两个方向的反模型。
 
-\subsection{递推下一 token 表示：Transformer 条件式接口}
+\subsection{递推下一 token 表示：有限自回归条件式接口}
 
-用未来预测组织历史，是计算力学和预测状态表示中的基本思路\citep{CrutchfieldYoung1989,ShaliziCrutchfield2001,LittmanSuttonSingh2001}。附录~\ref{app:transformer-predictive-states}研究固定边界的有限自回归生成器；Transformer\citep{VaswaniEtAl2017}是目标应用之一。该定理只使用模型的条件分布、完整 Markov 状态和确定性 token 更新，内容分为两层：分布加权闭合，以及提升为最坏情形判据所需的条件；具体模型满足所列条件需要独立验证。
+用未来预测组织历史，是计算力学和预测状态表示中的基本思路\citep{CrutchfieldYoung1989,ShaliziCrutchfield2001,LittmanSuttonSingh2001}。附录~\ref{app:transformer-predictive-states}研究固定边界的有限自回归生成器。Transformer\citep{VaswaniEtAl2017}只是可能的实例之一；附录不证明任何具体 Transformer 满足其假设，也不把条件式推论当作经验应用。该定理只使用模型条件分布、完整 Markov 状态和确定性 token 更新，内容分为两层：声明分布上的加权闭合，以及提升为正文最坏情形判据所需的附加条件。
 
 \paperclaim{分布加权候选。}
 假设 T1 给定参考条件分布的有限递推下一 token 表示 $s_N$、token 读出 $R_N$、更新 $F_N$ 及其相对状态数界，T2 给定模型条件分布相对于参考分布的总体 KL 界，T3 给定该表示从完整推理状态的确定性读出 $q_N$。由 $R_N$ 与 $F_N$ 可显式定义宏观转移 $L_N$。令

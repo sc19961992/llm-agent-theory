@@ -4,7 +4,7 @@
 \texorpdfstring{$\Gamma_N$}{Gamma-N} 判据}
 \label{app:transformer-predictive-states}
 
-本节给出一个自包含的有限状态定理。它适用于边界固定的自回归生成器，只使用实际采样条件分布、完整 Markov 状态和 token 驱动的状态更新；Transformer\citep{VaswaniEtAl2017} 是目标应用之一，证明本身不依赖 attention 或特定参数化。假设参考条件分布具有相对状态数受控的递推下一 token 表示，模型条件分布满足总体 KL 界，且该表示与模型完整状态相容。定理据此控制给定表示的分布加权下一 token 误差与一步闭合误差；具体 Transformer 是否满足这些条件需要独立验证。
+本节给出一个自包含的有限状态条件式定理。它适用于边界固定的自回归生成器，只使用实际采样条件分布、完整 Markov 状态和 token 驱动的状态更新；Transformer\citep{VaswaniEtAl2017} 只是可能的实例之一，证明本身不依赖 attention 或特定参数化。假设参考条件分布具有相对状态数受控的递推下一 token 表示，模型条件分布满足总体 KL 界，且该表示与模型完整状态相容，定理据此控制给定表示的分布加权下一 token 误差与一步闭合误差。本附录不证明任何具体 Transformer 满足这些假设，也不构成神经模型的经验验证；从这里到正文 $\Gamma_N$ 仍需本附录最后明确列出的最坏情形条件。
 
 \subsection{系统边界与统一记号}
 

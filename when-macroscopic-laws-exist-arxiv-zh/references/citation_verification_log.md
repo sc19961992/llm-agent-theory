@@ -1,6 +1,6 @@
 # 引文直接核验记录
 
-核验日期：2026-07-16。
+核验日期：2026-07-27。
 
 本表覆盖 `references.bib` 中的全部条目。每项均对照出版社、学会、官方会议论文页或原始全文核验书目信息，并记录该来源在本文中实际支持的陈述范围。本文使用行随机、从左到右复合的记号；涉及的公式均按这一约定在文中重新陈述或证明。
 
@@ -10,7 +10,7 @@
 | `Buchholz1994` | [Cambridge 论文页](https://www.cambridge.org/core/journals/journal-of-applied-probability/article/abs/exact-and-ordinary-lumpability-in-finite-markov-chains/2DC748F09D80BEEB03CCF18036E149D7)，[DOI](https://doi.org/10.2307/3215235) | 核对 *Journal of Applied Probability* 31(1), 59–75。其 ordinary lumpability 对应本文的出块概率条件；论文另行定义的 exact lumpability 是不同概念。 |
 | `RogersPitman1981` | [Project Euclid 原文](https://doi.org/10.1214/aop/1176994363) | 核对 *Annals of Probability* 9(4), 573–582。支持带 link kernel 与相容初始分布的 Markov-function 充分框架；本文未将其表述为 strong lumpability 的必要充分条件。 |
 | `GurvitsLedoux2005` | [Elsevier 原文](https://doi.org/10.1016/j.laa.2005.02.007) | 核对 *Linear Algebra and its Applications* 404, 85–117。支持有限链函数后 Markov 性、lumpability 与线性不变结构的背景。 |
-| `LarsenSkou1991` | [Elsevier 原文](https://www.sciencedirect.com/science/article/pii/0890540191900306) | 核对 *Information and Computation* 94(1), 1–28。支持带标签概率系统中的 testing 与 probabilistic bisimulation；本文仅把它作为行为等价的邻近工作。 |
+| `LarsenSkou1991` | [Elsevier 原文](https://www.sciencedirect.com/science/article/pii/0890540191900306) | 核对 *Information and Computation* 94(1), 1–28。支持带标签概率系统中的 testing 与 probabilistic bisimulation；在有限全概率系统中，这一稳定结构与本文精确分区条件直接对应。 |
 | `DerisaviEtAl2003` | [Elsevier 原文](https://www.sciencedirect.com/science/article/pii/S0020019003003430) | 核对 *Information Processing Letters* 87(6), 309–315。原文支持 ordinary-lumpable 分区的最粗解与稳定分区细化算法；主体为 CTMC，并说明方法可扩展到 DTMC。 |
 | `CrutchfieldYoung1989` | [APS 原文](https://link.aps.org/doi/10.1103/PhysRevLett.63.105) | 核对 *Physical Review Letters* 63(2), 105–108。支持计算力学、预测等价状态与统计复杂度的历史入口。 |
 | `ShaliziCrutchfield2001` | [Springer 论文页](https://link.springer.com/article/10.1023/A%3A1010388907793)，[arXiv 原文](https://arxiv.org/abs/cond-mat/9907176) | 核对 *Journal of Statistical Physics* 104, 817–879。支持 causal states 的预测充分性、最小性和唯一性；结论处于平稳过程、正则条件分布和几乎处处语境，且不保证状态空间有限。 |
@@ -27,12 +27,16 @@
 | `LittmanSuttonSingh2001` | [NeurIPS 官方原文](https://proceedings.neurips.cc/paper_files/paper/2001/file/1e4d36177d71bbb3558e43af9577d70e-Paper.pdf)，[官方论文页](https://proceedings.neurips.cc/paper_files/paper/2001/hash/1e4d36177d71bbb3558e43af9577d70e-Abstract.html) | 核对 NIPS 14, 1555–1561。论文首页列有 Littman、Sutton、Singh 三位作者；官方 HTML 元数据遗漏 Singh。原文支持用未来的动作条件预测表示状态及其递推思想。 |
 | `CoverThomas2006` | [Wiley 图书页](https://onlinelibrary.wiley.com/doi/book/10.1002/047174882X) | 核对第二版版权年 2006、DOI 与 ISBN；平台的 2005 日期是在线记录时间。Lemma 11.6.1 支持自然对数和半 $\ell^1$ TV 约定下的 Pinsker 界；Jensen 步骤在本文中直接给出。 |
 | `Kechris1995` | [Springer 图书页](https://link.springer.com/book/10.1007/978-1-4612-4190-4)，§18 | 核对 *Graduate Texts in Mathematics* 156、1995 年、DOI 与 ISBN。§18 的 smooth Borel equivalence relation 理论支持“一般 Borel 等价关系未必有由标准 Borel 值域实现的分类映射”这一边界。 |
+| `GivanDeanGreig2003` | [Elsevier/DOI](https://doi.org/10.1016/S0004-3702(02)00376-4)，[作者全文](https://cs.brown.edu/people/tdean/publications/archive/GivanetalAIJ-03.pdf) | 核对 *Artificial Intelligence* 147(1--2), 163--223。原文系统研究 reward-respecting stochastic bisimulation、稳定分区细化和 MDP 最小模型；把本文核族视为动作、任务视为标签后，直接支持精确商属于经典模型最小化结构这一定位。 |
+| `DeanGivanLeach1997` | [作者出版目录](https://cs.brown.edu/people/tdean/pages/publications.html)，[arXiv 全文](https://arxiv.org/abs/1302.1533) | 核对 UAI 1997、124--131 页；arXiv 为后补上传而非发表年份。原文以 $\varepsilon$-homogeneous partition 和 bounded-parameter MDP 研究状态约化与近似解质量之间的折中；其逐块误差与本文最坏行 TV 目标不同。 |
+| `BianAbate2017` | [Springer/DOI](https://doi.org/10.1007/978-3-662-54458-7_19)，[arXiv 扩展版](https://arxiv.org/abs/1701.04547) | 核对 FoSSaCS 2017、LNCS 10203、321--337 页。原文把近似概率互模拟联系到有限时域轨迹分布，并给出 $1-(1-\varepsilon)^k$ 型紧 TV 界；本文据此定位同型路径耦合界。 |
+| `KieferTang2021` | [Dagstuhl 官方论文页](https://doi.org/10.4230/LIPIcs.FSTTCS.2021.48) | 核对 FSTTCS 2021、LIPIcs 213、48:1--48:16。原文研究扰动或采样转移概率下的 approximate bisimulation quotient 及多项式时间最小化算法；本文不声称提供同类算法。 |
 
 ## 引用范围与术语约定
 
 - 本文使用的有限链条件是 Kemeny–Snell 的 lumpability，现代常称 strong lumpability；在 Buchholz 的术语中对应 ordinary lumpability。Buchholz 的 exact lumpability 是另一条件。
-- 单链最粗 ordinary lumping、稳定分区细化、Dobrushin 收缩、causal-state 最小性和固定预算 Markov 聚合均已有直接文献坐标。本文在正文中明确标出这些既有结果的适用范围。
-- 本文的复杂度--闭合误差前沿采用任务保真约束和最坏行 TV 缺陷；Geiger 等采用平稳 KL divergence rate。两者属于相关优化结构，目标函数与量词不同。
-- 附录 J 的定理适用于有限自回归生成器，Transformer 是目标应用之一，具体模型仍需独立验证 T1--T3。Vaswani 等只承担架构背景；KL 到加权 TV 的传递以及 $\Gamma_N$ 上界均以本文列出的假设和证明为准。
+- 单链最粗 ordinary lumping、MDP 中 reward-respecting stochastic bisimulation、稳定分区细化、Dobrushin 收缩、causal-state 最小性和固定预算 Markov 聚合均已有直接文献坐标。本文把精确商明确作为零误差基准，不把经典最粗稳定分区本身列为独立新结果。
+- 本文的复杂度--闭合误差前沿采用任务精确保真和最坏行 TV 缺陷；已有近似工作分别采用逐块 $\varepsilon$-齐次条件、互模拟关系、扰动后精确商或平稳 KL divergence rate。它们与本文的目标函数、量词或跨规模用途不同，但属于必须直接比较的先行路线。
+- 附录 J 的定理只作为有限自回归生成器的条件式接口；具体 Transformer 仍需独立验证 T1--T3。Vaswani 等只承担架构背景；KL 到加权 TV 的传递以及 $\Gamma_N$ 上界均以本文列出的假设和证明为准，不构成具体模型验证。
 - 标准 Borel kernel 的背景由 Kallenberg 支持；一般 Borel 等价关系的 smoothness 边界由 Kechris 支持。附录 H 只证明固定良好因子的接口结论。
 - 本文的主要数学对象包括可辨微观基线、任务保真的共同精确商、复杂度--闭合误差前沿、纤维预测直径以及系统族指标 $\Gamma_N$。所有定理的证明均在正文或附录中给出，文献用于定位既有定义、结果与邻近研究。

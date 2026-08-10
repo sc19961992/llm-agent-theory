@@ -16,18 +16,20 @@
 全文的结论分为三个层次。
 
 \begin{enumerate}
-  \item \textbf{有限规模的规范基准。} 可辨约化保持后续商的最坏行闭合误差。在约化空间上，对任意非空允许核族，都存在重标记意义下唯一的最粗任务保真精确闭合商；允许误差后，每个状态预算对应的最小闭合误差实际达到，并形成单调的复杂度--闭合误差前沿。
+  \item \textbf{有限规模的规范基准与近似前沿。} 可辨约化保持后续商的最坏行闭合误差。在约化空间上，经典稳定分区理论给出重标记意义下唯一的最粗任务保真精确闭合商；本文以它为零误差端点，并证明允许误差后每个状态预算对应的最小闭合误差实际达到，形成单调的复杂度--闭合误差前沿。
   \item \textbf{增长系统族的等价表征。} 纤维预测直径直接比较将被合并的状态对下一宏观块的预测。由半径--直径夹逼，$\Gamma_N\to0$ 当且仅当存在同一列任务保真分区，使相对状态数与最优最坏行闭合误差同时趋零；这也等价于某列趋零容限下的最小状态数为 $o(|B_N|)$。
-  \item \textbf{宏观规律存在性的成立与失败。} 置换对称故障--修复系统的唯一最粗精确任务商具有 $N+1$ 个故障数状态，其完整前沿给出 $\Gamma_N=\min\{1/N,(N+1)/2^N\}\to0$；单点标记循环链有 $\Gamma_N=1$。两个系统族分别给出 LC 成立与失败的完整计算。
+  \item \textbf{精确、近似与失败三种情形。} 置换对称故障--修复系统具有 $N+1$ 状态的精确故障数商，其完整前沿给出 $\Gamma_N=\min\{1/N,(N+1)/2^N\}\to0$。向该核族加入一个渐近消失的异质纯修复核，会使共同精确任务商在每个有限规模退化为离散分区，但故障数表示的直径仍趋于零，给出只能依靠近似闭合获得压缩的系统族。单点标记循环链则有 $\Gamma_N=1$。
 \end{enumerate}
 
 本文用“最简”专指\emph{状态数最少}。公式长度、参数数量、计算成本、样本复杂度和语义可解释性属于不同的复杂度概念。
 
 \subsection{与既有工作的关系}
 
-给定分区后，有限 Markov 链的精确聚合属于 lumpability 的经典问题\citep{KemenySnell1976,Buchholz1994}；Markov functions 与线性不变性给出相关的投影条件\citep{RogersPitman1981,GurvitsLedoux2005}。概率互模拟和状态空间最小化从行为等价与分区细化角度研究相近结构\citep{LarsenSkou1991,DerisaviEtAl2003}。近似聚合文献研究瞬态误差传播\citep{MichelSiegle2025}以及固定状态预算下的 KL 聚合目标\citep{GeigerEtAl2015}。计算力学中的因果状态和预测状态表示以未来预测构造状态\citep{CrutchfieldYoung1989,ShaliziCrutchfield2001,LittmanSuttonSingh2001}；群对称也可直接产生保持 Markov 性的轨道聚合\citep{BanischLima2015}。本文把这些工具组织为一条任务相对的逻辑链：可辨复杂度基线、有限系统的精确端点与近似前沿，以及增长系统族的压缩--闭合等价表征。
+给定分区后，有限 Markov 链的精确聚合属于 lumpability 的经典问题\citep{KemenySnell1976,Buchholz1994}；Markov functions 与线性不变性给出相关的投影条件\citep{RogersPitman1981,GurvitsLedoux2005}。概率互模拟和状态空间最小化从行为等价与分区细化角度研究同一类稳定结构\citep{LarsenSkou1991,DerisaviEtAl2003}。特别地，若把本文的核族元素视为 MDP 动作、把任务值视为状态标签或奖励标签，则任务保真的共同精确商正是 reward-respecting stochastic bisimulation 或 homogeneous partition；其最粗稳定细化和模型最小化已有系统研究\citep{GivanDeanGreig2003}。因此，本文把该精确商作为零误差基准，而不把经典的最粗稳定分区本身作为独立新结果。
 
-任务充分性、群对称和递推下一 token 表示为候选表示提供三类充分构造。有限自回归模型的分布加权定理及其用于 Transformer 时提升为最坏情形判据的条件见附录~\ref{app:transformer-predictive-states}。Markov category 为随机映射及其复合提供统一语言\citep{Fritz2020}。标准 Borel 空间、随机粗粒化和连续时间需要各自的可测性、复杂度或分析条件，相关接口集中置于附录。
+近似方面，$\varepsilon$-homogeneous partition 已用于在 MDP 状态数与求解精度之间折中\citep{DeanGivanLeach1997}；近似概率互模拟研究一步相似性及其对有限路径 TV 误差的控制\citep{BianAbate2017}，近似互模拟最小化还处理扰动或采样所得转移概率下的算法问题\citep{KieferTang2021}。另有工作研究聚合后的瞬态误差传播\citep{MichelSiegle2025}以及固定状态预算下的 KL 聚合目标\citep{GeigerEtAl2015}。本文与这些路线的区别不在精确商的存在性，而在以下组合：先以微观探针和动力学共同固定可辨复杂度分母，再施加精确任务保真约束，以优化后的最坏行 TV 缺陷形成有限规模前沿，最后用 $\Gamma_N$ 标量化增长系统族是否同时获得低相对状态数与低一步闭合误差。该组合不声称取代其他近似互模拟、价值保持或信息论目标。
+
+任务充分性和群对称为候选表示提供两类直接结构证书。递推下一 token 表示只作为有限自回归模型的条件式接口：附录~\ref{app:transformer-predictive-states}给出分布加权结论及其提升为正文最坏情形判据所需的附加条件，不对任何具体 Transformer 作验证。计算力学中的因果状态和预测状态表示以未来预测构造状态\citep{CrutchfieldYoung1989,ShaliziCrutchfield2001,LittmanSuttonSingh2001}；群对称也可直接产生保持 Markov 性的轨道聚合\citep{BanischLima2015}。Markov category 为随机映射及其复合提供统一语言\citep{Fritz2020}。标准 Borel 空间、随机粗粒化和连续时间需要各自的可测性、复杂度或分析条件，相关接口集中置于附录。
 
 \subsection{论证路线与结论边界}
 
@@ -45,6 +47,6 @@
 \end{aligned}
 \]
 
-第~\ref{sec:operational}节固定微观复杂度分母；第~\ref{sec:closure}节处理单个有限系统的精确端点和近似前沿；第~\ref{sec:criterion}节给出系统族的等价表征；第~\ref{sec:fault-repair}节计算一个满足 LC 的系统族和一个不满足 LC 的系统族。第~\ref{sec:construction}节讨论任务充分性、群对称和递推下一 token 表示三类候选构造；第~\ref{sec:verification}节说明有限检验、估计稳健性与时间边界；第~\ref{sec:discussion}节总结扩展接口和开放问题。独立证明、辅助反例及扩展材料统一置于附录。
+第~\ref{sec:operational}节固定微观复杂度分母；第~\ref{sec:closure}节处理单个有限系统的精确端点和近似前沿；第~\ref{sec:criterion}节给出系统族的等价表征；第~\ref{sec:fault-repair}节分别计算具有低复杂度精确商、只有低复杂度近似商以及不可渐近压缩的三个系统族。第~\ref{sec:construction}节讨论任务充分性、群对称和递推下一 token 表示；第~\ref{sec:verification}节说明有限检验、估计稳健性与时间边界；第~\ref{sec:discussion}节总结扩展接口和开放问题。独立证明、辅助反例及扩展材料统一置于附录。
 
 本文的闭合专指给定动力学族与误差范数下的一步 Markov 闭合。长时间准确、跨分布泛化、因果干预自治、内部神经表征、低维流形和高效发现分别需要附加定义与条件。

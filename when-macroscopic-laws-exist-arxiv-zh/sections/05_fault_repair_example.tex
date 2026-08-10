@@ -1,7 +1,7 @@
-\section{宏观规律存在性的两端：一个成立族与一个失败族}
+\section{宏观规律存在性的三种情形：精确、近似与失败}
 \label{sec:fault-repair}
 
-以下两个有限 Markov 系统族分别实现 $\Gamma_N\to0$ 与 $\Gamma_N=1$。正例同时给出精确最小商、有限规模前沿和系统族证书；反例在三个层次上均保持微观尺度。
+本节依次给出三种彼此不同的情形：低复杂度精确商已经存在；每个有限规模都没有非平凡精确任务商、但低复杂度近似商随规模改善；以及任何低误差表示都保持微观尺度。三者分别说明精确理论、近似理论和失败证书承担的作用。
 
 \subsection{正例：置换对称故障--修复系统}
 
@@ -116,7 +116,106 @@ $\Gamma_N$ 目标最小值为 $1/N$，因为 $2/2^N\le1/N$；零直径预算中�
 
 这个例子中的任务只有“零个故障/至少一个故障”两个输出，而任务未来的精确闭合预测恰需 $N+1$ 个状态。最粗宏观状态记录当前故障数，即保持任务未来所需的最少中间信息。
 
-\subsection{反例：单点标记循环链}
+\subsection{仅近似正例：渐近均匀的异质纯修复系统}
+
+上一例已经具有很小的精确商，因而尚未显示近似闭合相对于精确理论的必要性。现在保留相同的微观空间和任务，却用任意小的逐部件异质性破坏全部非平凡精确任务商。
+
+对 $N\ge2$，仍令 $B_N=\{0,1\}^N$ 并取恒等微观探针。记故障部件集合为
+$S(x):=\{i:x_i=1\}$。令
+\begin{equation}
+ \rho_N:=\frac1N,
+ \qquad
+ a_{N,i}:=\exp\!\bigl(-\rho_N3^{-i}\bigr),
+ \qquad 1\le i\le N.
+ \label{eq:heterogeneous-repair-rates}
+\end{equation}
+每一步均匀选择一个部件；若选中的部件 $i$ 故障，则以概率 $a_{N,i}$ 修复，否则系统保持不变。记所得纯修复核为 $\widetilde K_N$，任务仍为
+\[
+ g_N(x)=\one_{\{|x|=0\}}.
+\]
+把它加入定理~\ref{thm:fault-repair}的对称核族，记
+\begin{equation}
+ \cK_N^\sharp:=\cK_N\cup\{\widetilde K_N\}.
+ \label{eq:augmented-repair-family}
+\end{equation}
+各修复率与 $1$ 的差随 $N$ 消失，所以 $\widetilde K_N$ 是族中纯修复核 $K_{N,1,0}$ 的消失扰动；但对每个固定 $N$，这些微小差异仍编码了故障集合。
+
+\begin{theorem}[只有近似压缩的异质纯修复族]
+\label{thm:heterogeneous-repair}
+对上述扩充系统族，每个有限规模的最粗精确任务商都是离散分区：
+\begin{equation}
+ c^0_{\cK_N^\sharp}(g_N)=2^N.
+ \label{eq:heterogeneous-exact-complexity}
+\end{equation}
+而且
+\begin{equation}
+ d_\infty(\widetilde K_N,K_{N,1,0})\le\frac1{3N}.
+ \label{eq:heterogeneous-kernel-perturbation}
+\end{equation}
+另一方面，故障数表示 $q_N(x)=|x|$ 满足
+\begin{equation}
+ D_{\cK_N^\sharp}(\ker q_N)
+ \le \Delta_N
+ \le \frac1{3N},
+ \qquad
+ \Delta_N:=\max_i a_{N,i}-\min_i a_{N,i},
+ \label{eq:heterogeneous-diameter-bound}
+\end{equation}
+若以 $\Gamma_N^\sharp$ 记扩充核族~\eqref{eq:augmented-repair-family}的联合指标，则
+\begin{equation}
+ \Gamma_N^\sharp
+ \le
+ \max\left\{\frac{N+1}{2^N},\frac1{3N}\right\}
+ \longrightarrow0.
+ \label{eq:heterogeneous-gamma-bound}
+\end{equation}
+所以该系统族满足 LC，尽管任何有限规模都不存在严格的精确任务压缩。
+\end{theorem}
+
+\begin{proof}
+先证精确最小性。若一个任务保真精确闭合商合并状态 $x,x'$，则从二者出发的任意未来任务分布都相同。设 $|S(x)|=k<\ell=|S(x')|$。从 $x$ 出发，前 $k$ 步依次选中全部故障部件并成功修复的概率为正；从 $x'$ 出发，每步至多修复一个部件，故 $k$ 步后不可能清零。因此不同故障数的状态不能合并。
+
+再设 $S:=S(x)$ 与 $T:=S(x')$ 是两个不同的 $k$ 元集合。恰在 $k$ 步后清零，必须在这 $k$ 步中各选中 $S$ 内部件一次并全部成功修复，故其概率为
+\[
+ \frac{k!}{N^k}\prod_{i\in S}a_{N,i}
+ =\frac{k!}{N^k}
+   \exp\!\left(-\rho_N\sum_{i\in S}3^{-i}\right).
+\]
+不同有限子集具有不同的三进制和 $\sum_{i\in S}3^{-i}$：取两个子集首次不同的最小指标，其对应项严格大于全部后续项之和。因此 $S\ne T$ 时上述清零概率不同，同一故障数的不同状态也不能合并。所有状态均须分开。任何对 $\cK_N^\sharp$ 共同精确闭合的任务商尤其必须对 $\widetilde K_N$ 闭合，故得到式~\eqref{eq:heterogeneous-exact-complexity}。
+
+再比较 $\widetilde K_N$ 与 $K_{N,1,0}$。从故障集合 $S$ 出发，二者在修复部件 $i\in S$ 的转移概率上相差 $(1-a_{N,i})/N$，相应总质量在 $\widetilde K_N$ 中留于原状态。因此
+\[
+ \|\widetilde K_N(S,\cdot)-K_{N,1,0}(S,\cdot)\|_{\TV}
+ =\frac1N\sum_{i\in S}(1-a_{N,i})
+ \le 1-e^{-1/(3N)}
+ \le\frac1{3N},
+\]
+逐行取最大值得式~\eqref{eq:heterogeneous-kernel-perturbation}。
+
+现考察故障数表示。若当前故障集合为 $S$、$|S|=k$，则下一故障数为 $k-1$ 的概率是
+\[
+ p_S:=\frac1N\sum_{i\in S}a_{N,i},
+\]
+其余概率留在 $k$。对任意两个 $k$ 元集合 $S,T$，相应两行是同一二点空间上的 Bernoulli 分布，因而
+\[
+ \|p^{q_N}_{\widetilde K_N,S}-p^{q_N}_{\widetilde K_N,T}\|_{\TV}
+ =|p_S-p_T|
+ \le\frac{k}{N}\Delta_N
+ \le\Delta_N.
+\]
+由式~\eqref{eq:heterogeneous-repair-rates}与 $1-e^{-x}\le x$，
+\[
+ \Delta_N
+ =e^{-3^{-N}/N}-e^{-1/(3N)}
+ \le1-e^{-1/(3N)}
+ \le\frac1{3N}.
+\]
+原对称核族在故障数分区上的直径为零，故扩充族的统一直径由新增核控制。这证明式~\eqref{eq:heterogeneous-diameter-bound}。故障数分区有 $N+1$ 个块，而 $|B_N|=2^N$；把它代入 $\Gamma_N^\sharp$ 的定义即得式~\eqref{eq:heterogeneous-gamma-bound}。
+\end{proof}
+
+这个例子把精确与近似两种问题严格分开：一个 $d_\infty$ 意义下趋零的异质扰动把精确任务复杂度从 $N+1$ 推到 $2^N$，但故障数表示的状态比例和闭合误差仍同时趋零。
+
+\subsection{失败例：单点标记循环链}
 
 对 $N\ge2$，令 $B_N=\mathbb Z/N\mathbb Z$，动力学为确定性位移
 \[
@@ -138,4 +237,4 @@ c_{K_N}^{\tau}(g_N)=N,
 任意非离散的任务保真分区都合并某两个状态。若每一对被合并状态的后继仍在同一块中，该等价关系沿循环位移传播，最终会把 $0$ 与某个非零状态合并，违反任务保真。因此必有同块状态的后继落入两个不同块；它们的下一块分布是不同的 Dirac 分布，故纤维预测直径为 $1$，闭合缺陷至少为 $1/2$。于是容限小于 $1/2$ 时只能采用有 $N$ 块的离散分区。对 $\Gamma_N$，离散分区的相对状态数为 $1$，而每个非离散候选的直径为 $1$，所以最小值恰为 $1$。详细的分区论证见附录~\ref{app:examples-counterexamples}。
 \end{proof}
 
-置换对称故障--修复动力学使同一故障数纤维具有一致的下一宏观分布；循环位移持续传递任务标记的位置差异，使每个非离散任务保真分区的预测直径等于 $1$。这项动力学差异分别产生 $\Gamma_N\to0$ 与 $\Gamma_N=1$。
+置换对称动力学使故障数纤维精确一致；渐近均匀的异质动力学破坏每个有限规模的精确商，却只留下趋零的纤维预测分歧；循环位移则持续传递任务标记的位置差异，使每个非离散任务保真分区的预测直径等于 $1$。三者分别实现精确压缩、仅近似压缩和不可渐近压缩。
