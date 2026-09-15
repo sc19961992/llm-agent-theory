@@ -1,0 +1,23 @@
+参考文献
+53
+[21] Stewart N. Ethier and Thomas G. Kurtz.
+Markov Processes:
+Characterization and
+Convergence.
+John Wiley & Sons, New York, 1986.
+ISBN 978-0-471-08186-9.
+doi:
+10.1002/9780470316658.
+[22] R. L. Dobrushin. Central limit theorem for nonstationary markov chains. i. Theory of
+Probability and Its Applications, 1(1):65–80, 1956. doi: 10.1137/1101006.
+[23] Stéphane Gaubert and Zheng Qu.
+Dobrushin’s ergodicity coeﬀicient for markov op-
+erators on cones.
+Integral Equations and Operator Theory, 81:127–150, 2015.
+doi:
+10.1007/s00020-014-2193-2.
+[24] B. O. Koopman. Hamiltonian systems and transformation in hilbert space. Proceedings
+of the National Academy of Sciences of the United States of America, 17(5):315–318, 1931.
+doi: 10.1073/pnas.17.5.315.
+[25] Thomas M. Cover and Joy A. Thomas. Elements of Information Theory. John Wiley &
+Sons, Hoboken, NJ, 2 edition, 2006. ISBN 978-0-471-24195-9. doi: 10.1002/047174882X.

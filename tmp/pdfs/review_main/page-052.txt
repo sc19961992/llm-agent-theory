@@ -1,0 +1,46 @@
+参考文献
+52
+Leibniz International Proceedings in Informatics (LIPIcs), pages 48:1–48:16, Dagstuhl, Ger-
+many, 2021. Schloss Dagstuhl – Leibniz-Zentrum für Informatik. ISBN 978-3-95977-215-0.
+doi: 10.4230/LIPIcs.FSTTCS.2021.48.
+[11] Fabian Michel and Markus Siegle.
+Formal error bounds for the state space reduction
+of markov chains. Performance Evaluation, 167:102464, 2025. doi: 10.1016/j.peva.2024.
+102464.
+[12] Bernhard C. Geiger, Tatjana Petrov, Gernot Kubin, and Heinz Koeppl. Optimal kullback–
+leibler aggregation via information bottleneck. IEEE Transactions on Automatic Control,
+60(4):1010–1022, 2015. doi: 10.1109/TAC.2014.2364971.
+[13] James P. Crutchfield and Karl Young. Inferring statistical complexity. Physical Review
+Letters, 63(2):105–108, 1989. doi: 10.1103/PhysRevLett.63.105.
+[14] Cosma Rohilla Shalizi and James P. Crutchfield. Computational mechanics: Pattern and
+prediction, structure and simplicity. Journal of Statistical Physics, 104(3–4):817–879, 2001.
+doi: 10.1023/A:1010388907793.
+[15] Michael L. Littman, Richard S. Sutton, and Satinder Singh. Predictive representations
+of state.
+In Thomas G. Dietterich, Suzanna Becker, and Zoubin Ghahramani, editors,
+Advances in Neural Information Processing Systems, volume 14, pages 1555–1561. MIT
+Press, 2001.
+[16] Sven Banisch and Ricardo Lima. Markov chain aggregation for simple agent-based models
+on symmetric networks: The voter model.
+Advances in Complex Systems, 18(03n04):
+1550011, 2015. doi: 10.1142/S0219525915500113.
+[17] Tobias Fritz.
+A synthetic approach to markov kernels, conditional independence and
+theorems on suﬀicient statistics.
+Advances in Mathematics, 370:107239, 2020.
+doi:
+10.1016/j.aim.2020.107239.
+[18] Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N.
+Gomez, Łukasz Kaiser, and Illia Polosukhin. Attention is all you need. In Advances in
+Neural Information Processing Systems 30, pages 5998–6008. Curran Associates, Inc., 2017.
+arXiv:1706.03762.
+[19] Olav Kallenberg.
+Foundations of Modern Probability, volume 99 of Probability Theory
+and Stochastic Modelling. Springer, Cham, 3 edition, 2021. ISBN 978-3-030-61871-1. doi:
+10.1007/978-3-030-61871-1.
+[20] Alexander S. Kechris. Classical Descriptive Set Theory, volume 156 of Graduate Texts
+in Mathematics.
+Springer, New York, 1995.
+ISBN 978-0-387-94374-9.
+doi: 10.1007/
+978-1-4612-4190-4.

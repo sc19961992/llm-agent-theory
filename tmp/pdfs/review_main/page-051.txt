@@ -1,0 +1,43 @@
+参考文献
+51
+参考文献
+[1] John G. Kemeny and J. Laurie Snell. Finite Markov Chains: With a New Appendix “Gen-
+eralization of a Fundamental Matrix”.
+Undergraduate Texts in Mathematics. Springer,
+New York, 1976.
+ISBN 978-0-387-90192-3.
+URL https://link.springer.com/book/
+9780387901923. Originally published by Van Nostrand in 1960.
+[2] Peter Buchholz. Exact and ordinary lumpability in finite markov chains. Journal of Applied
+Probability, 31(1):59–75, 1994. doi: 10.2307/3215235.
+[3] L. C. G. Rogers and J. W. Pitman. Markov functions. The Annals of Probability, 9(4):
+573–582, 1981. doi: 10.1214/aop/1176994363.
+[4] Leonid Gurvits and James Ledoux. Markov property for a function of a markov chain:
+A linear algebra approach. Linear Algebra and its Applications, 404:85–117, 2005. doi:
+10.1016/j.laa.2005.02.007.
+[5] Kim Guldstrand Larsen and Arne Skou. Bisimulation through probabilistic testing. Infor-
+mation and Computation, 94(1):1–28, 1991. doi: 10.1016/0890-5401(91)90030-6.
+[6] Salem Derisavi, Holger Hermanns, and William H. Sanders. Optimal state-space lumping
+in markov chains.
+Information Processing Letters, 87(6):309–315, 2003.
+doi: 10.1016/
+S0020-0190(03)00343-0.
+[7] Robert Givan, Thomas Dean, and Matthew Greig. Equivalence notions and model mini-
+mization in Markov decision processes. Artificial Intelligence, 147(1–2):163–223, 2003. doi:
+10.1016/S0004-3702(02)00376-4.
+[8] Thomas L. Dean, Robert Givan, and Sonia M. Leach. Model reduction techniques for
+computing approximately optimal solutions for Markov decision processes. In Dan Geiger
+and Prakash P. Shenoy, editors, Proceedings of the Thirteenth Conference on Uncertainty in
+Artificial Intelligence, pages 124–131, San Francisco, CA, 1997. Morgan Kaufmann. ISBN
+1-55860-485-5.
+[9] Gaoang Bian and Alessandro Abate. On the relationship between bisimulation and trace
+equivalence in an approximate probabilistic context.
+In Javier Esparza and Andrzej S.
+Murawski, editors, Foundations of Software Science and Computation Structures, volume
+10203 of Lecture Notes in Computer Science, pages 321–337, Berlin, Heidelberg, 2017.
+Springer. doi: 10.1007/978-3-662-54458-7_19.
+[10] Stefan Kiefer and Qiyi Tang.
+Approximate bisimulation minimisation.
+In Mikołaj
+Bojańczyk and Chandra Chekuri, editors, 41st IARCS Annual Conference on Foundations
+of Software Technology and Theoretical Computer Science (FSTTCS 2021), volume 213 of
